@@ -305,7 +305,7 @@ Sin embargo, la actualización tecnológica más significativa de esta temporada
 * **Estabilización de Carril:** Permite determinar con precisión milimétrica cuándo el chasis se encuentra perfectamente recto en relación con el carril de navegación, optimizando las correcciones del servo de dirección y evitando sobrecorrecciones.
 
 Para explorar a fondo la implementación matemática y el firmware, puedes acceder directamente a las secciones detalladas:
-* [Desarrollo de la Lógica de Vueltas a la Pista (Vuelta Libre)](#desarrollo-de-la-logica-de-vueltas-a-la-pista)
+* [Desarrollo de la Lógica de Vueltas a la Pista (Vuelta Libre)](#Desarrollo-de-la-Logica-del-codigo-Maestro)
 * [Desarrollo de la Lógica de Evasión de Objetos (Modo Combinado)](#desarrollo-de-la-logica-de-evasion-de-objetos)
 
 ---
