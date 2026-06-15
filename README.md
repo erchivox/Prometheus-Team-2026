@@ -294,14 +294,31 @@ Componentes dedicados al posicionamiento preciso de la sensórica de distancia y
 * **✓ Visión Estable:** Reemplazo del trípode genérico inestable por un soporte de torres "Shark Fin" con distribución de carga uniforme e insertos roscados M3 metálicos desmontables.
 
 
-#### Continuidad en el Desarrollo de Software y Control:
-Es importante destacar que la arquitectura del firmware y la lógica de codificación del vehículo se mantienen exactamente idénticas a las implementadas con éxito en el diseño del año anterior. Debido a la fiabilidad demostrada en el procesamiento de datos y control cinemático, no se realizaron modificaciones de logica en el código base. 
+## Continuidad en el Desarrollo de Software y Control:
+#### Continuidad y Optimización en el Desarrollo de Software: Integración del BNO055
 
-El código fuente optimizado y los scripts de control se encuentran totalmente accesibles a través de los siguientes hipervínculos oficiales:
+Es importante destacar que la arquitectura del firmware y la lógica de codificación del vehículo mantienen su base estructural respecto a las implementadas con éxito en el diseño del año anterior, garantizando fiabilidad en el procesamiento de datos y control cinemático. 
 
- * [Desarrollo de la Lógica de Vueltas a la Pista](#desarrollo-de-la-logica-de-vueltas-a-la-pista)
- * [Desarrollo de la Lógica de Evasión de Objetos](#desarrollo-de-la-logica-de-evasion-de-objetos)
+Sin embargo, la actualización tecnológica más significativa de esta temporada radica en la sustitución del sensor giroscópico por la IMU **BNO055**. Al heredar y refinar la lógica de orientación previa, este nuevo sensor elimina por completo los problemas históricos de deriva (*gyro drift*), volviéndola prácticamente despreciable. El impacto de este cambio en el comportamiento del vehículo es drástico:
 
+* **Consciencia Espacial Absoluta:** El vehículo calcula en tiempo real y de forma fidedigna su vector de orientación angular en todo momento.
+* **Estabilización de Carril:** Permite determinar con precisión milimétrica cuándo el chasis se encuentra perfectamente recto en relación con el carril de navegación, optimizando las correcciones del servo de dirección y evitando sobrecorrecciones.
+
+Para explorar a fondo la implementación matemática y el firmware, puedes acceder directamente a las secciones detalladas:
+* [Desarrollo de la Lógica de Vueltas a la Pista (Vuelta Libre)](#desarrollo-de-la-logica-de-vueltas-a-la-pista)
+* [Desarrollo de la Lógica de Evasión de Objetos (Modo Combinado)](#desarrollo-de-la-logica-de-evasion-de-objetos)
+
+---
+
+### 📊 Resumen Ejecutivo de la Lógica de Control
+
+A continuación, se presenta una síntesis operativa de los algoritmos de navegación que gobiernan el firmware mediante el uso de la IMU BNO055 y la lectura periférica de sensores:
+
+#### 1. Modo Vuelta Libre (Navegación de Pista Vacía)
+Este algoritmo está diseñado para maximizar la velocidad en pista recta y asegurar trazadas óptimas en las curvas. El sistema prioriza las lecturas angulares de la IMU para la alineación del vehículo.
+
+* **Estrategia:** El sensor ToF lateral mide las distancias relativas hacia la pared guía. Si la orientación calculada por el **BNO055** indica un desvío angular, el sistema ejecuta un control fino corrigiendo en primera instancia el ángulo del vehículo para estabilizarlo y, consecutivamente, ajusta la distancia de seguridad respecto al muro. 
+* **Transición de Intersecciones:** El bucle se mantiene activo manteniendo el carril de forma autónoma hasta que el sensor de color detecta una línea en la pista, interrumpiendo el control lineal para ejecutar un giro controlado de intersección.
 
 ## Prueba de vueltas a la pista 
 
