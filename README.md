@@ -68,38 +68,57 @@ A partir de este nodo central, la alimentación se ramifica de forma completamen
 > Esta configuración ampliada, apoyada en tres reguladores de voltaje independientes, exige una gestión del espacio interno más rigurosa dentro del chasis impreso en 3D. Sin embargo, se asumió esta compensación espacial porque mitiga por completo el acoplamiento de ruido inductivo provocado por los motores hacia la electrónica sensible, blindando la estabilidad del vehículo y asegurando lecturas limpias en el bus I2C durante la navegación autónoma.
 
 
-## Esquema de Sensores:
-   [Para ver versiones anteriores aqui.](#sistema-de-detección-de-objetos)
-###  Versión 4:
+## Esquemas de Sensores y Adquisición de Datos
 
-![Diagrama de sensores 4](schemes/diagrama-sensores3.jpeg)
+[*Consultar el historial de versiones de detección aquí*](#sistema-de-detección-de-objetos)
 
-  #### Mejoras en el Sistema de Sensores y Hardware
+### Versión 4 (Actual)
 
-En esta versión del proyecto, hemos optimizado la configuración del hardware para mejorar la precisión, el tiempo de respuesta y la estabilidad del robot en la pista de competencia ($3 \times 3$ metros).
+![Diagrama de Sensores V4](schemes/diagrama-sensores3.jpeg)
 
-#### Sensores de Distancia y Navegación
+### Optimización del Sistema de Sensores y Hardware
 
-* **Transición a Sensores ToF (Time-of-Flight):** Reemplazamos los sensores ultrasónicos tradicionales por sensores ToF. Esta actualización resuelve los problemas de lectura en distancias cortas (zonas muertas) y ofrece una velocidad de respuesta significativamente mayor. Además, al operar mediante **comunicación I2C**, logramos una reducción crítica en el uso de pines del microcontrolador, haciendo el circuito más limpio y práctico.
-* **Giroscopio BNO055:** Implementamos el sensor BNO055 con el objetivo de **eliminar por completo la deriva (drift)** acumulada que presentaba el sensor anterior tras dar múltiples vueltas en la pista. Esto garantiza una orientación y posicionamiento mucho más fiables a largo plazo.
+En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehículo aprovechando la capacidad de múltiples buses del ESP32. El objetivo principal es maximizar la precisión espacial, evitar cuellos de botella en el procesamiento de datos y blindar la estabilidad del algoritmo de navegación autónoma dentro de la pista de $3 \times 3$ metros.
 
-### Sensores Mantenidos
+#### Subsistema de Navegación Cinemática (Bus I2C #1 - Pines D21/D22)
 
-Para asegurar las funciones que ya operaban de manera óptima, mantenemos en la estructura:
-* **Sensores Sharp diagonales:** Para la detección táctil/proximidad en ángulos críticos.
-* **Sensor de color:** Dedicado exclusivamente a la lectura y confirmación de líneas en la superficie de la pista.
+* **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
+* **Unidad de Medición Inercial (IMU) BNO055:** Comparte el Bus I2C #1. La inclusión de este sensor con procesamiento de fusión de datos a bordo está orientada a **eliminar por completo la deriva (*drift*)** acumulativa. Para garantizar la fidelidad del posicionamiento, el algoritmo calibra el cero relativo y establece el eje Y del sensor como el vector de referencia principal para el equilibrio y dirección del chasis.
+
+#### Subsistema de Lectura de Superficie (Bus I2C #2 - Pines D32/D33)
+
+* **Sensor de Color TCS34725:** Dedicado a la detección y confirmación de líneas. Para evitar saturar el bus principal de navegación, este sensor se ha aislado en un **segundo bus I2C independiente (Hardware I2C #2)**. Esto garantiza que las lecturas constantes del suelo no interfieran ni retrasen las respuestas críticas de evasión de obstáculos de los sensores ToF.
+
+#### Subsistema de Proximidad Redundante e Interfaz (E/S Estándar)
+
+* **Sensores Sharp GP2Y0A21 Diagonales:** Mantienen su conexión analógica tradicional para ofrecer detección de proximidad redundante en los ángulos ciegos frontales.
+* **Interfaz de Usuario y Control:** Se integró una tira Neopixel y un Buzzer para proporcionar telemetría visual y auditiva del estado del robot (códigos de error, calibración exitosa, detección de línea). El inicio de ejecución se controla mediante un **interruptor físico de palanca** (Pin D23), descartando el uso de pulsadores para evitar rebotes o activaciones accidentales por vibración.
 
 ---
 
-### Resumen de Cambios en Hardware
+> [!IMPORTANT]
+> **Iteración de Hardware: Simplificación y Mantenibilidad**
+> 
+> La transición de los sensores ultrasónicos (HC-SR04) a los módulos ToF no solo mejoró la velocidad de muestreo, sino que resolvió un problema crítico de diseño físico. En versiones anteriores, la incompatibilidad lógica (5V del HC-SR04 vs. 3.3V de los pines del ESP32) nos obligó a fabricar divisores de voltaje manuales con arreglos de resistencias debido a la falta de convertidores lógicos comerciales en ese momento. Aunque la solución era funcional, resultaba en un circuito sumamente tosco, voluminoso y propenso a falsos contactos. Migrar a una topología de sensores I2C nativos a 3.3V eliminó por completo esta red pasiva, logrando un ensamblaje mucho más limpio y facilitando enormemente las labores de mantenimiento y reparación en los pits durante la competencia.
 
-| Componente Anterior | Componente Actual | Ventaja Principal |
+> [!NOTE]
+> **Compensación de Diseño (*Trade-off*) y Gestión de Tráfico I2C**
+> 
+> Integrar múltiples sensores I2C presentaba el riesgo de colisiones de datos y retrasos en el ciclo principal (*loop*). Este riesgo se mitigó mediante dos decisiones arquitectónicas: a nivel de software, implementando rutinas de muestreo secuencial (*polling*) estrictamente temporizadas mediante los pines XSHUT; y a nivel de hardware, segregando la carga de datos en dos buses I2C independientes (Navegación vs. Superficie). Adicionalmente, para optimizar el espacio y peso, se decidió prescindir de bancos de resistencias *pull-up* externas, confiando exitosamente en las resistencias *pull-up* integradas por defecto en las placas comerciales de los sensores.
+
+---
+
+### Resumen de Cambios y Evolución de Hardware
+
+| Componente Anterior | Componente Actual | Justificación Técnica y Ventaja Principal |
 | :--- | :--- | :--- |
-| Sensor Ultrasónico | **Sensor ToF (I2C)** | Mayor precisión a corta distancia, respuesta rápida y ahorro de pines. |
-| Giroscopio Anterior | **BNO055** | Eliminación de la deriva (drift) en la pista de $3\times3$ m. |
-| Sharp Diagonales / Color | **Mismos Sensores** | Estabilidad en la lectura de líneas y detección diagonal. |
+| Sensor Ultrasónico (HC-SR04 con divisores de tensión) | **4x Sensores ToF (I2C #1)** | Eliminación de zonas muertas y de redes de resistencias; hardware limpio a 3.3V. Direcciones gestionadas vía pines XSHUT. |
+| Giroscopio básico | **IMU BNO055 (I2C #1)** | Supresión del *drift* inercial en el área de $3 \times 3$ m (Alineación orientada al eje Y). |
+| Sensor de Color (Bus único) | **TCS34725 (I2C #2 aislado)** | Independencia de bus para evitar cuellos de botella con la telemetría de evasión. |
+| Pulsador de inicio | **Interruptor físico (Pin D23)** | Enclavamiento seguro contra vibraciones mecánicas de la pista. |
 
 ---
+
 ##  Diseño Estructural y Sistema de Transmisión (V2)
 
 # PROMETHEUS TEAM — VEHÍCULO AUTÓNOMO WRO
