@@ -71,6 +71,51 @@ Para asegurar las funciones que ya operaban de manera óptima, mantenemos en la 
 | Sharp Diagonales / Color | **Mismos Sensores** | Estabilidad en la lectura de líneas y detección diagonal. |
 
 ---
+##  Diseño Estructural y Sistema de Transmisión (V2)
+
+Hemos rediseñado por completo el chasis y la mecánica del vehículo para maximizar su eficiencia en pista, mejorar la distribución de componentes y garantizar un rendimiento dinámico óptimo.
+
+###  Optimización del Chasis y Distribución de Espacio
+
+El nuevo diseño de la base se enfoca en mejorar la maniobrabilidad general del vehículo, especialmente en los giros cerrados:
+* **Reducción de Dimensiones:** Se redujo la longitud total del chasis y sutilmente su ancho. Esto disminuye el radio de giro, permitiendo curvas más rápidas y fluidas.
+* **Distribución Eficiente:** La integración de un puente H de menor tamaño liberó un espacio crítico en la base, permitiéndonos reubicar estratégicamente el resto de los componentes electrónicos para equilibrar el centro de masa.
+
+![Boceto de la nueva base optimizada](other/bocetoBase2026.jpeg)
+*Figura: Boceto inicial de la nueva geometría de la base.*
+
+![Comparación tridimensional de los chasis](other/comparacion3dBase2026.jpeg)
+*Figura: Comparación del modelo anterior frente al nuevo diseño dentro del software de modelado 3D.*
+
+---
+
+###  Rediseño de la Transmisión Mecánica
+
+Para aprovechar al máximo el torque y la potencia nominal del motor, eliminamos el sistema previo y diseñamos una transmisión directa por engranajes:
+* **Configuración de Piñones:** Implementamos un sistema de dos engranajes acoplados directamente.
+* **Transmisión de Fuerza Simultánea:** El primer engranaje se fija al eje del motor, transmitiendo la fuerza a un segundo engranaje solidario a una varilla (eje central). Este eje conecta ambas ruedas de tracción de forma síncrona, garantizando un empuje simétrico y eficiente sin pérdidas de potencia por fricción.
+
+![Sistema de engranajes y eje de transmisión](other/engranajesTransmision2026.jpeg)
+*Figura: Vista detallada del tren de engranajes y el eje de tracción.*
+
+---
+
+### Soporte Adaptativo para Dispositivo Móvil
+
+En lugar de utilizar un trípode genérico para la sujeción del teléfono (encargado del procesamiento visual), diseñamos un **prototipo de sujetador personalizado e integrado al chasis**:
+* **Mayor Estabilidad:** Al eliminar los puntos de articulación del trípode anterior, reducimos por completo las vibraciones mecánicas que afectaban el enfoque de la cámara.
+* **Adaptabilidad Específica:** Este diseño a medida se ajusta milimétricamente al espacio disponible, reduciendo la altura del vehículo y protegiendo el dispositivo de impactos.
+
+---
+
+###  Vista General del Vehículo Completo
+
+A continuación se muestra el ensamblaje final e integración de todos los sistemas (mecánico, estructural y electrónico) desarrollado en el software de diseño 3D:
+
+![Diseño final del vehículo completo en 3D](other/carro3d2026.jpeg)
+*Figura: Render del ensamblaje final del vehículo.*
+
+---
 
 
 
