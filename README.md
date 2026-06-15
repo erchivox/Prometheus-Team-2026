@@ -1,6 +1,19 @@
 # Prometheus Team - Temporada 2026
 Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
 
+##  Fotos de equipo
+| ![ Foto Oficial](t-photos/foto_equipo.jpeg)  | ![ Foto Equipo](t-photos/foto_equipo2.jpeg) | 
+| :----: | :---------- |
+
+
+---
+##  Fotos del vehiculo 
+| ![Arriba del vehiculo](v-photos/arriba2026.JPG)  |  ![Debajo de vehiculo](v-photos/abajo2026.JPG)  |  ![Lateral derecho](v-photos/lateral-derecho2026.JPG) |
+| :----: | :------------------- | :---------- |
+| ![lateral izquierdo](v-photos/lateral-izquierdo2026.JPG)  |  ![frente](v-photos/frente2026.JPG)  |  ![detras](v-photos/detras2026.JPG) |
+
+---
+
 ### Componentes de Control, Detección e Interfaz
 
 | Imagen | Nombre de Componente | Descripción |
@@ -150,6 +163,27 @@ La traslación del modelo digital al mundo físico se realizó utilizando filame
 2.  **Gestión de Componentes Microscópicos:** Las pequeñas clavijas mecánicas se distribuyeron en la misma bandeja de las piezas de gran tamaño. Esto permitió aprovechar el tiempo de traslación del cabezal como una ventana de **enfriamiento pasivo**, evitando que el filamento se derritiera por calor acumulado. Adicionalmente, se les aplicó un borde de adherencia exclusivo (*Brim* exterior de 5 mm) mediante el Modo Objeto de Orca Slicer para contrarrestar cualquier tirón o apalancamiento del filamento durante los viajes largos de la boquilla.
 3.  **Estandarización de Separadores:** Los separadores del chasis de 60 mm fueron fabricados a la medida exacta e integran insertos roscados M3 instalados por calor en sus extremos, superando las limitaciones intrínsecas de la impresión 3D para reproducir micro-roscas funcionales y garantizando un ensamblaje robusto y modular.
 
+## Dimensiones Finales e Integración de Componentes
+
+Gracias a la compactación de la transmisión trasera, las dimensiones del nuevo chasis se redujeron drásticamente, cumpliendo con las metas geométricas de estabilidad establecidas:
+
+### Especificaciones Geométricas
+
+| Parámetro | Dimensión |
+| :--- | :--- |
+| **Largo Total del Chasis** | 179 mm |
+| **Ancho Total del Chasis** | 115 mm |
+| **Distancia entre Ejes (Aprox.)** | 112 mm |
+| **Relación de Aspecto** | ~1:1 (Cumplida) |
+
+### Integración de Periféricos y Sensores
+
+La matriz del chasis incorpora de forma nativa anclajes optimizados para la distribución periférica del hardware de navegación:
+
+* **Sensores de Distancia:** Soportes dedicados para **4 sensores ToF** y **2 sensores analógicos Sharp**.
+* **Cromatismo:** Alojamiento inferior diseñado específicamente para el **sensor de color**.
+* **Electrónica:** Barrenos de sujeción integrados para los separadores y el montaje de las placas electrónicas.
+
 ---
 
 ### RESUMEN DE LOGROS DE OPTIMIZACIÓN MECÁNICA (2025 VS 2026)
@@ -157,6 +191,7 @@ La traslación del modelo digital al mundo físico se realizó utilizando filame
 * **✓ Maniobrabilidad:** Reducción del largo total del chasis logrando una relación perfecta de giro 1:1.
 * **✓ Robustez:** Transición de fijaciones externas de plástico a un Monochasis integrado de PETG con 5 perímetros de fuerza.
 * **✓ Visión Estable:** Reemplazo del trípode genérico inestable por un soporte de torres "Shark Fin" con distribución de carga uniforme e insertos roscados M3 metálicos desmontables.
+
 
 #### Continuidad en el Desarrollo de Software y Control:
 Es importante destacar que la arquitectura del firmware y la lógica de codificación del vehículo se mantienen exactamente idénticas a las implementadas con éxito en el diseño del año anterior. Debido a la fiabilidad demostrada en el procesamiento de datos y control cinemático, no se realizaron modificaciones de logica en el código base. 
