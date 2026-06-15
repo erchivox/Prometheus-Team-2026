@@ -117,7 +117,11 @@ A continuación se muestra el ensamblaje final e integración de todos los siste
 ---
 
 
+## Prueba de vueltas a la pista 
 
+Haz clic en la imagen para ver el vídeo:
+
+[![Mira el video del proyecto](other/prueba-vuelta.png)](https://youtube.com/shorts/Ml_8qpX_Ozo)
 
 
 
