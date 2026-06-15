@@ -109,7 +109,7 @@ Una vez demostrada la viabilidad del concepto de tren motriz, el diseño se tras
 
 La plataforma final resultante posee unas dimensiones de **179 mm de largo por 115 mm de ancho**, integrando una distancia entre ejes de **~112 mm**, consolidando en el modelo físico la relación de proporción 1:1 buscada para una maniobrabilidad excepcional.
 
-![VISTA DE PLANTA DEL MONOCHASIS DE ONSHAPE](AQUÍ_VA_EL_ENLACE_A_TU_IMAGEN_2)
+![VISTA DE PLANTA DEL MONOCHASIS DE ONSHAPE](other/shasisOneShape2026.jpeg)
 
 #### Desglose Técnico del Tren Motriz y Primer Piso:
 * **Motor de Tracción:** Modelo JGA25 de 220 RPM con caja reductora metálica integrada para un torque óptimo en aceleraciones cortas. El monochasis incorpora una "cama" elevada calculada a la altura exacta para alinear los engranajes.
@@ -124,7 +124,27 @@ La plataforma final resultante posee unas dimensiones de **179 mm de largo por 1
 
 La mayor ventaja de utilizar Onshape fue la capacidad de realizar un **Ensamble Virtual completo** de todas las piezas mecánicas e impresas antes de iniciar la fabricación física en PETG. Este paso de control de calidad permitió simular el movimiento de los componentes y corregir interferencias críticas en las piezas de sujeción por mordaza.
 
-![VISTA EXPLOTADA O ENSAMBLE COMPLETO EN ONSHAPE]( )
+> ###  Engranaje del Motor
+> ![Engranaje del Motor](other/engranajeMotorOneShape2026.jpeg)
+> *Vista detallada del piñón diseñado para acoplarse directamente al eje del motor.*
+
+***
+
+> ###  Engranaje de la Varilla
+> ![Engranaje de la Varilla](other/engranajeVarillaOneShape2026.jpeg)
+> *Modelado del engranaje conducido que interactúa con la varilla de transmisión.*
+
+***
+
+> ###  Subensamble del Motor con Engranajes
+> ![Subensamble del Motor con Engranajes](other/motorConEngranajesOneShape2026.jpeg)
+> *Acoplamiento del motor junto al tren de engranajes reductor/transmisor.*
+
+***
+
+> ### . Motor con Engranajes (Vista Completa / Ensamble)
+> ![Motor con Engranajes Vista Completa](other/motorConEngrenajesVistaCompletaOneShape2026.jpeg)
+> *Perspectiva final del bloque de propulsión listo para su integración en el chasis.*
 
 Durante la validación virtual, se optimizaron las uniones roscadas y los acoples de la mordaza para evitar fallos por fatiga. Un ejemplo clave de esta etapa de ingeniería fue el rediseño del sistema de apriete: al detectar virtualmente que el tornillo del soporte podía escapar hacia arriba por la fuerza de reacción, se transformó el sistema en una **Prensa en "C" estructural**. Se modificó la barra superior para contener una rosca interior ensanchada con tolerancia M11 y paso 3, mientras que la mordaza móvil recibió un bolsillo cilíndrico liso. Esto garantizó que el tornillo empujara el bloque móvil de forma lineal y confinada, impidiendo desajustes físicos bajo torsión.
 
@@ -134,13 +154,40 @@ Durante la validación virtual, se optimizaron las uniones roscadas y los acople
 
 El segundo piso del chasis mantiene un perfil simétrico con respecto al primero pero cumple funciones de distribución de masa y sujeción del sistema de visión artificial (smartphone). En el diseño anterior, la batería se sujetaba de forma precaria con bridas plásticas (tirras) en la parte superior trasera. En el nuevo diseño, se integró un **compartimento ventilado dedicado justo debajo del primer piso**, bajando el centro de gravedad del vehículo y dejando la plataforma del segundo piso totalmente libre y limpia.
 
-![PORTABATERÍAS](AQUÍ_VA_EL_ENLACE_A_TU_IMAGEN_4)
+![PORTABATERÍAS](other/portaBateriasOneShape2026.jpeg)
 
 Para el soporte del teléfono, se diseñaron dos **torres aerodinámicas tipo aleta de tiburón (*Shark Fin*)**. Su geometría se eleva suavemente desde la zona media-trasera del chasis y traza una curva hacia el eje delantero. Esta trayectoria no es solo estética: permite transferir y distribuir el peso del smartphone de manera uniforme sobre las cuatro ruedas del vehículo, evitando sobrecargar el eje delantero y manteniendo una tracción constante. 
 
 Las torres cuentan con un sistema de movimiento que permite ajustar el ángulo de inclinación de la pantalla según las necesidades de la cámara. La mordaza móvil se desplaza por el canal de la mordaza fija guiada por el tornillo M10 superior. Además, para facilitar el transporte y mantenimiento, las torres incorporan 3 alojamientos en su base para **insertos roscados M3**, permitiendo desmontar todo el conjunto del soporte retirando los tornillos desde la parte inferior del segundo piso.
 
-![SOPORTE DEL TELÉFONO ONSHAPE]( )
+
+> ### Mecanismo de Encaje del Soporte
+> ![Mecanismo de Encaje del Soporte](other/encajeSoporteTlfnOneShape2026.jpeg)
+> *Vista del sistema de acoplamiento.*
+
+***
+
+> ### Soporte
+> ![Ensamble General del Soporte](other/soporteTlfnOneShape2026.jpeg)
+> *soporte.*
+
+***
+
+> ### Componente Lateral
+> ![Componente Lateral Ajustable](other/lateralSoporte2OneShape2026.jpeg)
+> *Modelado de la sección lateral que asegura el agarre y la estabilidad del dispositivo.*
+
+***
+
+> ### Componente Lateral
+> ![Vista Lateral del Soporte](other/lateralSoporteTlfnOneShape2026.jpeg)
+>  *Modelado de la sección lateral que asegura el agarre y la estabilidad del dispositivo.*
+
+***
+
+> ### Tornillo de Ajuste y Bloqueo
+> ![Tornillo de Ajuste](other/tornilloTlfnOneShape2026.jpeg)
+> *Diseño de la pieza roscada para el sistema de sujeción mecánica y calibración manual.*
 
 ---
 
@@ -184,6 +231,42 @@ La matriz del chasis incorpora de forma nativa anclajes optimizados para la dist
 * **Cromatismo:** Alojamiento inferior diseñado específicamente para el **sensor de color**.
 * **Electrónica:** Barrenos de sujeción integrados para los separadores y el montaje de las placas electrónicas.
 
+---
+### Soportes Mecánicos y Ajustes de Componentes
+
+Componentes dedicados al posicionamiento preciso de la sensórica de distancia y la rigidez estructural de la transmisión:
+
+> ### Soporte para Sensor ToF
+> ![Soporte para Sensor ToF](other/soporteSensorTofOneShape2026.jpeg)
+> *Diseño del anclaje optimizado para la fijación y alineación de los sensores de tiempo de vuelo (Time-of-Flight).*
+
+***
+
+> ### Soporte de la parte superior
+> ![Soporte de la Varilla](other/soporteVarillaOneShape2026.jpeg)
+> *Pieza de sujeción encargada de mantener la parte superior.*
+
+***
+
+### Ensamble General del Chasis Completo
+
+Vistas globales del prototipo final con la integración total de la matriz, transmisión, soportes y periféricos nativos incorporados:
+
+> ### Vista Diagonal del Chasis Completo
+> ![Vista Diagonal del Chasis Completo](other/ShasisCompletodiagonalOneShape2026.jpeg)
+> *Perspectiva distinta.*
+
+***
+
+> ### Vista Frontal del Chasis Completo
+> ![Vista Frontal del Chasis Completo](other/ShasisCompletoFrenteOneShape2026.jpeg)
+> *Proyección frontal que evidencia la simetría del chasis y los espacios designados para la distribución.*
+
+***
+
+> ### Vista Diagonal Alternativa (Perspectiva Posterior)
+> ![Vista Diagonal Alternativa del Chasis](other/ShasisCompletoDiagonal2OneShape2026.jpeg)
+> *Ángulo secundario.*
 ---
 
 ### RESUMEN DE LOGROS DE OPTIMIZACIÓN MECÁNICA (2025 VS 2026)
