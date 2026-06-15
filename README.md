@@ -1,6 +1,57 @@
 # Prometheus Team - Temporada 2026
 Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
 
+## Esquema de alimentacion:
+   [Para ver versiones anteriores ver aqui.](#sistema-de-alimentación)
+###  Versión 4:
+
+![Diagrama de Alimentación 5](schemes/diagrama-alimentacion5.jpeg)
+
+Luego del cambio del puente H a la nueva version hemos logrado eliminar la necesidad de un segundo esp32 para el control exclusivo de el motor.
+
+La **batería LiPo 2S de 2200mAh** (7.4V, con un máximo de 8.4V) sigue siendo la fuente principal de energía, conectada a un interruptor general. A partir de este punto, la alimentación se ramifica: una rama se dirige a un **step-up/down XL6009** ajustado a 7.5V, que a su vez alimenta el **puente H L298N**. Este entrega aproximadamente 6V al **Motor 25GA-370** tras su caída de voltaje interna. 
+
+De forma paralela, la batería alimenta dos módulos **step-down DSN-Mini 360**. El primero, configurado a 6V, proporciona energía al **ESP32 #**. El segundo módulo DSN-Mini 360, con un ajuste de 5V, se encarga de la alimentación general para el **Servomotor SG90 180°** y otros posibles sensores, ofreciendo una línea de voltaje estable y adecuada para estos componentes. Esta configuración ampliada permite una gestión de energía más distribuida y específica para las necesidades de cada subsistema del vehículo.
+
+## Esquema de Sensores:
+   [Para ver versiones anteriores aqui.](#sistema-de-detección-de-objetos)
+###  Versión 4:
+
+![Diagrama de sensores 4](schemes/diagrama-sensores3.jpeg)
+
+  #### Mejoras en el Sistema de Sensores y Hardware
+
+En esta versión del proyecto, hemos optimizado la configuración del hardware para mejorar la precisión, el tiempo de respuesta y la estabilidad del robot en la pista de competencia ($3 \times 3$ metros).
+
+#### Sensores de Distancia y Navegación
+
+* **Transición a Sensores ToF (Time-of-Flight):** Reemplazamos los sensores ultrasónicos tradicionales por sensores ToF. Esta actualización resuelve los problemas de lectura en distancias cortas (zonas muertas) y ofrece una velocidad de respuesta significativamente mayor. Además, al operar mediante **comunicación I2C**, logramos una reducción crítica en el uso de pines del microcontrolador, haciendo el circuito más limpio y práctico.
+* **Giroscopio BNO055:** Implementamos el sensor BNO055 con el objetivo de **eliminar por completo la deriva (drift)** acumulada que presentaba el sensor anterior tras dar múltiples vueltas en la pista. Esto garantiza una orientación y posicionamiento mucho más fiables a largo plazo.
+
+### Sensores Mantenidos
+
+Para asegurar las funciones que ya operaban de manera óptima, mantenemos en la estructura:
+* **Sensores Sharp diagonales:** Para la detección táctil/proximidad en ángulos críticos.
+* **Sensor de color:** Dedicado exclusivamente a la lectura y confirmación de líneas en la superficie de la pista.
+
+---
+
+### Resumen de Cambios en Hardware
+
+| Componente Anterior | Componente Actual | Ventaja Principal |
+| :--- | :--- | :--- |
+| Sensor Ultrasónico | **Sensor ToF (I2C)** | Mayor precisión a corta distancia, respuesta rápida y ahorro de pines. |
+| Giroscopio Anterior | **BNO055** | Eliminación de la deriva (drift) en la pista de $3\times3$ m. |
+| Sharp Diagonales / Color | **Mismos Sensores** | Estabilidad en la lectura de líneas y detección diagonal. |
+
+---
+
+
+
+
+
+
+
 # Prometheus Team - Temporada 2025
 
 Somos un equipo venezolano que representa con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma.
