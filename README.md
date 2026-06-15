@@ -119,7 +119,12 @@ En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehícu
 
 ---
 
-## Diseño Estructural, Transmisión y Manufactura Aditiva (V2)
+## Diseño Estructural, Transmisión y Manufactura Aditiva
+
+[*Consultar el historial de versiones de diseño estructural, transmisión y manufactura aditiva aquí*](## Paso a Paso de la Construcción)
+
+### Versión 2 (Actual)
+
 ---
 
 ### 1. Filosofía de Rediseño y Prototipado Conceptual
@@ -149,7 +154,7 @@ La plataforma resultante mide **179 mm de largo por 115 mm de ancho**, con una d
 ![Vista de Planta del Monochasis (Onshape)](other/shasisOneShape2026.jpeg)
 
 #### Desglose Técnico del Tren Motriz (Razonamiento Par/Velocidad)
-* **Motor de Tracción:** Modelo JGA25 de 220 RPM con caja reductora metálica. El monochasis incorpora una cama hundida especifica para nuestro motor, alineando el eje de salida con la transmisión.
+* **Motor de Tracción:** Modelo JGA25 de 220 RPM con caja reductora metálica. El monochasis incorpora una cama hundida específica para nuestro motor, alineando el eje de salida con la transmisión.
 * **Sistema Piñón-Corona:** Un piñón de 15 dientes acoplado al motor transmite la potencia a una corona de 25 dientes. Esta **relación de transmisión de 1.66:1** representa una decisión de ingeniería calculada: sacrifica una fracción de la velocidad final máxima para multiplicar el torque (par motor) entregado a las ruedas, garantizando aceleraciones explosivas y controladas desde el reposo absoluto sin estresar mecánicamente el motor.
 * **Eje Trasero (Solución de Taller):** Ante la escasez de varillas calibradas de 4 mm, se adaptaron núcleos de electrodos de soldadura (~2.4 mm). El diámetro se incrementó uniformemente en las zonas de rodadura mediante fundas termocontraíbles, logrando tolerancias de ajuste a presión (*press-fit*) sin holguras.
 * **Apoyos y Rodamientos:** El eje descansa sobre rodamientos 604 ZZ ZSG (4x12x4 mm) encajados en portarolineras nativos del chasis.
@@ -158,53 +163,91 @@ La plataforma resultante mide **179 mm de largo por 115 mm de ancho**, con una d
 
 ### 3. Validación de Tolerancias y Ensamble Virtual
 
-El ensamble virtual en Onshape fue vital para analizar interferencias mecánicas y optimizar el diseño antes de la manufactura. 
+Antes de realizar la integración completa, el entorno de Onshape nos permitió modelar y auditar cada componente mecánico de forma individual, asegurando que las tolerancias geométricas fueran perfectas.
+
+#### Modelado de Componentes Clave y Sistemas de Anclaje
+El diseño del tren motriz requirió la creación de engranajes personalizados, implementando soluciones de fijación específicas para cada tipo de eje:
+
+* **Piñón Motriz (Eje tipo "D"):** Para acoplar el engranaje de 15 dientes al motor JGA25, se aprovechó el corte plano de fábrica del eje metálico. Se modeló un agujero con perfil en "D" calculando tolerancias estrictas para impresión 3D, logrando un ensamble a presión (*press-fit*) perfecto. Esto garantiza la transferencia total de torque sin desgaste y evita que el piñón se desplace o escape por vibración.
+* **Corona Conducida (Varilla Lisa):** Para fijar el engranaje de 25 dientes a nuestra varilla trasera adaptada, se implementó un collarín con **sistema de apriete por mordaza tipo "C"**. Al ajustar un tornillo transversal pasante, el collarín se comprime estrangulando la varilla lisa, bloqueando el engranaje mediante fricción radial sin requerir pegamentos ni dañar el metal.
+
+> ![Render del Piñón de 15 dientes mostrando el agujero en D](other/Engranaje_15D.png)
+> *Piñón motriz (15T) con acoplamiento tipo D.*
+
+> ![Render de la Corona de 25 dientes con mordaza](other/Engranaje_25D.png)
+> *Corona conducida (25T) con sistema de apriete tipo C.*
+
+#### Acoplamiento de Tracción: Adaptador para Ruedas Lego
+Para mantener la excelente adherencia a la pista de las **ruedas Lego** heredadas de la iteración pasada y acoplarlas a nuestra nueva varilla de transmisión lisa, se diseñó una interfaz mecánica a medida. 
+Este componente de transición cuenta con el perfil transversal clásico en cruz de Lego en un extremo, mientras que la base cilíndrica replica el mismo **sistema de apriete por mordaza tipo "C"** utilizado en la corona. Esto permite fijar la rueda sólidamente a la varilla y facilita enormemente el cambio rápido de neumáticos o mantenimientos en los pits.
+
+> ![Vista lateral del adaptador morado con el eje Lego](other/adaptador_lego.png)
+> *Perfil del adaptador de transición.*
+
+> ![Vista isométrica del adaptador morado mostrando la mordaza tipo C](other/mordaza_tipoc.png)
+> *Detalle del sistema de apriete por mordaza transversal.*
+
+#### Ensamble Virtual y Mitigación de Fallos
+Una vez validados los componentes individuales, el ensamble virtual completo fue vital para analizar interferencias mecánicas y optimizar el diseño antes de la manufactura. 
 
 > [!TIP]
-> **Mitigación de Fallos: Rediseño a Prensa en "C"**
+> **Mitigación de Fallos: Rediseño al soporte de motor**
 > 
-> Durante la simulación, se detectó que el soporte simple de la transmisión podía fallar porque el tornillo tendia a escapar bajo la fuerza de presión que debia realizar al estar montando el telefono. Para solucionarlo, se rediseñó el sistema de apriete transformándolo en una **Prensa en "C" estructural**. Se ensanchó la rosca superior (tolerancia M11, paso 3) y se añadió un bolsillo cilíndrico liso en la mordaza móvil, garantizando que el esfuerzo de compresión sea perfectamente lineal y confinado.
+> Durante la simulación, se detectó que el soporte del motor tenía los tornillos que anclan al motor ubicados en un punto donde serían cubiertos por la corona del eje trasero. Esto obligaría a desmontar la varilla y casi todo el sistema de tracción para sacar el motor, ocasionando pérdidas de tiempo críticas durante mantenimientos en los pits. Para solucionarlo, se reubicaron los agujeros de anclaje hacia las esquinas expuestas del soporte, permitiendo la extracción rápida del motor con solo retirar el piñón. 
 
-> ![Engranaje del Motor](other/engranajeMotorOneShape2026.jpeg)
-> *Piñón motriz (15T) diseñado para acoplamiento directo.*
-
-> ![Engranaje de la Varilla](other/engranajeVarillaOneShape2026.jpeg)
-> *Corona conducida (25T) para el eje de transmisión.*
-
-> ![Subensamble del Motor](other/motorConEngranajesOneShape2026.jpeg)
+> ![Subensamble del motor acoplado a sus engranajes y la varilla](other/subensamble_engranajes.png)
 > *Análisis de interferencia del tren de engranajes.*
 
-> ![Vista Completa Propulsión](other/motorConEngrenajesVistaCompletaOneShape2026.jpeg)
+> ![Vista general de la parte trasera del chasis con la propulsión montada](other/motorConEngranajesOneShape2026.jpeg)
 > *Bloque motriz empaquetado y listo para integración.*
 
 ---
 
-### 4. Segundo Piso y Sistema de Visión "Shark Fin"
+### 4. Segundo Piso, Separadores y Sistema de Visión "Shark Fin"
 
-El segundo nivel distribuye la masa y aloja el sistema de visión computacional. 
+El segundo nivel de la plataforma tiene como objetivo distribuir la masa, proteger la electrónica y alojar el robusto sistema de visión computacional.
 
 > [!NOTE]
 > **Compensación de Diseño (*Trade-off*) del Centro de Gravedad**
 > 
 > En versiones anteriores, la batería se ubicaba precariamente en la zona superior. El nuevo diseño integró un compartimento ventilado **debajo del primer piso**. Aunque reduce ligeramente la altura libre al suelo (*ground clearance*), esta compensación baja drásticamente el centro de gravedad (CoG), evitando el balanceo o vuelco en curvas a alta velocidad.
 
-![Portabaterías Inferior](other/portaBateriasOneShape2026.jpeg)
+> ![Vista inferior del chasis mostrando el compartimento de la batería](other/portaBateriasOneShape2026.jpeg)
 
-Para el soporte del teléfono inteligente, se modelaron dos torres aerodinámicas tipo **aleta de tiburón (*Shark Fin*)** trazadas con *splines* de transición suave. Esta geometría transfiere y distribuye el peso del dispositivo hacia el centro geométrico del chasis, evitando sobrecargar el eje directriz delantero. El sistema incluye un canal deslizante con tornillo M10 para calibrar el ángulo de la cámara y utiliza insertos roscados M3 instalados por calor para permitir su rápido desmontaje estructural.
+#### Separadores Estructurales e Insertos Roscados
+Para mantener la distancia entre el primer y segundo piso, se modelaron **separadores a medida de 60 mm**. Conscientes de las limitaciones físicas de las impresoras 3D convencionales (que no pueden imprimir micro-roscas funcionales que resistan tracción repetitiva), descartamos roscar el plástico. En su lugar, se insertaron por calor **insertos roscados de latón M3** en cada extremo del separador, logrando pilares de altísima resistencia estructural.
 
-#### Desglose del Soporte de Visión
-> ![Encaje del Soporte](other/encajeSoporteTlfnOneShape2026.jpeg) | ![Ensamble General](other/soporteTlfnOneShape2026.jpeg)
-> *Acoplamiento a la base y ensamble general del sistema de visión.*
+#### Sistema de Sujeción del Teléfono (Mordaza Ajustable)
+Para soportar el teléfono celular, se modelaron dos torres aerodinámicas laterales tipo **aleta de tiburón (*Shark Fin*)**. Para garantizar que estas torres no cedieran ante la vibración, se aplicó un método de anclaje de grado industrial:
+* **Fijación a la base:** Cada torre aloja en su base inferior **3 insertos roscados de latón**. Los tornillos atraviesan el segundo piso de abajo hacia arriba, traccionando la torre fuertemente contra la plataforma.
+* *Nota de Diseño (DfAM):* Para que la termofijación de estos insertos fuera perfecta, se modelaron agujeros ciegos con dimensiones precisas de **4.1 mm de diámetro por 9 mm de profundidad**. Estas tolerancias permiten que el inserto entre, y que el plástico derretido fluya por su moleteado exterior sin rebasar hacia el interior de la rosca.
 
-> ![Componente Lateral 1](other/lateralSoporte2OneShape2026.jpeg) | ![Componente Lateral 2](other/lateralSoporteTlfnOneShape2026.jpeg)
-> *Geometría lateral diseñada para abrazar el dispositivo con firmeza.*
+> ![Vista en corte de la base de las torres mostrando los agujeros para insertos]()
+> *Torres lateral derecha con agujeros para los insertos roscados.*
 
-> ![Tornillo de Calibración](other/tornilloTlfnOneShape2026.jpeg)
-> *Tornillo M10 personalizado para calibración del ángulo focal.*
+El mecanismo de retención en sí no es una ranura estática, sino una **Prensa/Mordaza ajustable**:
+1. **Calibración de Ángulo:** Las dos torres sostienen una **mordaza fija** central. Esta mordaza está sujeta por tornillos laterales (que encajan en dos insertos roscados propios). Al aflojarlos, la base completa pivota permitiendo ajustar el ángulo de la cámara; al apretarlos, la inclinación queda bloqueada.
+2. **Apriete de Seguridad:** La mordaza fija actúa como guía para una **mordaza móvil** interior. En la parte superior de la base fija se modeló una rosca ensanchada a **M10.5** (dejando 0.5 mm de holgura calculada para compensar la contracción térmica del PETG). Por allí desciende un robusto **tornillo M10 impreso en 3D**. Al girarlo, empuja la mordaza móvil hacia abajo de forma perfectamente lineal y confinada, comprimiendo y asegurando el teléfono inteligente con fuerza mecánica sin riesgo de escape.
+
+> ![Ensamble completo del soporte Shark Fin](other/soporteensamble.png)
+> *Ensamble del soporte Shark Fin interactuando con las torres laterales.*
+
+> ![Detalle del tornillo M10 superior impreso en 3D](other/vista_tornillo_rosca.png)
+> *Tornillo M10 personalizado y rosca M10.5 de compensación térmica.*
 
 ---
 
-### 5. Ingeniería de Manufactura Aditiva 
+### 5. Integración Total: Ensamble Maestro CAD
+
+Con todos los subsistemas (tracción, suspensión de cámara y chasis estructural) modelados y validados individualmente para evitar colisiones mecánicas, el proceso de diseño en Onshape culmina en un Ensamble Maestro. Esta auditoría virtual final nos permite garantizar la accesibilidad a los puertos de los microcontroladores y confirmar visualmente el cumplimiento de las metas geométricas establecidas para la competencia.
+
+> ![Vista isométrica general de todo el chasis ensamblado en 3D](other/vista_completa_ensamble.png)
+> *Perspectiva global del Prometheus Autónomo consolidado en el entorno de simulación.*
+
+---
+
+### 6. Ingeniería de Manufactura Aditiva 
+
 La fabricación se ejecutó aprovechando la estabilidad térmica de la **Creality K1C** y posteriormente en la **Elegoo Centauri Carbon 2**, procesando el modelo en filamento **PETG** a través de Orca Slicer y Elegoo Slicer. Dado que el chasis debe soportar impactos y vibraciones mecánicas constantes, se estableció un perfil de extrusión orientado a la resistencia estructural (*DfAM - Design for Additive Manufacturing*):
 
 | Parámetro de Laminación | Valor | Justificación Técnica (*Trade-off*) |
@@ -232,12 +275,11 @@ La fabricación se ejecutó aprovechando la estabilidad térmica de la **Crealit
 
 **Evolución Mecánica (2025 vs 2026):**
 * **✓ Maniobrabilidad:** Reducción de la cota longitudinal, logrando un ratio de giro excepcional.
-* **✓ Tracción Controlada:** Transmisión re-calculada a 1.66:1 para priorizar el torque sobre la velocidad pico.
-* **✓ Robustez Material:** Transición de fijaciones empíricas a un Monochasis paramétrico en PETG consolidado.
-* **✓ Visión y CoG:** Sustitución de trípodes inestables por torres estructurales de carga distribuida y descenso del compartimento energético.
+* **✓ Tracción Controlada:** Transmisión re-calculada a 1.66:1 para priorizar el torque sobre la velocidad pico y reutilización eficiente de ruedas Lego mediante un adaptador DfAM.
+* **✓ Robustez Material:** Transición de fijaciones empíricas a un Monochasis paramétrico en PETG consolidado y separadores de 60 mm con termofijación de latón.
+* **✓ Visión y CoG:** Descenso del compartimento energético (batería) y un sistema "Shark Fin" tipo prensa que asegura tolerancias críticas y previene holguras en el dispositivo de cámara.
 
 ---
-
 
 ## Continuidad en el Desarrollo de Software y Control:
 #### Continuidad y Optimización en el Desarrollo de Software: Integración del BNO055
