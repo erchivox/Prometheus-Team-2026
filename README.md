@@ -1,3 +1,6 @@
+# Prometheus Team - Temporada 2026
+
+
 # Prometheus Team
 
 Somos un equipo venezolano que representa con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma.
@@ -776,3 +779,4 @@ Haz clic en la imagen para ver el vídeo:
 Haz clic en la imagen para ver el vídeo:
 
 [![Mira el video del proyecto](other/prueba-evacion-obstaculos.png)](https://www.youtube.com/watch?v=WQM6CjVKSwE)
+
