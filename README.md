@@ -15,7 +15,7 @@ Dicen que el segundo lugar es el primer perdedor, pero para nosotros fue el comb
 
 Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de hardware y optimizado los algoritmos de control para que el robot sea más rápido, preciso e inteligente. No venimos a ver qué pasa; venimos a buscar ese 1er Lugar nacional y ganarnos el derecho de representar a Venezuela en el escenario mundial. La meta es clara y el equipo está listo.
 
-| <img src="URL_DE_TU_IMAGEN_1" width="300" alt="Diseño del robot"/> | <img src="URL_DE_TU_IMAGEN_2" width="300" alt="Segundo lugar nacional"/> | <img src="URL_DE_TU_IMAGEN_3" width="300" alt="Trabajando en el box"/> |
+<img src="other/wro2025-1.jpeg" width="300"> <img src="other/wro2025-2.jpeg" width="300"> <img src="other/wro2025-3.jpeg" width="300">
 
 ---
 ##  Fotos del vehiculo 
