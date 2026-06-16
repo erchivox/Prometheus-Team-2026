@@ -19,9 +19,9 @@ Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de 
 
 ---
 ##  Fotos del vehiculo 
-| ![Arriba del vehiculo](v-photos/arriba2026.JPG)  |  ![Debajo de vehiculo](v-photos/abajo2026.JPG)  |  ![Lateral derecho](v-photos/lateral-derecho2026.JPG) |
+| ![Arriba del vehiculo](v-photos/ARRIBA2026.jpeg)  |  ![Debajo de vehiculo](v-photos/ABAJO2026.jpeg)  |  ![Lateral derecho](v-photos/DERECHA2026.jpeg) |
 | :----: | :------------------- | :---------- |
-| ![lateral izquierdo](v-photos/lateral-izquierdo2026.JPG)  |  ![frente](v-photos/frente2026.JPG)  |  ![detras](v-photos/detras2026.JPG) |
+| ![lateral izquierdo](v-photos/IZQUIERDA2026.jpeg)  |  ![frente](v-photos/ADELANTE2026.jpeg)  |  ![detras](v-photos/DETRAS2026.jpeg) |
 
 ---
 
