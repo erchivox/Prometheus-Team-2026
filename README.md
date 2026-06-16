@@ -117,6 +117,89 @@ En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehícu
 | Sensor de Color (Bus único) | **TCS34725 (I2C #2 aislado)** | Independencia de bus para evitar cuellos de botella con la telemetría de evasión. |
 | Pulsador de inicio | **Interruptor físico (Pin D23)** | Enclavamiento seguro contra vibraciones mecánicas de la pista. |
 
+
+# Gestión Energética y Autonomía del Sistema
+
+Este apartado detalla el análisis del consumo eléctrico y la justificación técnica de la fuente de alimentación seleccionada para el hardware del proyecto.
+
+## Cálculo del Consumo Energético Total
+
+El consumo eléctrico del sistema se ha estimado evaluando cada componente en condiciones de operación típicas. Se asume un uso del procesador activo y actuadores bajo carga moderada.
+
+| Componente | Cantidad | Consumo Estimado (mA) | Total (mA) |
+| :--- | :---: | :---: | :---: |
+| **ESP32** (Procesamiento activo, sin WiFi/BT intensivo) | 1 | ~80 mA | 80.0 mA |
+| **Sensor Infrarrojo Sharp GP2Y0A21** | 2 | 30 mA c/u | 60.0 mA |
+| **Sensor de Distancia Láser TOF VL53L0X** | 4 | 15 mA c/u | 60.0 mA |
+| **IMU BNO055** (Orientación Absoluta de 9 Ejes) | 1 | 12.3 mA | 12.3 mA |
+| **Sensor de Color TCS34725** | 1 | 3 mA | 3.0 mA |
+| **Tira de LEDs Neopixel** (10 LEDs en brillo medio/mix) | 10 | ~30 mA c/u | 300.0 mA |
+| **Zumbador (Buzzer)** | 1 | 30 mA | 30.0 mA |
+| **Regulador Elevador/Reductor XL6009** (Corriente en reposo) | 1 | 15 mA | 15.0 mA |
+| **Driver de Motores TB6612FNG** (Consumo lógico de control) | 1 | 2 mA | 2.0 mA |
+| **Motor DC 25GA-370 (6V-8V)** (Operación con carga típica) | 1 | 500 mA | 500.0 mA |
+| **Step Down DSN-Mini 360** (Corriente en reposo) | 2 | 5 mA c/u | 10.0 mA |
+| **Servomotor MG90 180°** (En movimiento continuo dinámico) | 1 | 200 mA | 200.0 mA |
+| **CORRIENTE TOTAL ESTIMADA** | | | **~1272.3 mA** |
+
+🔋 **Demanda de Corriente Nominal:** ~1.27 A
+
+>  **Notas sobre escenarios extremos de consumo:**
+> * **LEDs Neopixel:** Si los 10 LEDs se configuran en color blanco al 100% de brillo, el consumo de la tira ascenderá a **600 mA**, incrementando el total del sistema a ~1572.3 mA.
+> * **Eficiencia de Regulación:** Los reguladores conmutados (XL6009 y DSN-Mini 360) presentan pérdidas por eficiencia térmica (entre un 10% y 15% de disipación). Este comportamiento real puede elevar ligeramente la demanda de corriente extraída de la batería principal.
+
+---
+
+## Estimación de la Autonomía
+
+Para calcular el tiempo estimado de funcionamiento continuo, se utiliza la relación entre la capacidad nominal de la batería y la demanda de corriente calculada.
+
+### Fórmula General
+$$\text{Autonomía (horas)} = \frac{\text{Capacidad de la Batería (mAh)}}{\text{Consumo Total del Sistema (mA)}}$$
+
+### Aplicación al Caso de Estudio
+$$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1272.3 \text{ mA}} \approx 1.73 \text{ horas}$$
+
+* **Tiempo estimado:** Aproximadamente **1 hora y 44 minutos** de operación continua en condiciones normales.
+* **Nota Práctica:** Este modelo es de naturaleza teórica. En un entorno dinámico, los motores variarán su consumo constantemente (aumentando cerca del punto de bloqueo o *stall*) y los sensores se activarán por ráfagas, haciendo que la autonomía real oscile en función de las rutinas algorítmicas del firmware.
+
+---
+
+##  Justificación de la Fuente de Alimentación Seleccionada
+## 🔋 Elección del Sistema de Alimentación: ¿Por qué LiPo?
+
+La elección de una batería de **Polímero de Litio (LiPo)** frente a otras tecnologías del mercado se debe principalmente a su excelente **relación peso-potencia** y a su **capacidad de entrega de corriente instantánea (tasa de descarga)**, factores críticos para el rendimiento dinámico del robot.
+
+---
+
+### 📊 Análisis Comparativo de Tecnologías
+
+| Tecnología | Densidad Energética | Tasa de Descarga (C) | Peso / Volumen | Comportamiento con Motores/Servos |
+| :--- | :---: | :---: | :---: | :--- |
+| **LiPo (2S 50C)** | **Alta** | **Muy Alta (~50C)** | **Muy Ligero** | **Excelente.** Entrega corriente instantánea sin caídas de voltaje. |
+| **Li-ion (18650)** | Muy Alta | Baja (1C - 2C) | Ligero | **Deficiente.** Los picos de corriente provocan *voltage sag* y reinician la ESP32. |
+| **NiMH (6 celdas)**| Media | Media | Muy Pesado | **Aceptable, pero inviable.** El exceso de peso penaliza la agilidad del robot. |
+| **Power Bank (USB)**| Alta | Limitada (2A-3A) | Medio | **Incompatible.** Los circuitos de protección se apagan por sobrecorriente. |
+
+---
+
+###  Justificación Técnica frente a Alternativas
+
+#### 1. Frente a Celdas Li-ion (ej. 18650)
+Aunque las celdas 18650 tienen una excelente densidad energética, su tasa de descarga típica es muy baja. Si se intentan alimentar motores DC y servomotores —que generan altos picos de corriente al arrancar o atascarse— una batería Li-ion común sufrirá una caída de voltaje severa (*voltage sag*). Esto provocaría el **reinicio constante de la ESP32** o la activación del circuito de protección (BMS). La LiPo con su alta tasa de descarga entrega esa corriente al instante sin caídas de tensión.
+
+#### 2. Frente a Baterías de NiMH (Níquel-Metal Hidruro)
+Las NiMH son seguras y duraderas, pero extremadamente pesadas y voluminosas. Para igualar los **7.4V** nominales de una LiPo 2S, se requerirían **6 celdas de NiMH en serie** (1.2V c/u). Este incremento de peso duplicaría o triplicaría la masa del robot, penalizando el consumo eléctrico de los motores y reduciendo drásticamente la agilidad y aceleración del sistema en pista.
+
+#### 3. Frente a Power Banks comerciales (USB 5V)
+Los Power Banks elevan internamente el voltaje de sus celdas a 5V mediante reguladores con un límite estricto de corriente (usualmente 2A o 3A máximo). El consumo concurrente del sistema satura este límite con facilidad:
+* **10 LEDs Neopixel** en blanco brillante: `~600 mA`
+* **Servomotor MG90** (esfuerzo de torsión): `~500 mA`
+* **Motor principal 25GA-370** (arranque/carga): `> 1A`
+
+Superar este límite provoca un apagado inmediato del Power Bank por sobrecorriente. Además, los motores **25GA-370** rinden de manera óptima entre **6V y 8V**; alimentarlos a 5V limitaría severamente su torque y velocidad final.
+
+> ⚠️ **Nota de Diseño:** La combinación de una LiPo 2S junto a una tasa de descarga de hasta 50C garantiza que la electrónica de control (ESP32) y la etapa de potencia (motores/servos) coexistan de manera estable sin interferencias por caídas de tensión.
 ---
 
 ## Diseño Estructural, Transmisión y Manufactura Aditiva
