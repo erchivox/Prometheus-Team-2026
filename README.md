@@ -135,29 +135,30 @@ Este apartado detalla el análisis del consumo eléctrico y la justificación t�
 
 ## Cálculo del Consumo Energético Total
 
-El consumo eléctrico del sistema se ha estimado evaluando cada componente en condiciones de operación típicas. Se asume un uso del procesador activo y actuadores bajo carga moderada.
+El consumo eléctrico del sistema se estimó para tres escenarios de operación por componente, siguiendo valores típicos de hoja de datos: **standby** (componente energizado pero inactivo o en reposo), **nominal** (operación típica durante una vuelta normal) y **pico** (consumo máximo instantáneo, por ejemplo arranque de motor o brillo máximo de LEDs).
 
-| Componente | Cantidad | Consumo Estimado (mA) | Total (mA) |
-| :--- | :---: | :---: | :---: |
-| **ESP32** (Procesamiento activo, sin WiFi/BT intensivo) | 1 | ~80 mA | 80.0 mA |
-| **Sensor Infrarrojo Sharp GP2Y0A21** | 2 | 30 mA c/u | 60.0 mA |
-| **Sensor de Distancia Láser TOF VL53L0X** | 4 | 15 mA c/u | 60.0 mA |
-| **IMU BNO055** (Orientación Absoluta de 9 Ejes) | 1 | 12.3 mA | 12.3 mA |
-| **Sensor de Color TCS34725** | 1 | 3 mA | 3.0 mA |
-| **Tira de LEDs Neopixel** (10 LEDs en brillo medio/mix) | 10 | ~30 mA c/u | 300.0 mA |
-| **Zumbador (Buzzer)** | 1 | 30 mA | 30.0 mA |
-| **Regulador Elevador/Reductor XL6009** (Corriente en reposo) | 1 | 15 mA | 15.0 mA |
-| **Driver de Motores TB6612FNG** (Consumo lógico de control) | 1 | 2 mA | 2.0 mA |
-| **Motor DC 25GA-370 (6V-8V)** (Operación con carga típica) | 1 | 500 mA | 500.0 mA |
-| **Step Down DSN-Mini 360** (Corriente en reposo) | 2 | 5 mA c/u | 10.0 mA |
-| **Servomotor MG90 180°** (En movimiento continuo dinámico) | 1 | 200 mA | 200.0 mA |
-| **CORRIENTE TOTAL ESTIMADA** | | | **~1272.3 mA** |
+| Componente | Cantidad | Standby (mA) | Nominal (mA) | Pico (mA) |
+| :--- | :---: | :---: | :---: | :---: |
+| **ESP32** (doble núcleo, WiFi/BT off) | 1 | ~20 mA (idle) | ~80 mA | ~80 mA (procesamiento intensivo) |
+| **Sensor Infrarrojo Sharp GP2Y0A21** | 2 | 10 mA c/u | 30 mA c/u | 33 mA c/u |
+| **Sensor ToF VL53L0X** | 4 | 5 mA c/u | 15 mA c/u | 20 mA c/u (ranging activo) |
+| **IMU BNO055** | 1 | ~1 mA | 12.3 mA | ~16 mA |
+| **Sensor de Color TCS34725** | 1 | ~0 mA (sleep, µA) | 3 mA | 3.6 mA |
+| **Tira Neopixel** (10 LEDs) | 10 | 0 mA (apagada) | 300 mA (mix medio) | 600 mA (blanco 100%) |
+| **Zumbador (Buzzer)** | 1 | 0 mA | 30 mA | 30 mA |
+| **Regulador XL6009** | 1 | 15 mA (quiescent) | 15 mA | 15 mA |
+| **Driver TB6612FNG** (lógica) | 1 | 1 mA | 2 mA | 6 mA |
+| **Motor DC 25GA-370** | 1 | 0 mA (detenido) | 500 mA | ~1800 mA (corriente de rotor bloqueado / arranque) |
+| **Step Down DSN-Mini 360** | 2 | 5 mA c/u | 5 mA c/u | 5 mA c/u |
+| **Servomotor MG90** | 1 | 10 mA (sosteniendo posición) | 200 mA (en movimiento) | ~700 mA (esfuerzo/stall) |
+| **TOTAL ESTIMADO** | | **~97 mA** | **~1272.3 mA** | **~3406.6 mA** |
 
-🔋 **Demanda de Corriente Nominal:** ~1.27 A
+🔋 **Demanda de Corriente Nominal:** ~1.27 A · **Pico teórico simultáneo:** ~3.41 A
 
->  **Notas sobre escenarios extremos de consumo:**
-> * **LEDs Neopixel:** Si los 10 LEDs se configuran en color blanco al 100% de brillo, el consumo de la tira ascenderá a **600 mA**, incrementando el total del sistema a ~1572.3 mA.
-> * **Eficiencia de Regulación:** Los reguladores conmutados (XL6009 y DSN-Mini 360) presentan pérdidas por eficiencia térmica (entre un 10% y 15% de disipación). Este comportamiento real puede elevar ligeramente la demanda de corriente extraída de la batería principal.
+> [!NOTE]
+> **Sobre el escenario de pico**
+>
+> El pico de ~3.41 A representa el caso extremo en que *todos* los componentes alcanzan su consumo máximo al mismo tiempo (arranque del motor + servo en esfuerzo + LEDs en blanco pleno). Es un escenario estadísticamente improbable en un ciclo de control real, pero es el valor de referencia usado para dimensionar la tasa de descarga (C) mínima requerida de la batería — ver sección de justificación de la LiPo 2S 50C.
 
 ---
 
@@ -173,6 +174,37 @@ $$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1272.3 \text{ mA}} \approx 1
 
 * **Tiempo estimado:** Aproximadamente **1 hora y 44 minutos** de operación continua en condiciones normales.
 * **Nota Práctica:** Este modelo es de naturaleza teórica. En un entorno dinámico, los motores variarán su consumo constantemente (aumentando cerca del punto de bloqueo o *stall*) y los sensores se activarán por ráfagas, haciendo que la autonomía real oscile en función de las rutinas algorítmicas del firmware.
+
+---
+
+### Eficiencia de los Conversores DC-DC y Autonomía Real
+
+El cálculo de autonomía anterior asume una relación 1:1 entre la corriente consumida por cada componente y la corriente extraída de la batería, sin considerar que los reguladores XL6009 y DSN-Mini 360 operan a voltajes de salida distintos al de la batería (7V, 6V y 5V vs. 7.4V nominal) y que ninguna conversión es 100% eficiente.
+
+**Eficiencias de referencia (según hoja de datos del fabricante):**
+
+| Convertidor | Rol en el sistema | Eficiencia típica | Rango según fabricante |
+| :--- | :--- | :---: | :---: |
+| **XL6009** (step-up/down) | Línea de Tracción (motor + TB6612FNG) | ~88% | Hasta 94% en condiciones ideales; en nuestra aplicación (relación de conversión cercana a 1:1, ~500 mA de carga) el valor real práctico es menor |
+| **DSN-Mini 360** ×2 (step-down, MP2307) | Línea de Control (ESP32) y Línea de Sensores/Actuadores | ~90% | 90–96% típico a carga moderada según el fabricante |
+
+**Recálculo de la corriente real extraída de la batería (balance de potencia por línea):**
+
+$$P_{\text{entrada}} = \frac{P_{\text{salida}}}{\eta} \qquad I_{\text{batería}} = \frac{P_{\text{entrada}}}{V_{\text{batería}}}$$
+
+| Línea de alimentación | V salida | I salida (nominal) | P salida | η | P entrada | I extraída de batería (7.4V) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tracción (XL6009 → Motor + TB6612) | 7 V | 502 mA | 3.51 W | 88% | 3.99 W | **≈ 540 mA** |
+| Control (Mini 360 → ESP32) | 6 V | 80 mA | 0.48 W | 90% | 0.53 W | **≈ 72 mA** |
+| Sensores/Actuadores (Mini 360 → Sharp+ToF+BNO+TCS+Neopixel+Buzzer+Servo) | 5 V | 665.3 mA | 3.33 W | 90% | 3.70 W | **≈ 500 mA** |
+| **TOTAL REAL EXTRAÍDO DE LA BATERÍA** | | | | | | **≈ 1112 mA** |
+
+$$\text{Autonomía real} \approx \frac{2200 \text{ mAh}}{1112 \text{ mA}} \approx 1.98 \text{ horas} \; (\approx 1\text{h}\,59\text{min})$$
+
+> [!IMPORTANT]
+> **Por qué la autonomía real es mayor que la estimación teórica inicial, no menor**
+>
+> A primera vista se esperaría que las pérdidas por eficiencia *reduzcan* la autonomía, y en efecto lo hacen frente al caso ideal (100% eficiencia). Pero el modelo original (~1.73 h) tenía un sesgo en sentido contrario: sumaba directamente los mA de cada componente como si todos operaran al voltaje de la batería (7.4V), cuando en realidad la mayoría opera a 5V o 6V. Al bajar el voltaje, la corriente equivalente en el lado de la batería es menor — y esa reducción por conversión de voltaje pesa más que la pérdida introducida por la eficiencia de los reguladores. El resultado neto es una autonomía real estimada (~1h 59min) **mayor** a la calculada originalmente sin este ajuste, lo cual es consistente con la observación empírica: en pruebas de una tarde y noche completas no se llegó al límite inferior de carga de la batería.
 
 ---
 
@@ -209,6 +241,20 @@ Los Power Banks elevan internamente el voltaje de sus celdas a 5V mediante regul
 * **Motor principal 25GA-370** (arranque/carga): `> 1A`
 
 Superar este límite provoca un apagado inmediato del Power Bank por sobrecorriente. Además, los motores **25GA-370** rinden de manera óptima entre **6V y 8V**; alimentarlos a 5V limitaría severamente su torque y velocidad final.
+
+
+#### ¿Por qué 2200 mAh y no 2600 mAh o 3000 mAh?
+
+La elección de la capacidad específica de 2200 mAh (y no una mayor) respondió a tres criterios evaluados en conjunto: peso, espacio y margen de autonomía real ya validado.
+
+- **Peso:** la LiPo 2S 2200mAh 50C seleccionada pesa **115 g**. Una celda de 2600 o 3000 mAh de la misma tecnología y tasa de descarga añade masa adicional proporcional a la capacidad extra — peso que impacta directamente la relación torque/masa calculada en la sección de tracción, sin ofrecer una ventaja competitiva relevante dado que la autonomía ya cubre con holgura la duración de una prueba de competencia.
+- **Tasa de descarga (50C):** con 2200 mAh y 50C, la batería puede entregar hasta 110 A de corriente instantánea — muy por encima de cualquier pico real del sistema (~3.6 A, ver tabla de consumo). Esto garantiza arranque del motor sin caídas de tensión (*voltage sag*) ni fluctuaciones que afecten a la lógica de control, sin necesitar más capacidad para lograrlo.
+- **Autonomía suficiente y validada empíricamente:** según el recálculo con pérdidas de conversión (sección anterior), la autonomía real estimada es de ~1h 59min. En la práctica, el equipo utilizó el vehículo durante una tarde y noche completas de pruebas sin llegar al límite inferior de carga, confirmando que 2200 mAh ofrece margen de sobra para entrenamiento y competencia sin necesidad de cargar más peso muerto en el chasis.
+
+> [!NOTE]
+> **Compensación de Diseño (*Trade-off*)**
+>
+> Subir a 2600–3000 mAh habría añadido entre 20–35 g adicionales aproximadamente (estimado proporcional a la línea de productos de la misma marca/tecnología) a cambio de una autonomía que ya no es el factor limitante del sistema — el "cuello de botella" real está en el tiempo de procesamiento del algoritmo de evasión (ver comparación de tiempos de vuelta), no en la energía disponible. Se priorizó mantener el chasis lo más liviano posible.
 
 > ⚠️ **Nota de Diseño:** La combinación de una LiPo 2S junto a una tasa de descarga de hasta 50C garantiza que la electrónica de control (ESP32) y la etapa de potencia (motores/servos) coexistan de manera estable sin interferencias por caídas de tensión.
 ---
