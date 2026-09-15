@@ -420,10 +420,77 @@ pie showData
 > **Justificación de Ingeniería**
 >
 > El ligero sesgo hacia el eje delantero (≈9 puntos porcentuales por encima del reparto ideal 50/50) es consistente con el diseño: el teléfono y el sistema *Shark Fin* — los componentes más pesados montados en altura — están ubicados sobre el segundo piso hacia la zona delantera-media, mientras que la batería LiPo se reubicó **debajo del primer piso** (ver sección de *Trade-off* del centro de gravedad) precisamente para compensar y bajar el CoG global, sin eliminar por completo el sesgo delantero. Este reparto favorece la tracción en frenado y la respuesta de la dirección delantera, aunque exige que el motor trasero entregue suficiente torque para no perder agarre en la aceleración — lo cual se valida en la siguiente sección.
- 
+
 ---
- 
-## 🛞 Coeficiente de Fricción y su Rol en el Cálculo de Tracción
+
+## 🚀 Cálculo de Velocidad, Torque y Margen de Seguridad
+
+Para garantizar que el vehículo cuente con la agilidad y fuerza necesarias en la pista, se calcularon teóricamente la velocidad lineal y los requerimientos de torque del tren motriz basándonos en la masa actual del vehículo en configuración de competencia (incluyendo el smartphone).
+
+### 1. Cálculo de la Velocidad Lineal del Vehículo
+El motor empleado (25GA-370) tiene una velocidad nominal de 220 RPM en el eje de salida. Convertimos esta velocidad a radianes por segundo ($\omega$):
+
+$$\omega = \frac{220 \cdot 2\pi}{60} \approx 23.04 \text{ rad/s}$$
+
+Con un radio de rueda ($r$) de 0.04 m, la velocidad lineal teórica ($v$) del vehículo es:
+
+$$v = \omega \cdot r = 23.04 \cdot 0.04 \approx 0.92 \text{ m/s}$$
+
+### 2. Cálculo de Torque Necesario y Disponible
+El torque necesario ($T_{\text{necesario}}$) para mover el vehículo desde el reposo absoluto se calcula mediante la fórmula:
+
+$$T_{\text{necesario}} = m \cdot g \cdot r$$
+
+Donde:
+* $m$ = masa del vehículo actual con smartphone (1.092 kg)
+* $g$ = gravedad (9.81 $\text{m/s}^2$)
+* $r$ = radio de las ruedas (0.04 m)
+
+$$T_{\text{necesario}} = 1.092 \cdot 9.81 \cdot 0.04 \approx 0.429 \text{ N·m}$$
+
+Por otro lado, el motor 25GA-370 con su caja reductora integrada (21.3:1) entrega un torque de salida ($T_{\text{salida}}$ o disponible) mayor:
+
+$$T_{\text{disponible}} = 0.0343 \text{ N·m (motor base)} \cdot 21.3 \approx 0.7306 \text{ N·m}$$
+
+### 3. Margen de Seguridad de Torque
+Con el torque necesario y el torque disponible calculados, se puede cuantificar el margen de seguridad del sistema de tracción como un porcentaje, siguiendo la lógica de un análisis de ingeniería estándar:
+
+$$\text{Margen de Seguridad (\%)} = \frac{T_{\text{disponible}}}{T_{\text{necesario}}} \times 100$$
+
+$$\text{Margen de Seguridad} = \frac{0.7306 \text{ N·m}}{0.429 \text{ N·m}} \times 100 \approx 170.5\%$$
+
+> [!IMPORTANT]
+> **Interpretación del margen**
+>
+> Un valor de 170.5% significa que el tren motriz entrega suficiente potencia para mover el vehículo (1092 g) en condiciones normales, contando con un excedente del **70.5%** por encima del mínimo requerido. Este colchón no es gratuito: se traduce directamente en capacidad de aceleración, tolerancia a superficies con mayor fricción de la esperada y margen ante el desgaste progresivo de los engranajes impresos en 3D, garantizando que el peso extra del teléfono no comprometa la agilidad en la pista.
+
+### 4. Tiempo Teórico de Vuelta vs. Tiempo Real en Pista
+A partir de la velocidad lineal máxima calculada ($v = 0.92 \text{ m/s}$), es posible estimar el tiempo teórico que tomaría completar una vuelta a la pista y compararlo contra los tiempos reales medidos en pruebas.
+
+$$\text{Tiempo teórico} = \frac{\text{Distancia recorrida en una vuelta}}{v}$$
+
+
+$$\text{Tiempo teórico} \approx \frac{9.5 \text{ m}}{0.92 \text{ m/s}} \approx 10.3 \text{ s}$$
+
+| Modo | Tiempo Teórico (v máx. constante) | Tiempo Real Medido (promedio) | Velocidad Real Efectiva | % de la Velocidad Teórica |
+| :--- | :---: | :---: | :---: | :---: |
+| **Vuelta Libre** | ≈ 10.3 s | **25 s** | ≈ 0.38 m/s | ≈ 41% |
+| **Modo Obstáculos** | ≈ 10.3 s (misma distancia base) | **1:20 min (80 s)** | ≈ 0.12 m/s | ≈ 13% |
+
+```mermaid
+xychart-beta
+    title "Tiempo por Vuelta: Teórico vs. Real"
+    x-axis ["Teórico (v máx.)", "Vuelta Libre (real)", "Obstáculos (real)"]
+    y-axis "Tiempo (segundos)" 0 --> 90
+    bar [10.3, 25, 80]
+```
+
+> [!IMPORTANT]
+> **Por qué la brecha es esperada (y qué nos dice)**
+>
+> El tiempo teórico asume velocidad lineal máxima constante durante toda la vuelta, lo cual no ocurre en la práctica: el algoritmo de Vuelta Libre reduce la velocidad al corregir el ángulo con el BNO055 y al ajustar la distancia de seguridad respecto al muro antes de cada intersección, mientras que en Modo Obstáculos se suman las desaceleraciones necesarias para detectar, clasificar y esquivar cada pilar. La caída al ~41% de la velocidad teórica en vuelta libre es consistente con un algoritmo que prioriza precisión de trayectoria sobre velocidad pico; la caída adicional a ~13% en obstáculos confirma que el cuello de botella no es mecánico (el motor tiene margen de torque de sobra, ver sección anterior) sino de tiempo de procesamiento y maniobra en el modo de evasión.
+
+## 🔵 Coeficiente de Fricción y su Rol en el Cálculo de Tracción
  
 Para validar el margen de torque calculado en la sección de transmisión, es necesario cuantificar la fuerza de fricción disponible entre las ruedas Lego Technic y la superficie de la pista (tapiz tipo alfombra/goma reglamentario de WRO).
  
@@ -432,6 +499,7 @@ $$F_{friccion} = \mu \cdot N$$
 Donde:
 - **μ (coeficiente de fricción estático rueda–tapiz):** se estima en un rango de **0.6 – 0.8**, valor típico documentado para neumáticos de goma Lego Technic sobre superficies texturizadas similares al tapiz de competencia (no se dispone de tribómetro, por lo que se usa un rango de referencia en lugar de un valor único).
 - **N (fuerza normal sobre el eje motriz):** derivada directamente de la distribución de masa medida — **550 g × 9.81 m/s² ≈ 5.4 N** sobre el eje trasero (motriz).
+
 | Escenario | μ | Fuerza de fricción máxima disponible (eje trasero) |
 | :--- | :---: | :---: |
 | Conservador | 0.6 | ≈ 3.24 N |
@@ -518,6 +586,20 @@ flowchart TD
 | **Resultado medible** | Masa reducida en 82 g respecto a v1 (943 g → 861 g) a pesar de integrar más funcionalidad en una sola pieza, confirmando que la ganancia no vino de adelgazar paredes sino de eliminar refuerzos correctivos. |
 
  ---
+
+### Margen de Seguridad de Torque
+
+Con el torque necesario y el torque disponible ya calculados, se puede cuantificar el margen de seguridad del sistema de tracción como un porcentaje, siguiendo la misma lógica que un análisis de ingeniería estándar:
+
+$$\text{Margen de Seguridad (\%)} = \frac{T_{\text{disponible}}}{T_{\text{necesario}}} \times 100$$
+
+$$\text{Margen de Seguridad} = \frac{0.7306 \text{ N·m}}{0.370 \text{ N·m}} \times 100 \approx 197.5\%$$
+
+> [!IMPORTANT]
+> **Interpretación del margen**
+>
+> Un valor de 197.5% significa que el tren motriz entrega **casi el doble** del torque mínimo requerido para mover el vehículo (943 g) en condiciones normales — un excedente del **97.5%** por encima del mínimo. Este colchón no es gratuito: se traduce directamente en capacidad de aceleración, tolerancia a superficies con mayor fricción de la esperada y margen ante el desgaste progresivo de los engranajes impresos en 3D, sin necesidad de sobredimensionar el motor ni aumentar el consumo eléctrico.
+</markdown>
 
 
 ## Continuidad en el Desarrollo de Software y Control:
