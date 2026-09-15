@@ -155,6 +155,51 @@ En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehícu
 * **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
 * **Unidad de Medición Inercial (IMU) BNO055:** Comparte el Bus I2C #1. La inclusión de este sensor con procesamiento de fusión de datos a bordo está orientada a **eliminar por completo la deriva (*drift*)** acumulativa. Para garantizar la fidelidad del posicionamiento, el algoritmo calibra el cero relativo y establece el eje Y del sensor como el vector de referencia principal para el equilibrio y dirección del chasis.
 
+#### Subsistema de Navegación Cinemática (Bus I2C #1 - Pines D21/D22)
+
+* **Unidad de Medición Inercial (IMU) BNO055:** Comparte el Bus I2C #1. La inclusión de este sensor con procesamiento de fusión de datos a bordo está orientada a **eliminar por completo la deriva (*drift*)** acumulativa. Para garantizar la fidelidad del posicionamiento, el algoritmo calibra el cero relativo y establece el eje Y del sensor como el vector de referencia principal para el equilibrio y dirección del chasis.
+
+* **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
+
+#### Calibración y Direccionamiento de los 4 Sensores ToF (XSHUT)
+
+Los cuatro sensores VL53L0X comparten el mismo bus físico I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección por defecto (`0x29`), lo que provocaría colisión de direcciones si se energizaran simultáneamente. Para resolverlo, cada sensor tiene su pin **XSHUT** conectado a un GPIO independiente del ESP32, usado como interruptor de encendido/apagado por software:
+
+```cpp
+#define XSHUT_FRONTAL 17
+#define XSHUT_TRASERO 16
+#define XSHUT_IZQ     5
+#define XSHUT_DER     18
+
+#define ADDR_FRONTAL 0x30
+#define ADDR_TRASERO 0x31
+#define ADDR_IZQ     0x32
+#define ADDR_DER     0x33
+```
+
+**Secuencia de inicialización (encendido escalonado):**
+
+```mermaid
+flowchart TD
+    A["Inicio: los 4 pines XSHUT en LOW<br/>(los 4 sensores en reset/apagado)"] --> B["Activar XSHUT_FRONTAL (HIGH)"]
+    B --> C["Inicializar sensor en dirección<br/>de fábrica 0x29"]
+    C --> D["Reasignar dirección → 0x30<br/>(ADDR_FRONTAL)"]
+    D --> E["Activar XSHUT_TRASERO (HIGH)"]
+    E --> F["Inicializar en 0x29 → reasignar a 0x31"]
+    F --> G["Activar XSHUT_IZQ (HIGH)"]
+    G --> H["Inicializar en 0x29 → reasignar a 0x32"]
+    H --> I["Activar XSHUT_DER (HIGH)"]
+    I --> J["Inicializar en 0x29 → reasignar a 0x33"]
+    J --> K["Los 4 sensores activos,<br/>cada uno con dirección única<br/>en el mismo bus I2C #1"]
+```
+
+En cada paso, solo **un sensor a la vez** queda activo en la dirección por defecto `0x29` mientras los demás permanecen en reset (XSHUT en LOW), evitando cualquier colisión. Una vez reasignada su dirección definitiva, el sensor permanece encendido (XSHUT en HIGH) y se pasa al siguiente.
+
+> [!NOTE]
+> **Calibración: los 4 sensores usan el mismo criterio (sin offsets individuales)**
+>
+> Los cuatro VL53L0X se calibran de forma idéntica, sin aplicar offsets particulares por unidad. Esto es posible porque el VL53L0X trae calibración de fábrica consistente entre unidades del mismo lote, y el direccionamiento único vía XSHUT es lo único que realmente necesita configurarse por sensor — no la calibración de medición en sí.
+
 #### Subsistema de Lectura de Superficie (Bus I2C #2 - Pines D32/D33)
 
 * **Sensor de Color TCS34725:** Dedicado a la detección y confirmación de líneas. Para evitar saturar el bus principal de navegación, este sensor se ha aislado en un **segundo bus I2C independiente (Hardware I2C #2)**. Esto garantiza que las lecturas constantes del suelo no interfieran ni retrasen las respuestas críticas de evasión de obstáculos de los sensores ToF.
@@ -188,7 +233,10 @@ En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehícu
 | Pulsador de inicio | **Interruptor físico (Pin D23)** | Enclavamiento seguro contra vibraciones mecánicas de la pista. |
 
 
+---
+
 # Gestión Energética y Autonomía del Sistema
+
 
 Este apartado detalla el análisis del consumo eléctrico y la justificación técnica de la fuente de alimentación seleccionada para el hardware del proyecto.
 
