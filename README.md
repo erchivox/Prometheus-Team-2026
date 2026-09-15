@@ -761,6 +761,90 @@ $$\text{Margen de Seguridad} = \frac{0.7306 \text{ N·m}}{0.370 \text{ N·m}} \t
 > Un valor de 197.5% significa que el tren motriz entrega **casi el doble** del torque mínimo requerido para mover el vehículo (943 g) en condiciones normales — un excedente del **97.5%** por encima del mínimo. Este colchón no es gratuito: se traduce directamente en capacidad de aceleración, tolerancia a superficies con mayor fricción de la esperada y margen ante el desgaste progresivo de los engranajes impresos en 3D, sin necesidad de sobredimensionar el motor ni aumentar el consumo eléctrico.
 </markdown>
 
+---
+
+## 🛠️ Guía de Ensamble Paso a Paso
+
+Uno de los pilares fundamentales en la ingeniería y un criterio clave de evaluación en la WRO es la **reproducibilidad**. Por ello, hemos diseñado esta guía de ensamblaje para documentar el proceso de construcción de nuestro vehículo, compartiendo consejos prácticos, técnicas de taller y consideraciones mecánicas que facilitarán la replicación exacta de este proyecto a cualquier otro equipo o desarrollador.
+
+---
+
+### Paso 1: Manufactura Aditiva (Impresión 3D)
+El primer paso es imprimir todas las piezas estructurales detalladas en los archivos del repositorio. Aunque hemos documentado nuestros parámetros de impresión ideales en la sección anterior, siéntete libre de jugar con estas configuraciones para adaptarlas al comportamiento específico de tu impresora o al material que utilices. 
+
+> [!TIP]
+> **Consejo de impresión para transmisión:** 
+> Para los engranajes y poleas mecánicas, es vital garantizar la máxima resistencia estructural. Si imprimes en PETG, te recomendamos ajustar la temperatura al alza y aumentar considerablemente el número de perímetros/paredes; esto evitará que los dientes se fracturen bajo el torque del motor.
+
+![Impresión de piezas](other/ensamble1.jpeg)
+
+---
+
+### Paso 2: Instalación del Motor y Piñón en el Monochasis
+Con las piezas listas, comenzaremos a trabajar sobre el chasis (primer piso). 
+1. Fija el motor a su cama nativa utilizando tornillos M3. **Detalle crucial:** asegúrate de que los conectores eléctricos del motor queden mirando hacia arriba o hacia un costado libre; esto te facilitará enormemente el cableado posterior hacia el driver TB6612FNG.
+2. Acopla el engranaje piñón al eje del motor. Entra a presión (*press-fit*). Notarás que el diseño del piñón tiene un lado redondeado y un pequeño separador integrado; esto sirve para que haga tope correctamente y no roce contra la caja reductora del motor. Asegúrate de que quede firme y no sea fácil de extraer.
+
+![Instalación de motor y piñón](other/ensamble2.png)
+
+---
+
+### Paso 3: Armado del Eje Trasero, Corona y Adaptadores de Rueda
+Para el eje motriz, optamos por una solución de taller muy accesible: el núcleo de un electrodo de soldadura limpio. 
+1. Como la varilla lisa tiene un diámetro menor al de las rolineras (rodamientos), ensancha su diámetro usando fundas termocontraíbles. 
+2. Coloca termocontraíble solo en **un extremo** de la varilla hasta que entre con un poco de presión en la primera rolinera del chasis. 
+3. Pasa la varilla por esa primera rolinera, inserta el engranaje corona (25T) en el centro de la varilla, y luego aplica termocontraíble en el otro extremo para pasarlo por la segunda rolinera.
+4. Alinea los dientes de la corona con el piñón del motor. Una vez acoplados, inserta un tornillo transversal con su tuerca en el collarín de la corona para apretar el sistema de mordaza tipo "C" y fijarlo a la varilla.
+5. Finalmente, instala los adaptadores para las ruedas Lego. Deslízalos en ambos extremos sobresalientes de la varilla y asegúralos con un tornillo y tuerca, utilizando exactamente el mismo mecanismo de mordaza en "C" que empleaste en la corona.
+
+> [!TIP]
+> **Pro-Tip de fricción:** 
+> Antes de aplicar calor para encoger las fundas sobre el metal, coloca unas gotas de cianocrilato (superglue) entre el metal y el plástico. Esto evitará por completo que el termocontraíble patine o deslice sobre la varilla cuando el motor aplique torque.
+
+![Armado del eje trasero](other/ensamble3.jpeg)
+
+---
+
+### Paso 4: Anclaje del Sistema de Dirección Lego
+Toma el subsistema de dirección frontal construido con piezas Lego y ubícalo en el espacio correspondiente del chasis; entrará con un poco de presión. Para asegurar la unión de forma permanente, aplica silicona caliente por los bordes de contacto entre el plástico 3D y las piezas Lego. 
+
+*Nota de ingeniería:* La silicona no solo actúa como adhesivo, sino que al curar mantiene una propiedad gomosa que sirve como un excelente sistema de amortiguación pasiva para absorber las vibraciones de la pista.
+
+![Sistema de dirección](other/ensamble4.jpeg)
+
+---
+
+### Paso 5: Montaje Periférico de Sensores ToF
+Alrededor del perímetro del primer piso (Adelante, Atrás, Izquierda y Derecha) encontrarás los alojamientos nativos para los sensores de distancia láser VL53L0X. Fija cada módulo en su soporte utilizando tornillos M3 con sus respectivas tuercas en la parte posterior para asegurar una lectura sin vibraciones.
+
+![Montaje de sensores ToF](other/ensamble5.png)
+
+---
+
+### Paso 6: Preparación e Instalación de los Separadores
+Toma los separadores de 60 mm impresos en 3D e inserta por calor los insertos roscados de latón M3 en cada extremo. Una vez enfriados, ubícalos en sus respectivas posiciones sobre el primer piso y fíjalos introduciendo tornillos M3 desde la cara inferior del chasis. Con esto, el primer nivel queda estructuralmente terminado.
+
+![Instalación de separadores](other/ensamble6.jpeg)
+
+---
+
+### Paso 7: Ensamblaje del Sistema *Shark Fin* (Soporte de Cámara)
+Antes de unir ambos niveles del vehículo, debemos preparar el segundo piso instalando las torres laterales aerodinámicas (*Shark Fin*) que sostendrán el teléfono inteligente.
+1. Inserta por calor 3 insertos roscados M3 en la base de cada torre (6 en total).
+2. Alinea las torres con los agujeros pasantes correspondientes en el segundo piso.
+3. Introduce los tornillos **desde la parte de abajo** del segundo piso hacia arriba para traccionar fuertemente las torres. 
+
+*(Es precisamente por esta maniobra de atornillado inferior que no podíamos fijar el segundo piso a los separadores en el paso anterior, ya que nos habríamos quedado sin espacio para manipular la herramienta).*
+
+![Soporte Shark Fin](other/ensamble7.5.jpeg)
+
+---
+
+### Paso 8: Integración Final de la Plataforma
+Con las torres del teléfono ya ancladas sólidamente a su base, puedes proceder a colocar el segundo piso completo sobre los separadores de 60 mm que instalaste en el Paso 6. Asegúralos con tornillos M3 superiores. Finalmente, acopla la mordaza central de ángulo ajustable entre las dos torres para completar el soporte del teléfono y procede con el ruteo del cableado y montaje de la electrónica.
+
+![Integración final de chasis](other/ensamble8.jpeg)
+
 
 ## Continuidad en el Desarrollo de Software y Control:
 #### Continuidad y Optimización en el Desarrollo de Software: Integración del BNO055
