@@ -788,6 +788,7 @@ Este algoritmo está diseñado para maximizar la velocidad en pista recta y aseg
 * **Estrategia:** El sensor ToF lateral mide las distancias relativas hacia la pared guía. Si la orientación calculada por el **BNO055** indica un desvío angular, el sistema ejecuta un control fino corrigiendo en primera instancia el ángulo del vehículo para estabilizarlo y, consecutivamente, ajusta la distancia de seguridad respecto al muro. 
 * **Transición de Intersecciones:** El bucle se mantiene activo manteniendo el carril de forma autónoma hasta que el sensor de color detecta una línea en la pista, interrumpiendo el control lineal para ejecutar un giro controlado de intersección.
 
+---
 
 ## 📱 Telemetría y Visión Artificial: Aplicación Prometheus V5.0
 
@@ -1040,34 +1041,48 @@ Se lograron importantes avances:
 
 ---
 
-##  Flujo de Proceso de la Aplicación 
+## 📱 Telemetría y Visión Artificial: Aplicación Prometheus V5.0
 
-El sistema opera como un ciclo continuo de detección y envío de comandos, con tres componentes principales: la interfaz de usuario, el análisis de imágenes y la comunicación serial.
+La aplicación de detección desarrollada en Android Studio y OpenCV ha evolucionado a su versión 5.0, operando como el verdadero muro de pits (*pit wall*) de nuestro sistema. Conservando las bases de comunicación USB, la interfaz a pantalla completa y el monitor serial integrado de la temporada 2025, la temporada 2026 exigió una reestructuración profunda en el motor de visión y telemetría para manejar escenarios de pista mucho más agresivos y dinámicos.
 
-### Flujo Detallado
+### Interfaz V5.0 y Monitor Serial Integrado
+| <img src="other/app2026.jpeg" width="400"> | <img src="other/Monitor_serial.jpeg" width="400"> |
+| :---: | :---: |
+| *Interfaz principal con telemetría de detección dual y estabilización.* | *Monitor serial integrado operando en tiempo real.* |
 
-* **Inicio y Conexión Automática (`MainActivity`):** Al iniciar, la aplicación solicita los permisos de la cámara e inicializa las librerías de OpenCV. La aplicación no requiere que el usuario conecte manualmente el dispositivo, ya que es capaz de detectar automáticamente el microcontrolador (Arduino/ESP32) y establecer la comunicación serial de forma autónoma.
-* **Captura y Análisis de la Imagen (`ColorAnalyzer`):** Un hilo de alta prioridad se encarga de capturar continuamente imágenes de la cámara. Cada fotograma se envía al `ColorAnalyzer` para su procesamiento.
-* **Preprocesamiento:** El `ColorAnalyzer` convierte el fotograma y aplica técnicas avanzadas como la ecualización de histograma para normalizar la iluminación.
-* **Detección de Colores y Formas:** La aplicación crea "máscaras" para aislar los colores de los obstáculos (rojo, verde y magenta) y busca contornos en esas máscaras, aplicando filtros geométricos para detectar pilares rectangulares.
-* **Cálculo de Distancia:** Se calcula el área de cada objeto detectado en píxeles para estimar su distancia en centímetros.
-* **Generación de Comandos (`CommandManager`):** La información del objeto detectado (color, distancia y posición en la imagen) se envía al `CommandManager`. Este módulo compara los datos del objeto con "casos" predefinidos para la detección de uno o dos objetos y determina el código de comando adecuado.
-* **Envío del Comando (`MainActivity`):** El comando generado se añade a una cola de procesamiento. Un hilo dedicado a la comunicación USB lee la cola y envía el comando al microcontrolador a través del puerto serial, con una pausa mínima para evitar la saturación.
-* **Monitoreo (`SerialMonitorActivity`):** Una actividad separada permite al usuario monitorear en tiempo real los datos que se envían y reciben, lo cual es útil para la depuración del sistema.
+A continuación, se detallan las innovaciones y sistemas implementados en el núcleo de la aplicación (`MainActivity.kt`, `ColorAnalyzer.kt` y el sistema de configuración):
 
-### Puntos Clave
+### 1. Calibración en Pista y Menú Dinámico
+Se eliminó la necesidad de depender de Android Studio para ajustar variables en el campo de competencia.
+* **Calibración Automática por Muestras:** Un nuevo menú interactivo permite calibrar el matiz (Hue) y tolerancia capturando 8 muestras directas de los pilares en distintos puntos de la pista.
+* **Ajuste Paramétrico:** Las zonas de detección de distancia, el área de referencia y los filtros se configuran directamente desde una interfaz visual sin tener que tocar código.
 
-* **Conexión Automática:** La aplicación se conecta automáticamente al microcontrolador al detectarlo, lo que agiliza el proceso de inicio.
-* **Visión por Computadora Avanzada:** El uso de OpenCV con ecualización de histograma y filtros geométricos asegura una detección precisa de los pilares.
-* **Doble Detección de Objetos:** La capacidad de diferenciar entre un objeto primario y uno secundario es fundamental para la navegación en el campo de la WRO.
-* **Arquitectura de Hilos:** El uso de múltiples hilos separa las tareas de alto rendimiento (cámara, USB) del hilo principal, garantizando una operación fluida.
-* **Sistema de Comandos Basado en Casos:** La lógica del `CommandManager` es clara y organizada, facilitando su mantenimiento y escalabilidad.
-* **Comunicación USB Serial:** La conexión entre el teléfono y el robot se realiza de forma confiable a través de USB.
+### 2. Filtro Anti-Reflejos y Limpieza Geométrica
+Para lidiar con los cambios de iluminación y destellos en el tapiz de la pista, se programó un blindaje en el procesamiento de imagen (`ColorAnalyzer`):
+* **Filtro de Saturación Interna:** Los reflejos pierden saturación al mezclarse con el brillo de la pista. El sistema analiza la saturación promedio (Canal S en HSV) *dentro* del contorno y rechaza automáticamente aquellos que presenten niveles bajos, identificándolos como destellos. Estos niveles de saturación son configurables de forma independiente para el rojo y el verde desde el menú.
+* **Ecualización CLAHE:** Se aplica ecualización adaptativa de histograma al canal de brillo para normalizar la iluminación del entorno sin perder detalles críticos.
+* **Rechazo de Formas Orgánicas:** Mediante detección de picos y conteo de defectos de convexidad, el sistema ignora geometrías con ángulos muy agudos (menores a 45°) o formas complejas que no correspondan a la silueta regular de un pilar o delimitador.
 
-  
-Diagrama de flujo, diseñado en Lucidchart, para una mejor visualización del funcionamiento de la aplicación WRO Prometheus.
+### 3. Modo Estacionamiento Dinámico (Zona Magenta)
+El color magenta activa un comportamiento estratégico mediante un umbral de área específico (8000 px), asegurando que el modo despierte únicamente al entrar a ese tramo de la pista y no desde lejos.
+* Su función no es simplemente frenar al final del circuito, sino **modificar la trayectoria de evasión**. 
+* Al reconocer la zona de estacionamiento, el `CommandManager` ajusta la ruta para que el vehículo navegue alejado de esa área (forzando un lado específico si es necesario), evitando llevarse por delante la placa delimitadora magenta durante el trayecto.
 
-![Diagrama de Flujo de la Aplicación](other/Diagrama_de_flujo_app.png)
+### 4. Filtro Temporal de Estabilización (Anti-Ruido)
+Para erradicar comandos fantasma o falsos positivos, la telemetría incluye un filtro temporal estricto.
+* **Ventana de Votación:** El sistema almacena las detecciones en una ventana deslizante de los últimos 8 fotogramas.
+* Para que un comando tome el control del vehículo, debe dominar al menos el **70% de esa ventana** y mantenerse estable durante un umbral de **2000 milisegundos**.
+
+### 5. Consolidación de Telemetría Dual y Arquitectura por Casos
+Construyendo sobre la capacidad de detección dual introducida a finales de 2025, el sistema ahora engrana esta telemetría con un motor de decisiones robustecido:
+* El sistema continúa extrayendo el área, distancia y orientación de un objeto primario y secundario en simultáneo.
+* Toda la lógica de decisión se extrajo del hilo principal y se encapsuló en un `CommandManager` independiente, el cual analiza esta telemetría dual bajo una arquitectura de casos predefinidos para emitir el comando exacto de evasión combinada.
+* Para soportar la alta carga de datos con la placa ESP32, se optimizó la comunicación USB con algoritmos que interceptan y destruyen la basura binaria y los mensajes de arranque (*boot logs*) nativos del ESP32, garantizando lecturas limpias desde el primer milisegundo.
+
+> [!TIP]
+> **Ergonomía en Pruebas (Legado Mejorado)**
+>
+> Diseñada para el estrés de la competencia, la interfaz mantiene su operabilidad a pantalla completa, despierta el teléfono automáticamente al conectar el cable USB, es capaz de emitir señales acústicas únicas para cada comando enviado de forma exitosa, permitiendo al equipo monitorear el desempeño sin despegar los ojos del vehículo.
 
 ----
 
