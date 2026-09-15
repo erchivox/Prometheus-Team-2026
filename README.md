@@ -215,7 +215,7 @@ Superar este límite provoca un apagado inmediato del Power Bank por sobrecorrie
 
 ## Diseño Estructural, Transmisión y Manufactura Aditiva
 
-[*Consultar el historial de versiones de diseño estructural, transmisión y manufactura aditiva aquí*](## Paso a Paso de la Construcción)
+[*Consultar el historial de versiones de diseño estructural, transmisión y manufactura aditiva aquí*](#paso-a-paso-de-la-construcción)
 
 ### Versión 2 (Actual)
 
