@@ -1,4 +1,8 @@
-# Prometheus Team - Temporada 2026
+<div align="center">
+  <img src="t-photos/prometehuslogo.jpg" alt="Prometheus Team Vehículo Autónomo" width="650" style="border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+
+# 🚘Prometheus Team - Temporada 2026
+</div>
 ¡Bienvenidos al repositorio oficial de nuestro equipo para la World Robot Olympiad (WRO) - Categoría: Futuros Ingenieros! Este espacio no solo almacena líneas de código, algoritmos de visión artificial y diseños en 3D; aquí se guarda la evolución, la pasión y la ingeniería de un equipo que no se rinde ante  los desafíos. Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
 
 ## Equipo Prometheus <a id="equipo-prometheus"></a>
