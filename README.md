@@ -59,28 +59,50 @@ Prometheus Team está conformados por estudiantes universitarios de la **Univers
   * **Doctorante en Tecnologías de la Información y Comunicación:** Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (**UNELLEZ** Barinas).
 * **Orientación y Tutoría:** Asesoría metodológica en proyectos de ingeniería, supervisión académica e integración estratégica de TIC y sistemas electrónicos.
 
-
-##  Fotos de equipo
-| ![ Foto Oficial](t-photos/foto_equipo.jpeg)  | ![ Foto Equipo](t-photos/foto_equipo2.jpeg) | 
-| :----: | :---------- |
-
 # 🥈 La Hazaña de 2025: Subcampeones Nacionales
-El año 2025 quedó marcado en nuestra historia. Tras meses de arduo trabajo, diseño iterativo, depuración de sensores y perfeccionamiento de la lógica de navegación autónoma, logramos alzarnos con el 2do Lugar en la Competencia Nacional de Venezuela.
 
-Fue una jornada intensa donde pusimos a prueba nuestras capacidades técnicas bajo presión, enfrentándonos a los mejores equipos del país. Superamos obstáculos en la pista, calibramos componentes en tiempo récord y demostramos que la ingeniería venezolana tiene un nivel excepcional. Estuvimos a solo un paso de la gloria máxima, y esa experiencia nos transformó por completo como desarrolladores y pensadores críticos.
+El año 2025 quedó marcado en nuestra historia. Tras meses de arduo trabajo, diseño iterativo, depuración de sensores y perfeccionamiento de la lógica de navegación autónoma, logramos alzarnos con el **2.º Lugar en la Competencia Nacional de Venezuela**.
+
+Fue una jornada intensa donde pusimos a prueba nuestras capacidades técnicas bajo presión, enfrentándonos a los mejores equipos del país. Superamos obstáculos en la pista, calibramos componentes en tiempo récord y demostramos el nivel de la ingeniería venezolana. Estuvimos a solo un paso de la gloria máxima, y esa experiencia nos transformó por completo como desarrolladores y pensadores críticos.
 
 # 🥇 2026: Con la Mira en el Primer Lugar
+
 Dicen que el segundo lugar es el primer perdedor, pero para nosotros fue el combustible perfecto. Este año regresamos a la pista con más experiencia, una mentalidad más madura y un hambre voraz de victoria.
 
-Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de hardware y optimizado los algoritmos de control para que el robot sea más rápido, preciso e inteligente. No venimos a ver qué pasa; venimos a buscar ese 1er Lugar nacional y ganarnos el derecho de representar a Venezuela en el escenario mundial. La meta es clara y el equipo está listo.
-
-<img src="other/wro2025-1.jpeg" width="300"> <img src="other/wro2025-2.jpeg" width="300"> <img src="other/wro2025-3.jpeg" width="300">
+Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de hardware y optimizado los algoritmos de control para que el robot sea más rápido, preciso e inteligente. No venimos a ver qué pasa; venimos a buscar ese **1.er Lugar nacional** y ganarnos el derecho de representar a Venezuela en el escenario mundial. La meta es clara y el equipo está listo.
 
 ---
-##  Fotos del vehiculo 
-| ![Arriba del vehiculo](v-photos/ARRIBA2026.jpeg)  |  ![Debajo de vehiculo](v-photos/ABAJO2026.jpeg)  |  ![Lateral derecho](v-photos/DERECHA2026.jpeg) |
-| :----: | :------------------- | :---------- |
-| ![lateral izquierdo](v-photos/IZQUIERDA2026.jpeg)  |  ![frente](v-photos/ADELANTE2026.jpeg)  |  ![detras](v-photos/DETRAS2026.jpeg) |
+
+### 📸 Nuestro Paso por la Competencia Nacional
+
+<p align="center">
+  <img src="t-photos/foto_equipo.jpeg" alt="Foto Oficial del Equipo" height="250" />
+  <img src="t-photos/foto_equipo2.jpeg" alt="Equipo en Competencia" height="250" />
+  <img src="other/wro2025-1.jpeg" alt="Momento WRO 2025" height="250" />
+</p>
+
+<details>
+  <summary>🔍 <b>Ver más momentos de la WRO 2025</b></summary>
+  <br>
+  <p align="center">
+    <img src="other/wro2025-2.jpeg" alt="WRO 2025 - Foto 2" height="200" />
+    <img src="other/wro2025-3.jpeg" alt="WRO 2025 - Foto 3" height="200" />
+  </p>
+</details>
+
+---
+
+## Galería de Inspección Técnica 360°
+Para verificar la simetría estructural, la distribución del centro de masa ($CoG$), la integridad del chasis impreso en 3D y la holgura funcional (*ground clearance*), se documentan los **6 perfiles de inspección ortogonal reglamentarios**:
+
+| 📸 Perfil de Inspección | 🖼️ Registro Visual | 🔍 Criterio de Verificación Técnica de Ingeniería |
+| :--- | :--- | :--- | 
+| **Vista Frontal**<br>*(Front View)* | <img width="380" alt="Perfil Delantero" src="v-photos/ADELANTE2026.jpeg" /> | • Verificación del sistema de visión artificial y sensores de detección frontal.<br>• Inspección de la alineación y paralelismo del mecanismo de dirección.<br>• Control del despeje inferior del parachoques y centrado estructural. |
+| **Vista Trasera**<br>*(Rear View)* | <img width="380" alt="Perfil Trasero" src="v-photos/DETRAS2026.jpeg" /> | • Inspección del acople del motor de tracción y el ensamble de transmisión posterior.<br>• Verificación de la rigidez de los soportes traseros y bujes de retención de las ruedas motrices.<br>• Organización de los conectores de salida y cableado del tren de potencia. |
+| **Vista Superior**<br>*(Top View)* | <img width="380" alt="Perfil Superior" src="v-photos/ARRIBA2026.jpeg" /> | • Evaluación del balance transversal de pesos.<br>• Verificación del centrado de la placa lógica principal y sensores inerciales/de navegación.<br>• Ruteo, segregación y peinado del cableado de control y potencia entre niveles. |
+| **Vista Inferior**<br>*(Bottom View)* | <img width="380" alt="Perfil Inferior" src="v-photos/ABAJO2026.jpeg" /> | • Inspección de la base del chasis para garantizar un acabado liso y plano sin fricciones.<br>• Verificación del despeje de suelo (*ground clearance*) para evitar contacto con desniveles.<br>• Comprobación de la fijación de la tornillería y tuercas autoblocantes empotradas. |
+| **Vista Lateral Derecha**<br>*(Right View)* | <img width="380" alt="Perfil Derecho" src="v-photos/DERECHA2026.jpeg" /> | • Verificación del acceso a la interfaz física (switches de encendido / botones de control).<br>• Evidencia de la separación multinivel (pisos de tracción, lógica y potencia).<br>• Alineación y perpendicularidad de los sensores laterales derechos de medición.<br>• Inspección de la holgura lateral y alineación de las ruedas directrices y motrices. |
+| **Vista Lateral Izquierda**<br>*(Left View)* | <img width="380" alt="Perfil Izquierdo" src="v-photos/IZQUIERDA2026.jpeg" /> | • Disposición del sistema de sensores ultrasónicos / distancia del lado izquierdo.<br>• Comprobación de las rutas de ventilación pasiva y disipación térmica de los módulos de potencia. |
 
 ---
 
