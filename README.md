@@ -316,8 +316,15 @@ Para soportar el teléfono celular, se modelaron dos torres aerodinámicas later
 * **Fijación a la base:** Cada torre aloja en su base inferior **3 insertos roscados de latón**. Los tornillos atraviesan el segundo piso de abajo hacia arriba, traccionando la torre fuertemente contra la plataforma.
 * *Nota de Diseño (DfAM):* Para que la termofijación de estos insertos fuera perfecta, se modelaron agujeros ciegos con dimensiones precisas de **4.1 mm de diámetro por 9 mm de profundidad**. Estas tolerancias permiten que el inserto entre, y que el plástico derretido fluya por su moleteado exterior sin rebasar hacia el interior de la rosca.
 
-> ![Vista en corte de la base de las torres mostrando los agujeros para insertos]()
-> *Torres lateral derecha con agujeros para los insertos roscados.*
+> [!IMPORTANT]
+> **Iteración del Sistema Shark Fin: De Ángulo Fijo a Ángulo Ajustable**
+>
+> El sistema Shark Fin **no fue diseño directo**: pasó por una primera versión funcional pero limitada antes de llegar al mecanismo actual.
+>
+> - **Versión 1 (soporte fijo):** Las dos torres laterales sostenían la mordaza fija mediante un soporte rígido, sin posibilidad de variar el ángulo de inclinación del teléfono una vez montado. Cualquier ajuste de encuadre de cámara requería desmontar y modificar físicamente la pieza.
+> - **Versión 2 (soporte ajustable, actual):** Se eliminó el soporte fijo y se reemplazó por un tornillo que atraviesa cada torre desde el exterior y aprieta contra la base de la mordaza fija. Al aflojar el tornillo, la base pivota libremente permitiendo recalibrar el ángulo de la cámara en campo; al apretarlo, la inclinación queda bloqueada con fricción mecánica.
+>
+> Fue un cambio sencillo — un tornillo pasante en lugar de un soporte rígido — pero con alto impacto: permite recalibrar el encuadre de la cámara en segundos durante los pits, sin herramientas adicionales ni reimpresión de piezas.
 
 El mecanismo de retención en sí no es una ranura estática, sino una **Prensa/Mordaza ajustable**:
 1. **Calibración de Ángulo:** Las dos torres sostienen una **mordaza fija** central. Esta mordaza está sujeta por tornillos laterales (que encajan en dos insertos roscados propios). Al aflojarlos, la base completa pivota permitiendo ajustar el ángulo de la cámara; al apretarlos, la inclinación queda bloqueada.
