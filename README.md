@@ -21,7 +21,7 @@ Prometheus Team está conformados por estudiantes universitarios de la **Univers
   * **Gestión de Proyectos:** Caracterizado por su alto nivel de responsabilidad, perseverancia y atención al detalle en entregables técnicos.
   * **Logros Destacados:** Finalista en la fase nacional de la **WRO Venezuela (Temporada 2025)** por su integración entre hardware y software.
 ---
-### 👤 Trino Carrizales <a id="trino-carrizales"></a>
+### 👤 Trino Carrisales <a id="trino-carrizales"></a>
 **Especialista en Programación Embebida, Algoritmos y Control**
 <div align="center">
   <img src="./t-photos/trino.jpeg" alt="Trino Carrizales" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
