@@ -108,28 +108,28 @@ Para verificar la simetría estructural, la distribución del centro de masa ($C
 
 ### Componentes de Control, Detección e Interfaz
 
-| Imagen | Nombre de Componente | Descripción |
-| :----: | :------------------- | :---------- |
-| ![ESP32](other/esp32.png) | **Microcontrolador ESP32** | Cerebro central del vehículo autónomo. Cuenta con un procesador de doble núcleo, conectividad Wi-Fi/Bluetooth, y múltiples pines GPIO para gestionar la lectura de sensores (I2C y Analógicos) y el control de actuadores en tiempo real. |
-| ![Sensor Sharp](other/sensor_infrarojo.jpg) | **Sensor Infrarrojo Sharp GP2Y0A21** | Sensores analógicos de medición de distancia por triangulación infrarroja. Colocados estratégicamente en el chasis para detectar obstáculos en las diagonales delanteras del vehículo y evitar colisiones de rango medio (10 a 80 cm). |
-| ![Sensor TOF](other/sensor-vl53l0x-de-tof.jpg) | **Sensores de Distancia Láser TOF VL53L0X** | Sensores basados en tecnología Time-of-Flight (Tiempo de Vuelo) que miden distancias precisas mediante luz láser invisible. Conectados en paralelo al Bus I2C #1, utilizan pines digitales individuales como selectores de dirección (XSHUT) para evitar conflictos de direccionamiento. |
-| ![IMU BNO055](other/MU_BNO055.jpg) | **IMU BNO055 (9-Axis Absolute Orientation)** | Unidad de medición inercial avanzada que integra acelerómetro, giroscopio y magnetómetro en 3 ejes, junto con un procesador interno que calcula la orientación absoluta (ángulos de Euler/Cuaterniones) de forma directa a través del Bus I2C #1. |
-| ![Sensor de Color TCS34725](other/sensor_color.png) | **Sensor de Color TCS34725** | Sensor de luz de color RGB con filtro infrarrojo. Conectado de forma independiente al Bus I2C #2 para evitar saturación de datos, está ubicado en la parte inferior del vehículo para identificar líneas, marcas y colores específicos en la pista. |
-| ![Tira Neopixel](other/Tira_de_LEDs_Neopixel.jpg) | **Tira de LEDs Neopixel** | Sistema de iluminación e indicadores visuales RGB direccionables de forma serial a través del pin digital D14. Se utiliza para mostrar estados del software, alertas del sistema o modos de conducción de forma dinámica. |
-| ![Buzzer](other/buzzer.jpg) | **Zumbador (Buzzer)** | Transductor piezoeléctrico conectado al pin digital D4. Emite señales acústicas y alarmas sonoras para retroalimentar las diferentes etapas del programa, fallos de lectura o alertas críticas del vehículo. |
-| ![Interruptor Programa](other/interruptor.jpg) | **Interruptor de Inicio de Programa** | Pulsador/interruptor conectado al pin digital D23 con resistencia pull-up/GND. Actúa como gatillo lógico para iniciar la marcha autónoma del software una vez el vehículo ha sido calibrado y posicionado. |
+| Imagen | Nombre de Componente | Descripción | 🔗 Referencias y Documentación |
+| :----: | :------------------- | :---------- | :----------------------------- |
+| ![ESP32](other/esp32.png) | **Microcontrolador ESP32** | Cerebro central del vehículo autónomo. Cuenta con un procesador de doble núcleo, conectividad Wi-Fi/Bluetooth, y múltiples pines GPIO para gestionar la lectura de sensores (I2C y Analógicos) y el control de actuadores en tiempo real. | • [Espressif ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)<br>• [Documentación ESP-IDF / Arduino ESP32](https://docs.espressif.com/projects/arduino-esp32/en/latest/) |
+| ![Sensor Sharp](other/sensor_infrarojo.jpg) | **Sensor Infrarrojo Sharp GP2Y0A21** | Sensores analógicos de medición de distancia por triangulación infrarroja. Colocados estratégicamente en el chasis para detectar obstáculos en las diagonales delanteras del vehículo y evitar colisiones de rango medio (10 a 80 cm). | • [Sharp GP2Y0A21YK0F Datasheet](https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y0a21yk_e.pdf)<br>• [Guía de Calibración Sharp IR](https://www.pololu.com/product/136) |
+| ![Sensor TOF](other/sensor-vl53l0x-de-tof.jpg) | **Sensores de Distancia Láser TOF VL53L0X** | Sensores basados en tecnología Time-of-Flight (Tiempo de Vuelo) que miden distancias precisas mediante luz láser invisible. Conectados en paralelo al Bus I2C #1, utilizan pines digitales individuales como selectores de dirección (XSHUT) para evitar conflictos de direccionamiento. | • [STMicroelectronics VL53L0X Datasheet](https://www.st.com/resource/en/datasheet/vl53l0x.pdf)<br>• [Librería Adafruit VL53L0X (GitHub)](https://github.com/adafruit/Adafruit_VL53L0X) |
+| ![IMU BNO055](other/MU_BNO055.jpg) | **IMU BNO055 (9-Axis Absolute Orientation)** | Unidad de medición inercial avanzada que integra acelerómetro, giroscopio y magnetómetro en 3 ejes, junto con un procesador interno que calcula la orientación absoluta (ángulos de Euler/Cuaterniones) de forma directa a través del Bus I2C #1. | • [Bosch Sensortec BNO055 Datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bno055-ds000.pdf)<br>• [Librería Adafruit BNO055 (GitHub)](https://github.com/adafruit/Adafruit_BNO055) |
+| ![Sensor de Color TCS34725](other/sensor_color.png) | **Sensor de Color TCS34725** | Sensor de luz de color RGB con filtro infrarrojo. Conectado de forma independiente al Bus I2C #2 para evitar saturación de datos, está ubicado en la parte inferior del vehículo para identificar líneas, marcas y colores específicos en la pista. | • [AMS TCS34725 Datasheet](https://ams.com/documents/20143/36005/TCS34725_DS000390_3-00.pdf)<br>• [Librería Adafruit TCS34725 (GitHub)](https://github.com/adafruit/Adafruit_TCS34725) |
+| ![Tira Neopixel](other/Tira_de_LEDs_Neopixel.jpg) | **Tira de LEDs Neopixel** | Sistema de iluminación e indicadores visuales RGB direccionables de forma serial a través del pin digital D14. Se utiliza para mostrar estados del software, alertas del sistema o modos de conducción de forma dinámica. | • [Worldsemi WS2812B / Neopixel Datasheet](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf)<br>• [Librería Adafruit NeoPixel (GitHub)](https://github.com/adafruit/Adafruit_NeoPixel) |
+| ![Buzzer](other/buzzer.jpg) | **Zumbador (Buzzer)** | Transductor piezoeléctrico conectado al pin digital D4. Emite señales acústicas y alarmas sonoras para retroalimentar las diferentes etapas del programa, fallos de lectura o alertas críticas del vehículo. | • [Guía de Tono Arduino PWM / Buzzer](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)<br>• [Especificaciones de Zumbadores Piezoeléctricos](https://www.sparkfun.com/products/7950) |
+| ![Interruptor Programa](other/interruptor.jpg) | **Interruptor de Inicio de Programa** | Pulsador/interruptor conectado al pin digital D23 con resistencia pull-up/GND. Actúa como gatillo lógico para iniciar la marcha autónoma del software una vez el vehículo ha sido calibrado y posicionado. | • [Documentación de Entradas Digitales y Pull-Up en ESP32](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html) |
 
 ### Componentes de Alimentación y Actuación
 
-| Imagen | Nombre de Componente | Descripción |
-| :----: | :------------------- | :---------- |
-| ![Batería LIPO](other/bateria_lipo.png) | **Batería LiPo 2S 50C 2200mAh** | Fuente de energía principal del vehículo. Suministra un voltaje nominal de 7.4V (máximo de 8.4V en carga completa) con una alta tasa de descarga (50C) para soportar los picos de corriente de los motores. |
-| ![Interruptor](other/interruptor.jpg) | **Interruptor de Encendido General** | Interruptor basculante (ON/OFF) conectado directamente al terminal positivo de la batería para cortar o permitir el paso de corriente a todo el sistema eléctrico de forma segura. |
-| ![Step up-down XL6009](other/XL6009.jpg) | **Regulador Elevador/Reductor XL6009** | Módulo de regulación de voltaje ajustado entre 6V y 8V (según la velocidad buscada). Estabiliza la alimentación que va dirigida al driver de los motores, independientemente de las fluctuaciones de la batería. |
-| ![Driver TB6612FNG](other/tb6612fng.jpg) | **Driver de Motores TB6612FNG** | Controlador de puente en H dual de alta eficiencia. Recibe las señales lógicas de control del ESP32 (dirección y PWM) y maneja la potencia hacia los motores DC de tracción de manera mucho más eficiente que el clásico L298N. |
-| ![Motor 25GA-370](other/motor.png) | **Motor DC 25GA-370 (6V-8V)** | Motorreductor metálico encargado de la tracción mecánica del vehículo autónomo. Funciona en un rango de voltaje de 6V a 8V regulado por el XL6009 y operado a través del driver. |
-| ![Step down DSN-Mini 360](other/dsn_mini_360.jpg) | **Step Down DSN-Mini 360** | Regulador reductor de voltaje de tipo conmutado, ajustado a una salida fija de 7V para alimentar de forma estable el pin VIN del microcontrolador ESP32. |
-| ![Servomotor MG90](other/servo_180.jpg) | **Servomotor MG90 180°** | Servo con piñonería metálica de alta resistencia. Utilizado para controlar el ángulo de dirección de las ruedas delanteras del vehículo mediante señales PWM del microcontrolador. Alimentado a 6V desde el regulador correspondiente. |
+| Imagen | Nombre de Componente | Descripción | 🔗 Referencias y Documentación |
+| :----: | :------------------- | :---------- | :----------------------------- |
+| ![Batería LIPO](other/bateria_lipo.png) | **Batería LiPo 2S 50C 2200mAh** | Fuente de energía principal del vehículo. Suministra un voltaje nominal de 7.4V (máximo de 8.4V en carga completa) con una alta tasa de descarga (50C) para soportar los picos de corriente de los motores. | • [Especificaciones de Baterías LiPo 2S (7.4V)](https://www.hobbywing.com/) |
+| ![Interruptor](other/interruptor.jpg) | **Interruptor de Encendido General** | Interruptor basculante (ON/OFF) conectado directamente al terminal positivo de la batería para cortar o permitir el paso de corriente a todo el sistema eléctrico de forma segura. | • [Especificaciones de Interruptores Basculantes KCD1](https://www.sparkfun.com/products/11138) |
+| ![Step up-down XL6009](other/XL6009.jpg) | **Regulador Elevador/Reductor XL6009** | Módulo de regulación de voltaje ajustado entre 6V y 8V (según la velocidad buscada). Estabiliza la alimentación que va dirigida al driver de los motores, independientemente de las fluctuaciones de la batería. | • [Datasheet Módulo Boost XL6009](https://www.xlsemi.com/datasheet/XL6009%20datasheet.pdf) |
+| ![Driver TB6612FNG](other/tb6612fng.jpg) | **Driver de Motores TB6612FNG** | Controlador de puente en H dual de alta eficiencia. Recibe las señales lógicas de control del ESP32 (dirección y PWM) y maneja la potencia hacia los motores DC de tracción de manera mucho más eficiente que el clásico L298N. | • [Toshiba TB6612FNG Datasheet](https://www.sparkfun.com/datasheets/Robotics/TB6612FNG.pdf) |
+| ![Motor 25GA-370](other/motor.png) | **Motor DC 25GA-370 (6V-8V)** | Motorreductor metálico encargado de la tracción mecánica del vehículo autónomo. Funciona en un rango de voltaje de 6V a 8V regulado por el XL6009 y operado a través del driver. | • [Especificaciones Técnicas Motorreductor 25GA-370](https://www.pololu.com/category/60/micro-metal-gearmotors) |
+| ![Step down DSN-Mini 360](other/dsn_mini_360.jpg) | **Step Down DSN-Mini 360** | Regulador reductor de voltaje de tipo conmutado, ajustado a una salida fija de 7V para alimentar de forma estable el pin VIN del microcontrolador ESP32. | • [MP2307 / Mini360 Step-Down Datasheet](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
+| ![Servomotor MG90](other/servo_180.jpg) | **Servomotor MG90 180°** | Servo con piñonería metálica de alta resistencia. Utilizado para controlar el ángulo de dirección de las ruedas delanteras del vehículo mediante señales PWM del microcontrolador. Alimentado a 6V desde el regulador correspondiente. | • [TowerPro MG90S Micro Servo Datasheet](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
 
 ## Esquemas de Alimentación y Cableado
 
@@ -139,6 +139,37 @@ Para verificar la simetría estructural, la distribución del centro de masa ($C
 
 ![Diagrama de Alimentación V4](schemes/diagrama-alimentacion5.jpeg)
 
+```mermaid
+graph TD
+    classDef bat fill:#d50000,stroke:#ff5252,stroke-width:2px,color:#fff;
+    classDef sw fill:#424242,stroke:#bdbdbd,stroke-width:2px,color:#fff;
+    classDef reg fill:#f57c00,stroke:#ffb74d,stroke-width:2px,color:#fff;
+    classDef load fill:#1565c0,stroke:#64b5f6,stroke-width:2px,color:#fff;
+
+    BAT["🔋 Bateria LiPo 2S<br>50C 2200mAh (7.4V - Max 8.4V)"]:::bat
+    SW["🔘 Interruptor Encendido General"]:::sw
+
+    XL["🚀 Step Up-Down XL6009<br>Ajuste: 6V a 8V (Motores)"]:::reg
+    SD1["📉 Step Down DSN-Mini 360 1<br>Ajuste: 7V (ESP32 VIN)"]:::reg
+    SD2["📉 Step Down DSN-Mini 360 2<br>Ajuste: 5V - 6V (Servo y Sensores)"]:::reg
+
+    ESP32["🧠 Microcontrolador ESP32<br>Alimentado por VIN a 7V"]:::load
+    DRIVER["🏎️ Driver TB6612FNG<br>Alimentacion VCC/VM 6V-8V"]:::load
+    MOTOR["⚙️ Motor DC 25GA-370<br>Tension Variable 6V-8V"]:::load
+    SERVO["📐 Servomotor MG90 180<br>Alimentado a 6V"]:::load
+
+    BAT --> SW
+
+    SW --> XL
+    SW --> SD1
+    SW --> SD2
+
+    XL --> DRIVER
+    DRIVER --> MOTOR
+
+    SD1 --> ESP32
+    SD2 --> SERVO
+```
 ### Arquitectura de Energía, Control y Gestión de Potencia
 
 La **batería LiPo 2S de 2200mAh** (7.4V nominales, 8.4V en máxima carga) constituye la fuente central de energía del sistema, gestionada mediante un **interruptor general físico de palanca** que garantiza un enclavamiento mecánico seguro y mitiga fallos por desconexión accidental ante vibraciones en la pista. 
@@ -168,6 +199,52 @@ A partir de este nodo central, la alimentación se ramifica de forma completamen
 
 ![Diagrama de Sensores V4](schemes/diagrama-sensores3.jpeg)
 
+```mermaid
+graph TD
+    classDef mcu fill:#2b2b2b,stroke:#00e676,stroke-width:2px,color:#fff;
+    classDef i2c1 fill:#1a237e,stroke:#448aff,stroke-width:2px,color:#fff;
+    classDef i2c2 fill:#4a148c,stroke:#e040fb,stroke-width:2px,color:#fff;
+    classDef adc fill:#e65100,stroke:#ff9100,stroke-width:2px,color:#fff;
+    classDef gpio fill:#004d40,stroke:#00bfa5,stroke-width:2px,color:#fff;
+
+    MCU["⚡ ESP32 Mainboard"]:::mcu
+
+    IMU["🧭 IMU BNO055"]:::i2c1
+    TOF1["🎯 Sensor TOF 1 VL53L0X"]:::i2c1
+    TOF2["🎯 Sensor TOF 2 VL53L0X"]:::i2c1
+    TOF3["🎯 Sensor TOF 3 VL53L0X"]:::i2c1
+    TOF4["🎯 Sensor TOF 4 VL53L0X"]:::i2c1
+
+    COLOR["🎨 Sensor Color TCS34725"]:::i2c2
+
+    SHARP1["📡 Sensor Sharp 1 GP2Y0A21"]:::adc
+    SHARP2["📡 Sensor Sharp 2 GP2Y0A21"]:::adc
+
+    SERVO["⚙️ Servomotor MG90 Pin D13"]:::gpio
+    NEO["🌈 Tira Neopixel RGB Pin D14"]:::gpio
+    BUZZER["🔔 Buzzer Piezoelectrico Pin D4"]:::gpio
+    SW["🔘 Switch Inicio Programa Pin D23"]:::gpio
+    DRIVER["🏎️ Driver TB6612FNG Control Motores"]:::gpio
+    XSHUT["🔀 Selectores XSHUT Control TOF"]:::gpio
+
+    MCU --> IMU
+    MCU --> COLOR
+
+    MCU --> XSHUT
+    XSHUT --> TOF1
+    XSHUT --> TOF2
+    XSHUT --> TOF3
+    XSHUT --> TOF4
+
+    SHARP1 --> MCU
+    SHARP2 --> MCU
+
+    MCU --> SERVO
+    MCU --> NEO
+    MCU --> BUZZER
+    SW --> MCU
+    MCU --> DRIVER
+```
 ### Optimización del Sistema de Sensores y Hardware
 
 En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehículo aprovechando la capacidad de múltiples buses del ESP32. El objetivo principal es maximizar la precisión espacial, evitar cuellos de botella en el procesamiento de datos y blindar la estabilidad del algoritmo de navegación autónoma dentro de la pista de $3 \times 3$ metros.
