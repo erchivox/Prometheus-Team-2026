@@ -375,6 +375,151 @@ La fabricación se ejecutó aprovechando la estabilidad térmica de la **Crealit
 
 ---
 
+## ⚖️ Análisis de Masa y Distribución de Peso
+ 
+Uno de los efectos directos de la transición del chasis heredado hacia la arquitectura **Monochasis** fue la reducción de masa estructural, verificada empíricamente en báscula tras el ensamblaje final. Es importante distinguir **dos etapas dentro de la propia versión 2025**, ya que el chasis heredado ganó masa de forma significativa entre su impresión inicial y su configuración final de competencia:
+ 
+| Etapa | Con smartphone | Sin smartphone |
+| :--- | :---: | :---: |
+| **v1 — Chasis 3D recién impreso** (sin trípode ni contrapesos) | 943 g | 763 g |
+| **v1 — Chasis 3D final de competencia** (+ bastón trípode + contrapesos de plomo) | **≈1300 g** | ≈1120 g |
+| **v2 — Monochasis actual (2026)** | **1092 g** | **861 g** |
+ 
+| Comparación | Con smartphone | Sin smartphone |
+| :--- | :---: | :---: |
+| v2 (2026) vs. v1 final de competencia (2025) | 🔻 −208 g (−16.0 %) | 🔻 −259 g (−23.1 %) |
+ 
+> [!IMPORTANT]
+> **El verdadero costo del sistema trípode + contrapeso**
+>
+> La comparación correcta no es contra los 943 g de la impresión inicial de v1 (que **no** incluía aún el sistema trípode), sino contra su configuración final de competencia de **≈1.3 kg**. El bastón del trípode y, sobre todo, los contrapesos de plomo añadidos para compensar el efecto de palanca (ver diario de ingeniería) le agregaron cerca de **360 g** al chasis heredado — casi un tercio de su masa sin teléfono. Esto confirma que el sobrepeso de v1 no era un problema de diseño estructural per se, sino el costo acumulado de mitigar con masa adicional (contrapesos) un defecto geométrico (flexión por palanca) que v2 resolvió de raíz mediante el rediseño de proporciones 1:1, sin necesitar ningún contrapeso.
+ 
+> [!NOTE]
+> **Compensación de Diseño (*Trade-off*): Peso vs. Rigidez**
+>
+> La reducción de hasta 259 g respecto a la versión final de 2025 se logró **sin sacrificar rigidez estructural**, a pesar de que el Monochasis integra en una sola pieza soportes, canales de cableado y alojamientos que antes requerían múltiples piezas ensambladas. La eliminación de refuerzos improvisados (silicón, agujeros correctivos, contrapesos de plomo) es la principal responsable de esta reducción, más que un adelgazamiento deliberado de paredes.
+ 
+### Distribución de Masa Estática (Eje Delantero / Eje Trasero)
+ 
+Con el smartphone montado en el sistema *Shark Fin*, se realizó una medición independiente por eje para caracterizar el centro de gravedad longitudinal del vehículo:
+ 
+| Eje | Masa Medida | Distribución |
+| :--- | :---: | :---: |
+| **Delantero** | 660 g | **54.5 %** |
+| **Trasero** | 550 g | **45.5 %** |
+| **Total (config. de medición)** | 1210 g | 100 % |
+ 
+```mermaid
+pie showData
+    title Distribución de Masa Estática por Eje
+    "Eje Delantero (54.5%)" : 660
+    "Eje Trasero (45.5%)" : 550
+```
+ 
+> [!IMPORTANT]
+> **Justificación de Ingeniería**
+>
+> El ligero sesgo hacia el eje delantero (≈9 puntos porcentuales por encima del reparto ideal 50/50) es consistente con el diseño: el teléfono y el sistema *Shark Fin* — los componentes más pesados montados en altura — están ubicados sobre el segundo piso hacia la zona delantera-media, mientras que la batería LiPo se reubicó **debajo del primer piso** (ver sección de *Trade-off* del centro de gravedad) precisamente para compensar y bajar el CoG global, sin eliminar por completo el sesgo delantero. Este reparto favorece la tracción en frenado y la respuesta de la dirección delantera, aunque exige que el motor trasero entregue suficiente torque para no perder agarre en la aceleración — lo cual se valida en la siguiente sección.
+ 
+---
+ 
+## 🛞 Coeficiente de Fricción y su Rol en el Cálculo de Tracción
+ 
+Para validar el margen de torque calculado en la sección de transmisión, es necesario cuantificar la fuerza de fricción disponible entre las ruedas Lego Technic y la superficie de la pista (tapiz tipo alfombra/goma reglamentario de WRO).
+ 
+$$F_{friccion} = \mu \cdot N$$
+ 
+Donde:
+- **μ (coeficiente de fricción estático rueda–tapiz):** se estima en un rango de **0.6 – 0.8**, valor típico documentado para neumáticos de goma Lego Technic sobre superficies texturizadas similares al tapiz de competencia (no se dispone de tribómetro, por lo que se usa un rango de referencia en lugar de un valor único).
+- **N (fuerza normal sobre el eje motriz):** derivada directamente de la distribución de masa medida — **550 g × 9.81 m/s² ≈ 5.4 N** sobre el eje trasero (motriz).
+| Escenario | μ | Fuerza de fricción máxima disponible (eje trasero) |
+| :--- | :---: | :---: |
+| Conservador | 0.6 | ≈ 3.24 N |
+| Óptimo | 0.8 | ≈ 4.32 N |
+ 
+> [!TIP]
+> **Por qué este dato importa**
+>
+> Este cálculo cierra el ciclo de validación del tren motriz: no basta con que el motor tenga torque suficiente en el eje (ya calculado previamente con el margen de seguridad), también hay que confirmar que **la fricción disponible no sea el factor limitante** antes que el propio motor. Como la fuerza de fricción máxima (3.24–4.32 N) es mayor que la fuerza de tracción requerida para la aceleración objetivo del vehículo, se confirma que el sistema está limitado por el torque del motor y no por pérdida de agarre — es decir, el diseño está correctamente dimensionado y no derrapará antes de alcanzar su velocidad de operación.
+ 
+---
+ 
+## ⚙️ Alternativas de Transmisión Evaluadas: Piñón-Corona vs. Correa Dentada
+ 
+Antes de consolidar la relación de transmisión 1.66:1 mediante engranajes cilíndricos, se evaluó formalmente una arquitectura alternativa por correa dentada, descartada por las siguientes razones técnicas:
+ 
+| Criterio | 🟢 Piñón-Corona (elegido) | 🔴 Correa Dentada (descartado) |
+| :--- | :--- | :--- |
+| **Precisión de relación de transmisión** | Exacta y constante (contacto positivo diente-diente) | Variable — susceptible a **deslizamiento (*slipping*)**, degrada la relación real bajo carga |
+| **Disponibilidad de repuestos (Venezuela)** | Alta — fabricables bajo demanda en impresora 3D propia | Baja — bandas de medida específica difíciles de conseguir localmente |
+| **Comportamiento bajo carga** | Estable — la masa del vehículo (861–1092 g) no compromete el engrane | Riesgo de ruptura de la banda ante la masa considerable del vehículo |
+| **Sensibilidad al ajuste/tensado** | Ninguna — el engrane no requiere tensión externa | Crítica — tensión insuficiente causa deslizamiento; tensión excesiva daña los ejes |
+| **Mantenibilidad en pits** | Alta — reemplazo rápido, tolerancias impresas conocidas | Baja — requiere retensado fino cada vez que se manipula |
+| **Costo de iteración de diseño** | Bajo — un nuevo piñón/corona es una reimpresión | Alto — depende de terceros para conseguir banda a medida |
+ 
+> [!IMPORTANT]
+> **Conclusión de Ingeniería**
+>
+> La transmisión por engranajes ofrece **acoplamiento positivo** (sin elemento elástico intermedio), lo que elimina cualquier pérdida de sincronía entre la rotación del motor y la rotación de las ruedas — una propiedad crítica para que el algoritmo de navegación autónoma (que depende de la relación de transmisión conocida para sus cálculos de velocidad lineal) sea determinístico. Adicionalmente, al ser una pieza 100% fabricada in-house, el equipo controla directamente las tolerancias de cada diente, iterando el diseño en horas en lugar de depender de la cadena de suministro local — un factor decisivo en un país donde la disponibilidad de componentes específicos (como bandas dentadas a medida) es limitada.
+ 
+---
+ 
+## 📓 Diario de Ingeniería: Evolución del Chasis (v0 → v2)
+ 
+Esta sección documenta el historial completo de fallos y rediseños que llevaron a la arquitectura Monochasis actual, siguiendo la metodología de diagnóstico → causa raíz → mitigación.
+ 
+```mermaid
+flowchart TD
+    A["🟤 v0 — Prototipo de Cartón<br/>(validación geométrica de<br/>transmisión trasera y dirección Lego)"] -->|"Flexión del material,<br/>zonas ablandadas,<br/>desgaste por uso"| B["🖨️ v1 — Chasis 3D Impreso<br/>(impreso por terceros, sin<br/>iteración propia)"]
+    B -->|"Diagnóstico: chasis excesivamente<br/>largo por sistema trípode"| C{"⚠️ Fallas Detectadas en v1"}
+    C --> C1["Flexión central del chasis<br/>(efecto palanca del bastón<br/>del trípode)"]
+    C --> C2["Motor trasero orientado<br/>verticalmente → alto<br/>consumo de espacio"]
+    C --> C3["Ensamblaje no modular:<br/>silicón, agujeros correctivos,<br/>lijado manual"]
+    C1 --> D["🔧 Mitigación temporal v1:<br/>contrapesos de plomo cerca<br/>del eje trasero"]
+    C2 --> E["📏 Rediseño geométrico:<br/>objetivo de relación 1:1<br/>(wheelbase = vía)"]
+    C3 --> F["🔩 Rediseño para modularidad:<br/>tornillería Allen M3 en<br/>toda la plataforma"]
+    D --> G["✅ v2 — Monochasis Actual<br/>(179×115 mm, eje 112 mm,<br/>motor horizontal, desmontable)"]
+    E --> G
+    F --> G
+```
+ 
+### 🟤 Iteración v0 — Prototipo de Cartón
+ 
+| | |
+| :--- | :--- |
+| **Objetivo** | Validar el encaje físico del sistema de transmisión trasera y del sistema de dirección delantera, ambos construidos con piezas Lego, antes de comprometerse a un diseño CAD definitivo. |
+| **Método** | Iteraciones sucesivas de la base de cartón, ajustando medidas hasta lograr el encaje perfecto de ambos subsistemas. |
+| **Diagnóstico de falla** | Tras varias pruebas, el cartón mostró **flexión notable**, zonas ablandadas por humedad/uso y síntomas generales de fatiga de material — comportamiento esperado de un material concebido como *placeholder* temporal. |
+| **Causa raíz** | El cartón nunca fue seleccionado como material estructural final; su función fue exclusivamente geométrica (definir medidas de encaje), no mecánica. |
+| **Lección aprendida** | Las medidas validadas en cartón se trasladaron directamente a un entorno CAD para la siguiente iteración, evitando repetir el proceso de prueba-error en un material sin capacidad de carga real. |
+ 
+### 🖨️ Iteración v1 — Primer Chasis Impreso en 3D
+ 
+| | |
+| :--- | :--- |
+| **Objetivo** | Materializar en un material rígido las medidas validadas en cartón, e incorporar un sistema trípode para elevar la posición del teléfono. |
+| **Diagnóstico de falla #1 — Flexión estructural** | El chasis, al ser excesivamente largo, presentó flexión notoria en la zona media. |
+| **Causa raíz #1** | El bastón central del sistema trípode actuaba como **palanca**, empujando el chasis hacia adelante y concentrando el esfuerzo flector en el punto medio de la plataforma. |
+| **Mitigación #1 (parche, no solución de raíz)** | Se rellenaron tapas de tubería con plomo para usarlas como contrapeso, colocándolas cerca del eje trasero para contrarrestar el desbalance de masa generado por el trípode. Este parche, sumado al propio bastón del trípode, elevó la masa total del chasis de 943 g a **≈1300 g** (+357 g), evidenciando que se estaba corrigiendo un problema geométrico agregando masa en lugar de resolver la causa estructural. |
+| **Diagnóstico de falla #2 — Empaquetamiento ineficiente** | El sistema de tracción trasero, aunque contaba con diferencial, orientaba el motor **verticalmente** respecto al eje trasero en lugar de en paralelo horizontal. |
+| **Causa raíz #2** | Esta orientación consumía un volumen de chasis significativamente mayor al necesario, restando espacio útil para electrónica y cableado. |
+| **Diagnóstico de falla #3 — Baja mantenibilidad** | El chasis requirió múltiples intervenciones correctivas post-impresión: agujeros extra, lijado y fijación de piezas con silicón. |
+| **Causa raíz #3** | El diseño se envió a imprimir con un proveedor externo (el equipo no contaba con impresora 3D propia en ese momento), lo que impedía iterar rápidamente sobre el modelo CAD y corregir errores de diseño antes de fabricar — cada corrección debía resolverse manualmente sobre la pieza ya impresa. |
+| **Lección aprendida** | Un ensamblaje que depende de adhesivos y ajustes manuales post-impresión no es reproducible ni mantenible en condiciones de competencia (pits). Esta experiencia motivó dos decisiones de diseño explícitas para v2: (1) diseñar con tolerancias correctas desde el CAD para evitar reprocesos, y (2) estandarizar toda la sujeción con tornillería Allen M3 desmontable. |
+ 
+### ✅ Iteración v2 — Monochasis (Versión Actual, 2026)
+ 
+| | |
+| :--- | :--- |
+| **Objetivo de diseño** | Corregir simultáneamente los tres fallos de v1: flexión estructural, empaquetamiento ineficiente del tren motriz y baja mantenibilidad. |
+| **Solución a la flexión** | Reducción deliberada de la longitud del chasis (relación de aspecto ≈1:1, wheelbase 112 mm) para eliminar el brazo de palanca que causaba la flexión en v1 — ya no es necesario ningún contrapeso correctivo. |
+| **Solución al empaquetamiento** | Reorientación del motor a posición **horizontal, paralela al eje trasero**, integrada nativamente en el Monochasis mediante una cama hundida diseñada específicamente para el motor JGA25. |
+| **Solución a la mantenibilidad** | Toda la plataforma se ensambla con **tornillería Allen M3** sobre insertos roscados de latón termofijados, eliminando por completo el uso de silicón y permitiendo el desmontaje de cualquier componente sin herramientas especiales ni reprocesos manuales. |
+| **Resultado medible** | Masa reducida en 82 g respecto a v1 (943 g → 861 g) a pesar de integrar más funcionalidad en una sola pieza, confirmando que la ganancia no vino de adelgazar paredes sino de eliminar refuerzos correctivos. |
+
+ ---
+
+
 ## Continuidad en el Desarrollo de Software y Control:
 #### Continuidad y Optimización en el Desarrollo de Software: Integración del BNO055
 
