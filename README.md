@@ -1,5 +1,60 @@
 # Prometheus Team - Temporada 2026
-¡Bienvenidos al repositorio oficial de nuestro equipo para la World Robot Olympiad (WRO) - Categoría: Futuros Ingenieros! Este espacio no solo almacena líneas de código, algoritmos de visión artificial y diseños en 3D; aquí se guarda la evolución, la pasión y la ingeniería de un equipo que no se rinde ante los desafíos. Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
+¡Bienvenidos al repositorio oficial de nuestro equipo para la World Robot Olympiad (WRO) - Categoría: Futuros Ingenieros! Este espacio no solo almacena líneas de código, algoritmos de visión artificial y diseños en 3D; aquí se guarda la evolución, la pasión y la ingeniería de un equipo que no se rinde ante  los desafíos. Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
+
+## Equipo Prometheus <a id="equipo-prometheus"></a>
+Prometheus Team está conformados por estudiantes universitarios de la **Universidad Politécnica Territorial "José Félix Ribas"**, destancandonos por nuestra anterior participación en la WRO 2025 y nuestro sistema de detección innovador:
+
+### 👤 Samuel Pérez <a id="samuel-perez"></a>
+**Diseñador de Entornos 3D, Desarrollador Móvil y Modelado CAD**
+<div align="center">
+  <img src="./t-photos/samuel.jpeg" alt="Samuel Pérez" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+</div>
+
+* **Trayectoria Académica:** Estudiante de Ingeniería Electrónica – **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**.
+* **Competencias y Funciones Técnicas:**
+  * **Diseño Estructural y Modelado 3D:** Creación paramétrica y desarrollo de componentes mecánicos optimizados para alta resistencia.
+  * **Desarrollo de Software Móvil:** Creación de aplicaciones interactivas en **Android Studio** orientadas a la gestión y monitoreo de sistemas.
+  * **Gestión de Proyectos:** Caracterizado por su alto nivel de responsabilidad, perseverancia y atención al detalle en entregables técnicos.
+  * **Logros Destacados:** Finalista en la fase nacional de la **WRO Venezuela (Temporada 2025)** por su integración entre hardware y software.
+---
+### 👤 Trino Carrizales <a id="trino-carrizales"></a>
+**Especialista en Programación Embebida, Algoritmos y Control**
+<div align="center">
+  <img src="./t-photos/trino.jpeg" alt="Trino Carrizales" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+</div>
+
+* **Perfil Académico:** 
+  * Estudiante de Ingeniería Electrónica – **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**.
+  * Estudiante de Ingeniería en Sistemas – **Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (UNELLEZ)**.
+* **Dominio Técnico y Desempeño:**
+  * **Desarrollo de Firmware:** Programación y optimización de código para microcontroladores **Arduino** y **ESP32**.
+  * **Depuración de Software:** Diagnóstico y resolución ágil de errores lógicos e imprevistos en código fuente bajo presión.
+  * **Trayectoria Competitiva:** Finalista nacional en la **WRO Venezuela (Temporada 2025)**, demostrando adaptabilidad y estabilidad en sistemas de control.
+---
+### 👤 Leandro Padrón <a id="leandro-padron"></a>
+**Coordinador de Logística, Mecánica Aplicada y Diagnóstico Físico**
+<div align="center">
+  <img src="./t-photos/leandro.jpeg" alt="Leandro Padrón" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+</div>
+
+* **Estudios Universitarios:** Estudiante de Ingeniería Electrónica – **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**.
+* **Aportes y Responsabilidades del Rol:**
+  * **Análisis Físico-Mecánico:** Resolución eficaz de contingencias dinámicas y ensamblajes mecánicos en prototipos.
+  * **Gestión Operativa:** Coordinación de recursos técnicos, planeación logística y soporte directo en las actividades de campo.
+  * **Liderazgo Operativo:** Habilidad para resolver fallas de manera expedita mientras impulsa la cohesión y el trabajo en equipo.
+---
+### 👤 Ing. Dayana Pérez <a id="ing-dayana-perez"></a>
+**Mentora Principal y Asesora de Investigación Tecnológica**
+<div align="center">
+  <img src="./t-photos/dayana.jpeg" alt="Ing. Dayana Pérez" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+</div>
+
+* **Acreditación y Grados Académicos:**
+  * **Ingeniera Electrónica:** Universidad Politécnica Territorial Experimental Antonio José de Sucre (**UNEXPO** VR Barquisimeto).
+  * **Magíster en Educación Superior:** Universidad Fermín Toro (**UFT**).
+  * **Doctorante en Tecnologías de la Información y Comunicación:** Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (**UNELLEZ** Barinas).
+* **Orientación y Tutoría:** Asesoría metodológica en proyectos de ingeniería, supervisión académica e integración estratégica de TIC y sistemas electrónicos.
+
 
 ##  Fotos de equipo
 | ![ Foto Oficial](t-photos/foto_equipo.jpeg)  | ![ Foto Equipo](t-photos/foto_equipo2.jpeg) | 
