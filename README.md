@@ -69,10 +69,10 @@
 
 ---
 
-## Equipo Prometheus <a id="equipo-prometheus"></a>
+## 1. Equipo Prometheus <a id="equipo-prometheus"></a>
 Prometheus Team está conformados por estudiantes universitarios de la **Universidad Politécnica Territorial "José Félix Ribas"**, destancandonos por nuestra anterior participación en la WRO 2025 y nuestro sistema de detección innovador:
 
-### 👤 Samuel Pérez <a id="samuel-perez"></a>
+### 1.1. 👤 Samuel Pérez <a id="samuel-perez"></a>
 **Diseñador de Entornos 3D, Desarrollador Móvil y Modelado CAD**
 <div align="center">
   <img src="./t-photos/samuel.jpeg" alt="Samuel Pérez" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -85,7 +85,7 @@ Prometheus Team está conformados por estudiantes universitarios de la **Univers
   * **Gestión de Proyectos:** Caracterizado por su alto nivel de responsabilidad, perseverancia y atención al detalle en entregables técnicos.
   * **Logros Destacados:** Finalista en la fase nacional de la **WRO Venezuela (Temporada 2025)** por su integración entre hardware y software.
 ---
-### 👤 Trino Carrisales <a id="trino-carrizales"></a>
+### 1.2. 👤 Trino Carrizales <a id="trino-carrizales"></a>
 **Especialista en Programación Embebida, Algoritmos y Control**
 <div align="center">
   <img src="./t-photos/trino.jpeg" alt="Trino Carrizales" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -99,7 +99,7 @@ Prometheus Team está conformados por estudiantes universitarios de la **Univers
   * **Depuración de Software:** Diagnóstico y resolución ágil de errores lógicos e imprevistos en código fuente bajo presión.
   * **Trayectoria Competitiva:** Finalista nacional en la **WRO Venezuela (Temporada 2025)**, demostrando adaptabilidad y estabilidad en sistemas de control.
 ---
-### 👤 Leandro Padrón <a id="leandro-padron"></a>
+### 1.3. 👤 Leandro Padrón <a id="leandro-padron"></a>
 **Coordinador de Logística, Mecánica Aplicada y Diagnóstico Físico**
 <div align="center">
   <img src="./t-photos/leandro.jpeg" alt="Leandro Padrón" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -111,7 +111,7 @@ Prometheus Team está conformados por estudiantes universitarios de la **Univers
   * **Gestión Operativa:** Coordinación de recursos técnicos, planeación logística y soporte directo en las actividades de campo.
   * **Liderazgo Operativo:** Habilidad para resolver fallas de manera expedita mientras impulsa la cohesión y el trabajo en equipo.
 ---
-### 👤 Ing. Dayana Pérez <a id="ing-dayana-perez"></a>
+### 1.4. 👤 Ing. Dayana Pérez <a id="ing-dayana-perez"></a>
 **Mentora Principal y Asesora de Investigación Tecnológica**
 <div align="center">
   <img src="./t-photos/dayana.jpeg" alt="Ing. Dayana Pérez" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
@@ -123,13 +123,13 @@ Prometheus Team está conformados por estudiantes universitarios de la **Univers
   * **Doctorante en Tecnologías de la Información y Comunicación:** Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (**UNELLEZ** Barinas).
 * **Orientación y Tutoría:** Asesoría metodológica en proyectos de ingeniería, supervisión académica e integración estratégica de TIC y sistemas electrónicos.
 
-# 🥈 La Hazaña de 2025: Subcampeones Nacionales
+## 2. 🥈 La Hazaña de 2025: Subcampeones Nacionales
 
 El año 2025 quedó marcado en nuestra historia. Tras meses de arduo trabajo, diseño iterativo, depuración de sensores y perfeccionamiento de la lógica de navegación autónoma, logramos alzarnos con el **2.º Lugar en la Competencia Nacional de Venezuela**.
 
 Fue una jornada intensa donde pusimos a prueba nuestras capacidades técnicas bajo presión, enfrentándonos a los mejores equipos del país. Superamos obstáculos en la pista, calibramos componentes en tiempo récord y demostramos el nivel de la ingeniería venezolana. Estuvimos a solo un paso de la gloria máxima, y esa experiencia nos transformó por completo como desarrolladores y pensadores críticos.
 
-# 🥇 2026: Con la Mira en el Primer Lugar
+## 3. 🥇 2026: Con la Mira en el Primer Lugar
 
 Dicen que el segundo lugar es el primer perdedor, pero para nosotros fue el combustible perfecto. Este año regresamos a la pista con más experiencia, una mentalidad más madura y un hambre voraz de victoria.
 
@@ -137,7 +137,7 @@ Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de 
 
 ---
 
-### 📸 Nuestro Paso por la Competencia Nacional
+### 3.1. 📸 Nuestro Paso por la Competencia Nacional
 
 <p align="center">
   <img src="t-photos/foto_equipo.jpeg" alt="Foto Oficial del Equipo" height="250" />
@@ -156,7 +156,7 @@ Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de 
 
 ---
 
-## Galería de Inspección Técnica 360°
+### 3.2. Galería de Inspección Técnica 360°
 Para verificar la simetría estructural, la distribución del centro de masa ($CoG$), la integridad del chasis impreso en 3D y la holgura funcional (*ground clearance*), se documentan los **6 perfiles de inspección ortogonal reglamentarios**:
 
 | 📸 Perfil de Inspección | 🖼️ Registro Visual | 🔍 Criterio de Verificación Técnica de Ingeniería |
@@ -170,7 +170,7 @@ Para verificar la simetría estructural, la distribución del centro de masa ($C
 
 ---
 
-### Componentes de Control, Detección e Interfaz
+## 4. Componentes de Control, Detección e Interfaz
 
 | Imagen | Nombre de Componente | Descripción | 🔗 Referencias y Documentación |
 | :----: | :------------------- | :---------- | :----------------------------- |
@@ -183,7 +183,7 @@ Para verificar la simetría estructural, la distribución del centro de masa ($C
 | ![Buzzer](other/buzzer.jpg) | **Zumbador (Buzzer)** | Transductor piezoeléctrico conectado al pin digital D4. Emite señales acústicas y alarmas sonoras para retroalimentar las diferentes etapas del programa, fallos de lectura o alertas críticas del vehículo. | • [Guía de Tono Arduino PWM / Buzzer](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)<br>• [Especificaciones de Zumbadores Piezoeléctricos](https://www.sparkfun.com/products/7950) |
 | ![Interruptor Programa](other/interruptor.jpg) | **Interruptor de Inicio de Programa** | Pulsador/interruptor conectado al pin digital D23 con resistencia pull-up/GND. Actúa como gatillo lógico para iniciar la marcha autónoma del software una vez el vehículo ha sido calibrado y posicionado. | • [Documentación de Entradas Digitales y Pull-Up en ESP32](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html) |
 
-### Componentes de Alimentación y Actuación
+## 5. Componentes de Alimentación y Actuación
 
 | Imagen | Nombre de Componente | Descripción | 🔗 Referencias y Documentación |
 | :----: | :------------------- | :---------- | :----------------------------- |
@@ -195,11 +195,11 @@ Para verificar la simetría estructural, la distribución del centro de masa ($C
 | ![Step down DSN-Mini 360](other/dsn_mini_360.jpg) | **Step Down DSN-Mini 360** | Regulador reductor de voltaje de tipo conmutado, ajustado a una salida fija de 7V para alimentar de forma estable el pin VIN del microcontrolador ESP32. | • [MP2307 / Mini360 Step-Down Datasheet](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
 | ![Servomotor MG90](other/servo_180.jpg) | **Servomotor MG90 180°** | Servo con piñonería metálica de alta resistencia. Utilizado para controlar el ángulo de dirección de las ruedas delanteras del vehículo mediante señales PWM del microcontrolador. Alimentado a 6V desde el regulador correspondiente. | • [TowerPro MG90S Micro Servo Datasheet](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
 
-## Esquemas de Alimentación y Cableado
+## 6. Esquemas de Alimentación y Cableado
 
 [*Consultar el historial de versiones de alimentación aquí*](#sistema-de-alimentación)
 
-### Versión 4 (Actual)
+### 6.1. Versión 4 (Actual)
 
 ![Diagrama de Alimentación V4](schemes/diagrama-alimentacion5.jpeg)
 
@@ -234,7 +234,7 @@ graph TD
     SD1 --> ESP32
     SD2 --> SERVO
 ```
-### Arquitectura de Energía, Control y Gestión de Potencia
+### 6.2. Arquitectura de Energía, Control y Gestión de Potencia
 
 La **batería LiPo 2S de 2200mAh** (7.4V nominales, 8.4V en máxima carga) constituye la fuente central de energía del sistema, gestionada mediante un **interruptor general físico de palanca** que garantiza un enclavamiento mecánico seguro y mitiga fallos por desconexión accidental ante vibraciones en la pista. 
 
@@ -255,11 +255,11 @@ A partir de este nodo central, la alimentación se ramifica de forma completamen
 > Esta configuración ampliada, apoyada en tres reguladores de voltaje independientes, exige una gestión del espacio interno más rigurosa dentro del chasis impreso en 3D. Sin embargo, se asumió esta compensación espacial porque mitiga por completo el acoplamiento de ruido inductivo provocado por los motores hacia la electrónica sensible, blindando la estabilidad del vehículo y asegurando lecturas limpias en el bus I2C durante la navegación autónoma.
 
 
-## Esquemas de Sensores y Adquisición de Datos
+## 7. Esquemas de Sensores y Adquisición de Datos
 
 [*Consultar el historial de versiones de detección aquí*](#sistema-de-detección-de-objetos)
 
-### Versión 4 (Actual)
+### 7.1. Versión 4 (Actual)
 
 ![Diagrama de Sensores V4](schemes/diagrama-sensores3.jpeg)
 
@@ -309,11 +309,11 @@ graph TD
     SW --> MCU
     MCU --> DRIVER
 ```
-### Optimización del Sistema de Sensores y Hardware
+### 7.2. Optimización del Sistema de Sensores y Hardware
 
 En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehículo aprovechando la capacidad de múltiples buses del ESP32. El objetivo principal es maximizar la precisión espacial, evitar cuellos de botella en el procesamiento de datos y blindar la estabilidad del algoritmo de navegación autónoma dentro de la pista de $3 \times 3$ metros.
 
-#### Subsistema de Navegación Cinemática (Bus I2C #1 - Pines D21/D22)
+#### 7.2.1. Subsistema de Navegación Cinemática (Bus I2C 1)
 
 * **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
 * **Unidad de Medición Inercial (IMU) BNO055:** Comparte el Bus I2C #1. La inclusión de este sensor con procesamiento de fusión de datos a bordo está orientada a **eliminar por completo la deriva (*drift*)** acumulativa. Para garantizar la fidelidad del posicionamiento, el algoritmo calibra el cero relativo y establece el eje Y del sensor como el vector de referencia principal para el equilibrio y dirección del chasis.
@@ -324,7 +324,7 @@ En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehícu
 
 * **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
 
-#### Calibración y Direccionamiento de los 4 Sensores ToF (XSHUT)
+#### 7.2.2. Calibración y Direccionamiento de los 4 Sensores ToF (XSHUT)
 
 Los cuatro sensores VL53L0X comparten el mismo bus físico I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección por defecto (`0x29`), lo que provocaría colisión de direcciones si se energizaran simultáneamente. Para resolverlo, cada sensor tiene su pin **XSHUT** conectado a un GPIO independiente del ESP32, usado como interruptor de encendido/apagado por software:
 
@@ -363,11 +363,11 @@ En cada paso, solo **un sensor a la vez** queda activo en la dirección por defe
 >
 > Los cuatro VL53L0X se calibran de forma idéntica, sin aplicar offsets particulares por unidad. Esto es posible porque el VL53L0X trae calibración de fábrica consistente entre unidades del mismo lote, y el direccionamiento único vía XSHUT es lo único que realmente necesita configurarse por sensor — no la calibración de medición en sí.
 
-#### Subsistema de Lectura de Superficie (Bus I2C #2 - Pines D32/D33)
+#### 7.2.3. Subsistema de Lectura de Superficie (Bus I2C 2)
 
 * **Sensor de Color TCS34725:** Dedicado a la detección y confirmación de líneas. Para evitar saturar el bus principal de navegación, este sensor se ha aislado en un **segundo bus I2C independiente (Hardware I2C #2)**. Esto garantiza que las lecturas constantes del suelo no interfieran ni retrasen las respuestas críticas de evasión de obstáculos de los sensores ToF.
 
-#### Subsistema de Proximidad Redundante e Interfaz (E/S Estándar)
+#### 7.2.4. Subsistema de Proximidad Redundante e Interfaz
 
 * **Sensores Sharp GP2Y0A21 Diagonales:** Mantienen su conexión analógica tradicional para ofrecer detección de proximidad redundante en los ángulos ciegos frontales.
 * **Interfaz de Usuario y Control:** Se integró una tira Neopixel y un Buzzer para proporcionar telemetría visual y auditiva del estado del robot (códigos de error, calibración exitosa, detección de línea). El inicio de ejecución se controla mediante un **interruptor físico de palanca** (Pin D23), descartando el uso de pulsadores para evitar rebotes o activaciones accidentales por vibración.
@@ -386,7 +386,7 @@ En cada paso, solo **un sensor a la vez** queda activo en la dirección por defe
 
 ---
 
-### Resumen de Cambios y Evolución de Hardware
+### 7.3. Resumen de Cambios y Evolución de Hardware
 
 | Componente Anterior | Componente Actual | Justificación Técnica y Ventaja Principal |
 | :--- | :--- | :--- |
@@ -398,12 +398,12 @@ En cada paso, solo **un sensor a la vez** queda activo en la dirección por defe
 
 ---
 
-# Gestión Energética y Autonomía del Sistema
+## 8. Gestión Energética y Autonomía del Sistema
 
 
 Este apartado detalla el análisis del consumo eléctrico y la justificación técnica de la fuente de alimentación seleccionada para el hardware del proyecto.
 
-## Cálculo del Consumo Energético Total
+### 8.1. Cálculo del Consumo Energético Total
 
 El consumo eléctrico del sistema se estimó para tres escenarios de operación por componente, siguiendo valores típicos de hoja de datos: **standby** (componente energizado pero inactivo o en reposo), **nominal** (operación típica durante una vuelta normal) y **pico** (consumo máximo instantáneo, por ejemplo arranque de motor o brillo máximo de LEDs).
 
@@ -432,14 +432,14 @@ El consumo eléctrico del sistema se estimó para tres escenarios de operación 
 
 ---
 
-## Estimación de la Autonomía
+### 8.2. Estimación de la Autonomía
 
 Para calcular el tiempo estimado de funcionamiento continuo, se utiliza la relación entre la capacidad nominal de la batería y la demanda de corriente calculada.
 
-### Fórmula General
+#### 8.2.1. Fórmula General
 $$\text{Autonomía (horas)} = \frac{\text{Capacidad de la Batería (mAh)}}{\text{Consumo Total del Sistema (mA)}}$$
 
-### Aplicación al Caso de Estudio
+#### 8.2.2. Aplicación al Caso de Estudio
 $$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1272.3 \text{ mA}} \approx 1.73 \text{ horas}$$
 
 * **Tiempo estimado:** Aproximadamente **1 hora y 44 minutos** de operación continua en condiciones normales.
@@ -447,7 +447,7 @@ $$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1272.3 \text{ mA}} \approx 1
 
 ---
 
-### Eficiencia de los Conversores DC-DC y Autonomía Real
+### 8.3. Eficiencia de los Conversores DC-DC y Autonomía Real
 
 El cálculo de autonomía anterior asume una relación 1:1 entre la corriente consumida por cada componente y la corriente extraída de la batería, sin considerar que los reguladores XL6009 y DSN-Mini 360 operan a voltajes de salida distintos al de la batería (7V, 6V y 5V vs. 7.4V nominal) y que ninguna conversión es 100% eficiente.
 
@@ -478,14 +478,14 @@ $$\text{Autonomía real} \approx \frac{2200 \text{ mAh}}{1112 \text{ mA}} \appro
 
 ---
 
-##  Justificación de la Fuente de Alimentación Seleccionada
-## 🔋 Elección del Sistema de Alimentación: ¿Por qué LiPo?
+### 8.4. Justificación de la Fuente de Alimentación
+### 🔋 Elección del Sistema de Alimentación: ¿Por qué LiPo?
 
 La elección de una batería de **Polímero de Litio (LiPo)** frente a otras tecnologías del mercado se debe principalmente a su excelente **relación peso-potencia** y a su **capacidad de entrega de corriente instantánea (tasa de descarga)**, factores críticos para el rendimiento dinámico del robot.
 
 ---
 
-### 📊 Análisis Comparativo de Tecnologías
+#### 8.4.2. 📊 Análisis Comparativo de Tecnologías
 
 | Tecnología | Densidad Energética | Tasa de Descarga (C) | Peso / Volumen | Comportamiento con Motores/Servos |
 | :--- | :---: | :---: | :---: | :--- |
@@ -496,15 +496,15 @@ La elección de una batería de **Polímero de Litio (LiPo)** frente a otras tec
 
 ---
 
-###  Justificación Técnica frente a Alternativas
+#### 8.4.3. Justificación Técnica frente a Alternativas
 
-#### 1. Frente a Celdas Li-ion (ej. 18650)
+##### a) Frente a Li-ion (18650)
 Aunque las celdas 18650 tienen una excelente densidad energética, su tasa de descarga típica es muy baja. Si se intentan alimentar motores DC y servomotores —que generan altos picos de corriente al arrancar o atascarse— una batería Li-ion común sufrirá una caída de voltaje severa (*voltage sag*). Esto provocaría el **reinicio constante de la ESP32** o la activación del circuito de protección (BMS). La LiPo con su alta tasa de descarga entrega esa corriente al instante sin caídas de tensión.
 
-#### 2. Frente a Baterías de NiMH (Níquel-Metal Hidruro)
+##### b) Frente a NiMH
 Las NiMH son seguras y duraderas, pero extremadamente pesadas y voluminosas. Para igualar los **7.4V** nominales de una LiPo 2S, se requerirían **6 celdas de NiMH en serie** (1.2V c/u). Este incremento de peso duplicaría o triplicaría la masa del robot, penalizando el consumo eléctrico de los motores y reduciendo drásticamente la agilidad y aceleración del sistema en pista.
 
-#### 3. Frente a Power Banks comerciales (USB 5V)
+##### c) Frente a Power Banks Comerciales
 Los Power Banks elevan internamente el voltaje de sus celdas a 5V mediante reguladores con un límite estricto de corriente (usualmente 2A o 3A máximo). El consumo concurrente del sistema satura este límite con facilidad:
 * **10 LEDs Neopixel** en blanco brillante: `~600 mA`
 * **Servomotor MG90** (esfuerzo de torsión): `~500 mA`
@@ -513,7 +513,7 @@ Los Power Banks elevan internamente el voltaje de sus celdas a 5V mediante regul
 Superar este límite provoca un apagado inmediato del Power Bank por sobrecorriente. Además, los motores **25GA-370** rinden de manera óptima entre **6V y 8V**; alimentarlos a 5V limitaría severamente su torque y velocidad final.
 
 
-#### ¿Por qué 2200 mAh y no 2600 mAh o 3000 mAh?
+#### 8.4.4. ¿Por qué 2200 mAh y no más capacidad?
 
 La elección de la capacidad específica de 2200 mAh (y no una mayor) respondió a tres criterios evaluados en conjunto: peso, espacio y margen de autonomía real ya validado.
 
@@ -1085,9 +1085,13 @@ Construyendo sobre la capacidad de detección dual introducida a finales de 2025
 
 Haz clic en la imagen para ver el vídeo:
 
-[![Mira el video del proyecto](other/prueba-vuelta.png)](https://youtube.com/shorts/Ml_8qpX_Ozo)
+[![Mira el video del proyecto](other/videos.jpeg)](https://youtube.com/shorts/Ml_8qpX_Ozo)
 
+## Prueba de Evasión de obstáculos 
 
+Haz clic en la imagen para ver el vídeo:
+
+[![Mira el video del proyecto](other/videos.jpeg)](https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq)
 
 # Prometheus Team - Temporada 2025
 
