@@ -5,6 +5,65 @@
 </div>
 ¡Bienvenidos al repositorio oficial de nuestro equipo para la World Robot Olympiad (WRO) - Categoría: Futuros Ingenieros! Este espacio no solo almacena líneas de código, algoritmos de visión artificial y diseños en 3D; aquí se guarda la evolución, la pasión y la ingeniería de un equipo que no se rinde ante  los desafíos. Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
 
+---
+
+## 📑 Índice
+
+<table>
+<tr><td valign="top" width="50%">
+
+**Temporada 2026**
+
+- [1. Presentación del Equipo](#1-presentación-del-equipo)
+  - [1.1. Fotos del Equipo](#11-fotos-del-equipo)
+  - [1.2. Contenido del Repositorio](#12-contenido-del-repositorio)
+  - [1.3. Trayectoria: Subcampeones Nacionales 2025](#13-trayectoria-subcampeones-nacionales-2025)
+  - [1.4. Objetivo 2026: Con la Mira en el Primer Lugar](#14-objetivo-2026-con-la-mira-en-el-primer-lugar)
+- [2. El Vehículo](#2-el-vehículo)
+  - [2.1. Fotos del Vehículo](#21-fotos-del-vehículo)
+  - [2.2. Componentes de Control, Detección e Interfaz](#22-componentes-de-control-detección-e-interfaz)
+  - [2.3. Componentes de Alimentación y Actuación](#23-componentes-de-alimentación-y-actuación)
+- [3. Esquemas Electrónicos](#3-esquemas-electrónicos)
+  - [3.1. Alimentación y Cableado — V4](#31-alimentación-y-cableado--v4)
+    - [3.1.1. Arquitectura de Energía y Gestión de Potencia](#311-arquitectura-de-energía-y-gestión-de-potencia)
+  - [3.2. Sensores y Adquisición de Datos — V4](#32-sensores-y-adquisición-de-datos--v4)
+    - [3.2.1. Optimización del Sistema de Sensores](#321-optimización-del-sistema-de-sensores)
+    - [3.2.2. Navegación Cinemática — Bus I2C #1](#322-navegación-cinemática--bus-i2c-1)
+    - [3.2.3. Lectura de Superficie — Bus I2C #2](#323-lectura-de-superficie--bus-i2c-2)
+    - [3.2.4. Proximidad Redundante e Interfaz](#324-proximidad-redundante-e-interfaz)
+  - [3.3. Resumen de Evolución de Hardware](#33-resumen-de-evolución-de-hardware)
+
+</td><td valign="top" width="50%">
+
+&nbsp;
+
+- [4. Gestión Energética y Autonomía](#4-gestión-energética-y-autonomía)
+  - [4.1. Cálculo del Consumo Energético Total](#41-cálculo-del-consumo-energético-total)
+  - [4.2. Estimación de la Autonomía](#42-estimación-de-la-autonomía)
+  - [4.3. ¿Por qué LiPo? Justificación de la Fuente](#43-por-qué-lipo-justificación-de-la-fuente)
+    - [4.3.1. Análisis Comparativo de Tecnologías](#431-análisis-comparativo-de-tecnologías)
+    - [4.3.2. Justificación frente a Alternativas](#432-justificación-frente-a-alternativas)
+- [5. Diseño Estructural y Manufactura Aditiva — V2](#5-diseño-estructural-y-manufactura-aditiva--v2)
+  - [5.1. Filosofía de Rediseño y Prototipado](#51-filosofía-de-rediseño-y-prototipado)
+  - [5.2. CAD Profesional y Arquitectura Monochasis](#52-cad-profesional-y-arquitectura-monochasis)
+  - [5.3. Validación de Tolerancias y Ensamble Virtual](#53-validación-de-tolerancias-y-ensamble-virtual)
+  - [5.4. Segundo Piso y Sistema de Visión Shark Fin](#54-segundo-piso-y-sistema-de-visión-shark-fin)
+  - [5.5. Integración Total: Ensamble Maestro CAD](#55-integración-total-ensamble-maestro-cad)
+  - [5.6. Ingeniería de Manufactura Aditiva](#56-ingeniería-de-manufactura-aditiva)
+  - [5.7. Dimensiones Finales y Logros Estructurales](#57-dimensiones-finales-y-logros-estructurales)
+- [6. Software y Lógica de Control](#6-software-y-lógica-de-control)
+  - [6.1. Integración del BNO055](#61-integración-del-bno055)
+  - [6.2. Resumen Ejecutivo de la Lógica de Control](#62-resumen-ejecutivo-de-la-lógica-de-control)
+    - [6.2.1. Modo Vuelta Libre](#621-modo-vuelta-libre)
+- [7. Pruebas y Resultados](#7-pruebas-y-resultados)
+  - [7.1. Prueba de Vueltas a la Pista](#71-prueba-de-vueltas-a-la-pista)
+- [8. Archivo Histórico — Temporada 2025](#8-archivo-histórico--temporada-2025)
+
+</td></tr>
+</table>
+
+---
+
 ## Equipo Prometheus <a id="equipo-prometheus"></a>
 Prometheus Team está conformados por estudiantes universitarios de la **Universidad Politécnica Territorial "José Félix Ribas"**, destancandonos por nuestra anterior participación en la WRO 2025 y nuestro sistema de detección innovador:
 
