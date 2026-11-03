@@ -5,7 +5,7 @@
 **Cálculos, justificación y comparación con la dirección Lego anterior**<br>
 Prometheus Team · WRO 2026 · Diseño en Onshape · Octubre 2026
 
-[⬅️ Volver al README principal](../README.md#94-sistema-de-dirección-ackermann) · [📄 Documento original (.docx)](Direccion_Ackermann_Calculos_y_Justificacion.docx)
+[⬅️ Volver al README principal](../README.md#104--sistema-de-dirección-ackermann) · [📄 Documento original (.docx)](Direccion_Ackermann_Calculos_y_Justificacion.docx)
 
 </div>
 
@@ -315,6 +315,6 @@ La dirección Lego era convencional: las dos ruedas giraban el mismo ángulo (ge
 
 <div align="center">
 
-[⬅️ Volver al README principal](../README.md#94-sistema-de-dirección-ackermann)
+[⬅️ Volver al README principal](../README.md#104--sistema-de-dirección-ackermann)
 
 </div>
