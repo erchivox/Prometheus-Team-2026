@@ -1,73 +1,62 @@
-# Software del Vehículo Autónomo WRO Prometheus
+# 💾 Código del vehículo
 
-## Código del Microcontrolador (Arduino)
+[⬅️ Volver al README principal](../README.md)
 
-El software del microcontrolador para nuestro vehículo autónomo ha sido desarrollado utilizando el IDE de Arduino. Este código gestiona la interacción directa con los sensores y actuadores del vehículo.
-
-### Librerías del Proyecto Arduino
-
-El proyecto de Arduino utiliza las siguientes librerías. Para asegurar una compilación exitosa, es fundamental que estas librerías estén instaladas en tu IDE de Arduino.
-
-* **`Wire.h`**:
-    * **Tipo**: Librería estándar de Arduino.
-    * **Descripción**: Permite la comunicación a través del bus I2C (Inter-Integrated Circuit), fundamental para interactuar con sensores como el TCS34725 y el MPU6050.
-    * **Instalación**: Viene preinstalada con el IDE de Arduino. No se requiere acción adicional.
-    * **Documentación**: [Referencia de la Librería Wire (Arduino)](https://docs.arduino.cc/language-reference/en/functions/communication/wire/)
-
-* **`Adafruit_TCS34725.h`**:
-    * **Tipo**: Librería externa (Adafruit).
-    * **Descripción**: Controla el sensor de color TCS34725, permitiendo la lectura de valores RGB para la detección de colores en el entorno.
-    * **Instalación**: Se instala a través del **Gestor de Librerías del IDE de Arduino** buscando "Adafruit TCS34725".
-    * **Documentación**: [Repositorio de GitHub de Adafruit_TCS34725](https://github.com/adafruit/Adafruit_TCS34725) | [Overview de Adafruit sobre TCS34725](https://learn.adafruit.com/adafruit-color-sensors/overview)
-
-* **`MPU6050.h`**:
-    * **Tipo**: Librería externa (Electronic Cats).
-    * **Descripción**: Facilita la interacción con el giroscopio y acelerómetro MPU-6050, proporcionando datos de movimiento y orientación para la navegación del vehículo.
-    * **Instalación**: Se instala a través del **Gestor de Librerías del IDE de Arduino** buscando "MPU6050" (by Electronic Cats).
-    * **Documentación**: [Repositorio de GitHub de MPU6050 Electronic Cats](https://github.com/ElectronicCats/mpu6050)
-
-* **`Servo.h`**:
-    * **Tipo**: Librería estándar de Arduino.
-    * **Descripción**: Permite controlar motores servo, utilizados para movimientos precisos en el vehículo (por ejemplo, dirección o manipulación).
-    * **Instalación**: Viene preinstalada con el IDE de Arduino. No se requiere acción adicional.
-    * **Documentación**: [Referencia de la Librería Servo (Arduino)](https://www.arduino.cc/reference/en/libraries/servo/)
-
-* **`ColorConverterLib.h`**:
-    * **Tipo**: Librería externa.
-    * **Descripción**: Utilizada para la conversión entre diferentes espacios de color (ej. RGB a HSV/HSL), optimizando el procesamiento y la interpretación de los datos del sensor de color.
-    * **Instalación**: Esta librería puede no estar disponible directamente en el Gestor de Librerías de Arduino. Se recomienda descargarla desde su repositorio de GitHub. Para instalarla, descargue el archivo ZIP y añádalo a su IDE de Arduino (`Sketch > Incluir Librería > Añadir Librería .ZIP`).
-    * **Documentación/Repositorio**: Puedes encontrar el código fuente y más detalles en el repositorio oficial de GitHub: **[Arduino-ColorConverter](https://github.com/luisllamasbinaburo/Arduino-ColorConverter/tree/master)**
+Firmware del ESP32 (IDE de Arduino) y enlaces al código de la app de visión. La lógica de navegación está explicada en la sección *15. Software y control* del README principal.
 
 ---
 
-### Preparación del Proyecto Arduino
+## ✅ Firmware 2026
 
-Para cargar el código en el microcontrolador de su vehículo:
+| Archivo | Desafío | Qué hace |
+| :--- | :--- | :--- |
+| [`v1PrometeusTeam2026.ino`](v1PrometeusTeam2026.ino) | 🏁 Vuelta libre | Seguimiento de pared con ToF y BNO055, conteo de líneas y giros con PID |
+| [`v2PrometrusTeam2026.ino`](v2PrometrusTeam2026.ino) | 🚧 Obstáculos | Todo lo anterior más la salida del estacionamiento, el sistema de carriles y los comandos de la app por USB serial |
 
-1.  **Requisitos Previos**:
-    * Tenga instalado el **IDE de Arduino** en su computadora.
-    * Asegúrese de haber instalado todas las librerías externas mencionadas (Adafruit_TCS34725, MPU6050, ColorConverterLib) a través del Gestor de Librerías de Arduino o manualmente según sea necesario.
+### 📚 Librerías
 
-2.  **Abrir el Proyecto**:
-    * Abra el archivo `.ino` principal de su proyecto de Arduino en el IDE de Arduino.
+| Librería | Uso | Instalación |
+| :--- | :--- | :--- |
+| `Wire.h` | Buses I2C (#1 en 21/22 y #2 en 32/33) | Incluida con el core del ESP32 |
+| [`Adafruit_BNO055`](https://github.com/adafruit/Adafruit_BNO055) + [`Adafruit_Sensor`](https://github.com/adafruit/Adafruit_Sensor) | IMU BNO055 (orientación) | Gestor de librerías: "Adafruit BNO055" |
+| [`Adafruit_VL53L0X`](https://github.com/adafruit/Adafruit_VL53L0X) | 4 sensores ToF | Gestor de librerías: "Adafruit VL53L0X" |
+| [`Adafruit_TCS34725`](https://github.com/adafruit/Adafruit_TCS34725) | Sensor de color | Gestor de librerías: "Adafruit TCS34725" |
+| [`Adafruit_NeoPixel`](https://github.com/adafruit/Adafruit_NeoPixel) | Tira de LEDs de estado | Gestor de librerías: "Adafruit NeoPixel" |
+| [`ESP32Servo`](https://github.com/madhephaestus/ESP32Servo) | Servo de la dirección | Gestor de librerías: "ESP32Servo" |
+| [`ColorConverterLib`](https://github.com/luisllamasbinaburo/Arduino-ColorConverter) | Conversión RGB → HSV | Descargar el .zip e instalar con *Sketch → Incluir librería → Añadir .ZIP* |
 
-3.  **Seleccionar Placa y Puerto**:
-    * En el IDE de Arduino, vaya a `Herramientas > Placa` y seleccione el modelo de Arduino que está utilizando (ej., Arduino Uno, ESP32 Dev Module, etc.).
-    * Luego, vaya a `Herramientas > Puerto` y seleccione el puerto serie al que está conectado su Arduino.
+### ⬆️ Cargar el código
 
-4.  **Verificar y Subir**:
-    * Haga clic en el botón "Verificar" (el checkmark) para compilar el código y comprobar errores.
-    * Una vez verificado, haga clic en el botón "Subir" (la flecha) para cargar el código a su microcontrolador Arduino.
+1. Instale el **IDE de Arduino** y agregue el soporte para **ESP32** (*Gestor de tarjetas → esp32 by Espressif Systems*).
+2. Instale las librerías de la tabla anterior.
+3. Abra `v1PrometeusTeam2026.ino` o `v2PrometrusTeam2026.ino`.
+4. Seleccione la placa **ESP32 Dev Module** y el puerto correspondiente.
+5. Presione **Verificar** y luego **Subir**.
+6. Con el vehículo en la pista, pase el interruptor de inicio (D23) a LOW para arrancar.
 
 ---
 
-## APP WRO Prometheus Desarrollada en Android Studio
+## 📁 Firmware 2025
 
-Este directorio contiene el código fuente y los artefactos necesarios para la aplicación **WRO Prometheus**, que sirve para procesar datos de imágenes para nuestro Vehículo Autónomo en la competencia. Aquí encontrarás toda la información relevante sobre las tecnologías utilizadas y cómo preparar el proyecto.
+| Archivo | Descripción |
+| :--- | :--- |
+| [`Wro_Prometheus_Arduino_Maestro_v28.ino`](Wro_Prometheus_Arduino_Maestro_v28.ino) | Arduino principal (sensores y lógica) |
+| [`Wro_Prometheus_Arduino_Esclavo.ino`](Wro_Prometheus_Arduino_Esclavo.ino) | Arduino esclavo para el puente H |
+| [`Wro_Prometeus_V1.ino`](Wro_Prometeus_V1.ino) | ESP32 con MPU6050, vuelta libre |
+| [`Wro_Prometeus_V2_.ino`](Wro_Prometeus_V2_.ino) | ESP32 con MPU6050, obstáculos (primer sistema de carriles) |
+| [`Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino`](Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino) | ESP32 esclavo del motor |
+
+Estas versiones usan además la librería [`MPU6050`](https://github.com/ElectronicCats/mpu6050) (Electronic Cats).
 
 ---
 
-### Tecnologías y Dependencias Principales
+## 📱 App WRO Prometheus (Android Studio)
+
+El código de la aplicación **WRO Prometheus** está en su propio repositorio: [APP-WRO-PROMETHEUS-TEAM](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) ([descarga en .zip](https://drive.google.com/file/d/1VvdzdWbxGnchFslUwI8wQfkkwYPTyGRD/view?usp=drive_link)). La app, que sirve para procesar datos de imágenes para nuestro Vehículo Autónomo en la competencia. Aquí encontrarás toda la información relevante sobre las tecnologías utilizadas y cómo preparar el proyecto.
+
+---
+
+### 📦 Tecnologías y dependencias principales
 
 Nuestra aplicación Android ha sido desarrollada utilizando **Android Studio** y se basa en las siguientes librerías y marcos de trabajo:
 
@@ -114,7 +103,7 @@ Componentes estándar para realizar pruebas unitarias y de instrumentación en l
 
 ---
 
-### Preparación del Proyecto Android
+### 🛠️ Preparación del proyecto Android
 
 Para compilar y ejecutar esta aplicación en su entorno, siga estos pasos:
 
@@ -122,7 +111,7 @@ Para compilar y ejecutar esta aplicación en su entorno, siga estos pasos:
     * Asegúrese de tener **Android Studio** instalado y configurado, incluyendo el SDK de Android necesario y las herramientas de Gradle.
 
 2.  **Abrir el Proyecto**:
-    * Abra este directorio directamente en Android Studio.
+    * Clone el repositorio de la app y ábralo en Android Studio.
 
 3.  **Sincronización de Gradle**:
     * Android Studio detectará automáticamente el proyecto y sus archivos `build.gradle`. Se le pedirá que sincronice el proyecto. Este paso es crucial, ya que Gradle descargará automáticamente todas las dependencias externas (AndroidX, CameraX, USB Serial, etc.) desde los repositorios de Maven configurados.
