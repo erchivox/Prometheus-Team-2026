@@ -1618,7 +1618,7 @@ A partir de la detección de dos objetos que añadimos a finales de 2025, ahora 
 
 ## 17. 🎬 Pruebas en pista y videos
 
-Para las pruebas construimos una réplica de la pista de competencia de 3 × 3 metros con láminas recicladas pegadas. Tiene un error de unos 10 cm. En las esquinas pusimos las dos líneas, azul y naranja, separadas 30° y con el mismo origen en la esquina interior del cuadrado.
+Para las pruebas mandamos a imprimir en lona una pista idéntica a la de la competencia, de 3 × 3 metros, con las mismas medidas, colores y líneas de esquina. Así probamos el vehículo sobre la misma superficie y con los mismos colores que encontrará en la competencia, y los ajustes que hacemos en casa (sensor de color, cámara y control) sirven igual el día de la ronda.
 
 Los enlaces de todos los videos también están en [`video/video.md`](video/video.md).
 
