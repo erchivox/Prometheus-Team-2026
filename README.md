@@ -74,7 +74,6 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
   - [9.2. ⏳ Estimación de la autonomía](#92--estimación-de-la-autonomía)
   - [9.3. 🔁 Eficiencia de los conversores DC-DC y autonomía real](#93--eficiencia-de-los-conversores-dc-dc-y-autonomía-real)
   - [9.4. ✅ Justificación de la fuente de alimentación](#94--justificación-de-la-fuente-de-alimentación)
-  - [9.5. 💡 Mejoras futuras (electrónica y energía)](#95--mejoras-futuras-electrónica-y-energía)
 
 **⚙️ Diseño mecánico**
 
@@ -87,7 +86,6 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
   - [10.6. 🧩 Integración total: ensamble maestro CAD](#106--integración-total-ensamble-maestro-cad)
   - [10.7. 🏭 Manufactura aditiva](#107--manufactura-aditiva)
   - [10.8. 📐 Dimensiones finales y resumen de logros estructurales](#108--dimensiones-finales-y-resumen-de-logros-estructurales)
-  - [10.9. 💡 Mejoras futuras (mecánica)](#109--mejoras-futuras-mecánica)
 
 </td><td valign="top" width="50%">
 
@@ -126,7 +124,6 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
   - [15.4. 🏁 Modo vuelta libre (pista sin obstáculos)](#154--modo-vuelta-libre-pista-sin-obstáculos)
   - [15.5. 🚧 Modo obstáculos: sistema de carriles](#155--modo-obstáculos-sistema-de-carriles)
   - [15.6. 🧠 Arquitectura de control y máquina de estados](#156--arquitectura-de-control-y-máquina-de-estados)
-  - [15.7. 💡 Mejoras futuras (software)](#157--mejoras-futuras-software)
 - [16. 📱 Telemetría y visión artificial: aplicación Prometheus V5.0](#16--telemetría-y-visión-artificial-aplicación-prometheus-v50)
   - [16.1. 📺 Interfaz V5.0 y monitor serial integrado](#161--interfaz-v50-y-monitor-serial-integrado)
   - [16.2. 🎯 Calibración en pista y menú dinámico](#162--calibración-en-pista-y-menú-dinámico)
@@ -279,7 +276,7 @@ La categoría Futuros Ingenieros tiene dos rondas sobre una pista de 3 × 3 m, m
 | **Pilares rojos y verdes** | Rojo: pasar por la derecha. Verde: pasar por la izquierda. | App de visión en el teléfono que detecta hasta dos pilares a la vez ([16](#16--telemetría-y-visión-artificial-aplicación-prometheus-v50)). |
 | **Planificación** | Varias combinaciones de pilares por tramo | Sistema de carriles: la app envía un comando por combinación y el ESP32 elige el carril ([15.5](#155--modo-obstáculos-sistema-de-carriles)). |
 | **Zona de estacionamiento** | Salir al inicio y no chocar el delimitador magenta | Salida hacia el lado con más espacio y modo magenta en la app ([16.4](#164--modo-estacionamiento-zona-magenta)). |
-| **Fin del recorrido** | Terminar las tres vueltas y estacionar | Detención final después de la línea 12. El estacionamiento en paralelo está en desarrollo ([15.7](#157--mejoras-futuras-software)). |
+| **Fin del recorrido** | Terminar las tres vueltas y estacionar | Detención final después de la línea 12. |
 
 ### 3.3. 📊 Criterios de evaluación de la documentación
 
@@ -729,15 +726,6 @@ La capacidad de 2200 mAh la decidimos por tres criterios: peso, tasa de descarga
 >
 > Subir a 2600–3000 mAh habría añadido unos 20–35 g (estimado de forma proporcional dentro de la misma línea de productos) a cambio de una autonomía que no es lo que nos limita. El cuello de botella real es el tiempo que tarda el algoritmo de evasión (ver los tiempos de vuelta en [12.4](#124--tiempo-teórico-de-vuelta-frente-al-tiempo-real)), no la energía disponible. Preferimos mantener el chasis lo más liviano posible.
 
-
-### 9.5. 💡 Mejoras futuras (electrónica y energía)
-
-- **Usar el encoder del motor:** el 25GA-370 trae encoder y todavía no lo usamos. Con él podríamos medir la distancia recorrida y la velocidad real.
-- **Medir el consumo real** con un sensor de corriente (por ejemplo un INA219) para validar la tabla teórica de consumo.
-- **Monitorear la batería:** leer su voltaje con un divisor en un pin analógico y avisar con el Neopixel cuando esté baja.
-- **Actualizar el esquema de alimentación** para que las etiquetas de voltaje del ESP32 y del servo coincidan con el ajuste de sus reguladores.
-- **Limpiar el firmware:** quitar la declaración de pines del ultrasónico trasero (18 y 35), que ya no existe y coincide con el XSHUT derecho y el Sharp izquierdo.
-
 ---
 
 ## 10. 🧱 Diseño estructural, transmisión y manufactura aditiva
@@ -1065,15 +1053,6 @@ Imprimimos primero en una **Creality K1C** y después en una **Elegoo Centauri C
 * **✓ Tracción:** transmisión de 1.67:1 que prioriza el torque, y las ruedas Lego reutilizadas con un adaptador propio.
 * **✓ Robustez:** pasamos de fijaciones improvisadas a un Monochasis paramétrico en PETG con separadores de 60 mm e insertos de latón.
 * **✓ Visión y centro de gravedad:** la batería bajó al nivel inferior y el sistema Shark Fin sujeta el teléfono sin holguras.
-
-
-### 10.9. 💡 Mejoras futuras (mecánica)
-
-- **Servo definitivo:** cambiar el MG90 de pruebas por el EMAX ES08MA II previsto y recalibrar los µs por grado, dejando 2–3° de margen respecto a los topes.
-- **Pivotes con tornillo de hombro** en la dirección, en lugar de tornillo normal con tuerca autoblocante.
-- **Volver a medir la dirección** como recorrido total de cada rueda, para eliminar el error del cero, y ajustar la convergencia (*toe-in*).
-- **Medir el coeficiente de fricción real** entre rueda y tapete (por ejemplo con un plano inclinado) para reemplazar el rango estimado de 0,6–0,8.
-- **Bujes o rodamientos en el eje delantero** si con el uso aparece desgaste en el apoyo impreso.
 
 ---
 
@@ -1553,14 +1532,6 @@ Diagrama interactivo de estados desarrollado para la competencia WRO Future Engi
 <p align="center">
   <a href="https://erchivox.github.io/clasificador-de-animales-en-peligro-de-extinci-n-en-Venezuela/pagina/ModeloArquitecturaEstados.html"><img src="other/diagrama-de-estados.png" alt="Diagrama de estados del sistema" width="900"></a>
 </p>
-
-
-### 15.7. 💡 Mejoras futuras (software)
-
-- **Estacionamiento en paralelo** al terminar el desafío con obstáculos. Hoy el carro se detiene después de la línea 12.
-- **Bajar el tiempo de la vuelta con obstáculos** (80 s): no detenerse a esperar el comando cuando el tramo ya es conocido y usar la maniobra optimizada en más tramos.
-- **Odometría** combinando el encoder del motor con el ángulo del BNO055.
-- **Calibrar al encender** los umbrales HSV del sensor de color, para adaptarse a la iluminación de cada pista.
 
 ---
 
