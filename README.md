@@ -76,9 +76,7 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
   - [9.4. ✅ Justificación de la fuente de alimentación](#94--justificación-de-la-fuente-de-alimentación)
   - [9.5. 💡 Mejoras futuras (electrónica y energía)](#95--mejoras-futuras-electrónica-y-energía)
 
-</td><td valign="top" width="50%">
-
-**⚙️ Mecánica**
+**⚙️ Diseño mecánico**
 
 - [10. 🧱 Diseño estructural, transmisión y manufactura aditiva](#10--diseño-estructural-transmisión-y-manufactura-aditiva)
   - [10.1. 📝 Filosofía de rediseño y prototipado conceptual](#101--filosofía-de-rediseño-y-prototipado-conceptual)
@@ -90,6 +88,11 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
   - [10.7. 🏭 Manufactura aditiva](#107--manufactura-aditiva)
   - [10.8. 📐 Dimensiones finales y resumen de logros estructurales](#108--dimensiones-finales-y-resumen-de-logros-estructurales)
   - [10.9. 💡 Mejoras futuras (mecánica)](#109--mejoras-futuras-mecánica)
+
+</td><td valign="top" width="50%">
+
+**🧮 Cálculos, evolución y ensamble**
+
 - [11. 🧮 Análisis de masa y distribución de peso](#11--análisis-de-masa-y-distribución-de-peso)
   - [11.1. 📦 Masa del vehículo: 2025 frente a 2026](#111--masa-del-vehículo-2025-frente-a-2026)
   - [11.2. 📊 Distribución de masa estática (eje delantero / eje trasero)](#112--distribución-de-masa-estática-eje-delantero--eje-trasero)
