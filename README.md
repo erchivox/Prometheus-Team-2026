@@ -1,9 +1,14 @@
 <div align="center">
-  <img src="t-photos/prometehuslogo.jpg" alt="Prometheus Team Vehículo Autónomo" width="650" style="border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+  <img src="t-photos/prometehuslogo.jpg" alt="Prometheus Team" width="650">
 
-# 🚘Prometheus Team - Temporada 2026
+# 🚘 Prometheus Team · Temporada 2026
+
+**World Robot Olympiad (WRO) · Categoría Futuros Ingenieros**<br>
+Universidad Politécnica Territorial José Félix Ribas (UPTJFR) · Barinas, Venezuela
+
 </div>
-¡Bienvenidos al repositorio oficial de nuestro equipo para la World Robot Olympiad (WRO) - Categoría: Futuros Ingenieros! Este espacio no solo almacena líneas de código, algoritmos de visión artificial y diseños en 3D; aquí se guarda la evolución, la pasión y la ingeniería de un equipo que no se rinde ante  los desafíos. Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
+
+Bienvenidos al repositorio oficial de nuestro equipo para la WRO, categoría Futuros Ingenieros. Aquí guardamos el código del vehículo, los algoritmos de visión artificial y los diseños en 3D, pero también el registro de cómo fuimos resolviendo cada problema hasta llegar a la versión actual. Somos un equipo venezolano que representa a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. En 2025 quedamos subcampeones nacionales y esta temporada volvemos para mejorar ese resultado.
 
 ---
 
@@ -12,136 +17,161 @@
 <table>
 <tr><td valign="top" width="50%">
 
-- [1. Fotos del Equipo](#1-fotos-del-equipo)
-- [2. La Hazaña de 2025: Subcampeones Nacionales](#2-la-hazaña-de-2025-subcampeones-nacionales)
-- [3. 2026: Con la Mira en el Primer Lugar](#3-2026-con-la-mira-en-el-primer-lugar)
-- [4. Fotos del Vehículo](#4-fotos-del-vehículo)
-- [5. Componentes de Control, Detección e Interfaz](#5-componentes-de-control-detección-e-interfaz)
-- [6. Componentes de Alimentación y Actuación](#6-componentes-de-alimentación-y-actuación)
-- [7. Esquemas de Alimentación y Cableado](#7-esquemas-de-alimentación-y-cableado)
-  - [7.1. Versión 4 (Actual)](#71-versión-4-actual)
-  - [7.2. Arquitectura de Energía, Control y Gestión de Potencia](#72-arquitectura-de-energía-control-y-gestión-de-potencia)
-- [8. Esquemas de Sensores y Adquisición de Datos](#8-esquemas-de-sensores-y-adquisición-de-datos)
-  - [8.1. Versión 4 (Actual)](#81-versión-4-actual)
-  - [8.2. Optimización del Sistema de Sensores y Hardware](#82-optimización-del-sistema-de-sensores-y-hardware)
-    - [8.2.1. Subsistema de Navegación Cinemática (Bus I2C 1)](#821-subsistema-de-navegación-cinemática-bus-i2c-1)
-    - [8.2.2. Subsistema de Lectura de Superficie (Bus I2C 2)](#822-subsistema-de-lectura-de-superficie-bus-i2c-2)
-    - [8.2.3. Subsistema de Proximidad Redundante e Interfaz](#823-subsistema-de-proximidad-redundante-e-interfaz)
-  - [8.3. Resumen de Cambios y Evolución de Hardware](#83-resumen-de-cambios-y-evolución-de-hardware)
-- [9. Gestión Energética y Autonomía del Sistema](#9-gestión-energética-y-autonomía-del-sistema)
-  - [9.1. Cálculo del Consumo Energético Total](#91-cálculo-del-consumo-energético-total)
-  - [9.2. Estimación de la Autonomía](#92-estimación-de-la-autonomía)
-    - [9.2.1. Fórmula General](#921-fórmula-general)
-    - [9.2.2. Aplicación al Caso de Estudio](#922-aplicación-al-caso-de-estudio)
-  - [9.3. Justificación de la Fuente de Alimentación](#93-justificación-de-la-fuente-de-alimentación)
-    - [9.3.1. Elección del Sistema: ¿Por qué LiPo?](#931-elección-del-sistema-por-qué-lipo)
-    - [9.3.2. Análisis Comparativo de Tecnologías](#932-análisis-comparativo-de-tecnologías)
-    - [9.3.3. Justificación Técnica frente a Alternativas](#933-justificación-técnica-frente-a-alternativas)
+**Equipo y vehículo**
+
+- [1. Equipo Prometheus](#equipo-prometheus)
+- [2. La hazaña de 2025: subcampeones nacionales](#hazana-2025)
+- [3. 2026: con la mira en el primer lugar](#mira-2026)
+  - [3.1. Nuestro paso por la competencia nacional](#competencia-nacional)
+  - [3.2. Galería de inspección técnica 360°](#galeria-360)
+
+**Hardware**
+
+- [4. Componentes de control, detección e interfaz](#componentes-control)
+- [5. Componentes de alimentación y actuación](#componentes-alimentacion)
+- [6. Esquemas de alimentación y cableado](#esquemas-alimentacion)
+  - [6.1. Versión 4 (actual)](#alimentacion-v4)
+  - [6.2. Arquitectura de energía y potencia](#arquitectura-energia)
+- [7. Esquemas de sensores y adquisición de datos](#esquemas-sensores)
+  - [7.1. Versión 4 (actual)](#sensores-v4)
+  - [7.2. Optimización del sistema de sensores](#optimizacion-sensores)
+  - [7.3. Resumen de cambios de hardware](#resumen-hardware)
+- [8. Gestión energética y autonomía](#gestion-energetica)
+  - [8.1. Consumo energético total](#consumo-total)
+  - [8.2. Estimación de la autonomía](#estimacion-autonomia)
+  - [8.3. Eficiencia de los conversores y autonomía real](#autonomia-real)
+  - [8.4. Justificación de la fuente de alimentación](#justificacion-fuente)
 
 </td><td valign="top" width="50%">
 
-- [10. Diseño Estructural, Transmisión y Manufactura Aditiva](#10-diseño-estructural-transmisión-y-manufactura-aditiva)
-  - [10.1. Versión 2 (Actual)](#101-versión-2-actual)
-  - [10.2. Filosofía de Rediseño y Prototipado Conceptual](#102-filosofía-de-rediseño-y-prototipado-conceptual)
-    - [10.2.1. Prototipos Conceptuales Tempranos](#1021-prototipos-conceptuales-tempranos)
-  - [10.3. Transición a CAD Profesional y Arquitectura Monochasis](#103-transición-a-cad-profesional-y-arquitectura-monochasis)
-    - [10.3.1. Desglose Técnico del Tren Motriz](#1031-desglose-técnico-del-tren-motriz)
-  - [10.4. Validación de Tolerancias y Ensamble Virtual](#104-validación-de-tolerancias-y-ensamble-virtual)
-    - [10.4.1. Modelado de Componentes Clave y Sistemas de Anclaje](#1041-modelado-de-componentes-clave-y-sistemas-de-anclaje)
-    - [10.4.2. Acoplamiento de Tracción: Adaptador para Ruedas Lego](#1042-acoplamiento-de-tracción-adaptador-para-ruedas-lego)
-    - [10.4.3. Ensamble Virtual y Mitigación de Fallos](#1043-ensamble-virtual-y-mitigación-de-fallos)
-  - [10.5. Segundo Piso, Separadores y Sistema de Visión Shark Fin](#105-segundo-piso-separadores-y-sistema-de-visión-shark-fin)
-    - [10.5.1. Separadores Estructurales e Insertos Roscados](#1051-separadores-estructurales-e-insertos-roscados)
-    - [10.5.2. Sistema de Sujeción del Teléfono (Mordaza Ajustable)](#1052-sistema-de-sujeción-del-teléfono-mordaza-ajustable)
-  - [10.6. Integración Total: Ensamble Maestro CAD](#106-integración-total-ensamble-maestro-cad)
-  - [10.7. Ingeniería de Manufactura Aditiva](#107-ingeniería-de-manufactura-aditiva)
-    - [10.7.1. Optimizaciones de Impresión](#1071-optimizaciones-de-impresión)
-  - [10.8. Dimensiones Finales y Resumen de Logros Estructurales](#108-dimensiones-finales-y-resumen-de-logros-estructurales)
-- [11. Continuidad en el Desarrollo de Software y Control](#11-continuidad-en-el-desarrollo-de-software-y-control)
-  - [11.1. Integración del BNO055](#111-integración-del-bno055)
-  - [11.2. Resumen Ejecutivo de la Lógica de Control](#112-resumen-ejecutivo-de-la-lógica-de-control)
-    - [11.2.1. Modo Vuelta Libre (Navegación de Pista Vacía)](#1121-modo-vuelta-libre-navegación-de-pista-vacía)
-- [12. Prueba de Vueltas a la Pista](#12-prueba-de-vueltas-a-la-pista)
-- [13. Archivo Histórico: Temporada 2025](#13-archivo-histórico-temporada-2025)
+**Mecánica**
+
+- [9. Diseño estructural, transmisión y manufactura aditiva](#diseno-estructural)
+  - [9.1. Filosofía de rediseño y prototipado](#filosofia-rediseno)
+  - [9.2. CAD profesional y arquitectura Monochasis](#monochasis)
+  - [9.3. Validación de tolerancias y ensamble virtual](#tolerancias)
+  - [9.4. Dirección Ackermann](#direccion-ackermann)
+  - [9.5. Segundo piso, separadores y sistema Shark Fin](#segundo-piso)
+  - [9.6. Ensamble maestro CAD](#ensamble-maestro)
+  - [9.7. Manufactura aditiva](#manufactura-aditiva)
+  - [9.8. Dimensiones finales y logros estructurales](#dimensiones-finales)
+- [10. Análisis de masa y distribución de peso](#analisis-masa)
+- [11. Velocidad, torque y tracción](#velocidad-torque)
+- [12. Diario de ingeniería: evolución del chasis](#diario-ingenieria)
+- [13. Guía de ensamble paso a paso](#guia-ensamble)
+
+**Software**
+
+- [14. Software y control](#software-control)
+  - [14.1. Integración del BNO055](#integracion-bno055)
+  - [14.2. Archivos y librerías](#archivos-librerias)
+  - [14.3. Lógica común de navegación](#logica-comun)
+  - [14.4. Modo vuelta libre](#vuelta-libre)
+  - [14.5. Modo obstáculos: sistema de carriles](#modo-obstaculos)
+  - [14.6. Arquitectura de control y máquina de estados](#arquitectura-control)
+- [15. Aplicación de visión Prometheus V5.0](#app-v5)
+- [16. Pruebas en pista](#pruebas-pista)
+
+**Anexos**
+
+- [17. Estructura del repositorio](#estructura-repositorio)
+- [18. Archivo histórico: temporada 2025](#archivo-2025)
 
 </td></tr>
 </table>
 
 ---
 
-## 1. Equipo Prometheus <a id="equipo-prometheus"></a>
-Prometheus Team está conformados por estudiantes universitarios de la **Universidad Politécnica Territorial "José Félix Ribas"**, destancandonos por nuestra anterior participación en la WRO 2025 y nuestro sistema de detección innovador:
+<a id="equipo-prometheus"></a>
+## 1. Equipo Prometheus
 
-### 1.1. 👤 Samuel Pérez <a id="samuel-perez"></a>
-**Diseñador de Entornos 3D, Desarrollador Móvil y Modelado CAD**
+Prometheus Team está conformado por estudiantes universitarios de la **Universidad Politécnica Territorial "José Félix Ribas"**. Ya participamos juntos en la WRO 2025, donde llamó la atención nuestro sistema de detección de obstáculos con el teléfono.
+
+<a id="samuel-perez"></a>
+### 1.1. 👤 Samuel Pérez
+**Diseño 3D, modelado CAD y desarrollo móvil**
+
 <div align="center">
-  <img src="./t-photos/samuel.jpeg" alt="Samuel Pérez" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+  <img src="t-photos/samuel.jpeg" alt="Samuel Pérez" width="300">
 </div>
 
-* **Trayectoria Académica:** Estudiante de Ingeniería Electrónica – **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**.
-* **Competencias y Funciones Técnicas:**
-  * **Diseño Estructural y Modelado 3D:** Creación paramétrica y desarrollo de componentes mecánicos optimizados para alta resistencia.
-  * **Desarrollo de Software Móvil:** Creación de aplicaciones interactivas en **Android Studio** orientadas a la gestión y monitoreo de sistemas.
-  * **Gestión de Proyectos:** Caracterizado por su alto nivel de responsabilidad, perseverancia y atención al detalle en entregables técnicos.
-  * **Logros Destacados:** Finalista en la fase nacional de la **WRO Venezuela (Temporada 2025)** por su integración entre hardware y software.
+* **Formación:** estudiante de Ingeniería Electrónica en la **UPTJFR**.
+* **En el equipo:**
+  * **Diseño estructural y modelado 3D:** diseño paramétrico de las piezas mecánicas del vehículo en Onshape.
+  * **Desarrollo móvil:** creó la aplicación de detección en **Android Studio** con OpenCV.
+  * **Organización:** se encarga de que los entregables técnicos estén completos y a tiempo.
+  * **Logros:** finalista en la fase nacional de la **WRO Venezuela 2025**.
+
 ---
-### 1.2. 👤 Trino Carrizales <a id="trino-carrizales"></a>
-**Especialista en Programación Embebida, Algoritmos y Control**
+
+<a id="trino-carrizales"></a>
+### 1.2. 👤 Trino Carrizales
+**Programación embebida, algoritmos y control**
+
 <div align="center">
-  <img src="./t-photos/trino.jpeg" alt="Trino Carrizales" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+  <img src="t-photos/trino.jpeg" alt="Trino Carrizales" width="300">
 </div>
 
-* **Perfil Académico:** 
-  * Estudiante de Ingeniería Electrónica – **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**.
-  * Estudiante de Ingeniería en Sistemas – **Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (UNELLEZ)**.
-* **Dominio Técnico y Desempeño:**
-  * **Desarrollo de Firmware:** Programación y optimización de código para microcontroladores **Arduino** y **ESP32**.
-  * **Depuración de Software:** Diagnóstico y resolución ágil de errores lógicos e imprevistos en código fuente bajo presión.
-  * **Trayectoria Competitiva:** Finalista nacional en la **WRO Venezuela (Temporada 2025)**, demostrando adaptabilidad y estabilidad en sistemas de control.
+* **Formación:**
+  * Estudiante de Ingeniería Electrónica en la **UPTJFR**.
+  * Estudiante de Ingeniería en Sistemas en la **Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (UNELLEZ)**.
+* **En el equipo:**
+  * **Firmware:** programa y optimiza el código de los microcontroladores **Arduino** y **ESP32**.
+  * **Depuración:** encuentra y corrige errores de lógica durante las pruebas, incluso en plena competencia.
+  * **Logros:** finalista en la fase nacional de la **WRO Venezuela 2025**.
+
 ---
-### 1.3. 👤 Leandro Padrón <a id="leandro-padron"></a>
-**Coordinador de Logística, Mecánica Aplicada y Diagnóstico Físico**
+
+<a id="leandro-padron"></a>
+### 1.3. 👤 Leandro Padrón
+**Logística, mecánica aplicada y diagnóstico físico**
+
 <div align="center">
-  <img src="./t-photos/leandro.jpeg" alt="Leandro Padrón" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+  <img src="t-photos/leandro.jpeg" alt="Leandro Padrón" width="300">
 </div>
 
-* **Estudios Universitarios:** Estudiante de Ingeniería Electrónica – **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**.
-* **Aportes y Responsabilidades del Rol:**
-  * **Análisis Físico-Mecánico:** Resolución eficaz de contingencias dinámicas y ensamblajes mecánicos en prototipos.
-  * **Gestión Operativa:** Coordinación de recursos técnicos, planeación logística y soporte directo en las actividades de campo.
-  * **Liderazgo Operativo:** Habilidad para resolver fallas de manera expedita mientras impulsa la cohesión y el trabajo en equipo.
+* **Formación:** estudiante de Ingeniería Electrónica en la **UPTJFR**.
+* **En el equipo:**
+  * **Mecánica:** armado de los prototipos y solución de las fallas mecánicas que aparecen en las pruebas.
+  * **Logística:** coordina materiales, herramientas y la planificación de las salidas a competencia.
+  * **Trabajo en pista:** diagnostica y repara fallas rápido para que el equipo pueda seguir probando.
+
 ---
-### 1.4. 👤 Ing. Dayana Pérez <a id="ing-dayana-perez"></a>
-**Mentora Principal y Asesora de Investigación Tecnológica**
+
+<a id="dayana-perez"></a>
+### 1.4. 👤 Ing. Dayana Pérez
+**Mentora principal y asesora de investigación**
+
 <div align="center">
-  <img src="./t-photos/dayana.jpeg" alt="Ing. Dayana Pérez" width="320" style="border-radius: 12px; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+  <img src="t-photos/dayana.jpeg" alt="Ing. Dayana Pérez" width="300">
 </div>
 
-* **Acreditación y Grados Académicos:**
-  * **Ingeniera Electrónica:** Universidad Politécnica Territorial Experimental Antonio José de Sucre (**UNEXPO** VR Barquisimeto).
+* **Formación:**
+  * **Ingeniera Electrónica:** Universidad Nacional Experimental Politécnica Antonio José de Sucre (**UNEXPO**, VR Barquisimeto).
   * **Magíster en Educación Superior:** Universidad Fermín Toro (**UFT**).
-  * **Doctorante en Tecnologías de la Información y Comunicación:** Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (**UNELLEZ** Barinas).
-* **Orientación y Tutoría:** Asesoría metodológica en proyectos de ingeniería, supervisión académica e integración estratégica de TIC y sistemas electrónicos.
-
-## 2. 🥈 La Hazaña de 2025: Subcampeones Nacionales
-
-El año 2025 quedó marcado en nuestra historia. Tras meses de arduo trabajo, diseño iterativo, depuración de sensores y perfeccionamiento de la lógica de navegación autónoma, logramos alzarnos con el **2.º Lugar en la Competencia Nacional de Venezuela**.
-
-Fue una jornada intensa donde pusimos a prueba nuestras capacidades técnicas bajo presión, enfrentándonos a los mejores equipos del país. Superamos obstáculos en la pista, calibramos componentes en tiempo récord y demostramos el nivel de la ingeniería venezolana. Estuvimos a solo un paso de la gloria máxima, y esa experiencia nos transformó por completo como desarrolladores y pensadores críticos.
-
-## 3. 🥇 2026: Con la Mira en el Primer Lugar
-
-Dicen que el segundo lugar es el primer perdedor, pero para nosotros fue el combustible perfecto. Este año regresamos a la pista con más experiencia, una mentalidad más madura y un hambre voraz de victoria.
-
-Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de hardware y optimizado los algoritmos de control para que el robot sea más rápido, preciso e inteligente. No venimos a ver qué pasa; venimos a buscar ese **1.er Lugar nacional** y ganarnos el derecho de representar a Venezuela en el escenario mundial. La meta es clara y el equipo está listo.
+  * **Doctorante en Tecnologías de la Información y Comunicación:** **UNELLEZ** Barinas.
+* **En el equipo:** asesoría metodológica, supervisión académica del proyecto y orientación en la integración de TIC y sistemas electrónicos.
 
 ---
 
-### 3.1. 📸 Nuestro Paso por la Competencia Nacional
+<a id="hazana-2025"></a>
+## 2. 🥈 La hazaña de 2025: subcampeones nacionales
+
+En 2025 obtuvimos el **2.º lugar en la competencia nacional de Venezuela**. Llegamos después de meses de diseño, depuración de sensores y ajustes a la lógica de navegación, y en la final tuvimos que recalibrar componentes contra reloj y resolver imprevistos en la pista frente a los mejores equipos del país. Quedamos a un paso del primer lugar y esa experiencia nos enseñó mucho, tanto en lo técnico como en la forma de trabajar en equipo.
+
+<a id="mira-2026"></a>
+## 3. 🥇 2026: con la mira en el primer lugar
+
+Este año volvemos con más experiencia y con una lista clara de lo que falló el año pasado. Rediseñamos el chasis, cambiamos buena parte del hardware y mejoramos los algoritmos de control para que el vehículo sea más rápido y preciso. La meta es el **1.er lugar nacional** y la clasificación para representar a Venezuela en la final internacional.
+
+---
+
+<a id="competencia-nacional"></a>
+### 3.1. 📸 Nuestro paso por la competencia nacional
 
 <p align="center">
-  <img src="t-photos/foto_equipo.jpeg" alt="Foto Oficial del Equipo" height="250" />
-  <img src="t-photos/foto_equipo2.jpeg" alt="Equipo en Competencia" height="250" />
+  <img src="t-photos/foto_equipo.jpeg" alt="Foto oficial del equipo" height="250" />
+  <img src="t-photos/foto_equipo2.jpeg" alt="Equipo en competencia" height="250" />
   <img src="other/wro2025-1.jpeg" alt="Momento WRO 2025" height="250" />
 </p>
 
@@ -149,59 +179,69 @@ Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de 
   <summary>🔍 <b>Ver más momentos de la WRO 2025</b></summary>
   <br>
   <p align="center">
-    <img src="other/wro2025-2.jpeg" alt="WRO 2025 - Foto 2" height="200" />
-    <img src="other/wro2025-3.jpeg" alt="WRO 2025 - Foto 3" height="200" />
+    <img src="other/wro2025-2.jpeg" alt="WRO 2025, foto 2" height="200" />
+    <img src="other/wro2025-3.jpeg" alt="WRO 2025, foto 3" height="200" />
+    <img src="t-photos/foto_divertida.jpeg" alt="Foto divertida del equipo" height="200" />
   </p>
 </details>
 
 ---
 
-### 3.2. Galería de Inspección Técnica 360°
-Para verificar la simetría estructural, la distribución del centro de masa ($CoG$), la integridad del chasis impreso en 3D y la holgura funcional (*ground clearance*), se documentan los **6 perfiles de inspección ortogonal reglamentarios**:
+<a id="galeria-360"></a>
+### 3.2. Galería de inspección técnica 360°
 
-| 📸 Perfil de Inspección | 🖼️ Registro Visual | 🔍 Criterio de Verificación Técnica de Ingeniería |
-| :--- | :--- | :--- | 
-| **Vista Frontal**<br>*(Front View)* | <img width="380" alt="Perfil Delantero" src="v-photos/ADELANTE2026.jpeg" /> | • Verificación del sistema de visión artificial y sensores de detección frontal.<br>• Inspección de la alineación y paralelismo del mecanismo de dirección.<br>• Control del despeje inferior del parachoques y centrado estructural. |
-| **Vista Trasera**<br>*(Rear View)* | <img width="380" alt="Perfil Trasero" src="v-photos/DETRAS2026.jpeg" /> | • Inspección del acople del motor de tracción y el ensamble de transmisión posterior.<br>• Verificación de la rigidez de los soportes traseros y bujes de retención de las ruedas motrices.<br>• Organización de los conectores de salida y cableado del tren de potencia. |
-| **Vista Superior**<br>*(Top View)* | <img width="380" alt="Perfil Superior" src="v-photos/ARRIBA2026.jpeg" /> | • Evaluación del balance transversal de pesos.<br>• Verificación del centrado de la placa lógica principal y sensores inerciales/de navegación.<br>• Ruteo, segregación y peinado del cableado de control y potencia entre niveles. |
-| **Vista Inferior**<br>*(Bottom View)* | <img width="380" alt="Perfil Inferior" src="v-photos/ABAJO2026.jpeg" /> | • Inspección de la base del chasis para garantizar un acabado liso y plano sin fricciones.<br>• Verificación del despeje de suelo (*ground clearance*) para evitar contacto con desniveles.<br>• Comprobación de la fijación de la tornillería y tuercas autoblocantes empotradas. |
-| **Vista Lateral Derecha**<br>*(Right View)* | <img width="380" alt="Perfil Derecho" src="v-photos/DERECHA2026.jpeg" /> | • Verificación del acceso a la interfaz física (switches de encendido / botones de control).<br>• Evidencia de la separación multinivel (pisos de tracción, lógica y potencia).<br>• Alineación y perpendicularidad de los sensores laterales derechos de medición.<br>• Inspección de la holgura lateral y alineación de las ruedas directrices y motrices. |
-| **Vista Lateral Izquierda**<br>*(Left View)* | <img width="380" alt="Perfil Izquierdo" src="v-photos/IZQUIERDA2026.jpeg" /> | • Disposición del sistema de sensores ultrasónicos / distancia del lado izquierdo.<br>• Comprobación de las rutas de ventilación pasiva y disipación térmica de los módulos de potencia. |
+Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verificar la simetría, la distribución del centro de masa (*CoG*), el estado del chasis impreso y la altura libre al suelo (*ground clearance*).
+
+| 📸 Vista | 🖼️ Foto | 🔍 Qué se verifica |
+| :--- | :---: | :--- |
+| **Frontal**<br>*(Front)* | <img width="360" alt="Vista frontal" src="v-photos/ADELANTE2026.jpeg" /> | • Sensores frontales y diagonales.<br>• Alineación del mecanismo de dirección.<br>• Altura del frente y centrado de la estructura. |
+| **Trasera**<br>*(Rear)* | <img width="360" alt="Vista trasera" src="v-photos/DETRAS2026.jpeg" /> | • Acople del motor y de la transmisión trasera.<br>• Rigidez de los soportes del eje motriz.<br>• Orden del cableado de potencia. |
+| **Superior**<br>*(Top)* | <img width="360" alt="Vista superior" src="v-photos/ARRIBA2026.jpeg" /> | • Balance transversal de peso.<br>• Posición del ESP32 y de la IMU.<br>• Recorrido del cableado entre pisos. |
+| **Inferior**<br>*(Bottom)* | <img width="360" alt="Vista inferior" src="v-photos/ABAJO2026.jpeg" /> | • Base lisa y plana, sin piezas que rocen.<br>• Altura libre al suelo.<br>• Fijación de tornillos y tuercas. |
+| **Lateral derecha**<br>*(Right)* | <img width="360" alt="Vista lateral derecha" src="v-photos/DERECHA2026.jpeg" /> | • Acceso a interruptores y controles.<br>• Separación entre pisos (tracción, lógica y potencia).<br>• Alineación de los sensores del lado derecho y de las ruedas. |
+| **Lateral izquierda**<br>*(Left)* | <img width="360" alt="Vista lateral izquierda" src="v-photos/IZQUIERDA2026.jpeg" /> | • Sensores del lado izquierdo.<br>• Ventilación de los módulos de potencia. |
 
 ---
 
-## 4. Componentes de Control, Detección e Interfaz
+<a id="componentes-control"></a>
+## 4. Componentes de control, detección e interfaz
 
-| Imagen | Nombre de Componente | Descripción | 🔗 Referencias y Documentación |
-| :----: | :------------------- | :---------- | :----------------------------- |
-| ![ESP32](other/esp32.png) | **Microcontrolador ESP32** | Cerebro central del vehículo autónomo. Cuenta con un procesador de doble núcleo, conectividad Wi-Fi/Bluetooth, y múltiples pines GPIO para gestionar la lectura de sensores (I2C y Analógicos) y el control de actuadores en tiempo real. | • [Espressif ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)<br>• [Documentación ESP-IDF / Arduino ESP32](https://docs.espressif.com/projects/arduino-esp32/en/latest/) |
-| ![Sensor Sharp](other/sensor_infrarojo.jpg) | **Sensor Infrarrojo Sharp GP2Y0A21** | Sensores analógicos de medición de distancia por triangulación infrarroja. Colocados estratégicamente en el chasis para detectar obstáculos en las diagonales delanteras del vehículo y evitar colisiones de rango medio (10 a 80 cm). | • [Sharp GP2Y0A21YK0F Datasheet](https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y0a21yk_e.pdf)<br>• [Guía de Calibración Sharp IR](https://www.pololu.com/product/136) |
-| ![Sensor TOF](other/sensor-vl53l0x-de-tof.jpg) | **Sensores de Distancia Láser TOF VL53L0X** | Sensores basados en tecnología Time-of-Flight (Tiempo de Vuelo) que miden distancias precisas mediante luz láser invisible. Conectados en paralelo al Bus I2C #1, utilizan pines digitales individuales como selectores de dirección (XSHUT) para evitar conflictos de direccionamiento. | • [STMicroelectronics VL53L0X Datasheet](https://www.st.com/resource/en/datasheet/vl53l0x.pdf)<br>• [Librería Adafruit VL53L0X (GitHub)](https://github.com/adafruit/Adafruit_VL53L0X) |
-| ![IMU BNO055](other/MU_BNO055.jpg) | **IMU BNO055 (9-Axis Absolute Orientation)** | Unidad de medición inercial avanzada que integra acelerómetro, giroscopio y magnetómetro en 3 ejes, junto con un procesador interno que calcula la orientación absoluta (ángulos de Euler/Cuaterniones) de forma directa a través del Bus I2C #1. | • [Bosch Sensortec BNO055 Datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bno055-ds000.pdf)<br>• [Librería Adafruit BNO055 (GitHub)](https://github.com/adafruit/Adafruit_BNO055) |
-| ![Sensor de Color TCS34725](other/sensor_color.png) | **Sensor de Color TCS34725** | Sensor de luz de color RGB con filtro infrarrojo. Conectado de forma independiente al Bus I2C #2 para evitar saturación de datos, está ubicado en la parte inferior del vehículo para identificar líneas, marcas y colores específicos en la pista. | • [AMS TCS34725 Datasheet](https://ams.com/documents/20143/36005/TCS34725_DS000390_3-00.pdf)<br>• [Librería Adafruit TCS34725 (GitHub)](https://github.com/adafruit/Adafruit_TCS34725) |
-| ![Tira Neopixel](other/Tira_de_LEDs_Neopixel.jpg) | **Tira de LEDs Neopixel** | Sistema de iluminación e indicadores visuales RGB direccionables de forma serial a través del pin digital D14. Se utiliza para mostrar estados del software, alertas del sistema o modos de conducción de forma dinámica. | • [Worldsemi WS2812B / Neopixel Datasheet](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf)<br>• [Librería Adafruit NeoPixel (GitHub)](https://github.com/adafruit/Adafruit_NeoPixel) |
-| ![Buzzer](other/buzzer.jpg) | **Zumbador (Buzzer)** | Transductor piezoeléctrico conectado al pin digital D4. Emite señales acústicas y alarmas sonoras para retroalimentar las diferentes etapas del programa, fallos de lectura o alertas críticas del vehículo. | • [Guía de Tono Arduino PWM / Buzzer](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)<br>• [Especificaciones de Zumbadores Piezoeléctricos](https://www.sparkfun.com/products/7950) |
-| ![Interruptor Programa](other/interruptor.jpg) | **Interruptor de Inicio de Programa** | Pulsador/interruptor conectado al pin digital D23 con resistencia pull-up/GND. Actúa como gatillo lógico para iniciar la marcha autónoma del software una vez el vehículo ha sido calibrado y posicionado. | • [Documentación de Entradas Digitales y Pull-Up en ESP32](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html) |
+| Imagen | Componente | Descripción | 🔗 Documentación |
+| :----: | :--- | :--- | :--- |
+| <img src="other/esp32.png" width="110" alt="ESP32"> | **Microcontrolador ESP32** | Cerebro del vehículo. Procesador de doble núcleo con Wi-Fi/Bluetooth y suficientes GPIO para leer todos los sensores (I2C y analógicos) y controlar los actuadores en tiempo real. | • [Datasheet ESP32](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)<br>• [Arduino-ESP32](https://docs.espressif.com/projects/arduino-esp32/en/latest/) |
+| <img src="other/sensor_infrarojo.jpg" width="110" alt="Sharp"> | **Sensor infrarrojo Sharp GP2Y0A21** | Mide distancia por triangulación infrarroja (10 a 80 cm). Van en las diagonales delanteras para detectar paredes y obstáculos cercanos. | • [Datasheet Sharp](https://global.sharp/products/device/lineup/data/pdf/datasheet/gp2y0a21yk_e.pdf)<br>• [Guía Pololu](https://www.pololu.com/product/136) |
+| <img src="other/sensor-vl53l0x-de-tof.jpg" width="110" alt="VL53L0X"> | **Sensores ToF VL53L0X** | Miden distancia con un láser infrarrojo por tiempo de vuelo. Los cuatro van en paralelo en el bus I2C #1 y cada uno tiene un pin XSHUT propio para asignarle una dirección distinta. | • [Datasheet ST](https://www.st.com/resource/en/datasheet/vl53l0x.pdf)<br>• [Librería Adafruit](https://github.com/adafruit/Adafruit_VL53L0X) |
+| <img src="other/MU_BNO055.jpg" width="110" alt="BNO055"> | **IMU BNO055 (9 ejes)** | Integra acelerómetro, giroscopio y magnetómetro con un procesador que calcula la orientación absoluta (ángulos de Euler o cuaterniones). Va en el bus I2C #1. | • [Datasheet Bosch](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bno055-ds000.pdf)<br>• [Librería Adafruit](https://github.com/adafruit/Adafruit_BNO055) |
+| <img src="other/sensor_color.png" width="110" alt="TCS34725"> | **Sensor de color TCS34725** | Sensor RGB con filtro infrarrojo. Va debajo del vehículo para detectar las líneas de la pista, solo en el bus I2C #2 para no cargar el bus de navegación. | • [Datasheet AMS](https://ams.com/documents/20143/36005/TCS34725_DS000390_3-00.pdf)<br>• [Librería Adafruit](https://github.com/adafruit/Adafruit_TCS34725) |
+| <img src="other/Tira_de_LEDs_Neopixel.jpg" width="110" alt="Neopixel"> | **Tira de LEDs Neopixel** | LEDs RGB direccionables conectados al pin D14. Muestran el estado del programa, alertas y el modo de conducción. | • [Datasheet WS2812B](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf)<br>• [Librería Adafruit](https://github.com/adafruit/Adafruit_NeoPixel) |
+| <img src="other/buzzer.jpg" width="110" alt="Buzzer"> | **Buzzer** | Piezoeléctrico en el pin D4. Emite avisos sonoros en cada etapa del programa, en fallos de lectura y en alertas. | • [tone() en Arduino](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)<br>• [Zumbadores piezoeléctricos](https://www.sparkfun.com/products/7950) |
+| <img src="other/interruptor.jpg" width="110" alt="Interruptor"> | **Interruptor de inicio** | Interruptor de palanca en el pin D23 con la resistencia pull-up interna del ESP32. Al pasarlo a LOW arranca el recorrido autónomo, una vez el vehículo está calibrado y en posición. | • [GPIO y pull-up en ESP32](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html) |
+| <img src="other/celular.png" width="110" alt="Teléfono"> | **Teléfono Android** | Su cámara, con nuestra app de OpenCV, detecta los pilares rojos y verdes y la zona de estacionamiento, y envía comandos al ESP32 por USB. | • [Código de la app](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) |
 
-## 5. Componentes de Alimentación y Actuación
+<a id="componentes-alimentacion"></a>
+## 5. Componentes de alimentación y actuación
 
-| Imagen | Nombre de Componente | Descripción | 🔗 Referencias y Documentación |
-| :----: | :------------------- | :---------- | :----------------------------- |
-| ![Batería LIPO](other/bateria_lipo.png) | **Batería LiPo 2S 50C 2200mAh** | Fuente de energía principal del vehículo. Suministra un voltaje nominal de 7.4V (máximo de 8.4V en carga completa) con una alta tasa de descarga (50C) para soportar los picos de corriente de los motores. | • [Especificaciones de Baterías LiPo 2S (7.4V)](https://www.hobbywing.com/) |
-| ![Interruptor](other/interruptor.jpg) | **Interruptor de Encendido General** | Interruptor basculante (ON/OFF) conectado directamente al terminal positivo de la batería para cortar o permitir el paso de corriente a todo el sistema eléctrico de forma segura. | • [Especificaciones de Interruptores Basculantes KCD1](https://www.sparkfun.com/products/11138) |
-| ![Step up-down XL6009](other/XL6009.jpg) | **Regulador Elevador/Reductor XL6009** | Módulo de regulación de voltaje ajustado entre 6V y 8V (según la velocidad buscada). Estabiliza la alimentación que va dirigida al driver de los motores, independientemente de las fluctuaciones de la batería. | • [Datasheet Módulo Boost XL6009](https://www.xlsemi.com/datasheet/XL6009%20datasheet.pdf) |
-| ![Driver TB6612FNG](other/tb6612fng.jpg) | **Driver de Motores TB6612FNG** | Controlador de puente en H dual de alta eficiencia. Recibe las señales lógicas de control del ESP32 (dirección y PWM) y maneja la potencia hacia los motores DC de tracción de manera mucho más eficiente que el clásico L298N. | • [Toshiba TB6612FNG Datasheet](https://www.sparkfun.com/datasheets/Robotics/TB6612FNG.pdf) |
-| ![Motor 25GA-370](other/motor.png) | **Motor DC 25GA-370 (6V-8V)** | Motorreductor metálico encargado de la tracción mecánica del vehículo autónomo. Funciona en un rango de voltaje de 6V a 8V regulado por el XL6009 y operado a través del driver. | • [Especificaciones Técnicas Motorreductor 25GA-370](https://www.pololu.com/category/60/micro-metal-gearmotors) |
-| ![Step down DSN-Mini 360](other/dsn_mini_360.jpg) | **Step Down DSN-Mini 360** | Regulador reductor de voltaje de tipo conmutado, ajustado a una salida fija de 7V para alimentar de forma estable el pin VIN del microcontrolador ESP32. | • [MP2307 / Mini360 Step-Down Datasheet](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
-| ![Servomotor MG90](other/servo_180.jpg) | **Servomotor MG90 180°** | Servo con piñonería metálica de alta resistencia. Utilizado para controlar el ángulo de dirección de las ruedas delanteras del vehículo mediante señales PWM del microcontrolador. Alimentado a 6V desde el regulador correspondiente. | • [TowerPro MG90S Micro Servo Datasheet](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
+| Imagen | Componente | Descripción | 🔗 Documentación |
+| :----: | :--- | :--- | :--- |
+| <img src="other/bateria_lipo.png" width="110" alt="LiPo"> | **Batería LiPo 2S 50C 2200 mAh** | Fuente de energía principal. 7.4 V nominales (8.4 V con carga completa) y una tasa de descarga de 50C para soportar los picos de corriente del motor. | • [Baterías LiPo 2S](https://www.hobbywing.com/) |
+| <img src="other/interruptor.jpg" width="110" alt="Interruptor general"> | **Interruptor general** | Interruptor basculante ON/OFF en el positivo de la batería. Corta o habilita la corriente a todo el sistema. | • [Interruptor KCD1](https://www.sparkfun.com/products/11138) |
+| <img src="other/XL6009.jpg" width="110" alt="XL6009"> | **Regulador XL6009 (step-up/down)** | Ajustado entre 6 y 8 V según la velocidad buscada. Mantiene estable la alimentación del driver del motor aunque baje la batería. | • [Datasheet XL6009](https://www.xlsemi.com/datasheet/XL6009%20datasheet.pdf) |
+| <img src="other/tb6612fng.jpg" width="110" alt="TB6612FNG"> | **Driver de motores TB6612FNG** | Puente H dual. Recibe dirección y PWM del ESP32 y entrega la potencia al motor con mucha menos pérdida que el L298N que usábamos antes. | • [Datasheet TB6612FNG](https://www.sparkfun.com/datasheets/Robotics/TB6612FNG.pdf) |
+| <img src="other/motor.png" width="110" alt="Motor 25GA-370"> | **Motor DC 25GA-370 (6 V a 8 V)** | Motorreductor metálico de 220 RPM (caja 21.3:1) para la tracción. También se vende como JGA25-370. Lo alimenta el XL6009 a través del driver. | • [Motorreductores](https://www.pololu.com/category/60/micro-metal-gearmotors) |
+| <img src="other/dsn_mini_360.jpg" width="110" alt="Mini 360"> | **2 × Step-down DSN-Mini 360** | Reguladores conmutados. El #1 está ajustado a 7 V para el pin VIN del ESP32 y el #2 a 5 V para el servo y los sensores. | • [Datasheet MP2307](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
+| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#direccion-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 5 V desde el Mini 360 #2. El servo previsto para la versión final es un EMAX ES08MA II. | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
 
-## 6. Esquemas de Alimentación y Cableado
+---
 
-[*Consultar el historial de versiones de alimentación aquí*](#sistema-de-alimentación)
+<a id="esquemas-alimentacion"></a>
+## 6. Esquemas de alimentación y cableado
 
-### 6.1. Versión 4 (Actual)
+*Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](#archivo-electronica-2025).*
 
-![Diagrama de Alimentación V4](schemes/diagrama-alimentacion5.jpeg)
+<a id="alimentacion-v4"></a>
+### 6.1. Versión 4 (actual)
+
+![Diagrama de alimentación V4](schemes/diagrama-alimentacion5.jpeg)
 
 ```mermaid
 graph TD
@@ -210,17 +250,18 @@ graph TD
     classDef reg fill:#f57c00,stroke:#ffb74d,stroke-width:2px,color:#fff;
     classDef load fill:#1565c0,stroke:#64b5f6,stroke-width:2px,color:#fff;
 
-    BAT["🔋 Bateria LiPo 2S<br>50C 2200mAh (7.4V - Max 8.4V)"]:::bat
-    SW["🔘 Interruptor Encendido General"]:::sw
+    BAT["🔋 Batería LiPo 2S<br>50C 2200 mAh (7.4 V, máx. 8.4 V)"]:::bat
+    SW["🔘 Interruptor general"]:::sw
 
-    XL["🚀 Step Up-Down XL6009<br>Ajuste: 6V a 8V (Motores)"]:::reg
-    SD1["📉 Step Down DSN-Mini 360 1<br>Ajuste: 7V (ESP32 VIN)"]:::reg
-    SD2["📉 Step Down DSN-Mini 360 2<br>Ajuste: 5V - 6V (Servo y Sensores)"]:::reg
+    XL["🚀 Step up-down XL6009<br>Ajuste: 6 V a 8 V (motor)"]:::reg
+    SD1["📉 Step-down DSN-Mini 360 #1<br>Ajuste: 7 V (VIN del ESP32)"]:::reg
+    SD2["📉 Step-down DSN-Mini 360 #2<br>Ajuste: 5 V (servo y sensores)"]:::reg
 
-    ESP32["🧠 Microcontrolador ESP32<br>Alimentado por VIN a 7V"]:::load
-    DRIVER["🏎️ Driver TB6612FNG<br>Alimentacion VCC/VM 6V-8V"]:::load
-    MOTOR["⚙️ Motor DC 25GA-370<br>Tension Variable 6V-8V"]:::load
-    SERVO["📐 Servomotor MG90 180<br>Alimentado a 6V"]:::load
+    ESP32["🧠 ESP32<br>alimentado por VIN a 7 V"]:::load
+    DRIVER["🏎️ Driver TB6612FNG<br>VM 6 V a 8 V"]:::load
+    MOTOR["⚙️ Motor DC 25GA-370<br>6 V a 8 V"]:::load
+    SERVO["📐 Servomotor MG90 180°<br>5 V"]:::load
+    SENS["📡 Sensores, Neopixel y buzzer<br>5 V"]:::load
 
     BAT --> SW
 
@@ -233,35 +274,41 @@ graph TD
 
     SD1 --> ESP32
     SD2 --> SERVO
+    SD2 --> SENS
 ```
-### 6.2. Arquitectura de Energía, Control y Gestión de Potencia
 
-La **batería LiPo 2S de 2200mAh** (7.4V nominales, 8.4V en máxima carga) constituye la fuente central de energía del sistema, gestionada mediante un **interruptor general físico de palanca** que garantiza un enclavamiento mecánico seguro y mitiga fallos por desconexión accidental ante vibraciones en la pista. 
+<a id="arquitectura-energia"></a>
+### 6.2. Arquitectura de energía, control y gestión de potencia
 
-A partir de este nodo central, la alimentación se ramifica de forma completamente independiente en tres sub-buses regulados para aislar el ruido electromagnético y evitar caídas de tensión (*brownouts*) en la lógica de control:
+La **batería LiPo 2S de 2200 mAh** (7.4 V nominales, 8.4 V con carga completa) es la única fuente de energía. Pasa por un **interruptor general de palanca**, que elegimos porque no se desconecta solo con las vibraciones de la pista.
 
-* **Línea de Tracción Potenciada:** Una rama se dirige a un regulador **step-up/down XL6009**, ajustado dinámicamente entre 6V y 8V en función de la velocidad requerida. Este módulo alimenta el **puente H TB6612FNG**, el cual entrega el voltaje íntegro al **Motor 25GA-370**.
-* **Línea de Control Confiable:** De forma paralela, un módulo **step-down DSN-Mini 360** configurado a 6V proporciona energía limpia al pin Vin del único **ESP32** del sistema, garantizando el diferencial necesario para el correcto funcionamiento de su regulador interno LDO sin riesgo de reinicios.
-* **Línea de Actuadores y Sensores:** Un segundo módulo **DSN-Mini 360**, calibrado estrictamente a 5V, se encarga de la alimentación general para el **Servomotor SG90 180°** y el resto de la red de sensores, ofreciendo una línea de voltaje estable y adecuada para las comunicaciones de datos.
+Desde ese punto la alimentación se divide en tres líneas reguladas e independientes. Así el ruido del motor no llega a la lógica de control y evitamos caídas de tensión (*brownouts*):
+
+* **Línea de tracción:** un regulador **XL6009** ajustado entre 6 y 8 V, según la velocidad que busquemos, alimenta el **puente H TB6612FNG**, que a su vez mueve el **motor 25GA-370**.
+* **Línea de control:** un **DSN-Mini 360** ajustado a 7 V alimenta el pin VIN del **ESP32** (el único microcontrolador del sistema). Con ese voltaje su regulador interno de 3.3 V tiene margen suficiente y la placa no se reinicia cuando arranca el motor.
+* **Línea de actuadores y sensores:** un segundo **DSN-Mini 360**, ajustado a 5 V, alimenta el **servomotor MG90** y el resto de los sensores con una tensión estable.
 
 > [!IMPORTANT]
-> **Iteración Crítica de Hardware (L298N vs. TB6612FNG)**
-> 
-> La transición al puente H TB6612FNG resolvió dos fallos arquitectónicos graves de nuestro prototipo inicial. En primer lugar, eliminó la severa caída de voltaje interna característica del L298N, optimizando la eficiencia del par motor. En segundo lugar, el módulo L298N generaba una interferencia que inhabilitaba los puertos I2C de cualquier microcontrolador conectado. Este fallo nos había obligado temporalmente a utilizar una arquitectura ineficiente con dos placas ESP32 (una dedicada exclusivamente al control del motor). El cambio al TB6612FNG solucionó este conflicto de comunicaciones, permitiéndonos unificar todo el procesamiento en un único ESP32. Esto redujo drásticamente el peso, la complejidad del cableado, el consumo general de energía y los posibles puntos de fallo del vehículo.
+> **Cambio clave de hardware: L298N → TB6612FNG**
+>
+> El cambio al TB6612FNG resolvió dos problemas graves del prototipo de 2025. Primero, eliminó la caída de voltaje interna del L298N, que le quitaba fuerza al motor. Segundo, el L298N generaba una interferencia que dejaba inutilizado el bus I2C del microcontrolador. Para esquivarlo tuvimos que usar dos placas ESP32, una solo para el motor. Con el TB6612FNG ese conflicto desapareció y volvimos a un único ESP32, lo que redujo el peso, el cableado, el consumo y los puntos de falla.
 
 > [!NOTE]
-> **Compensación de diseño (*Trade-off*)**
-> 
-> Esta configuración ampliada, apoyada en tres reguladores de voltaje independientes, exige una gestión del espacio interno más rigurosa dentro del chasis impreso en 3D. Sin embargo, se asumió esta compensación espacial porque mitiga por completo el acoplamiento de ruido inductivo provocado por los motores hacia la electrónica sensible, blindando la estabilidad del vehículo y asegurando lecturas limpias en el bus I2C durante la navegación autónoma.
+> **Compromiso de diseño**
+>
+> Tres reguladores independientes ocupan más espacio dentro del chasis impreso. Aceptamos ese costo porque separar la potencia de la electrónica sensible eliminó el ruido inductivo del motor y nos dio lecturas I2C limpias durante toda la navegación.
 
+---
 
-## 7. Esquemas de Sensores y Adquisición de Datos
+<a id="esquemas-sensores"></a>
+## 7. Esquemas de sensores y adquisición de datos
 
-[*Consultar el historial de versiones de detección aquí*](#sistema-de-detección-de-objetos)
+*Las versiones anteriores del sistema de detección están en el [archivo de 2025](#archivo-electronica-2025).*
 
-### 7.1. Versión 4 (Actual)
+<a id="sensores-v4"></a>
+### 7.1. Versión 4 (actual)
 
-![Diagrama de Sensores V4](schemes/diagrama-sensores3.jpeg)
+![Diagrama de sensores V4](schemes/diagrama-sensores3.jpeg)
 
 ```mermaid
 graph TD
@@ -271,28 +318,28 @@ graph TD
     classDef adc fill:#e65100,stroke:#ff9100,stroke-width:2px,color:#fff;
     classDef gpio fill:#004d40,stroke:#00bfa5,stroke-width:2px,color:#fff;
 
-    MCU["⚡ ESP32 Mainboard"]:::mcu
+    MCU["⚡ ESP32"]:::mcu
 
     IMU["🧭 IMU BNO055"]:::i2c1
-    TOF1["🎯 Sensor TOF 1 VL53L0X"]:::i2c1
-    TOF2["🎯 Sensor TOF 2 VL53L0X"]:::i2c1
-    TOF3["🎯 Sensor TOF 3 VL53L0X"]:::i2c1
-    TOF4["🎯 Sensor TOF 4 VL53L0X"]:::i2c1
+    TOF1["🎯 ToF 1 VL53L0X (frontal)"]:::i2c1
+    TOF2["🎯 ToF 2 VL53L0X (trasero)"]:::i2c1
+    TOF3["🎯 ToF 3 VL53L0X (izquierdo)"]:::i2c1
+    TOF4["🎯 ToF 4 VL53L0X (derecho)"]:::i2c1
 
-    COLOR["🎨 Sensor Color TCS34725"]:::i2c2
+    COLOR["🎨 Sensor de color TCS34725"]:::i2c2
 
-    SHARP1["📡 Sensor Sharp 1 GP2Y0A21"]:::adc
-    SHARP2["📡 Sensor Sharp 2 GP2Y0A21"]:::adc
+    SHARP1["📡 Sharp 1 GP2Y0A21 (GPIO 34)"]:::adc
+    SHARP2["📡 Sharp 2 GP2Y0A21 (GPIO 35)"]:::adc
 
-    SERVO["⚙️ Servomotor MG90 Pin D13"]:::gpio
-    NEO["🌈 Tira Neopixel RGB Pin D14"]:::gpio
-    BUZZER["🔔 Buzzer Piezoelectrico Pin D4"]:::gpio
-    SW["🔘 Switch Inicio Programa Pin D23"]:::gpio
-    DRIVER["🏎️ Driver TB6612FNG Control Motores"]:::gpio
-    XSHUT["🔀 Selectores XSHUT Control TOF"]:::gpio
+    SERVO["⚙️ Servomotor MG90 · D13"]:::gpio
+    NEO["🌈 Tira Neopixel · D14"]:::gpio
+    BUZZER["🔔 Buzzer · D4"]:::gpio
+    SW["🔘 Interruptor de inicio · D23"]:::gpio
+    DRIVER["🏎️ Driver TB6612FNG · D25, D26, D27"]:::gpio
+    XSHUT["🔀 Selectores XSHUT · D17, D16, D5, D18"]:::gpio
 
-    MCU --> IMU
-    MCU --> COLOR
+    MCU -- "I2C #1 (21/22)" --> IMU
+    MCU -- "I2C #2 (32/33)" --> COLOR
 
     MCU --> XSHUT
     XSHUT --> TOF1
@@ -309,24 +356,32 @@ graph TD
     SW --> MCU
     MCU --> DRIVER
 ```
-### 7.2. Optimización del Sistema de Sensores y Hardware
 
-En esta cuarta iteración, se ha reconfigurado la matriz de sensores del vehículo aprovechando la capacidad de múltiples buses del ESP32. El objetivo principal es maximizar la precisión espacial, evitar cuellos de botella en el procesamiento de datos y blindar la estabilidad del algoritmo de navegación autónoma dentro de la pista de $3 \times 3$ metros.
+**Asignación de pines del ESP32**
 
-#### 7.2.1. Subsistema de Navegación Cinemática (Bus I2C 1)
+| Señal | Pin | Señal | Pin |
+| :--- | :---: | :--- | :---: |
+| I2C #1 SDA / SCL | 21 / 22 | XSHUT frontal / trasero | 17 / 16 |
+| I2C #2 SDA / SCL | 32 / 33 | XSHUT izquierdo / derecho | 5 / 18 |
+| Motor IN1 / IN2 / PWM | 27 / 26 / 25 | Sharp derecho / izquierdo | 34 / 35 |
+| Servo de dirección | 13 | Tira Neopixel | 14 |
+| Interruptor de inicio | 23 | Buzzer | 4 |
 
-* **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
-* **Unidad de Medición Inercial (IMU) BNO055:** Comparte el Bus I2C #1. La inclusión de este sensor con procesamiento de fusión de datos a bordo está orientada a **eliminar por completo la deriva (*drift*)** acumulativa. Para garantizar la fidelidad del posicionamiento, el algoritmo calibra el cero relativo y establece el eje Y del sensor como el vector de referencia principal para el equilibrio y dirección del chasis.
+<a id="optimizacion-sensores"></a>
+### 7.2. Optimización del sistema de sensores y hardware
 
-#### Subsistema de Navegación Cinemática (Bus I2C #1 - Pines D21/D22)
+En esta cuarta versión reorganizamos los sensores aprovechando que el ESP32 tiene dos buses I2C por hardware. El objetivo era ganar precisión, que ningún sensor retrasara a los demás y que la navegación fuera estable dentro de la pista de $3 \times 3$ metros.
 
-* **Unidad de Medición Inercial (IMU) BNO055:** Comparte el Bus I2C #1. La inclusión de este sensor con procesamiento de fusión de datos a bordo está orientada a **eliminar por completo la deriva (*drift*)** acumulativa. Para garantizar la fidelidad del posicionamiento, el algoritmo calibra el cero relativo y establece el eje Y del sensor como el vector de referencia principal para el equilibrio y dirección del chasis.
+<a id="bus-i2c-1"></a>
+#### 7.2.1. Subsistema de navegación (bus I2C #1, pines D21/D22)
 
-* **Sensores de Distancia por Tiempo de Vuelo (ToF):** El reemplazo de los transductores ultrasónicos por módulos ToF elimina las zonas muertas en lecturas de corto alcance. Para conectar los cuatro sensores en el mismo bus I2C, se implementó una estrategia de asignación de direcciones dinámicas controlando los pines **XSHUT** a través de pines digitales del ESP32, lo que permite un encendido secuencial. Además, al operar nativamente a 3.3V, esta actualización eliminó la necesidad de utilizar divisores de tensión, simplificando drásticamente el hardware.
+* **Sensores de distancia ToF:** reemplazaron a los ultrasónicos y eliminaron las zonas muertas a corta distancia. Para conectar los cuatro al mismo bus controlamos sus pines **XSHUT** desde el ESP32 y los encendemos uno por uno para darles direcciones distintas (ver 7.2.2). Además trabajan a 3.3 V, así que ya no hacen falta divisores de tensión.
+* **IMU BNO055:** comparte el bus I2C #1. Su procesador interno fusiona los datos y prácticamente **elimina la deriva (*drift*)** acumulada que teníamos con el giroscopio anterior. Al arrancar, el programa toma la orientación actual como cero y todos los giros se calculan respecto a ella.
 
-#### 7.2.2. Calibración y Direccionamiento de los 4 Sensores ToF (XSHUT)
+<a id="xshut"></a>
+#### 7.2.2. Calibración y direccionamiento de los 4 sensores ToF (XSHUT)
 
-Los cuatro sensores VL53L0X comparten el mismo bus físico I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección por defecto (`0x29`), lo que provocaría colisión de direcciones si se energizaran simultáneamente. Para resolverlo, cada sensor tiene su pin **XSHUT** conectado a un GPIO independiente del ESP32, usado como interruptor de encendido/apagado por software:
+Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección (`0x29`). Si se encendieran a la vez habría colisión. Para resolverlo, el pin **XSHUT** de cada sensor va a un GPIO distinto del ESP32 y funciona como interruptor de encendido por software:
 
 ```cpp
 #define XSHUT_FRONTAL 17
@@ -344,8 +399,8 @@ Los cuatro sensores VL53L0X comparten el mismo bus físico I2C #1 (pines D21/D22
 
 ```mermaid
 flowchart TD
-    A["Inicio: los 4 pines XSHUT en LOW<br/>(los 4 sensores en reset/apagado)"] --> B["Activar XSHUT_FRONTAL (HIGH)"]
-    B --> C["Inicializar sensor en dirección<br/>de fábrica 0x29"]
+    A["Inicio: los 4 pines XSHUT en LOW<br/>(sensores apagados)"] --> B["Activar XSHUT_FRONTAL (HIGH)"]
+    B --> C["Inicializar en la dirección<br/>de fábrica 0x29"]
     C --> D["Reasignar dirección → 0x30<br/>(ADDR_FRONTAL)"]
     D --> E["Activar XSHUT_TRASERO (HIGH)"]
     E --> F["Inicializar en 0x29 → reasignar a 0x31"]
@@ -353,1544 +408,1151 @@ flowchart TD
     G --> H["Inicializar en 0x29 → reasignar a 0x32"]
     H --> I["Activar XSHUT_DER (HIGH)"]
     I --> J["Inicializar en 0x29 → reasignar a 0x33"]
-    J --> K["Los 4 sensores activos,<br/>cada uno con dirección única<br/>en el mismo bus I2C #1"]
+    J --> K["Los 4 sensores activos,<br/>cada uno con su dirección,<br/>en el mismo bus I2C #1"]
 ```
 
-En cada paso, solo **un sensor a la vez** queda activo en la dirección por defecto `0x29` mientras los demás permanecen en reset (XSHUT en LOW), evitando cualquier colisión. Una vez reasignada su dirección definitiva, el sensor permanece encendido (XSHUT en HIGH) y se pasa al siguiente.
+En cada paso solo **un sensor** está encendido en la dirección `0x29`; los demás siguen en reset (XSHUT en LOW). Cuando ya tiene su dirección definitiva, ese sensor queda encendido (XSHUT en HIGH) y se pasa al siguiente.
 
 > [!NOTE]
-> **Calibración: los 4 sensores usan el mismo criterio (sin offsets individuales)**
+> **Los 4 sensores usan la misma calibración**
 >
-> Los cuatro VL53L0X se calibran de forma idéntica, sin aplicar offsets particulares por unidad. Esto es posible porque el VL53L0X trae calibración de fábrica consistente entre unidades del mismo lote, y el direccionamiento único vía XSHUT es lo único que realmente necesita configurarse por sensor — no la calibración de medición en sí.
+> No aplicamos offsets individuales. Los VL53L0X del mismo lote vienen con una calibración de fábrica consistente entre sí; lo único que hay que configurar por sensor es su dirección.
 
-#### 7.2.3. Subsistema de Lectura de Superficie (Bus I2C 2)
+<a id="bus-i2c-2"></a>
+#### 7.2.3. Subsistema de lectura de superficie (bus I2C #2, pines D32/D33)
 
-* **Sensor de Color TCS34725:** Dedicado a la detección y confirmación de líneas. Para evitar saturar el bus principal de navegación, este sensor se ha aislado en un **segundo bus I2C independiente (Hardware I2C #2)**. Esto garantiza que las lecturas constantes del suelo no interfieran ni retrasen las respuestas críticas de evasión de obstáculos de los sensores ToF.
+* **Sensor de color TCS34725:** detecta y confirma las líneas de la pista. Lo pusimos en un **segundo bus I2C independiente** para que sus lecturas constantes del suelo no retrasen las de los ToF, que son las que usa el carro para no chocar. En el firmware se lee cada 30 ms en una tarea propia de FreeRTOS.
 
-#### 7.2.4. Subsistema de Proximidad Redundante e Interfaz
+<a id="proximidad-interfaz"></a>
+#### 7.2.4. Subsistema de proximidad redundante e interfaz
 
-* **Sensores Sharp GP2Y0A21 Diagonales:** Mantienen su conexión analógica tradicional para ofrecer detección de proximidad redundante en los ángulos ciegos frontales.
-* **Interfaz de Usuario y Control:** Se integró una tira Neopixel y un Buzzer para proporcionar telemetría visual y auditiva del estado del robot (códigos de error, calibración exitosa, detección de línea). El inicio de ejecución se controla mediante un **interruptor físico de palanca** (Pin D23), descartando el uso de pulsadores para evitar rebotes o activaciones accidentales por vibración.
+* **Sensores Sharp GP2Y0A21 diagonales:** siguen conectados a entradas analógicas y dan una segunda medida de proximidad en los ángulos ciegos del frente.
+* **Interfaz de usuario:** la tira Neopixel y el buzzer muestran el estado del robot (errores, calibración correcta, línea detectada). El arranque se hace con un **interruptor de palanca** (pin D23); descartamos el pulsador porque los rebotes y la vibración lo activaban por accidente.
 
 ---
 
 > [!IMPORTANT]
-> **Iteración de Hardware: Simplificación y Mantenibilidad**
-> 
-> La transición de los sensores ultrasónicos (HC-SR04) a los módulos ToF no solo mejoró la velocidad de muestreo, sino que resolvió un problema crítico de diseño físico. En versiones anteriores, la incompatibilidad lógica (5V del HC-SR04 vs. 3.3V de los pines del ESP32) nos obligó a fabricar divisores de voltaje manuales con arreglos de resistencias debido a la falta de convertidores lógicos comerciales en ese momento. Aunque la solución era funcional, resultaba en un circuito sumamente tosco, voluminoso y propenso a falsos contactos. Migrar a una topología de sensores I2C nativos a 3.3V eliminó por completo esta red pasiva, logrando un ensamblaje mucho más limpio y facilitando enormemente las labores de mantenimiento y reparación en los pits durante la competencia.
+> **Simplificación y mantenimiento**
+>
+> Pasar de los ultrasónicos HC-SR04 a los ToF no solo mejoró la frecuencia de muestreo, también resolvió un problema físico. El HC-SR04 trabaja con 5 V y los pines del ESP32 con 3.3 V, así que en 2025 tuvimos que armar divisores de voltaje a mano con resistencias (no conseguimos convertidores de nivel comerciales). Funcionaban, pero el circuito era voluminoso y daba falsos contactos. Con sensores I2C nativos de 3.3 V esa red desapareció y el montaje quedó más limpio y fácil de reparar en los pits.
 
 > [!NOTE]
-> **Compensación de Diseño (*Trade-off*) y Gestión de Tráfico I2C**
-> 
-> Integrar múltiples sensores I2C presentaba el riesgo de colisiones de datos y retrasos en el ciclo principal (*loop*). Este riesgo se mitigó mediante dos decisiones arquitectónicas: a nivel de software, implementando rutinas de muestreo secuencial (*polling*) estrictamente temporizadas mediante los pines XSHUT; y a nivel de hardware, segregando la carga de datos en dos buses I2C independientes (Navegación vs. Superficie). Adicionalmente, para optimizar el espacio y peso, se decidió prescindir de bancos de resistencias *pull-up* externas, confiando exitosamente en las resistencias *pull-up* integradas por defecto en las placas comerciales de los sensores.
+> **Compromiso de diseño: tráfico en el bus I2C**
+>
+> Tener varios sensores I2C traía el riesgo de colisiones y de retrasos en el `loop` principal. Lo resolvimos de dos formas: en software, con lecturas secuenciales (*polling*) y direcciones asignadas con XSHUT; en hardware, separando la carga en dos buses (navegación y superficie). Para ahorrar espacio no pusimos resistencias *pull-up* externas: las que traen las placas de los sensores fueron suficientes.
 
 ---
 
-### 7.3. Resumen de Cambios y Evolución de Hardware
+<a id="resumen-hardware"></a>
+### 7.3. Resumen de cambios y evolución del hardware
 
-| Componente Anterior | Componente Actual | Justificación Técnica y Ventaja Principal |
+| Componente anterior | Componente actual | Justificación y ventaja principal |
 | :--- | :--- | :--- |
-| Sensor Ultrasónico (HC-SR04 con divisores de tensión) | **4x Sensores ToF (I2C #1)** | Eliminación de zonas muertas y de redes de resistencias; hardware limpio a 3.3V. Direcciones gestionadas vía pines XSHUT. |
-| Giroscopio básico | **IMU BNO055 (I2C #1)** | Supresión del *drift* inercial en el área de $3 \times 3$ m (Alineación orientada al eje Y). |
-| Sensor de Color (Bus único) | **TCS34725 (I2C #2 aislado)** | Independencia de bus para evitar cuellos de botella con la telemetría de evasión. |
-| Pulsador de inicio | **Interruptor físico (Pin D23)** | Enclavamiento seguro contra vibraciones mecánicas de la pista. |
-
+| Sensor ultrasónico HC-SR04 con divisores de tensión | **4 × sensores ToF (I2C #1)** | Sin zonas muertas ni redes de resistencias; todo a 3.3 V. Direcciones asignadas con XSHUT. |
+| MPU6050 + magnetómetro HMC5883L | **IMU BNO055 (I2C #1)** | Deriva prácticamente eliminada en la pista de $3 \times 3$ m. |
+| Sensor de color en el bus compartido | **TCS34725 (I2C #2 aislado)** | Bus propio, sin cuellos de botella con los sensores de distancia. |
+| Pulsador de inicio | **Interruptor de palanca (D23)** | No se activa solo con la vibración de la pista. |
+| L298N + segundo microcontrolador | **TB6612FNG + un solo ESP32** | Sin caída de voltaje ni interferencia en el I2C. |
 
 ---
 
-## 8. Gestión Energética y Autonomía del Sistema
+<a id="gestion-energetica"></a>
+## 8. Gestión energética y autonomía del sistema
 
+En esta sección calculamos el consumo eléctrico del vehículo y justificamos la batería que elegimos.
 
-Este apartado detalla el análisis del consumo eléctrico y la justificación técnica de la fuente de alimentación seleccionada para el hardware del proyecto.
+<a id="consumo-total"></a>
+### 8.1. Cálculo del consumo energético total
 
-### 8.1. Cálculo del Consumo Energético Total
+Estimamos el consumo de cada componente en tres escenarios, con valores típicos de sus hojas de datos: **reposo** (energizado pero sin trabajar), **nominal** (operación normal durante una vuelta) y **pico** (consumo máximo instantáneo, como el arranque del motor o los LEDs al máximo).
 
-El consumo eléctrico del sistema se estimó para tres escenarios de operación por componente, siguiendo valores típicos de hoja de datos: **standby** (componente energizado pero inactivo o en reposo), **nominal** (operación típica durante una vuelta normal) y **pico** (consumo máximo instantáneo, por ejemplo arranque de motor o brillo máximo de LEDs).
-
-| Componente | Cantidad | Standby (mA) | Nominal (mA) | Pico (mA) |
+| Componente | Cantidad | Reposo (mA) | Nominal (mA) | Pico (mA) |
 | :--- | :---: | :---: | :---: | :---: |
-| **ESP32** (doble núcleo, WiFi/BT off) | 1 | ~20 mA (idle) | ~80 mA | ~80 mA (procesamiento intensivo) |
-| **Sensor Infrarrojo Sharp GP2Y0A21** | 2 | 10 mA c/u | 30 mA c/u | 33 mA c/u |
-| **Sensor ToF VL53L0X** | 4 | 5 mA c/u | 15 mA c/u | 20 mA c/u (ranging activo) |
-| **IMU BNO055** | 1 | ~1 mA | 12.3 mA | ~16 mA |
-| **Sensor de Color TCS34725** | 1 | ~0 mA (sleep, µA) | 3 mA | 3.6 mA |
-| **Tira Neopixel** (10 LEDs) | 10 | 0 mA (apagada) | 300 mA (mix medio) | 600 mA (blanco 100%) |
-| **Zumbador (Buzzer)** | 1 | 0 mA | 30 mA | 30 mA |
-| **Regulador XL6009** | 1 | 15 mA (quiescent) | 15 mA | 15 mA |
-| **Driver TB6612FNG** (lógica) | 1 | 1 mA | 2 mA | 6 mA |
-| **Motor DC 25GA-370** | 1 | 0 mA (detenido) | 500 mA | ~1800 mA (corriente de rotor bloqueado / arranque) |
-| **Step Down DSN-Mini 360** | 2 | 5 mA c/u | 5 mA c/u | 5 mA c/u |
-| **Servomotor MG90** | 1 | 10 mA (sosteniendo posición) | 200 mA (en movimiento) | ~700 mA (esfuerzo/stall) |
+| **ESP32** (doble núcleo, WiFi/BT apagados) | 1 | ~20 | ~80 | ~80 (procesamiento intensivo) |
+| **Sensor infrarrojo Sharp GP2Y0A21** | 2 | 10 c/u | 30 c/u | 33 c/u |
+| **Sensor ToF VL53L0X** | 4 | 5 c/u | 15 c/u | 20 c/u (midiendo) |
+| **IMU BNO055** | 1 | ~1 | 12.3 | ~16 |
+| **Sensor de color TCS34725** | 1 | ~0 (en reposo, µA) | 3 | 3.6 |
+| **Tira Neopixel** (10 LEDs) | 10 | 0 (apagada) | 300 (colores mixtos) | 600 (blanco al 100 %) |
+| **Buzzer** | 1 | 0 | 30 | 30 |
+| **Regulador XL6009** (consumo propio) | 1 | 15 | 15 | 15 |
+| **Driver TB6612FNG** (lógica) | 1 | 1 | 2 | 6 |
+| **Motor DC 25GA-370** | 1 | 0 (detenido) | 500 | ~1800 (arranque / rotor bloqueado) |
+| **Step-down DSN-Mini 360** (consumo propio) | 2 | 5 c/u | 5 c/u | 5 c/u |
+| **Servomotor MG90** | 1 | 10 (sosteniendo posición) | 200 (en movimiento) | ~700 (forzado) |
 | **TOTAL ESTIMADO** | | **~97 mA** | **~1272.3 mA** | **~3406.6 mA** |
 
-🔋 **Demanda de Corriente Nominal:** ~1.27 A · **Pico teórico simultáneo:** ~3.41 A
+🔋 **Corriente nominal:** ~1.27 A · **Pico teórico simultáneo:** ~3.41 A
 
 > [!NOTE]
 > **Sobre el escenario de pico**
 >
-> El pico de ~3.41 A representa el caso extremo en que *todos* los componentes alcanzan su consumo máximo al mismo tiempo (arranque del motor + servo en esfuerzo + LEDs en blanco pleno). Es un escenario estadísticamente improbable en un ciclo de control real, pero es el valor de referencia usado para dimensionar la tasa de descarga (C) mínima requerida de la batería — ver sección de justificación de la LiPo 2S 50C.
+> Los ~3.41 A corresponden al caso extremo en que *todos* los componentes llegan a su máximo a la vez (arranque del motor, servo forzado y LEDs en blanco). En una vuelta real es muy poco probable, pero es el valor que usamos para comprobar la tasa de descarga (C) mínima de la batería (ver [8.4](#justificacion-fuente)).
 
 ---
 
-### 8.2. Estimación de la Autonomía
+<a id="estimacion-autonomia"></a>
+### 8.2. Estimación de la autonomía
 
-Para calcular el tiempo estimado de funcionamiento continuo, se utiliza la relación entre la capacidad nominal de la batería y la demanda de corriente calculada.
+Para estimar el tiempo de funcionamiento continuo usamos la relación entre la capacidad de la batería y el consumo calculado.
 
-#### 8.2.1. Fórmula General
-$$\text{Autonomía (horas)} = \frac{\text{Capacidad de la Batería (mAh)}}{\text{Consumo Total del Sistema (mA)}}$$
+#### 8.2.1. Fórmula general
 
-#### 8.2.2. Aplicación al Caso de Estudio
+$$\text{Autonomía (horas)} = \frac{\text{Capacidad de la batería (mAh)}}{\text{Consumo total del sistema (mA)}}$$
+
+#### 8.2.2. Aplicación a nuestro vehículo
+
 $$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1272.3 \text{ mA}} \approx 1.73 \text{ horas}$$
 
-* **Tiempo estimado:** Aproximadamente **1 hora y 44 minutos** de operación continua en condiciones normales.
-* **Nota Práctica:** Este modelo es de naturaleza teórica. En un entorno dinámico, los motores variarán su consumo constantemente (aumentando cerca del punto de bloqueo o *stall*) y los sensores se activarán por ráfagas, haciendo que la autonomía real oscile en función de las rutinas algorítmicas del firmware.
+* **Tiempo estimado:** aproximadamente **1 hora y 44 minutos** de operación continua en condiciones normales.
+* **Nota práctica:** es un modelo teórico. En la pista el consumo del motor varía todo el tiempo (sube cerca del bloqueo o *stall*) y los sensores trabajan por ráfagas, así que la autonomía real depende de lo que esté haciendo el firmware.
 
 ---
 
-### 8.3. Eficiencia de los Conversores DC-DC y Autonomía Real
+<a id="autonomia-real"></a>
+### 8.3. Eficiencia de los conversores DC-DC y autonomía real
 
-El cálculo de autonomía anterior asume una relación 1:1 entre la corriente consumida por cada componente y la corriente extraída de la batería, sin considerar que los reguladores XL6009 y DSN-Mini 360 operan a voltajes de salida distintos al de la batería (7V, 6V y 5V vs. 7.4V nominal) y que ninguna conversión es 100% eficiente.
+El cálculo anterior supone que la corriente de cada componente es la misma que sale de la batería. No es así: los reguladores XL6009 y DSN-Mini 360 entregan voltajes distintos a los de la batería (7 V y 5 V frente a 7.4 V nominales) y ninguna conversión es 100 % eficiente.
 
-**Eficiencias de referencia (según hoja de datos del fabricante):**
+**Eficiencias de referencia (hoja de datos del fabricante):**
 
-| Convertidor | Rol en el sistema | Eficiencia típica | Rango según fabricante |
+| Conversor | Función en el sistema | Eficiencia usada | Rango del fabricante |
 | :--- | :--- | :---: | :---: |
-| **XL6009** (step-up/down) | Línea de Tracción (motor + TB6612FNG) | ~88% | Hasta 94% en condiciones ideales; en nuestra aplicación (relación de conversión cercana a 1:1, ~500 mA de carga) el valor real práctico es menor |
-| **DSN-Mini 360** ×2 (step-down, MP2307) | Línea de Control (ESP32) y Línea de Sensores/Actuadores | ~90% | 90–96% típico a carga moderada según el fabricante |
+| **XL6009** (step-up/down) | Línea de tracción (motor + TB6612FNG) | ~88 % | Hasta 94 % en condiciones ideales; con una relación cercana a 1:1 y ~500 mA de carga el valor real es menor |
+| **DSN-Mini 360** ×2 (step-down, MP2307) | Línea de control (ESP32) y línea de servo y sensores | ~90 % | 90–96 % típico con carga moderada |
 
-**Recálculo de la corriente real extraída de la batería (balance de potencia por línea):**
+**Corriente real extraída de la batería (balance de potencia por línea):**
 
 $$P_{\text{entrada}} = \frac{P_{\text{salida}}}{\eta} \qquad I_{\text{batería}} = \frac{P_{\text{entrada}}}{V_{\text{batería}}}$$
 
-| Línea de alimentación | V salida | I salida (nominal) | P salida | η | P entrada | I extraída de batería (7.4V) |
+| Línea de alimentación | V salida | I salida (nominal) | P salida | η | P entrada | I de la batería (7.4 V) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| Tracción (XL6009 → Motor + TB6612) | 7 V | 502 mA | 3.51 W | 88% | 3.99 W | **≈ 540 mA** |
-| Control (Mini 360 → ESP32) | 6 V | 80 mA | 0.48 W | 90% | 0.53 W | **≈ 72 mA** |
-| Sensores/Actuadores (Mini 360 → Sharp+ToF+BNO+TCS+Neopixel+Buzzer+Servo) | 5 V | 665.3 mA | 3.33 W | 90% | 3.70 W | **≈ 500 mA** |
-| **TOTAL REAL EXTRAÍDO DE LA BATERÍA** | | | | | | **≈ 1112 mA** |
+| Tracción (XL6009 → motor + TB6612FNG) | 7 V | 502 mA | 3.51 W | 88 % | 3.99 W | **≈ 540 mA** |
+| Control (Mini 360 #1 → ESP32) | 7 V | 80 mA | 0.56 W | 90 % | 0.62 W | **≈ 84 mA** |
+| Servo y sensores (Mini 360 #2 → Sharp, ToF, BNO055, TCS34725, Neopixel, buzzer y servo) | 5 V | 665.3 mA | 3.33 W | 90 % | 3.70 W | **≈ 500 mA** |
+| **TOTAL REAL EXTRAÍDO DE LA BATERÍA** | | | | | | **≈ 1124 mA** |
 
-$$\text{Autonomía real} \approx \frac{2200 \text{ mAh}}{1112 \text{ mA}} \approx 1.98 \text{ horas} \; (\approx 1\text{h}\,59\text{min})$$
+$$\text{Autonomía real} \approx \frac{2200 \text{ mAh}}{1124 \text{ mA}} \approx 1.96 \text{ horas} \; (\approx 1\text{ h }57\text{ min})$$
 
 > [!IMPORTANT]
-> **Por qué la autonomía real es mayor que la estimación teórica inicial, no menor**
+> **Por qué la autonomía real sale mayor que la estimación inicial**
 >
-> A primera vista se esperaría que las pérdidas por eficiencia *reduzcan* la autonomía, y en efecto lo hacen frente al caso ideal (100% eficiencia). Pero el modelo original (~1.73 h) tenía un sesgo en sentido contrario: sumaba directamente los mA de cada componente como si todos operaran al voltaje de la batería (7.4V), cuando en realidad la mayoría opera a 5V o 6V. Al bajar el voltaje, la corriente equivalente en el lado de la batería es menor — y esa reducción por conversión de voltaje pesa más que la pérdida introducida por la eficiencia de los reguladores. El resultado neto es una autonomía real estimada (~1h 59min) **mayor** a la calculada originalmente sin este ajuste, lo cual es consistente con la observación empírica: en pruebas de una tarde y noche completas no se llegó al límite inferior de carga de la batería.
+> Se esperaría que las pérdidas de los reguladores *redujeran* la autonomía, y frente a un caso ideal (100 % de eficiencia) lo hacen. Pero el primer modelo (~1.73 h) tenía un error en sentido contrario: sumaba los mA de cada componente como si todos trabajaran al voltaje de la batería (7.4 V), cuando la mayoría trabaja a 5 V o 7 V. Al bajar el voltaje, la corriente equivalente del lado de la batería es menor, y ese efecto pesa más que la pérdida en los reguladores. El resultado (~1 h 57 min) coincide con lo que observamos: en una tarde y noche completas de pruebas la batería no llegó a su límite inferior de carga.
 
 ---
 
-### 8.4. Justificación de la Fuente de Alimentación
-### 🔋 Elección del Sistema de Alimentación: ¿Por qué LiPo?
+<a id="justificacion-fuente"></a>
+### 8.4. Justificación de la fuente de alimentación
 
-La elección de una batería de **Polímero de Litio (LiPo)** frente a otras tecnologías del mercado se debe principalmente a su excelente **relación peso-potencia** y a su **capacidad de entrega de corriente instantánea (tasa de descarga)**, factores críticos para el rendimiento dinámico del robot.
+#### 8.4.1. 🔋 ¿Por qué LiPo?
 
----
+Elegimos una batería de **polímero de litio (LiPo)** por su **relación peso-potencia** y por su **capacidad de entregar mucha corriente al instante** (tasa de descarga). Las dos cosas son importantes para el rendimiento dinámico del robot.
 
-#### 8.4.2. 📊 Análisis Comparativo de Tecnologías
+#### 8.4.2. 📊 Comparación de tecnologías
 
-| Tecnología | Densidad Energética | Tasa de Descarga (C) | Peso / Volumen | Comportamiento con Motores/Servos |
+| Tecnología | Densidad energética | Tasa de descarga (C) | Peso / volumen | Con motores y servos |
 | :--- | :---: | :---: | :---: | :--- |
-| **LiPo (2S 50C)** | **Alta** | **Muy Alta (~50C)** | **Muy Ligero** | **Excelente.** Entrega corriente instantánea sin caídas de voltaje. |
-| **Li-ion (18650)** | Muy Alta | Baja (1C - 2C) | Ligero | **Deficiente.** Los picos de corriente provocan *voltage sag* y reinician la ESP32. |
-| **NiMH (6 celdas)**| Media | Media | Muy Pesado | **Aceptable, pero inviable.** El exceso de peso penaliza la agilidad del robot. |
-| **Power Bank (USB)**| Alta | Limitada (2A-3A) | Medio | **Incompatible.** Los circuitos de protección se apagan por sobrecorriente. |
+| **LiPo (2S 50C)** | **Alta** | **Muy alta (~50C)** | **Muy ligera** | **Excelente.** Entrega corriente al instante sin caídas de voltaje. |
+| **Li-ion (18650)** | Muy alta | Baja (1C a 2C) | Ligera | **Deficiente.** Los picos de corriente bajan el voltaje (*voltage sag*) y reinician el ESP32. |
+| **NiMH (6 celdas)** | Media | Media | Muy pesada | **Aceptable pero inviable.** El peso extra le quita agilidad al robot. |
+| **Power bank (USB)** | Alta | Limitada (2 A a 3 A) | Media | **Incompatible.** Su protección se apaga por sobrecorriente. |
 
----
+#### 8.4.3. Justificación frente a las alternativas
 
-#### 8.4.3. Justificación Técnica frente a Alternativas
+**a) Frente a Li-ion (18650).** Las 18650 tienen muy buena densidad de energía, pero su tasa de descarga típica es baja. El motor y el servo generan picos de corriente al arrancar o al forzarse, y una Li-ion común sufriría una caída de voltaje fuerte (*voltage sag*). Eso provocaría **reinicios del ESP32** o activaría la protección de la batería (BMS). La LiPo entrega esa corriente al instante sin bajar el voltaje.
 
-##### a) Frente a Li-ion (18650)
-Aunque las celdas 18650 tienen una excelente densidad energética, su tasa de descarga típica es muy baja. Si se intentan alimentar motores DC y servomotores —que generan altos picos de corriente al arrancar o atascarse— una batería Li-ion común sufrirá una caída de voltaje severa (*voltage sag*). Esto provocaría el **reinicio constante de la ESP32** o la activación del circuito de protección (BMS). La LiPo con su alta tasa de descarga entrega esa corriente al instante sin caídas de tensión.
+**b) Frente a NiMH.** Las NiMH son seguras y duraderas, pero muy pesadas y voluminosas. Para igualar los **7.4 V** de una LiPo 2S harían falta **6 celdas en serie** (1.2 V cada una). Ese peso duplicaría o triplicaría la masa del robot, aumentaría el consumo del motor y le quitaría aceleración en la pista.
 
-##### b) Frente a NiMH
-Las NiMH son seguras y duraderas, pero extremadamente pesadas y voluminosas. Para igualar los **7.4V** nominales de una LiPo 2S, se requerirían **6 celdas de NiMH en serie** (1.2V c/u). Este incremento de peso duplicaría o triplicaría la masa del robot, penalizando el consumo eléctrico de los motores y reduciendo drásticamente la agilidad y aceleración del sistema en pista.
+**c) Frente a power banks comerciales.** Un power bank eleva el voltaje de sus celdas a 5 V con un regulador que tiene un límite estricto de corriente (normalmente 2 A o 3 A). Nuestro consumo simultáneo supera ese límite con facilidad:
 
-##### c) Frente a Power Banks Comerciales
-Los Power Banks elevan internamente el voltaje de sus celdas a 5V mediante reguladores con un límite estricto de corriente (usualmente 2A o 3A máximo). El consumo concurrente del sistema satura este límite con facilidad:
-* **10 LEDs Neopixel** en blanco brillante: `~600 mA`
-* **Servomotor MG90** (esfuerzo de torsión): `~500 mA`
-* **Motor principal 25GA-370** (arranque/carga): `> 1A`
+* **10 LEDs Neopixel** en blanco: `~600 mA`
+* **Servo MG90** forzado: `~700 mA`
+* **Motor 25GA-370** al arrancar o con carga: `> 1 A`
 
-Superar este límite provoca un apagado inmediato del Power Bank por sobrecorriente. Además, los motores **25GA-370** rinden de manera óptima entre **6V y 8V**; alimentarlos a 5V limitaría severamente su torque y velocidad final.
-
+Al pasar ese límite el power bank se apaga. Además, el motor **25GA-370** rinde mejor entre **6 V y 8 V**; a 5 V perdería torque y velocidad.
 
 #### 8.4.4. ¿Por qué 2200 mAh y no más capacidad?
 
-La elección de la capacidad específica de 2200 mAh (y no una mayor) respondió a tres criterios evaluados en conjunto: peso, espacio y margen de autonomía real ya validado.
+La capacidad de 2200 mAh la decidimos por tres criterios: peso, tasa de descarga y una autonomía que ya comprobamos en la práctica.
 
-- **Peso:** la LiPo 2S 2200mAh 50C seleccionada pesa **115 g**. Una celda de 2600 o 3000 mAh de la misma tecnología y tasa de descarga añade masa adicional proporcional a la capacidad extra — peso que impacta directamente la relación torque/masa calculada en la sección de tracción, sin ofrecer una ventaja competitiva relevante dado que la autonomía ya cubre con holgura la duración de una prueba de competencia.
-- **Tasa de descarga (50C):** con 2200 mAh y 50C, la batería puede entregar hasta 110 A de corriente instantánea — muy por encima de cualquier pico real del sistema (~3.6 A, ver tabla de consumo). Esto garantiza arranque del motor sin caídas de tensión (*voltage sag*) ni fluctuaciones que afecten a la lógica de control, sin necesitar más capacidad para lograrlo.
-- **Autonomía suficiente y validada empíricamente:** según el recálculo con pérdidas de conversión (sección anterior), la autonomía real estimada es de ~1h 59min. En la práctica, el equipo utilizó el vehículo durante una tarde y noche completas de pruebas sin llegar al límite inferior de carga, confirmando que 2200 mAh ofrece margen de sobra para entrenamiento y competencia sin necesidad de cargar más peso muerto en el chasis.
+- **Peso:** la LiPo 2S 2200 mAh 50C que usamos pesa **115 g**. Una de 2600 o 3000 mAh de la misma tecnología pesa proporcionalmente más, y ese peso afecta la relación torque/masa (ver [sección 11](#velocidad-torque)) sin darnos ninguna ventaja, porque la autonomía actual ya cubre de sobra una ronda de competencia.
+- **Tasa de descarga (50C):** con 2200 mAh y 50C la batería puede entregar hasta 110 A instantáneos, muy por encima del pico real del sistema (~3.4 A, ver [8.1](#consumo-total)). El motor arranca sin que baje el voltaje y sin afectar a la lógica de control.
+- **Autonomía comprobada:** según el recálculo con pérdidas (8.3), la autonomía real es de ~1 h 57 min. En una tarde y noche completas de pruebas no llegamos al límite de carga, así que 2200 mAh deja margen de sobra para entrenar y competir sin cargar peso muerto.
 
 > [!NOTE]
-> **Compensación de Diseño (*Trade-off*)**
+> **Compromiso de diseño**
 >
-> Subir a 2600–3000 mAh habría añadido entre 20–35 g adicionales aproximadamente (estimado proporcional a la línea de productos de la misma marca/tecnología) a cambio de una autonomía que ya no es el factor limitante del sistema — el "cuello de botella" real está en el tiempo de procesamiento del algoritmo de evasión (ver comparación de tiempos de vuelta), no en la energía disponible. Se priorizó mantener el chasis lo más liviano posible.
-
-> ⚠️ **Nota de Diseño:** La combinación de una LiPo 2S junto a una tasa de descarga de hasta 50C garantiza que la electrónica de control (ESP32) y la etapa de potencia (motores/servos) coexistan de manera estable sin interferencias por caídas de tensión.
----
-
-## Diseño Estructural, Transmisión y Manufactura Aditiva
-
-[*Consultar el historial de versiones de diseño estructural, transmisión y manufactura aditiva aquí*](#paso-a-paso-de-la-construcción)
-
-### Versión 2 (Actual)
+> Subir a 2600–3000 mAh habría añadido unos 20–35 g (estimado de forma proporcional dentro de la misma línea de productos) a cambio de una autonomía que no es lo que nos limita. El cuello de botella real es el tiempo que tarda el algoritmo de evasión (ver los tiempos de vuelta en [11.4](#tiempo-vuelta)), no la energía disponible. Preferimos mantener el chasis lo más liviano posible.
 
 ---
 
-### 1. Filosofía de Rediseño y Prototipado Conceptual
+<a id="diseno-estructural"></a>
+## 9. Diseño estructural, transmisión y manufactura aditiva
 
-El punto de partida de esta iteración consistió en un riguroso análisis de fallos del desempeño en los desafíos anteriores. El diagnóstico principal determinó que el chasis heredado poseía una longitud excesiva, lo que degradaba la cinemática de giro del robot y aumentaba su radio de giro, restando agilidad en las evasiones. 
+*El diseño y la construcción del chasis de 2025 están en el [archivo de 2025](#archivo-chasis-2025).*
 
-Para mitigar este problema sin comprometer el espacio de la electrónica, se fijó un objetivo de diseño geométrico estricto: lograr una **relación de aspecto 1:1**. Esto significa igualar la distancia entre el eje delantero y trasero (*wheelbase*) con el ancho total del vehículo (vía), maximizando la respuesta de la dirección.
+<a id="filosofia-rediseno"></a>
+### 9.1. Filosofía de rediseño y prototipado conceptual
+
+Empezamos analizando qué falló en las rondas del año pasado. La conclusión principal fue que el chasis heredado era demasiado largo: eso empeoraba el giro, aumentaba el radio de giro y le quitaba agilidad en las evasiones.
+
+Para corregirlo sin quitarle espacio a la electrónica nos pusimos un objetivo geométrico: una **relación de aspecto 1:1**, es decir, que la distancia entre el eje delantero y el trasero (*wheelbase*) fuera igual al ancho del vehículo (vía). Así la dirección responde mejor.
 
 > [!IMPORTANT]
-> **Iteración del Tren Motriz: De Correas a Engranajes**
-> 
-> Antes del modelado final, se validaron conceptos espaciales mediante prototipado rápido. Inicialmente, se consideró una transmisión por correa dentada, pero las limitaciones para conseguir bandas a la medida y el riesgo de deslizamiento (*slipping*) obligaron a descartarla. La iteración conceptual consolidó una arquitectura de engranajes cilíndricos de dientes rectos en paralelo. Esto permitió rotar el montaje del motor, empaquetar la transmisión de forma más compacta y confirmar que la reducción longitudinal del chasis era viable.
+> **Tren motriz: de correas a engranajes**
+>
+> Antes del modelado final probamos la idea con prototipos rápidos. Primero pensamos en una transmisión por correa dentada, pero no conseguíamos correas a medida y existía el riesgo de que patinaran (*slipping*), así que la descartamos. Nos quedamos con engranajes rectos en paralelo, que nos permitieron girar el montaje del motor, compactar la transmisión y confirmar que el chasis se podía acortar.
 
-#### Prototipos Conceptuales Tempranos
-![Prototipo Conceptual 1](other/PrototipoTinkercad2026.jpeg)
-![Prototipo Conceptual 2](other/PrototipoTinkercad2_2026.jpeg)
-![Comparativa de Proporciones](other/prototipoComparado2026.jpeg)
+#### 9.1.1. Prototipos conceptuales tempranos
 
----
-
-### 2. Transición a CAD Profesional y Arquitectura "Monochasis"
-
-Demostrada la viabilidad geométrica, el desarrollo se trasladó al entorno paramétrico de **Onshape**. La innovación estructural radica en la concepción de un **Monochasis** para el nivel inferior: una sola pieza que integra de forma nativa los soportes, canales de cableado y alojamientos mediante operaciones booleanas exactas, erradicando los ensambles múltiples y fijaciones caseras propensas a la vibración.
-
-La plataforma resultante mide **179 mm de largo por 115 mm de ancho**, con una distancia entre ejes de **~112 mm**, cristalizando la relación geométrica 1:1 buscada.
-
-![Vista de Planta del Monochasis (Onshape)](other/shasisOneShape2026.jpeg)
-
-#### Desglose Técnico del Tren Motriz (Razonamiento Par/Velocidad)
-* **Motor de Tracción:** Modelo JGA25 de 220 RPM con caja reductora metálica. El monochasis incorpora una cama hundida específica para nuestro motor, alineando el eje de salida con la transmisión.
-* **Sistema Piñón-Corona:** Un piñón de 15 dientes acoplado al motor transmite la potencia a una corona de 25 dientes. Esta **relación de transmisión de 1.66:1** representa una decisión de ingeniería calculada: sacrifica una fracción de la velocidad final máxima para multiplicar el torque (par motor) entregado a las ruedas, garantizando aceleraciones explosivas y controladas desde el reposo absoluto sin estresar mecánicamente el motor.
-* **Eje Trasero (Solución de Taller):** Ante la escasez de varillas calibradas de 4 mm, se adaptaron núcleos de electrodos de soldadura (~2.4 mm). El diámetro se incrementó uniformemente en las zonas de rodadura mediante fundas termocontraíbles, logrando tolerancias de ajuste a presión (*press-fit*) sin holguras.
-* **Apoyos y Rodamientos:** El eje descansa sobre rodamientos 604 ZZ ZSG (4x12x4 mm) encajados en portarolineras nativos del chasis.
+<p align="center">
+  <img src="other/PrototipoTinkercad2026.jpeg" alt="Prototipo conceptual 1" height="210">
+  <img src="other/PrototipoTinkercad2_2026.jpeg" alt="Prototipo conceptual 2" height="210">
+  <img src="other/prototipoComparado2026.jpeg" alt="Comparación de proporciones" height="210">
+</p>
 
 ---
 
-### 3. Validación de Tolerancias y Ensamble Virtual
+<a id="monochasis"></a>
+### 9.2. Transición a CAD profesional y arquitectura Monochasis
 
-Antes de realizar la integración completa, el entorno de Onshape nos permitió modelar y auditar cada componente mecánico de forma individual, asegurando que las tolerancias geométricas fueran perfectas.
+Con la geometría validada pasamos a **Onshape**, un entorno paramétrico. La principal novedad es el **Monochasis** del nivel inferior: una sola pieza que integra los soportes, los canales de cableado y los alojamientos de los componentes. Así eliminamos los ensambles de varias piezas y las fijaciones improvisadas que se aflojaban con la vibración.
 
-#### Modelado de Componentes Clave y Sistemas de Anclaje
-El diseño del tren motriz requirió la creación de engranajes personalizados, implementando soluciones de fijación específicas para cada tipo de eje:
+La plataforma mide **179 mm de largo por 115 mm de ancho**, con una distancia entre ejes de **~112 mm**, lo que cumple la relación 1:1 que buscábamos.
 
-* **Piñón Motriz (Eje tipo "D"):** Para acoplar el engranaje de 15 dientes al motor JGA25, se aprovechó el corte plano de fábrica del eje metálico. Se modeló un agujero con perfil en "D" calculando tolerancias estrictas para impresión 3D, logrando un ensamble a presión (*press-fit*) perfecto. Esto garantiza la transferencia total de torque sin desgaste y evita que el piñón se desplace o escape por vibración.
-* **Corona Conducida (Varilla Lisa):** Para fijar el engranaje de 25 dientes a nuestra varilla trasera adaptada, se implementó un collarín con **sistema de apriete por mordaza tipo "C"**. Al ajustar un tornillo transversal pasante, el collarín se comprime estrangulando la varilla lisa, bloqueando el engranaje mediante fricción radial sin requerir pegamentos ni dañar el metal.
+<p align="center">
+  <img src="other/shasisOneShape2026.jpeg" alt="Vista de planta del Monochasis en Onshape" width="600"><br>
+  <sub>Vista de planta del Monochasis en Onshape.</sub>
+</p>
 
-> ![Render del Piñón de 15 dientes mostrando el agujero en D](other/Engranaje_15D.png)
-> *Piñón motriz (15T) con acoplamiento tipo D.*
+#### 9.2.1. Tren motriz (torque frente a velocidad)
 
-> ![Render de la Corona de 25 dientes con mordaza](other/Engranaje_25D.png)
-> *Corona conducida (25T) con sistema de apriete tipo C.*
+* **Motor de tracción:** 25GA-370 (JGA25) de 220 RPM con caja reductora metálica. El Monochasis tiene una cama hundida hecha a la medida del motor, que deja su eje alineado con la transmisión.
+* **Piñón y corona:** un piñón de 15 dientes en el motor mueve una corona de 25 dientes en el eje trasero. Esta **relación de 1.67:1** sacrifica algo de velocidad máxima para aumentar el torque en las ruedas, así el carro acelera de forma controlada desde parado sin forzar el motor.
+* **Eje trasero (solución de taller):** no conseguimos varilla calibrada de 4 mm, así que usamos el núcleo de electrodos de soldadura (~2.4 mm). En las zonas de los rodamientos aumentamos el diámetro con termorretráctil hasta lograr un ajuste a presión (*press-fit*) sin holgura.
+* **Rodamientos:** el eje gira sobre rodamientos 604ZZ (4 × 12 × 4 mm) encajados en alojamientos del propio chasis.
 
-#### Acoplamiento de Tracción: Adaptador para Ruedas Lego
-Para mantener la excelente adherencia a la pista de las **ruedas Lego** heredadas de la iteración pasada y acoplarlas a nuestra nueva varilla de transmisión lisa, se diseñó una interfaz mecánica a medida. 
-Este componente de transición cuenta con el perfil transversal clásico en cruz de Lego en un extremo, mientras que la base cilíndrica replica el mismo **sistema de apriete por mordaza tipo "C"** utilizado en la corona. Esto permite fijar la rueda sólidamente a la varilla y facilita enormemente el cambio rápido de neumáticos o mantenimientos en los pits.
+---
 
-> ![Vista lateral del adaptador morado con el eje Lego](other/adaptador_lego.png)
-> *Perfil del adaptador de transición.*
+<a id="tolerancias"></a>
+### 9.3. Validación de tolerancias y ensamble virtual
 
-> ![Vista isométrica del adaptador morado mostrando la mordaza tipo C](other/mordaza_tipoc.png)
-> *Detalle del sistema de apriete por mordaza transversal.*
+Antes de integrar todo, en Onshape modelamos y revisamos cada pieza mecánica por separado para asegurarnos de que las tolerancias fueran correctas.
 
-#### Ensamble Virtual y Mitigación de Fallos
-Una vez validados los componentes individuales, el ensamble virtual completo fue vital para analizar interferencias mecánicas y optimizar el diseño antes de la manufactura. 
+#### 9.3.1. Componentes clave y sistemas de anclaje
+
+Diseñamos engranajes propios, cada uno con un sistema de fijación según el tipo de eje:
+
+* **Piñón motriz (eje en "D"):** para acoplar el engranaje de 15 dientes al motor aprovechamos el corte plano que trae su eje. El agujero tiene perfil en "D" con tolerancias pensadas para impresión 3D, de modo que entra a presión (*press-fit*). Transmite todo el torque sin desgastarse y no se sale con la vibración.
+* **Corona (varilla lisa):** el engranaje de 25 dientes se fija a la varilla trasera con un collarín de **abrazadera tipo "C"**. Al apretar un tornillo transversal, el collarín se cierra sobre la varilla y bloquea el engranaje por fricción, sin pegamento y sin dañar el metal.
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/Engranaje_15D.png" alt="Piñón de 15 dientes con agujero en D" width="300"><br><sub>Piñón motriz (15T) con acople en "D".</sub></td>
+<td align="center" width="50%"><img src="other/Engranaje_25D.png" alt="Corona de 25 dientes con abrazadera" width="300"><br><sub>Corona (25T) con abrazadera tipo "C".</sub></td>
+</tr>
+</table>
+
+#### 9.3.2. Acople de tracción: adaptador para ruedas Lego
+
+Las **ruedas Lego** del año pasado tienen muy buen agarre en la pista, así que las mantuvimos. Para montarlas en la nueva varilla lisa diseñamos un adaptador: en un extremo tiene el perfil en cruz de Lego y en el otro una base cilíndrica con la misma **abrazadera tipo "C"** de la corona. La rueda queda firme sobre la varilla y se puede cambiar rápido en los pits.
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/adaptador_lego.png" alt="Adaptador para eje Lego" width="300"><br><sub>Perfil del adaptador.</sub></td>
+<td align="center" width="50%"><img src="other/mordaza_tipoc.png" alt="Abrazadera tipo C del adaptador" width="300"><br><sub>Detalle de la abrazadera transversal.</sub></td>
+</tr>
+</table>
+
+#### 9.3.3. Ensamble virtual y prevención de fallas
+
+Con las piezas validadas, el ensamble virtual completo nos sirvió para encontrar interferencias y corregir el diseño antes de imprimir.
 
 > [!TIP]
-> **Mitigación de Fallos: Rediseño al soporte de motor**
-> 
-> Durante la simulación, se detectó que el soporte del motor tenía los tornillos que anclan al motor ubicados en un punto donde serían cubiertos por la corona del eje trasero. Esto obligaría a desmontar la varilla y casi todo el sistema de tracción para sacar el motor, ocasionando pérdidas de tiempo críticas durante mantenimientos en los pits. Para solucionarlo, se reubicaron los agujeros de anclaje hacia las esquinas expuestas del soporte, permitiendo la extracción rápida del motor con solo retirar el piñón. 
+> **Rediseño del soporte del motor**
+>
+> En la simulación vimos que los tornillos que sujetan el motor quedaban tapados por la corona del eje trasero. Para sacar el motor habría que desmontar la varilla y casi toda la tracción, algo que en los pits cuesta mucho tiempo. Movimos los agujeros a las esquinas libres del soporte y ahora el motor sale quitando solo el piñón.
 
-> ![Subensamble del motor acoplado a sus engranajes y la varilla](other/subensamble_engranajes.png)
-> *Análisis de interferencia del tren de engranajes.*
-
-> ![Vista general de la parte trasera del chasis con la propulsión montada](other/motorConEngranajesOneShape2026.jpeg)
-> *Bloque motriz empaquetado y listo para integración.*
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/subensamble_engranajes.png" alt="Subensamble del motor con engranajes y varilla" width="320"><br><sub>Revisión de interferencias del tren de engranajes.</sub></td>
+<td align="center" width="50%"><img src="other/motorConEngranajesOneShape2026.jpeg" alt="Parte trasera del chasis con la propulsión montada" width="320"><br><sub>Bloque motriz listo para integrar.</sub></td>
+</tr>
+</table>
 
 ---
 
-### 4. Segundo Piso, Separadores y Sistema de Visión "Shark Fin"
+<a id="direccion-ackermann"></a>
+### 9.4. Sistema de dirección Ackermann
 
-El segundo nivel de la plataforma tiene como objetivo distribuir la masa, proteger la electrónica y alojar el robusto sistema de visión computacional.
+📄 *Cálculos completos, verificación en CAD y mediciones: [docs/direccion-ackermann.md](docs/direccion-ackermann.md) ([.docx original](docs/Direccion_Ackermann_Calculos_y_Justificacion.docx)).*
 
-> [!NOTE]
-> **Compensación de Diseño (*Trade-off*) del Centro de Gravedad**
-> 
-> En versiones anteriores, la batería se ubicaba precariamente en la zona superior. El nuevo diseño integró un compartimento ventilado **debajo del primer piso**. Aunque reduce ligeramente la altura libre al suelo (*ground clearance*), esta compensación baja drásticamente el centro de gravedad (CoG), evitando el balanceo o vuelco en curvas a alta velocidad.
+La dirección Lego que traíamos de 2025 era **paralela**: las dos ruedas giraban el mismo ángulo, tenía poco giro máximo y estaba encajada a presión en un recorte del chasis, con holgura. La reemplazamos por una **dirección Ackermann diseñada en Onshape e impresa en PETG-CF**: un servo mueve una biela plana, la biela mueve una barra de acoplamiento y la barra gira las dos manguetas, cada una sobre un pivote (*kingpin*) metálico M3.
 
-> ![Vista inferior del chasis mostrando el compartimento de la batería](other/portaBateriasOneShape2026.jpeg)
+En una dirección Ackermann las prolongaciones de los ejes de las ruedas delanteras se cortan sobre la línea del eje trasero. Así la rueda interior gira más que la exterior, cada una sigue su propia circunferencia y ninguna se arrastra de lado al girar.
 
-#### Separadores Estructurales e Insertos Roscados
-Para mantener la distancia entre el primer y segundo piso, se modelaron **separadores a medida de 60 mm**. Conscientes de las limitaciones físicas de las impresoras 3D convencionales (que no pueden imprimir micro-roscas funcionales que resistan tracción repetitiva), descartamos roscar el plástico. En su lugar, se insertaron por calor **insertos roscados de latón M3** en cada extremo del separador, logrando pilares de altísima resistencia estructural.
+```mermaid
+flowchart LR
+    S["Servo<br/>(brazo 14 mm)"] --> B["Biela plana<br/>14,5 mm"]
+    B --> T["Barra de acoplamiento<br/>68,6 mm"]
+    T --> MI["Mangueta izquierda<br/>brazo 22 mm a 20,56°"]
+    T --> MD["Mangueta derecha<br/>brazo 22 mm a 20,56°"]
+```
 
-#### Sistema de Sujeción del Teléfono (Mordaza Ajustable)
-Para soportar el teléfono celular, se modelaron dos torres aerodinámicas laterales tipo **aleta de tiburón (*Shark Fin*)**. Para garantizar que estas torres no cedieran ante la vibración, se aplicó un método de anclaje de grado industrial:
-* **Fijación a la base:** Cada torre aloja en su base inferior **3 insertos roscados de latón**. Los tornillos atraviesan el segundo piso de abajo hacia arriba, traccionando la torre fuertemente contra la plataforma.
-* *Nota de Diseño (DfAM):* Para que la termofijación de estos insertos fuera perfecta, se modelaron agujeros ciegos con dimensiones precisas de **4.1 mm de diámetro por 9 mm de profundidad**. Estas tolerancias permiten que el inserto entre, y que el plástico derretido fluya por su moleteado exterior sin rebasar hacia el interior de la rosca.
+#### 9.4.1. Geometría
+
+| Fórmula | Uso |
+| :--- | :--- |
+| $\cot\delta_e - \cot\delta_i = K / L$ | Condición de Ackermann |
+| $\theta = \arctan\left(\frac{K/2}{L}\right)$ | Ángulo del brazo de dirección |
+| $R = \frac{L}{\tan\delta_i} + \frac{K}{2}$ | Radio de giro (al centro del eje trasero) |
+
+Donde $\delta_i$ y $\delta_e$ son los ángulos de la rueda interior y exterior, $K$ la separación entre *kingpins* y $L$ = 112 mm la distancia entre ejes.
+
+El primer cálculo usó el ancho del chasis (115 mm) como $K$, pero $K$ es la distancia entre pivotes, no entre ruedas. Probamos 96 mm y 108 mm, que hacían que la mangueta invadiera la llanta, y adoptamos **K = 84 mm** (pivotes a ±42 mm del centro). Con eso:
+
+$$\theta = \arctan\left(\frac{42}{112}\right) = 20{,}56^\circ \qquad \text{barra} = 84 - 2 \cdot 22 \cdot \sin(20{,}56^\circ) = 68{,}55 \text{ mm}$$
+
+| Parámetro | Valor |
+| :--- | :--- |
+| Separación entre kingpins (K) | 84 mm |
+| Brazo de dirección | 22 mm a 20,56° |
+| Barra de acoplamiento | 68,6 mm entre agujeros, con un tercero a 14 mm del centro para la biela |
+| Servo | Montado invertido delante de la barra; brazo de 14 mm y biela plana de 14,5 mm |
+| Recorrido del servo | −50° a +48° (98°) |
+| Ancho entre extremos de rueda | ≈ 143 mm, igual que el eje trasero (adaptador de rueda de 25,7 mm) |
+| Holgura mínima contra el chasis | 1,00 mm en todo el recorrido (verificada en CAD) |
+
+#### 9.4.2. Resultado: real frente a ideal
+
+| δ interior | δ exterior ideal | δ exterior de nuestro mecanismo | Error | Error de una dirección paralela | Radio de giro |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 10° | 8,85° | 9,25° | +0,40° | 1,15° | 677 mm |
+| 20° | 15,96° | 17,06° | +1,10° | 4,04° | 350 mm |
+| 30° | 21,95° | 23,37° | +1,42° | 8,05° | 236 mm |
+| 40° | 27,24° | 27,96° | +0,72° | 12,76° | **176 mm** |
+
+El error nunca pasa de 1,4°, y en el giro máximo el mecanismo está al 94 % del Ackermann ideal. En el montaje real medimos con transportador **40° en la rueda interior y 25° a 30° en la exterior** (promedio 27,5°, frente a 27,2° ideal). La diferencia entre lados está dentro del error de medir sobre papel.
+
+#### 9.4.3. Comparación con la dirección Lego
+
+| Aspecto | Dirección Lego (anterior) | Dirección Ackermann (actual) |
+| :--- | :--- | :--- |
+| **Geometría** | Paralela: el mismo ángulo en las dos ruedas | Ackermann: K = 84 mm, L = 112 mm |
+| **Ángulo máximo** | Reducido (lo típico en Lego es 15° a 20°) | 40° interior y 25°–30° exterior (medido) |
+| **Radio de giro mínimo** | ≈ 308 a 418 mm | **176 mm**, un 43 % menor que con 20° |
+| **Error frente al ideal** | 4,0° con 20° y 8,1° con 30° | 1,1° con 20° y 1,4° con 30° |
+| **Neumáticos** | Se arrastran de lado al girar | Casi tangentes a sus círculos de giro |
+| **Pivotes y rigidez** | Encaje a presión en Lego, con juego | Pivote M3 y piezas en PETG-CF con holguras de 0,1 mm por lado |
 
 > [!IMPORTANT]
-> **Iteración del Sistema Shark Fin: De Ángulo Fijo a Ángulo Ajustable**
+> **Lo que aprendimos en el montaje real**
 >
-> El sistema Shark Fin **no fue diseño directo**: pasó por una primera versión funcional pero limitada antes de llegar al mecanismo actual.
->
-> - **Versión 1 (soporte fijo):** Las dos torres laterales sostenían la mordaza fija mediante un soporte rígido, sin posibilidad de variar el ángulo de inclinación del teléfono una vez montado. Cualquier ajuste de encuadre de cámara requería desmontar y modificar físicamente la pieza.
-> - **Versión 2 (soporte ajustable, actual):** Se eliminó el soporte fijo y se reemplazó por un tornillo que atraviesa cada torre desde el exterior y aprieta contra la base de la mordaza fija. Al aflojar el tornillo, la base pivota libremente permitiendo recalibrar el ángulo de la cámara en campo; al apretarlo, la inclinación queda bloqueada con fricción mecánica.
->
-> Fue un cambio sencillo — un tornillo pasante en lugar de un soporte rígido — pero con alto impacto: permite recalibrar el encuadre de la cámara en segundos durante los pits, sin herramientas adicionales ni reimpresión de piezas.
+> El CAD predecía un recorrido de servo de 81°, pero en la práctica hicieron falta 98°: la barra necesita 22 mm de carrera y, con un brazo de 14 mm, eso exige entre 100° y 104°. Además, el servo había quedado montado al revés. Al voltearlo y ampliar el rango a −50°/+48°, la dirección llegó a los ángulos esperados. También tuvimos que abrir un canal de 2 mm en el chasis para las cabezas de los tornillos de los brazos y fijar las tuercas de los pivotes con autoblocantes, porque no conseguimos tornillos de hombro.
 
-El mecanismo de retención en sí no es una ranura estática, sino una **Prensa/Mordaza ajustable**:
-1. **Calibración de Ángulo:** Las dos torres sostienen una **mordaza fija** central. Esta mordaza está sujeta por tornillos laterales (que encajan en dos insertos roscados propios). Al aflojarlos, la base completa pivota permitiendo ajustar el ángulo de la cámara; al apretarlos, la inclinación queda bloqueada.
-2. **Apriete de Seguridad:** La mordaza fija actúa como guía para una **mordaza móvil** interior. En la parte superior de la base fija se modeló una rosca ensanchada a **M10.5** (dejando 0.5 mm de holgura calculada para compensar la contracción térmica del PETG). Por allí desciende un robusto **tornillo M10 impreso en 3D**. Al girarlo, empuja la mordaza móvil hacia abajo de forma perfectamente lineal y confinada, comprimiendo y asegurando el teléfono inteligente con fuerza mecánica sin riesgo de escape.
-
-> ![Ensamble completo del soporte Shark Fin](other/soporteensamble.png)
-> *Ensamble del soporte Shark Fin interactuando con las torres laterales.*
-
-> ![Detalle del tornillo M10 superior impreso en 3D](other/vista_tornillo_rosca.png)
-> *Tornillo M10 personalizado y rosca M10.5 de compensación térmica.*
-
----
-
-### 5. Integración Total: Ensamble Maestro CAD
-
-Con todos los subsistemas (tracción, suspensión de cámara y chasis estructural) modelados y validados individualmente para evitar colisiones mecánicas, el proceso de diseño en Onshape culmina en un Ensamble Maestro. Esta auditoría virtual final nos permite garantizar la accesibilidad a los puertos de los microcontroladores y confirmar visualmente el cumplimiento de las metas geométricas establecidas para la competencia.
-
-> ![Vista isométrica general de todo el chasis ensamblado en 3D](other/vista_completa_ensamble.png)
-> *Perspectiva global del Prometheus Autónomo consolidado en el entorno de simulación.*
-
----
-
-### 6. Ingeniería de Manufactura Aditiva 
-
-La fabricación se ejecutó aprovechando la estabilidad térmica de la **Creality K1C** y posteriormente en la **Elegoo Centauri Carbon 2**, procesando el modelo en filamento **PETG** a través de Orca Slicer y Elegoo Slicer. Dado que el chasis debe soportar impactos y vibraciones mecánicas constantes, se estableció un perfil de extrusión orientado a la resistencia estructural (*DfAM - Design for Additive Manufacturing*):
-
-| Parámetro de Laminación | Valor | Justificación Técnica (*Trade-off*) |
-| :--- | :--- | :--- |
-| **Temp. de Boquilla** | 260 °C | Maximiza la fluidez y la fuerza intermolecular (*layer adhesion*). |
-| **Flujo Volumétrico Máx.** | 11 - 12 mm³/s | Actúa como gobernador automático de presión en el extrusor. |
-| **Velocidad de Relleno** | 150 mm/s | Previene el desgaste del engranaje del extrusor en pases largos. |
-| **Perímetros Exteriores** | 5 Paredes | Crea una corteza estructural que resiste la torsión mecánica. |
-| **Ventilador de Capa** | 0% inicial / 40% Máx | Compensación crítica: Reduce la estética de los voladizos pero asegura que las capas no se delaminen por enfriamiento prematuro. |
-| **Cabina (Enclosure)** | Abierta | Evita la fluencia térmica (*heat creep*) en la garganta del fusor. |
-
-#### Optimizaciones de Impresión:
-* **Ensamblaje por Clavijas (*Dowels*):** Las geometrías con voladizos extremos fueron cortadas e impresas de forma plana. Su unión se garantizó mediante clavijas guía cilíndricas de 2.5 mm con tolerancias de 0.15 mm para ajuste deslizante (*slip-fit*), reforzadas con cianocrilato.
-* **Gestión Térmica de Micro-componentes:** Las piezas pequeñas se laminaron simultáneamente junto a las grandes. El viaje del cabezal sirvió como ventana de enfriamiento pasivo, evitando la deformación por calor acumulado, apoyadas por un borde exterior (*Brim*) de 5 mm para anclaje a la cama.
-
----
-
-### Dimensiones Finales y Resumen de Logros Estructurales
-
-| Parámetro Geométrico | Dimensión Físico | Estado |
-| :--- | :--- | :--- |
-| **Largo Total** | 179 mm | Optimizado |
-| **Ancho Total (Vía)** | 115 mm | Optimizado |
-| **Distancia entre Ejes** | 112 mm | ~1:1 |
-
-**Evolución Mecánica (2025 vs 2026):**
-* **✓ Maniobrabilidad:** Reducción de la cota longitudinal, logrando un ratio de giro excepcional.
-* **✓ Tracción Controlada:** Transmisión re-calculada a 1.66:1 para priorizar el torque sobre la velocidad pico y reutilización eficiente de ruedas Lego mediante un adaptador DfAM.
-* **✓ Robustez Material:** Transición de fijaciones empíricas a un Monochasis paramétrico en PETG consolidado y separadores de 60 mm con termofijación de latón.
-* **✓ Visión y CoG:** Descenso del compartimento energético (batería) y un sistema "Shark Fin" tipo prensa que asegura tolerancias críticas y previene holguras en el dispositivo de cámara.
-
----
-
-## ⚖️ Análisis de Masa y Distribución de Peso
- 
-Uno de los efectos directos de la transición del chasis heredado hacia la arquitectura **Monochasis** fue la reducción de masa estructural, verificada empíricamente en báscula tras el ensamblaje final. Es importante distinguir **dos etapas dentro de la propia versión 2025**, ya que el chasis heredado ganó masa de forma significativa entre su impresión inicial y su configuración final de competencia:
- 
-| Etapa | Con smartphone | Sin smartphone |
-| :--- | :---: | :---: |
-| **v1 — Chasis 3D recién impreso** (sin trípode ni contrapesos) | 943 g | 763 g |
-| **v1 — Chasis 3D final de competencia** (+ bastón trípode + contrapesos de plomo) | **≈1300 g** | ≈1120 g |
-| **v2 — Monochasis actual (2026)** | **1092 g** | **861 g** |
- 
-| Comparación | Con smartphone | Sin smartphone |
-| :--- | :---: | :---: |
-| v2 (2026) vs. v1 final de competencia (2025) | 🔻 −208 g (−16.0 %) | 🔻 −259 g (−23.1 %) |
- 
-> [!IMPORTANT]
-> **El verdadero costo del sistema trípode + contrapeso**
->
-> La comparación correcta no es contra los 943 g de la impresión inicial de v1 (que **no** incluía aún el sistema trípode), sino contra su configuración final de competencia de **≈1.3 kg**. El bastón del trípode y, sobre todo, los contrapesos de plomo añadidos para compensar el efecto de palanca (ver diario de ingeniería) le agregaron cerca de **360 g** al chasis heredado — casi un tercio de su masa sin teléfono. Esto confirma que el sobrepeso de v1 no era un problema de diseño estructural per se, sino el costo acumulado de mitigar con masa adicional (contrapesos) un defecto geométrico (flexión por palanca) que v2 resolvió de raíz mediante el rediseño de proporciones 1:1, sin necesitar ningún contrapeso.
- 
 > [!NOTE]
-> **Compensación de Diseño (*Trade-off*): Peso vs. Rigidez**
+> **Par del servo**
 >
-> La reducción de hasta 259 g respecto a la versión final de 2025 se logró **sin sacrificar rigidez estructural**, a pesar de que el Monochasis integra en una sola pieza soportes, canales de cableado y alojamientos que antes requerían múltiples piezas ensambladas. La eliminación de refuerzos improvisados (silicón, agujeros correctivos, contrapesos de plomo) es la principal responsable de esta reducción, más que un adelgazamiento deliberado de paredes.
- 
-### Distribución de Masa Estática (Eje Delantero / Eje Trasero)
- 
-Con el smartphone montado en el sistema *Shark Fin*, se realizó una medición independiente por eje para caracterizar el centro de gravedad longitudinal del vehículo:
- 
-| Eje | Masa Medida | Distribución |
+> Con 2,0 kgf·cm y un brazo de 14 mm el servo empuja con unos 14 N, más de 6 veces lo que hace falta para girar las ruedas con el carro parado (unos 0,66 kg sobre el eje delantero). El punto débil del sistema es la holgura mecánica, no la fuerza.
+
+---
+
+<a id="segundo-piso"></a>
+### 9.5. Segundo piso, separadores y sistema de visión Shark Fin
+
+El segundo nivel distribuye la masa, protege la electrónica y sostiene el sistema de visión.
+
+> [!NOTE]
+> **Compromiso de diseño: centro de gravedad**
+>
+> En la versión anterior la batería iba arriba, en una posición poco segura. El nuevo diseño tiene un compartimento ventilado **debajo del primer piso**. Se pierde un poco de altura libre al suelo, pero el centro de gravedad baja mucho y el carro ya no se balancea ni corre riesgo de volcar en las curvas rápidas.
+
+<p align="center">
+  <img src="other/portaBateriasOneShape2026.jpeg" alt="Compartimento de la batería bajo el chasis" width="560"><br>
+  <sub>Vista inferior con el compartimento de la batería.</sub>
+</p>
+
+#### 9.5.1. Separadores e insertos roscados
+
+Entre el primer y el segundo piso van **separadores de 60 mm** diseñados por nosotros. Las impresoras 3D comunes no hacen roscas pequeñas que aguanten apretar y aflojar muchas veces, así que no roscamos el plástico: en cada extremo del separador colocamos con calor un **inserto roscado de latón M3**. Así los pilares quedan muy resistentes.
+
+#### 9.5.2. Sujeción del teléfono (mordaza ajustable)
+
+El teléfono va sostenido por dos torres laterales en forma de **aleta de tiburón (*Shark Fin*)**. Para que no cedan con la vibración las fijamos así:
+
+* **Fijación a la base:** cada torre lleva **3 insertos roscados de latón** en su base. Los tornillos atraviesan el segundo piso de abajo hacia arriba y aprietan la torre contra la plataforma.
+* **Detalle de diseño (DfAM):** para que los insertos entren bien con calor, los agujeros son ciegos de **4.1 mm de diámetro por 9 mm de profundidad**. Con esas medidas el inserto entra y el plástico derretido llena su moleteado sin meterse en la rosca.
+
+> [!IMPORTANT]
+> **Evolución del sistema Shark Fin: de ángulo fijo a ángulo ajustable**
+>
+> - **Versión 1 (soporte fijo):** las torres sostenían la mordaza con un soporte rígido. No se podía cambiar la inclinación del teléfono; cualquier ajuste de la cámara obligaba a desmontar y modificar la pieza.
+> - **Versión 2 (ajustable, actual):** quitamos el soporte rígido y pusimos un tornillo que atraviesa cada torre desde afuera y aprieta la base de la mordaza fija. Aflojándolo, la base pivota y se puede recalibrar el ángulo de la cámara en la pista; apretándolo, queda bloqueada por fricción.
+>
+> Fue un cambio pequeño, un tornillo en lugar de un soporte rígido, pero ahora ajustamos el encuadre en segundos sin herramientas especiales ni reimprimir piezas.
+
+La sujeción en sí es una **prensa ajustable**:
+
+1. **Ángulo:** las dos torres sostienen una **mordaza fija** central, sujeta por los tornillos laterales (que van en sus propios insertos roscados). Aflojándolos se ajusta el ángulo de la cámara; apretándolos queda fijo.
+2. **Apriete:** dentro de la mordaza fija se desliza una **mordaza móvil**. En la parte superior de la base fija modelamos una rosca **M10.5** (0.5 mm de holgura para compensar la contracción del PETG), por donde baja un **tornillo M10 impreso en 3D**. Al girarlo empuja la mordaza móvil en línea recta y sujeta el teléfono con firmeza.
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/soporteensamble.png" alt="Ensamble del soporte Shark Fin" width="320"><br><sub>Soporte Shark Fin montado entre las torres.</sub></td>
+<td align="center" width="50%"><img src="other/vista_tornillo_rosca.png" alt="Tornillo M10 impreso" width="320"><br><sub>Tornillo M10 y rosca M10.5 con holgura térmica.</sub></td>
+</tr>
+</table>
+
+---
+
+<a id="ensamble-maestro"></a>
+### 9.6. Integración total: ensamble maestro CAD
+
+Con todos los subsistemas (tracción, soporte de cámara y chasis) modelados y revisados por separado, armamos en Onshape un ensamble maestro. En esta última revisión virtual comprobamos que se puede llegar a los puertos del microcontrolador y que se cumplen las medidas que nos propusimos.
+
+<p align="center">
+  <img src="other/vista_completa_ensamble.png" alt="Vista isométrica del vehículo completo en 3D" width="600"><br>
+  <sub>El vehículo completo en el entorno de Onshape.</sub>
+</p>
+
+---
+
+<a id="manufactura-aditiva"></a>
+### 9.7. Manufactura aditiva
+
+Imprimimos primero en una **Creality K1C** y después en una **Elegoo Centauri Carbon 2**, con filamento **PETG** y los programas Orca Slicer y Elegoo Slicer. Las piezas de la dirección (manguetas, barra, biela y soporte del servo) van en **PETG-CF**, que es más rígido. Como el chasis recibe golpes y vibraciones todo el tiempo, usamos un perfil pensado para resistencia (*DfAM, Design for Additive Manufacturing*):
+
+| Parámetro | Valor | Justificación |
+| :--- | :--- | :--- |
+| **Temperatura de boquilla** | 260 °C | Mejor fluidez y mejor adhesión entre capas (*layer adhesion*). |
+| **Flujo volumétrico máximo** | 11–12 mm³/s | Limita la presión en el extrusor y evita que se quede corto. |
+| **Velocidad de relleno** | 150 mm/s | Evita el desgaste del engranaje del extrusor en recorridos largos. |
+| **Perímetros exteriores** | 5 paredes | Forman una capa exterior que resiste la torsión. |
+| **Ventilador de capa** | 0 % al inicio / 40 % máx. | Los voladizos quedan peor estéticamente, pero las capas no se separan por enfriarse demasiado rápido. |
+| **Cabina** | Abierta | Evita que el calor suba por la garganta del hotend (*heat creep*). |
+
+#### 9.7.1. Optimizaciones de impresión
+
+* **Unión con clavijas (*dowels*):** las piezas con voladizos grandes se cortaron e imprimieron planas. Se unen con clavijas guía de 2.5 mm con 0.15 mm de holgura (*slip-fit*), reforzadas con cianoacrilato.
+* **Enfriamiento de piezas pequeñas:** las imprimimos junto con las grandes. El tiempo que el cabezal pasa en las otras piezas les da a las pequeñas tiempo de enfriarse y no se deforman. Usamos además un borde (*brim*) de 5 mm para que se pegaran bien a la cama.
+
+---
+
+<a id="dimensiones-finales"></a>
+### 9.8. Dimensiones finales y resumen de logros estructurales
+
+| Parámetro | Medida | Estado |
+| :--- | :--- | :--- |
+| **Largo total** | 179 mm | Reducido |
+| **Ancho del chasis** | 115 mm | Mantenido |
+| **Ancho total con ruedas** | ≈ 143 mm | Igual adelante y atrás |
+| **Distancia entre ejes** | 112 mm | ≈ 1:1 con el ancho del chasis |
+| **Radio de giro mínimo** | 176 mm | Con la dirección Ackermann |
+
+**Evolución mecánica (2025 → 2026):**
+
+* **✓ Maniobrabilidad:** el chasis es más corto y la dirección Ackermann baja el radio de giro mínimo a 176 mm.
+* **✓ Tracción:** transmisión de 1.67:1 que prioriza el torque, y las ruedas Lego reutilizadas con un adaptador propio.
+* **✓ Robustez:** pasamos de fijaciones improvisadas a un Monochasis paramétrico en PETG con separadores de 60 mm e insertos de latón.
+* **✓ Visión y centro de gravedad:** la batería bajó al nivel inferior y el sistema Shark Fin sujeta el teléfono sin holguras.
+
+---
+
+<a id="analisis-masa"></a>
+## 10. ⚖️ Análisis de masa y distribución de peso
+
+<a id="masa-total"></a>
+### 10.1. Masa del vehículo: 2025 frente a 2026
+
+Pasar del chasis heredado al **Monochasis** redujo la masa, y lo comprobamos con báscula después del ensamble final. Hay que distinguir **dos etapas dentro de la propia versión de 2025**, porque ese chasis ganó mucho peso entre su primera impresión y su configuración final de competencia:
+
+| Etapa | Con teléfono | Sin teléfono |
+| :--- | :---: | :---: |
+| **v1 (2025): chasis recién impreso** (sin trípode ni contrapesos) | 943 g | 763 g |
+| **v1 (2025): configuración final de competencia** (+ trípode + contrapesos de plomo) | **≈1300 g** | ≈1120 g |
+| **v2 (2026): Monochasis actual** | **1092 g** | **861 g** |
+
+| Comparación | Con teléfono | Sin teléfono |
+| :--- | :---: | :---: |
+| v2 (2026) frente a v1 de competencia (2025) | 🔻 −208 g (−16.0 %) | 🔻 −259 g (−23.1 %) |
+
+> [!IMPORTANT]
+> **Lo que realmente costaban el trípode y los contrapesos**
+>
+> La comparación correcta no es contra los 943 g de la primera impresión de v1 (que todavía **no** tenía el trípode), sino contra su configuración de competencia de **≈1.3 kg**. El trípode y, sobre todo, los contrapesos de plomo que pusimos para compensar el efecto palanca (ver [sección 12](#diario-ingenieria)) le añadieron cerca de **360 g**, casi un tercio de su masa sin teléfono. El sobrepeso de v1 no venía del chasis en sí, sino de corregir con peso un defecto geométrico (la flexión por palanca). La v2 lo resolvió de raíz con la proporción 1:1 y no necesita contrapesos.
+>
+> Frente al chasis de 2025 recién impreso, la v2 pesa algo más (861 g frente a 763 g sin teléfono), porque ahora lleva cuatro ToF, tres reguladores, la tira de LEDs y el soporte Shark Fin.
+
+> [!NOTE]
+> **Compromiso de diseño: peso frente a rigidez**
+>
+> Bajamos hasta 259 g respecto a la versión final de 2025 **sin perder rigidez**, aunque el Monochasis integra en una sola pieza soportes, canales de cableado y alojamientos que antes eran piezas separadas. La reducción viene sobre todo de eliminar los refuerzos improvisados (silicón, agujeros correctivos, contrapesos de plomo), no de adelgazar las paredes.
+
+<a id="distribucion-masa"></a>
+### 10.2. Distribución de masa estática (eje delantero / eje trasero)
+
+Con el teléfono montado en el *Shark Fin* pesamos cada eje por separado para conocer el centro de gravedad longitudinal:
+
+| Eje | Masa medida | Distribución |
 | :--- | :---: | :---: |
 | **Delantero** | 660 g | **54.5 %** |
 | **Trasero** | 550 g | **45.5 %** |
-| **Total (config. de medición)** | 1210 g | 100 % |
- 
+| **Total (configuración de medición)** | 1210 g | 100 % |
+
 ```mermaid
 pie showData
-    title Distribución de Masa Estática por Eje
-    "Eje Delantero (54.5%)" : 660
-    "Eje Trasero (45.5%)" : 550
+    title Distribución de masa estática por eje
+    "Eje delantero (54.5 %)" : 660
+    "Eje trasero (45.5 %)" : 550
 ```
- 
+
 > [!IMPORTANT]
-> **Justificación de Ingeniería**
+> **Interpretación**
 >
-> El ligero sesgo hacia el eje delantero (≈9 puntos porcentuales por encima del reparto ideal 50/50) es consistente con el diseño: el teléfono y el sistema *Shark Fin* — los componentes más pesados montados en altura — están ubicados sobre el segundo piso hacia la zona delantera-media, mientras que la batería LiPo se reubicó **debajo del primer piso** (ver sección de *Trade-off* del centro de gravedad) precisamente para compensar y bajar el CoG global, sin eliminar por completo el sesgo delantero. Este reparto favorece la tracción en frenado y la respuesta de la dirección delantera, aunque exige que el motor trasero entregue suficiente torque para no perder agarre en la aceleración — lo cual se valida en la siguiente sección.
+> El eje delantero lleva unos 9 puntos más que un reparto 50/50. Es lo esperado: el teléfono y el *Shark Fin*, que son lo más pesado montado en altura, están sobre el segundo piso hacia la zona delantera-media. La batería LiPo se movió **debajo del primer piso** (ver [9.5](#segundo-piso)) justamente para bajar el centro de gravedad, aunque no elimina por completo el sesgo hacia adelante. Este reparto ayuda a la tracción al frenar y a la respuesta de la dirección, pero deja menos peso sobre el eje motriz, algo que revisamos en el cálculo de agarre ([11.5](#friccion)).
 
 ---
 
-## 🚀 Cálculo de Velocidad, Torque y Margen de Seguridad
+<a id="velocidad-torque"></a>
+## 11. 🚀 Velocidad, torque y tracción
 
-Para garantizar que el vehículo cuente con la agilidad y fuerza necesarias en la pista, se calcularon teóricamente la velocidad lineal y los requerimientos de torque del tren motriz basándonos en la masa actual del vehículo en configuración de competencia (incluyendo el smartphone).
+Calculamos la velocidad lineal y el torque del tren motriz con la masa actual del vehículo en configuración de competencia (con el teléfono), teniendo en cuenta la caja reductora del motor y nuestra transmisión de engranajes 15T → 25T.
 
-### 1. Cálculo de la Velocidad Lineal del Vehículo
-El motor empleado (25GA-370) tiene una velocidad nominal de 220 RPM en el eje de salida. Convertimos esta velocidad a radianes por segundo ($\omega$):
+<a id="velocidad-lineal"></a>
+### 11.1. Velocidad lineal del vehículo
 
-$$\omega = \frac{220 \cdot 2\pi}{60} \approx 23.04 \text{ rad/s}$$
+El motor 25GA-370 gira a 220 RPM en el eje de salida de su caja reductora. Convertido a radianes por segundo:
 
-Con un radio de rueda ($r$) de 0.04 m, la velocidad lineal teórica ($v$) del vehículo es:
+$$\omega_{\text{motor}} = \frac{220 \cdot 2\pi}{60} \approx 23.04 \text{ rad/s}$$
 
-$$v = \omega \cdot r = 23.04 \cdot 0.04 \approx 0.92 \text{ m/s}$$
+La transmisión piñón (15T) → corona (25T) reduce otra vez la velocidad en la rueda:
 
-### 2. Cálculo de Torque Necesario y Disponible
-El torque necesario ($T_{\text{necesario}}$) para mover el vehículo desde el reposo absoluto se calcula mediante la fórmula:
+$$\omega_{\text{rueda}} = \omega_{\text{motor}} \cdot \frac{15}{25} \approx 13.82 \text{ rad/s} \;(\approx 132 \text{ RPM})$$
 
-$$T_{\text{necesario}} = m \cdot g \cdot r$$
+Con un radio de rueda $r = 0.04$ m, la velocidad lineal máxima teórica es:
+
+$$v = \omega_{\text{rueda}} \cdot r = 13.82 \cdot 0.04 \approx 0.55 \text{ m/s}$$
+
+<a id="torque"></a>
+### 11.2. Torque necesario y torque disponible
+
+Como criterio exigente tomamos como torque de referencia el necesario para sostener todo el peso del vehículo en el radio de la rueda (equivale a subir una pared vertical). Es mucho más de lo que pide mover el carro en la pista, donde solo hay que vencer la resistencia a la rodadura:
+
+$$T_{\text{ref}} = m \cdot g \cdot r$$
 
 Donde:
-* $m$ = masa del vehículo actual con smartphone (1.092 kg)
+
+* $m$ = masa del vehículo con teléfono (1.092 kg)
 * $g$ = gravedad (9.81 $\text{m/s}^2$)
 * $r$ = radio de las ruedas (0.04 m)
 
-$$T_{\text{necesario}} = 1.092 \cdot 9.81 \cdot 0.04 \approx 0.429 \text{ N·m}$$
+$$T_{\text{ref}} = 1.092 \cdot 9.81 \cdot 0.04 \approx 0.429 \text{ N·m}$$
 
-Por otro lado, el motor 25GA-370 con su caja reductora integrada (21.3:1) entrega un torque de salida ($T_{\text{salida}}$ o disponible) mayor:
+El motor entrega 0.0343 N·m antes de su caja reductora (21.3:1), y nuestra transmisión multiplica el torque por 25/15:
 
-$$T_{\text{disponible}} = 0.0343 \text{ N·m (motor base)} \cdot 21.3 \approx 0.7306 \text{ N·m}$$
+$$T_{\text{salida motor}} = 0.0343 \cdot 21.3 \approx 0.731 \text{ N·m} \qquad T_{\text{rueda}} = 0.731 \cdot \frac{25}{15} \approx 1.218 \text{ N·m}$$
 
-### 3. Margen de Seguridad de Torque
-Con el torque necesario y el torque disponible calculados, se puede cuantificar el margen de seguridad del sistema de tracción como un porcentaje, siguiendo la lógica de un análisis de ingeniería estándar:
+<a id="margen-seguridad"></a>
+### 11.3. Margen de seguridad de torque
 
-$$\text{Margen de Seguridad (\%)} = \frac{T_{\text{disponible}}}{T_{\text{necesario}}} \times 100$$
-
-$$\text{Margen de Seguridad} = \frac{0.7306 \text{ N·m}}{0.429 \text{ N·m}} \times 100 \approx 170.5\%$$
+$$\text{Margen de seguridad} = \frac{T_{\text{rueda}}}{T_{\text{ref}}} \times 100 = \frac{1.218}{0.429} \times 100 \approx 284\,\%$$
 
 > [!IMPORTANT]
 > **Interpretación del margen**
 >
-> Un valor de 170.5% significa que el tren motriz entrega suficiente potencia para mover el vehículo (1092 g) en condiciones normales, contando con un excedente del **70.5%** por encima del mínimo requerido. Este colchón no es gratuito: se traduce directamente en capacidad de aceleración, tolerancia a superficies con mayor fricción de la esperada y margen ante el desgaste progresivo de los engranajes impresos en 3D, garantizando que el peso extra del teléfono no comprometa la agilidad en la pista.
+> Incluso con un criterio tan exigente, el tren motriz entrega casi **tres veces** el torque de referencia. Ese excedente se traduce en capacidad de aceleración, tolerancia a superficies con más fricción de la esperada y margen ante el desgaste de los engranajes impresos. El peso del teléfono no compromete la agilidad del carro.
 
-### 4. Tiempo Teórico de Vuelta vs. Tiempo Real en Pista
-A partir de la velocidad lineal máxima calculada ($v = 0.92 \text{ m/s}$), es posible estimar el tiempo teórico que tomaría completar una vuelta a la pista y compararlo contra los tiempos reales medidos en pruebas.
+<a id="tiempo-vuelta"></a>
+### 11.4. Tiempo teórico de vuelta frente al tiempo real
 
-$$\text{Tiempo teórico} = \frac{\text{Distancia recorrida en una vuelta}}{v}$$
+Con la velocidad máxima calculada ($v \approx 0.55$ m/s) podemos estimar cuánto tardaría una vuelta y compararlo con lo que medimos en las pruebas:
 
+$$\text{Tiempo teórico} = \frac{\text{Distancia de una vuelta}}{v} \approx \frac{9.5 \text{ m}}{0.55 \text{ m/s}} \approx 17.2 \text{ s}$$
 
-$$\text{Tiempo teórico} \approx \frac{9.5 \text{ m}}{0.92 \text{ m/s}} \approx 10.3 \text{ s}$$
-
-| Modo | Tiempo Teórico (v máx. constante) | Tiempo Real Medido (promedio) | Velocidad Real Efectiva | % de la Velocidad Teórica |
+| Modo | Tiempo teórico (v máx. constante) | Tiempo real medido (promedio) | Velocidad real efectiva | % de la velocidad teórica |
 | :--- | :---: | :---: | :---: | :---: |
-| **Vuelta Libre** | ≈ 10.3 s | **25 s** | ≈ 0.38 m/s | ≈ 41% |
-| **Modo Obstáculos** | ≈ 10.3 s (misma distancia base) | **1:20 min (80 s)** | ≈ 0.12 m/s | ≈ 13% |
+| **Vuelta libre** | ≈ 17.2 s | **25 s** | ≈ 0.38 m/s | ≈ 69 % |
+| **Modo obstáculos** | ≈ 17.2 s (misma distancia base) | **1:20 min (80 s)** | ≈ 0.12 m/s | ≈ 21 % |
 
 ```mermaid
 xychart-beta
-    title "Tiempo por Vuelta: Teórico vs. Real"
-    x-axis ["Teórico (v máx.)", "Vuelta Libre (real)", "Obstáculos (real)"]
+    title "Tiempo por vuelta: teórico vs. real"
+    x-axis ["Teórico (v máx.)", "Vuelta libre (real)", "Obstáculos (real)"]
     y-axis "Tiempo (segundos)" 0 --> 90
-    bar [10.3, 25, 80]
+    bar [17.2, 25, 80]
 ```
 
 > [!IMPORTANT]
-> **Por qué la brecha es esperada (y qué nos dice)**
+> **Por qué la diferencia es esperable y qué nos dice**
 >
-> El tiempo teórico asume velocidad lineal máxima constante durante toda la vuelta, lo cual no ocurre en la práctica: el algoritmo de Vuelta Libre reduce la velocidad al corregir el ángulo con el BNO055 y al ajustar la distancia de seguridad respecto al muro antes de cada intersección, mientras que en Modo Obstáculos se suman las desaceleraciones necesarias para detectar, clasificar y esquivar cada pilar. La caída al ~41% de la velocidad teórica en vuelta libre es consistente con un algoritmo que prioriza precisión de trayectoria sobre velocidad pico; la caída adicional a ~13% en obstáculos confirma que el cuello de botella no es mecánico (el motor tiene margen de torque de sobra, ver sección anterior) sino de tiempo de procesamiento y maniobra en el modo de evasión.
+> El tiempo teórico supone velocidad máxima constante durante toda la vuelta, y eso no pasa. En vuelta libre el algoritmo reduce la velocidad para corregir el ángulo con el BNO055, ajustar la distancia al muro y girar en cada esquina. En modo obstáculos, además, el carro se detiene a esperar el comando de la app y hace las maniobras de cambio de carril. Llegar al ~69 % de la velocidad teórica en vuelta libre es coherente con un algoritmo que prioriza la precisión de la trayectoria. La caída al ~21 % en obstáculos confirma que el límite no es mecánico (el motor tiene torque de sobra, ver 11.3), sino el tiempo de decisión y de maniobra del modo de evasión.
 
-## 🔵 Coeficiente de Fricción y su Rol en el Cálculo de Tracción
- 
-Para validar el margen de torque calculado en la sección de transmisión, es necesario cuantificar la fuerza de fricción disponible entre las ruedas Lego Technic y la superficie de la pista (tapiz tipo alfombra/goma reglamentario de WRO).
- 
-$$F_{friccion} = \mu \cdot N$$
- 
+<a id="friccion"></a>
+### 11.5. Coeficiente de fricción y agarre
+
+Para completar el análisis hay que saber cuánta fuerza pueden transmitir las ruedas Lego Technic al tapete de la pista antes de patinar:
+
+$$F_{\text{fricción}} = \mu \cdot N$$
+
 Donde:
-- **μ (coeficiente de fricción estático rueda–tapiz):** se estima en un rango de **0.6 – 0.8**, valor típico documentado para neumáticos de goma Lego Technic sobre superficies texturizadas similares al tapiz de competencia (no se dispone de tribómetro, por lo que se usa un rango de referencia en lugar de un valor único).
-- **N (fuerza normal sobre el eje motriz):** derivada directamente de la distribución de masa medida — **550 g × 9.81 m/s² ≈ 5.4 N** sobre el eje trasero (motriz).
 
-| Escenario | μ | Fuerza de fricción máxima disponible (eje trasero) |
-| :--- | :---: | :---: |
-| Conservador | 0.6 | ≈ 3.24 N |
-| Óptimo | 0.8 | ≈ 4.32 N |
- 
+- **μ (coeficiente de fricción estático rueda–tapete):** lo estimamos entre **0.6 y 0.8**, un rango típico para neumáticos de goma Lego sobre superficies texturizadas parecidas al tapete de competencia. No tenemos tribómetro, por eso usamos un rango y no un valor único.
+- **N (fuerza normal sobre el eje motriz):** sale de la distribución de masa medida: **550 g × 9.81 m/s² ≈ 5.4 N** sobre el eje trasero.
+
+| Escenario | μ | Fuerza de fricción máxima (eje trasero) | Aceleración máxima ($F/m$, con 1.092 kg) |
+| :--- | :---: | :---: | :---: |
+| Conservador | 0.6 | ≈ 3.24 N | ≈ 3.0 m/s² |
+| Favorable | 0.8 | ≈ 4.32 N | ≈ 4.0 m/s² |
+
 > [!TIP]
-> **Por qué este dato importa**
+> **Qué nos dice este dato**
 >
-> Este cálculo cierra el ciclo de validación del tren motriz: no basta con que el motor tenga torque suficiente en el eje (ya calculado previamente con el margen de seguridad), también hay que confirmar que **la fricción disponible no sea el factor limitante** antes que el propio motor. Como la fuerza de fricción máxima (3.24–4.32 N) es mayor que la fuerza de tracción requerida para la aceleración objetivo del vehículo, se confirma que el sistema está limitado por el torque del motor y no por pérdida de agarre — es decir, el diseño está correctamente dimensionado y no derrapará antes de alcanzar su velocidad de operación.
- 
----
- 
-## ⚙️ Alternativas de Transmisión Evaluadas: Piñón-Corona vs. Correa Dentada
- 
-Antes de consolidar la relación de transmisión 1.66:1 mediante engranajes cilíndricos, se evaluó formalmente una arquitectura alternativa por correa dentada, descartada por las siguientes razones técnicas:
- 
-| Criterio | 🟢 Piñón-Corona (elegido) | 🔴 Correa Dentada (descartado) |
+> El motor puede empujar con unos **30 N** en la rueda ($1.218 \text{ N·m} / 0.04 \text{ m}$), mucho más que los 3.2–4.3 N de agarre. Eso significa que **la aceleración la limita el agarre y no el motor**: si se aplica toda la potencia de golpe, las ruedas pueden patinar. Aun así, con 3 m/s² el carro llega a su velocidad máxima (0.55 m/s) en menos de 0.2 s, que es más que suficiente para la pista. También explica por qué conviene no quitar más peso del eje trasero.
+
+<a id="alternativas-transmision"></a>
+### 11.6. Alternativas de transmisión evaluadas: piñón-corona frente a correa dentada
+
+Antes de quedarnos con la relación 1.67:1 de engranajes evaluamos una transmisión por correa dentada. La descartamos por estas razones:
+
+| Criterio | 🟢 Piñón-corona (elegido) | 🔴 Correa dentada (descartada) |
 | :--- | :--- | :--- |
-| **Precisión de relación de transmisión** | Exacta y constante (contacto positivo diente-diente) | Variable — susceptible a **deslizamiento (*slipping*)**, degrada la relación real bajo carga |
-| **Disponibilidad de repuestos (Venezuela)** | Alta — fabricables bajo demanda en impresora 3D propia | Baja — bandas de medida específica difíciles de conseguir localmente |
-| **Comportamiento bajo carga** | Estable — la masa del vehículo (861–1092 g) no compromete el engrane | Riesgo de ruptura de la banda ante la masa considerable del vehículo |
-| **Sensibilidad al ajuste/tensado** | Ninguna — el engrane no requiere tensión externa | Crítica — tensión insuficiente causa deslizamiento; tensión excesiva daña los ejes |
-| **Mantenibilidad en pits** | Alta — reemplazo rápido, tolerancias impresas conocidas | Baja — requiere retensado fino cada vez que se manipula |
-| **Costo de iteración de diseño** | Bajo — un nuevo piñón/corona es una reimpresión | Alto — depende de terceros para conseguir banda a medida |
- 
+| **Relación de transmisión** | Exacta y constante (contacto diente a diente) | Puede **patinar (*slipping*)** y cambiar la relación real con carga |
+| **Repuestos en Venezuela** | Alta disponibilidad: los imprimimos nosotros | Baja: las correas de medida específica son difíciles de conseguir |
+| **Con carga** | Estable: la masa del vehículo (861–1092 g) no afecta el engrane | Riesgo de que la correa se rompa con el peso del vehículo |
+| **Ajuste / tensado** | No necesita: el engrane no requiere tensión | Crítico: poca tensión hace que patine y demasiada daña los ejes |
+| **Mantenimiento en pits** | Fácil: cambio rápido, tolerancias conocidas | Difícil: hay que volver a tensarla cada vez que se toca |
+| **Costo de iterar el diseño** | Bajo: un piñón o corona nuevo es una reimpresión | Alto: depende de conseguir una correa a medida |
+
 > [!IMPORTANT]
-> **Conclusión de Ingeniería**
+> **Conclusión**
 >
-> La transmisión por engranajes ofrece **acoplamiento positivo** (sin elemento elástico intermedio), lo que elimina cualquier pérdida de sincronía entre la rotación del motor y la rotación de las ruedas — una propiedad crítica para que el algoritmo de navegación autónoma (que depende de la relación de transmisión conocida para sus cálculos de velocidad lineal) sea determinístico. Adicionalmente, al ser una pieza 100% fabricada in-house, el equipo controla directamente las tolerancias de cada diente, iterando el diseño en horas en lugar de depender de la cadena de suministro local — un factor decisivo en un país donde la disponibilidad de componentes específicos (como bandas dentadas a medida) es limitada.
- 
+> Los engranajes dan un **acople positivo**, sin un elemento elástico en medio, así que la rotación del motor y la de las ruedas nunca pierden sincronía. Eso es importante para que el algoritmo de navegación, que asume una relación de transmisión conocida, se comporte siempre igual. Además, como fabricamos las piezas nosotros, controlamos las tolerancias de cada diente y podemos cambiar el diseño en horas en lugar de depender de proveedores, algo decisivo en un país donde conseguir piezas específicas (como correas a medida) es difícil.
+
 ---
- 
-## 📓 Diario de Ingeniería: Evolución del Chasis (v0 → v2)
- 
-Esta sección documenta el historial completo de fallos y rediseños que llevaron a la arquitectura Monochasis actual, siguiendo la metodología de diagnóstico → causa raíz → mitigación.
- 
+
+<a id="diario-ingenieria"></a>
+## 12. 📓 Diario de ingeniería: evolución del chasis (v0 → v2)
+
+Aquí registramos las fallas y rediseños que nos llevaron al Monochasis actual, siguiendo el orden diagnóstico → causa raíz → solución.
+
 ```mermaid
 flowchart TD
-    A["🟤 v0 — Prototipo de Cartón<br/>(validación geométrica de<br/>transmisión trasera y dirección Lego)"] -->|"Flexión del material,<br/>zonas ablandadas,<br/>desgaste por uso"| B["🖨️ v1 — Chasis 3D Impreso<br/>(impreso por terceros, sin<br/>iteración propia)"]
-    B -->|"Diagnóstico: chasis excesivamente<br/>largo por sistema trípode"| C{"⚠️ Fallas Detectadas en v1"}
-    C --> C1["Flexión central del chasis<br/>(efecto palanca del bastón<br/>del trípode)"]
-    C --> C2["Motor trasero orientado<br/>verticalmente → alto<br/>consumo de espacio"]
-    C --> C3["Ensamblaje no modular:<br/>silicón, agujeros correctivos,<br/>lijado manual"]
-    C1 --> D["🔧 Mitigación temporal v1:<br/>contrapesos de plomo cerca<br/>del eje trasero"]
-    C2 --> E["📏 Rediseño geométrico:<br/>objetivo de relación 1:1<br/>(wheelbase = vía)"]
-    C3 --> F["🔩 Rediseño para modularidad:<br/>tornillería Allen M3 en<br/>toda la plataforma"]
-    D --> G["✅ v2 — Monochasis Actual<br/>(179×115 mm, eje 112 mm,<br/>motor horizontal, desmontable)"]
+    A["🟤 v0: prototipo de cartón<br/>(validar la transmisión trasera<br/>y la dirección Lego)"] -->|"Flexión del material,<br/>zonas ablandadas,<br/>desgaste por uso"| B["🖨️ v1: chasis impreso en 3D<br/>(impreso por terceros, sin<br/>poder iterar nosotros)"]
+    B -->|"Diagnóstico: chasis demasiado<br/>largo por el sistema trípode"| C{"⚠️ Fallas detectadas en v1"}
+    C --> C1["Flexión en el centro del chasis<br/>(palanca del trípode)"]
+    C --> C2["Motor trasero vertical:<br/>mucho espacio ocupado"]
+    C --> C3["Ensamble no modular:<br/>silicón, agujeros correctivos,<br/>lijado a mano"]
+    C1 --> D["🔧 Parche temporal en v1:<br/>contrapesos de plomo cerca<br/>del eje trasero"]
+    C2 --> E["📏 Rediseño geométrico:<br/>relación 1:1<br/>(wheelbase = vía)"]
+    C3 --> F["🔩 Rediseño modular:<br/>tornillos Allen M3 en<br/>toda la plataforma"]
+    D --> G["✅ v2: Monochasis actual<br/>(179 × 115 mm, ejes a 112 mm,<br/>motor horizontal, desmontable)"]
     E --> G
     F --> G
 ```
- 
-### 🟤 Iteración v0 — Prototipo de Cartón
- 
+
+<a id="iteracion-v0"></a>
+### 12.1. 🟤 Iteración v0: prototipo de cartón
+
 | | |
 | :--- | :--- |
-| **Objetivo** | Validar el encaje físico del sistema de transmisión trasera y del sistema de dirección delantera, ambos construidos con piezas Lego, antes de comprometerse a un diseño CAD definitivo. |
-| **Método** | Iteraciones sucesivas de la base de cartón, ajustando medidas hasta lograr el encaje perfecto de ambos subsistemas. |
-| **Diagnóstico de falla** | Tras varias pruebas, el cartón mostró **flexión notable**, zonas ablandadas por humedad/uso y síntomas generales de fatiga de material — comportamiento esperado de un material concebido como *placeholder* temporal. |
-| **Causa raíz** | El cartón nunca fue seleccionado como material estructural final; su función fue exclusivamente geométrica (definir medidas de encaje), no mecánica. |
-| **Lección aprendida** | Las medidas validadas en cartón se trasladaron directamente a un entorno CAD para la siguiente iteración, evitando repetir el proceso de prueba-error en un material sin capacidad de carga real. |
- 
-### 🖨️ Iteración v1 — Primer Chasis Impreso en 3D
- 
+| **Objetivo** | Comprobar que la transmisión trasera y la dirección delantera, ambas hechas con piezas Lego, encajaran físicamente antes de pasar a un diseño CAD. |
+| **Método** | Varias versiones de la base de cartón, ajustando medidas hasta que ambos sistemas encajaron bien. |
+| **Falla** | Después de varias pruebas el cartón se **dobló**, se ablandó en algunas zonas por la humedad y el uso y mostró fatiga general. Era lo esperado de un material provisional. |
+| **Causa raíz** | El cartón nunca se eligió como material estructural; solo servía para definir medidas, no para soportar carga. |
+| **Lección** | Las medidas validadas en cartón pasaron directo al CAD de la siguiente versión, sin repetir la prueba y error en un material que no aguanta carga. |
+
+<a id="iteracion-v1"></a>
+### 12.2. 🖨️ Iteración v1: primer chasis impreso en 3D
+
 | | |
 | :--- | :--- |
-| **Objetivo** | Materializar en un material rígido las medidas validadas en cartón, e incorporar un sistema trípode para elevar la posición del teléfono. |
-| **Diagnóstico de falla #1 — Flexión estructural** | El chasis, al ser excesivamente largo, presentó flexión notoria en la zona media. |
-| **Causa raíz #1** | El bastón central del sistema trípode actuaba como **palanca**, empujando el chasis hacia adelante y concentrando el esfuerzo flector en el punto medio de la plataforma. |
-| **Mitigación #1 (parche, no solución de raíz)** | Se rellenaron tapas de tubería con plomo para usarlas como contrapeso, colocándolas cerca del eje trasero para contrarrestar el desbalance de masa generado por el trípode. Este parche, sumado al propio bastón del trípode, elevó la masa total del chasis de 943 g a **≈1300 g** (+357 g), evidenciando que se estaba corrigiendo un problema geométrico agregando masa en lugar de resolver la causa estructural. |
-| **Diagnóstico de falla #2 — Empaquetamiento ineficiente** | El sistema de tracción trasero, aunque contaba con diferencial, orientaba el motor **verticalmente** respecto al eje trasero en lugar de en paralelo horizontal. |
-| **Causa raíz #2** | Esta orientación consumía un volumen de chasis significativamente mayor al necesario, restando espacio útil para electrónica y cableado. |
-| **Diagnóstico de falla #3 — Baja mantenibilidad** | El chasis requirió múltiples intervenciones correctivas post-impresión: agujeros extra, lijado y fijación de piezas con silicón. |
-| **Causa raíz #3** | El diseño se envió a imprimir con un proveedor externo (el equipo no contaba con impresora 3D propia en ese momento), lo que impedía iterar rápidamente sobre el modelo CAD y corregir errores de diseño antes de fabricar — cada corrección debía resolverse manualmente sobre la pieza ya impresa. |
-| **Lección aprendida** | Un ensamblaje que depende de adhesivos y ajustes manuales post-impresión no es reproducible ni mantenible en condiciones de competencia (pits). Esta experiencia motivó dos decisiones de diseño explícitas para v2: (1) diseñar con tolerancias correctas desde el CAD para evitar reprocesos, y (2) estandarizar toda la sujeción con tornillería Allen M3 desmontable. |
- 
-### ✅ Iteración v2 — Monochasis (Versión Actual, 2026)
- 
+| **Objetivo** | Pasar las medidas del cartón a un material rígido y añadir un trípode para subir el teléfono. |
+| **Falla #1: flexión** | El chasis, al ser demasiado largo, se doblaba visiblemente en la zona media. |
+| **Causa raíz #1** | El vástago del trípode hacía **palanca**: empujaba el chasis hacia adelante y concentraba el esfuerzo en el centro de la plataforma. |
+| **Parche #1 (no fue una solución de raíz)** | Rellenamos tapas de tubería con plomo y las pusimos cerca del eje trasero como contrapeso. Esto, más el propio trípode, subió la masa de 943 g a **≈1300 g** (+357 g): estábamos corrigiendo un problema geométrico con peso en vez de atacar la causa. |
+| **Falla #2: mal aprovechamiento del espacio** | La tracción trasera, aunque tenía diferencial, llevaba el motor **vertical** respecto al eje en lugar de horizontal y paralelo. |
+| **Causa raíz #2** | Esa orientación ocupaba mucho más volumen del necesario y le quitaba espacio a la electrónica y al cableado. |
+| **Falla #3: difícil de mantener** | El chasis necesitó varias correcciones después de impreso: agujeros extra, lijado y piezas pegadas con silicón. |
+| **Causa raíz #3** | Lo imprimió un proveedor externo (no teníamos impresora propia), así que no podíamos corregir el CAD e imprimir otra vez rápido; cada error se arreglaba a mano sobre la pieza. |
+| **Lección** | Un ensamble que depende de pegamento y ajustes manuales no se puede reproducir ni reparar en los pits. Por eso en v2 decidimos: (1) diseñar con las tolerancias correctas desde el CAD y (2) usar en todo tornillos Allen M3 desmontables. |
+
+<a id="iteracion-v2"></a>
+### 12.3. ✅ Iteración v2: Monochasis (versión actual, 2026)
+
 | | |
 | :--- | :--- |
-| **Objetivo de diseño** | Corregir simultáneamente los tres fallos de v1: flexión estructural, empaquetamiento ineficiente del tren motriz y baja mantenibilidad. |
-| **Solución a la flexión** | Reducción deliberada de la longitud del chasis (relación de aspecto ≈1:1, wheelbase 112 mm) para eliminar el brazo de palanca que causaba la flexión en v1 — ya no es necesario ningún contrapeso correctivo. |
-| **Solución al empaquetamiento** | Reorientación del motor a posición **horizontal, paralela al eje trasero**, integrada nativamente en el Monochasis mediante una cama hundida diseñada específicamente para el motor JGA25. |
-| **Solución a la mantenibilidad** | Toda la plataforma se ensambla con **tornillería Allen M3** sobre insertos roscados de latón termofijados, eliminando por completo el uso de silicón y permitiendo el desmontaje de cualquier componente sin herramientas especiales ni reprocesos manuales. |
-| **Resultado medible** | Masa reducida en 82 g respecto a v1 (943 g → 861 g) a pesar de integrar más funcionalidad en una sola pieza, confirmando que la ganancia no vino de adelgazar paredes sino de eliminar refuerzos correctivos. |
-
- ---
-
-### Margen de Seguridad de Torque
-
-Con el torque necesario y el torque disponible ya calculados, se puede cuantificar el margen de seguridad del sistema de tracción como un porcentaje, siguiendo la misma lógica que un análisis de ingeniería estándar:
-
-$$\text{Margen de Seguridad (\%)} = \frac{T_{\text{disponible}}}{T_{\text{necesario}}} \times 100$$
-
-$$\text{Margen de Seguridad} = \frac{0.7306 \text{ N·m}}{0.370 \text{ N·m}} \times 100 \approx 197.5\%$$
-
-> [!IMPORTANT]
-> **Interpretación del margen**
->
-> Un valor de 197.5% significa que el tren motriz entrega **casi el doble** del torque mínimo requerido para mover el vehículo (943 g) en condiciones normales — un excedente del **97.5%** por encima del mínimo. Este colchón no es gratuito: se traduce directamente en capacidad de aceleración, tolerancia a superficies con mayor fricción de la esperada y margen ante el desgaste progresivo de los engranajes impresos en 3D, sin necesidad de sobredimensionar el motor ni aumentar el consumo eléctrico.
-</markdown>
+| **Objetivo** | Corregir a la vez las tres fallas de v1: flexión, mal aprovechamiento del espacio y mantenimiento difícil. |
+| **Solución a la flexión** | Chasis más corto (relación ≈1:1, ejes a 112 mm) para eliminar la palanca que lo doblaba. Ya no hace falta ningún contrapeso. |
+| **Solución al espacio** | Motor **horizontal y paralelo al eje trasero**, en una cama hundida hecha para el 25GA-370 dentro del Monochasis. |
+| **Solución al mantenimiento** | Toda la plataforma se arma con **tornillos Allen M3** sobre insertos de latón colocados con calor. No hay silicón y cualquier pieza se desmonta sin herramientas especiales ni retoques. |
+| **Resultado medible** | Frente a la v1 de competencia, la masa bajó **259 g sin teléfono** (1120 g → 861 g) y **208 g con teléfono** (≈1300 g → 1092 g), aun integrando más funciones en una sola pieza. La reducción vino de quitar refuerzos correctivos, no de adelgazar paredes. |
 
 ---
 
-## 🛠️ Guía de Ensamble Paso a Paso
+<a id="guia-ensamble"></a>
+## 13. 🛠️ Guía de ensamble paso a paso
 
-Uno de los pilares fundamentales en la ingeniería y un criterio clave de evaluación en la WRO es la **reproducibilidad**. Por ello, hemos diseñado esta guía de ensamblaje para documentar el proceso de construcción de nuestro vehículo, compartiendo consejos prácticos, técnicas de taller y consideraciones mecánicas que facilitarán la replicación exacta de este proyecto a cualquier otro equipo o desarrollador.
+En la WRO se valora mucho que un proyecto se pueda **reproducir**. Por eso documentamos cómo armamos el vehículo, con consejos y técnicas de taller, para que cualquier otro equipo pueda replicarlo. Los archivos STL de todas las piezas están en la carpeta [`models/`](models/).
 
 ---
 
-### Paso 1: Manufactura Aditiva (Impresión 3D)
-El primer paso es imprimir todas las piezas estructurales detalladas en los archivos del repositorio. Aunque hemos documentado nuestros parámetros de impresión ideales en la sección anterior, siéntete libre de jugar con estas configuraciones para adaptarlas al comportamiento específico de tu impresora o al material que utilices. 
+### Paso 1: impresión 3D
+
+Primero hay que imprimir todas las piezas estructurales del repositorio. Nuestros parámetros están en la [sección 9.7](#manufactura-aditiva), pero puedes ajustarlos según tu impresora o el material que uses.
 
 > [!TIP]
-> **Consejo de impresión para transmisión:** 
-> Para los engranajes y poleas mecánicas, es vital garantizar la máxima resistencia estructural. Si imprimes en PETG, te recomendamos ajustar la temperatura al alza y aumentar considerablemente el número de perímetros/paredes; esto evitará que los dientes se fracturen bajo el torque del motor.
+> **Consejo para la transmisión:** los engranajes necesitan la mayor resistencia posible. Si imprimes en PETG, sube la temperatura y aumenta bastante el número de perímetros; así los dientes no se parten con el torque del motor.
 
-![Impresión de piezas](other/ensamble1.jpeg)
-
----
-
-### Paso 2: Instalación del Motor y Piñón en el Monochasis
-Con las piezas listas, comenzaremos a trabajar sobre el chasis (primer piso). 
-1. Fija el motor a su cama nativa utilizando tornillos M3. **Detalle crucial:** asegúrate de que los conectores eléctricos del motor queden mirando hacia arriba o hacia un costado libre; esto te facilitará enormemente el cableado posterior hacia el driver TB6612FNG.
-2. Acopla el engranaje piñón al eje del motor. Entra a presión (*press-fit*). Notarás que el diseño del piñón tiene un lado redondeado y un pequeño separador integrado; esto sirve para que haga tope correctamente y no roce contra la caja reductora del motor. Asegúrate de que quede firme y no sea fácil de extraer.
-
-![Instalación de motor y piñón](other/ensamble2.png)
+<p align="center"><img src="other/ensamble1.jpeg" alt="Impresión de piezas" width="520"></p>
 
 ---
 
-### Paso 3: Armado del Eje Trasero, Corona y Adaptadores de Rueda
-Para el eje motriz, optamos por una solución de taller muy accesible: el núcleo de un electrodo de soldadura limpio. 
-1. Como la varilla lisa tiene un diámetro menor al de las rolineras (rodamientos), ensancha su diámetro usando fundas termocontraíbles. 
-2. Coloca termocontraíble solo en **un extremo** de la varilla hasta que entre con un poco de presión en la primera rolinera del chasis. 
-3. Pasa la varilla por esa primera rolinera, inserta el engranaje corona (25T) en el centro de la varilla, y luego aplica termocontraíble en el otro extremo para pasarlo por la segunda rolinera.
-4. Alinea los dientes de la corona con el piñón del motor. Una vez acoplados, inserta un tornillo transversal con su tuerca en el collarín de la corona para apretar el sistema de mordaza tipo "C" y fijarlo a la varilla.
-5. Finalmente, instala los adaptadores para las ruedas Lego. Deslízalos en ambos extremos sobresalientes de la varilla y asegúralos con un tornillo y tuerca, utilizando exactamente el mismo mecanismo de mordaza en "C" que empleaste en la corona.
+### Paso 2: motor y piñón en el Monochasis
+
+Con las piezas listas, empezamos por el primer piso.
+
+1. Fija el motor a su cama con tornillos M3. **Importante:** deja los terminales del motor hacia arriba o hacia un lado libre; así es mucho más fácil llevar los cables al driver TB6612FNG.
+2. Coloca el piñón en el eje del motor; entra a presión (*press-fit*). El piñón tiene un lado redondeado y un pequeño separador integrado para que haga tope y no roce con la caja reductora. Verifica que quede firme.
+
+<p align="center"><img src="other/ensamble2.png" alt="Instalación del motor y el piñón" width="520"></p>
+
+---
+
+### Paso 3: eje trasero, corona y adaptadores de rueda
+
+Para el eje usamos una solución de taller fácil de conseguir: el núcleo limpio de un electrodo de soldadura.
+
+1. Como la varilla es más delgada que el agujero de los rodamientos, auméntale el diámetro con termorretráctil.
+2. Pon termorretráctil solo en **un extremo**, hasta que entre con algo de presión en el primer rodamiento del chasis.
+3. Pasa la varilla por ese rodamiento, mete la corona (25T) en el centro y pon termorretráctil en el otro extremo para pasarlo por el segundo rodamiento.
+4. Alinea los dientes de la corona con el piñón. Cuando engranen, pon un tornillo transversal con su tuerca en el collarín de la corona y apriétalo para cerrar la abrazadera tipo "C" sobre la varilla.
+5. Por último, coloca los adaptadores de las ruedas Lego en los dos extremos de la varilla y asegúralos con tornillo y tuerca, con el mismo sistema de abrazadera que la corona.
 
 > [!TIP]
-> **Pro-Tip de fricción:** 
-> Antes de aplicar calor para encoger las fundas sobre el metal, coloca unas gotas de cianocrilato (superglue) entre el metal y el plástico. Esto evitará por completo que el termocontraíble patine o deslice sobre la varilla cuando el motor aplique torque.
+> **Para que no patine:** antes de encoger el termorretráctil con calor, pon unas gotas de cianoacrilato entre el metal y el plástico. Así no gira sobre la varilla cuando el motor hace fuerza.
 
-![Armado del eje trasero](other/ensamble3.jpeg)
-
----
-
-### Paso 4: Anclaje del Sistema de Dirección Lego
-Toma el subsistema de dirección frontal construido con piezas Lego y ubícalo en el espacio correspondiente del chasis; entrará con un poco de presión. Para asegurar la unión de forma permanente, aplica silicona caliente por los bordes de contacto entre el plástico 3D y las piezas Lego. 
-
-*Nota de ingeniería:* La silicona no solo actúa como adhesivo, sino que al curar mantiene una propiedad gomosa que sirve como un excelente sistema de amortiguación pasiva para absorber las vibraciones de la pista.
-
-![Sistema de dirección](other/ensamble4.jpeg)
+<p align="center"><img src="other/ensamble3.jpeg" alt="Armado del eje trasero" width="520"></p>
 
 ---
 
-### Paso 5: Montaje Periférico de Sensores ToF
-Alrededor del perímetro del primer piso (Adelante, Atrás, Izquierda y Derecha) encontrarás los alojamientos nativos para los sensores de distancia láser VL53L0X. Fija cada módulo en su soporte utilizando tornillos M3 con sus respectivas tuercas en la parte posterior para asegurar una lectura sin vibraciones.
+### Paso 4: dirección Ackermann
 
-![Montaje de sensores ToF](other/ensamble5.png)
+Las piezas y medidas de la dirección están en la [sección 9.4](#direccion-ackermann) y el detalle completo en [docs/direccion-ackermann.md](docs/direccion-ackermann.md).
 
----
+1. Coloca cada mangueta en su pivote con un tornillo M3 (cabeza embutida) y fija la tuerca con autoblocante o fijador de roscas. La mangueta tiene que girar libre, sin juego vertical.
+2. Une las puntas de los dos brazos de dirección con la barra de acoplamiento (agujeros a 68,6 mm).
+3. Monta el servo **invertido** (eje hacia abajo) en su soporte, delante de la barra, apoyado sobre la placa.
+4. Conecta el brazo del servo (último agujero, a 14 mm del eje) con el agujero central de la barra mediante la biela plana de 14,5 mm.
+5. Con las ruedas rectas, centra el servo y comprueba el recorrido de −50° a +48° sin que nada roce el chasis. Ajusta la convergencia (*toe-in*) con la ranura de la barra.
 
-### Paso 6: Preparación e Instalación de los Separadores
-Toma los separadores de 60 mm impresos en 3D e inserta por calor los insertos roscados de latón M3 en cada extremo. Una vez enfriados, ubícalos en sus respectivas posiciones sobre el primer piso y fíjalos introduciendo tornillos M3 desde la cara inferior del chasis. Con esto, el primer nivel queda estructuralmente terminado.
-
-![Instalación de separadores](other/ensamble6.jpeg)
-
----
-
-### Paso 7: Ensamblaje del Sistema *Shark Fin* (Soporte de Cámara)
-Antes de unir ambos niveles del vehículo, debemos preparar el segundo piso instalando las torres laterales aerodinámicas (*Shark Fin*) que sostendrán el teléfono inteligente.
-1. Inserta por calor 3 insertos roscados M3 en la base de cada torre (6 en total).
-2. Alinea las torres con los agujeros pasantes correspondientes en el segundo piso.
-3. Introduce los tornillos **desde la parte de abajo** del segundo piso hacia arriba para traccionar fuertemente las torres. 
-
-*(Es precisamente por esta maniobra de atornillado inferior que no podíamos fijar el segundo piso a los separadores en el paso anterior, ya que nos habríamos quedado sin espacio para manipular la herramienta).*
-
-![Soporte Shark Fin](other/ensamble7.5.jpeg)
+> [!TIP]
+> Si la dirección no llega al ángulo esperado o se traba en un punto muerto, revisa que el servo no esté montado al revés: nos pasó en el primer armado.
 
 ---
 
-### Paso 8: Integración Final de la Plataforma
-Con las torres del teléfono ya ancladas sólidamente a su base, puedes proceder a colocar el segundo piso completo sobre los separadores de 60 mm que instalaste en el Paso 6. Asegúralos con tornillos M3 superiores. Finalmente, acopla la mordaza central de ángulo ajustable entre las dos torres para completar el soporte del teléfono y procede con el ruteo del cableado y montaje de la electrónica.
+### Paso 5: sensores ToF
 
-![Integración final de chasis](other/ensamble8.jpeg)
+En el contorno del primer piso (adelante, atrás, izquierda y derecha) están los soportes para los sensores láser VL53L0X. Fija cada módulo a su soporte con tornillos M3 y tuercas por detrás, para que no vibre y la lectura sea estable.
 
-
-## Continuidad en el Desarrollo de Software y Control:
-#### Continuidad y Optimización en el Desarrollo de Software: Integración del BNO055
-
-Es importante destacar que la arquitectura del firmware y la lógica de codificación del vehículo mantienen su base estructural respecto a las implementadas con éxito en el diseño del año anterior, garantizando fiabilidad en el procesamiento de datos y control cinemático. 
-
-Sin embargo, la actualización tecnológica más significativa de esta temporada radica en la sustitución del sensor giroscópico por la IMU **BNO055**. Al heredar y refinar la lógica de orientación previa, este nuevo sensor elimina por completo los problemas históricos de deriva (*gyro drift*), volviéndola prácticamente despreciable. El impacto de este cambio en el comportamiento del vehículo es drástico:
-
-* **Consciencia Espacial Absoluta:** El vehículo calcula en tiempo real y de forma fidedigna su vector de orientación angular en todo momento.
-* **Estabilización de Carril:** Permite determinar con precisión milimétrica cuándo el chasis se encuentra perfectamente recto en relación con el carril de navegación, optimizando las correcciones del servo de dirección y evitando sobrecorrecciones.
-
-
-Para explorar a fondo la implementación matemática y el firmware, puedes acceder directamente a las secciones detalladas:
-* [Desarrollo de la Lógica de Vueltas a la Pista (Vuelta Libre)](#Desarrollo-de-la-Logica-del-codigo-Maestro)
-* [Desarrollo de la Lógica de Evasión de Objetos (Modo Combinado)](#desarrollo-de-la-logica-de-evasion-de-objetos)
-
----
-## Arquitectura de Control y Máquina de Estados (Prometheus Team)
-
-Diagrama interactivo de estados desarrollado para la competencia WRO Future Engineers. Permite simular los flujos de control, sensores ToF, IMU BNO055 y la lógica de navegación autónoma.
-
-[![Diagrama de Estados del Sistema](other/diagrama-de-estados.png)](https://erchivox.github.io/clasificador-de-animales-en-peligro-de-extinci-n-en-Venezuela/pagina/ModeloArquitecturaEstados.html)
+<p align="center"><img src="other/ensamble5.png" alt="Montaje de los sensores ToF" width="520"></p>
 
 ---
 
-### 📊 Resumen Ejecutivo de la Lógica de Control
+### Paso 6: separadores
 
-A continuación, se presenta una síntesis operativa de los algoritmos de navegación que gobiernan el firmware mediante el uso de la IMU BNO055 y la lectura periférica de sensores:
+Coloca con calor los insertos de latón M3 en cada extremo de los separadores de 60 mm. Cuando se enfríen, ponlos en su lugar sobre el primer piso y fíjalos con tornillos M3 desde la cara inferior del chasis. Con esto el primer nivel queda terminado.
 
-#### 1. Modo Vuelta Libre (Navegación de Pista Vacía)
-Este algoritmo está diseñado para maximizar la velocidad en pista recta y asegurar trazadas óptimas en las curvas. El sistema prioriza las lecturas angulares de la IMU para la alineación del vehículo.
-
-* **Estrategia:** El sensor ToF lateral mide las distancias relativas hacia la pared guía. Si la orientación calculada por el **BNO055** indica un desvío angular, el sistema ejecuta un control fino corrigiendo en primera instancia el ángulo del vehículo para estabilizarlo y, consecutivamente, ajusta la distancia de seguridad respecto al muro. 
-* **Transición de Intersecciones:** El bucle se mantiene activo manteniendo el carril de forma autónoma hasta que el sensor de color detecta una línea en la pista, interrumpiendo el control lineal para ejecutar un giro controlado de intersección.
+<p align="center"><img src="other/ensamble6.jpeg" alt="Instalación de los separadores" width="520"></p>
 
 ---
 
-## 📱 Telemetría y Visión Artificial: Aplicación Prometheus V5.0
+### Paso 7: sistema Shark Fin (soporte del teléfono)
 
-La aplicación de detección desarrollada en Android Studio y OpenCV ha evolucionado a su versión 5.0, operando como el verdadero muro de pits (*pit wall*) de nuestro sistema. Conservando las bases de comunicación USB, la interfaz a pantalla completa y el monitor serial integrado de la temporada 2025, la temporada 2026 exigió una reestructuración profunda en el motor de visión y telemetría para manejar escenarios de pista mucho más agresivos y dinámicos.
+Antes de unir los dos niveles hay que preparar el segundo piso con las torres laterales que sostienen el teléfono.
 
-### Interfaz V5.0 y Monitor Serial Integrado
-| <img src="other/app2026.jpeg" width="400"> | <img src="other/Monitor_serial.jpeg" width="400"> |
+1. Coloca con calor 3 insertos M3 en la base de cada torre (6 en total).
+2. Alinea las torres con los agujeros del segundo piso.
+3. Mete los tornillos **desde abajo** del segundo piso hacia arriba para que aprieten las torres contra la plataforma.
+
+*(Por esta forma de atornillar desde abajo no fijamos el segundo piso a los separadores en el paso anterior: no habría espacio para meter la herramienta.)*
+
+<p align="center"><img src="other/ensamble7.5.jpeg" alt="Soporte Shark Fin" width="520"></p>
+
+---
+
+### Paso 8: integración final
+
+Con las torres bien fijas, coloca el segundo piso sobre los separadores del paso 6 y asegúralo con tornillos M3 por arriba. Luego monta la mordaza central de ángulo ajustable entre las dos torres y continúa con el cableado y la electrónica.
+
+<p align="center"><img src="other/ensamble8.jpeg" alt="Integración final del chasis" width="520"></p>
+
+---
+
+<a id="software-control"></a>
+## 14. Software y control
+
+<a id="integracion-bno055"></a>
+### 14.1. Continuidad del software e integración del BNO055
+
+La arquitectura del firmware y la lógica general del vehículo se mantienen respecto a 2025, porque ya habían funcionado bien en competencia. Lo que cambió es de dónde salen los datos.
+
+El cambio más importante de esta temporada es el reemplazo del giroscopio MPU6050 (y del magnetómetro con el que lo corregíamos) por la IMU **BNO055**. Partimos de la misma lógica de orientación, pero con este sensor la deriva del giroscopio (*gyro drift*) se vuelve prácticamente despreciable. El efecto en el comportamiento del carro es muy notorio:
+
+* **Orientación confiable:** el vehículo conoce en todo momento su ángulo real respecto al punto de partida.
+* **Mejor estabilidad en el carril:** sabe con precisión cuándo está recto respecto al pasillo, así que el servo corrige lo justo y no sobrecorrige.
+
+<a id="archivos-librerias"></a>
+### 14.2. Archivos del firmware y librerías
+
+| Archivo | Uso |
+| :--- | :--- |
+| [`src/v1PrometeusTeam2026.ino`](src/v1PrometeusTeam2026.ino) | Modo vuelta libre (desafío abierto), temporada 2026 |
+| [`src/v2PrometrusTeam2026.ino`](src/v2PrometrusTeam2026.ino) | Modo obstáculos, temporada 2026 |
+| [`src/README.md`](src/README.md) | Instrucciones para instalar las librerías y cargar el código |
+
+**Librerías usadas en 2026:** `Wire`, `Adafruit_BNO055`, `Adafruit_Sensor`, `Adafruit_VL53L0X`, `Adafruit_TCS34725`, `Adafruit_NeoPixel`, `ESP32Servo` y `ColorConverterLib`.
+
+<a id="logica-comun"></a>
+### 14.3. Lógica común de navegación
+
+Los dos programas comparten esta base:
+
+* **Arranque:** al encender, el ESP32 inicializa los sensores, asigna las direcciones de los ToF y espera con los LEDs en modo de espera hasta que el interruptor de D23 pasa a LOW.
+* **Referencia de orientación:** al iniciar se guarda el ángulo del BNO055 como 0°. En cada esquina el ángulo objetivo avanza 90° (0°, 90°, 180°, 270°).
+* **Detección de líneas:** el TCS34725 se lee cada 30 ms en una tarea propia de FreeRTOS. El color se convierte a HSV (con `ColorConverterLib`) y una línea solo cuenta si se confirma en varias lecturas seguidas. Después de contar una, las siguientes se ignoran durante 5 s para no contar la misma línea dos veces.
+* **Sentido de la vuelta:** lo decide la primera línea que aparece. Si es **azul**, el carro gira a la izquierda en todas las esquinas (sentido antihorario); si es **naranja**, gira a la derecha (sentido horario).
+* **Fin del recorrido:** cuatro líneas son una vuelta, así que al llegar a **12 líneas** (3 vueltas) el carro avanza un tramo corto y se detiene.
+* **Giros con PID:** un PID sobre el error de ángulo (Kp = 2.5, Ki = 0.8, Kd = 0.4) lleva el carro al nuevo ángulo objetivo con una tolerancia de 5°.
+* **Centrado con PID:** otro PID sobre la distancia a la pared (Kp = 2.0, Kd = 1.2) mantiene el carro en su trayectoria. Si el desvío angular supera los 15°, primero corrige el ángulo y después la distancia; así no zigzaguea.
+* **Seguridad:** si un Sharp diagonal detecta la pared a menos de ~13 cm, el carro retrocede un instante y luego continúa.
+
+<p align="center">
+  <img src="other/diagrama_PID_giro_y_centrado.png" alt="Diagrama de la lógica PID de giro y centrado" width="640"><br>
+  <sub>Lógica PID de giro y centrado.</sub>
+</p>
+
+<a id="vuelta-libre"></a>
+### 14.4. Modo vuelta libre (pista sin obstáculos)
+
+Este algoritmo busca ir lo más rápido posible en las rectas y hacer bien los giros en las esquinas. Para mantener el carro alineado se apoya sobre todo en el ángulo de la IMU.
+
+* **Estrategia:** el sensor ToF lateral mide la distancia a la pared guía. Si el **BNO055** indica que el carro se desvió, el sistema corrige primero el ángulo para estabilizarlo y después ajusta la distancia a la pared.
+* **Esquinas:** el carro sigue su carril hasta que el sensor de color detecta una línea. En ese momento se suspende el centrado y se hace el giro controlado de 90°. Después vuelve a enderezarse y retoma el seguimiento de la pared.
+
+<p align="center">
+  <img src="other/Diagrama_codigo_vueltas.png" alt="Diagrama de la lógica de vueltas a la pista" width="640"><br>
+  <sub>Lógica de vueltas a la pista.</sub>
+</p>
+
+<a id="modo-obstaculos"></a>
+### 14.5. Modo obstáculos: sistema de carriles
+
+**Salida del estacionamiento.** Al activar el interruptor, el carro mide con los ToF laterales hacia qué lado tiene más espacio y ejecuta la maniobra de salida hacia ese lado.
+
+**Carriles.** En lugar de esquivar cada pilar por separado, dividimos el pasillo en carriles: el **carril 1**, a la derecha, para pasar junto a los pilares rojos, y el **carril 2**, a la izquierda, para los verdes. La app reconoce hasta dos pilares a la vez y envía un comando que describe esa combinación (por ejemplo `C21`, `C15` o `C33`). Con eso el carro sabe desde antes a qué carril ir y si tendrá que cambiar de carril a mitad del tramo.
+
+```mermaid
+stateDiagram-v2
+    [*] --> ESPERANDO_COMANDO_CARRIL
+    ESPERANDO_COMANDO_CARRIL --> EVALUANDO_POSICION: llega un comando de la app
+    EVALUANDO_POSICION --> GIRANDO_HACIA_CARRIL: decide hacia dónde moverse
+    GIRANDO_HACIA_CARRIL --> ENDEREZANDO_CARRIL: llega al carril
+    ENDEREZANDO_CARRIL --> MANTENIENDO_CARRIL: ángulo recto
+    MANTENIENDO_CARRIL --> ESTADO_NORMAL: detecta una línea
+    ESTADO_NORMAL --> ESPERANDO_COMANDO_CARRIL: termina el giro de esquina
+    MANTENIENDO_CARRIL --> ESTADO_DETENCION_FINAL: línea 12
+    ESTADO_DETENCION_FINAL --> [*]
+```
+
+| Estado | Qué hace |
+| :--- | :--- |
+| `ESPERANDO_COMANDO_CARRIL` | Detiene el motor y lee el puerto serie hasta recibir un comando válido de la app. |
+| `EVALUANDO_POSICION` | Mide las distancias laterales para saber en qué parte del pasillo está y hacia dónde tiene que moverse. |
+| `GIRANDO_HACIA_CARRIL` | Gira hacia el carril con un ángulo y un tiempo que dependen del comando y de la distancia a la pared. Si el Sharp de ese lado detecta la pared muy cerca, interrumpe el giro, retrocede un poco y continúa. |
+| `ENDEREZANDO_CARRIL` | Hace el contragiro hasta quedar otra vez alineado con el tramo (0°, 90°, 180° o 270°). |
+| `MANTENIENDO_CARRIL` | Mantiene con PID la distancia a la pared del lado del carril, dando prioridad al ángulo. Sigue así hasta la siguiente línea. |
+| `ESTADO_NORMAL` | Hace el giro de esquina y retrocede usando el ángulo del BNO055 y el ToF trasero como guía, para empezar el siguiente tramo recto y a una distancia conocida de los pilares. |
+| `ESTADO_DETENCION_FINAL` | Después de la línea 12 avanza un tramo corto y apaga los motores. |
+
+En 2025, después de cada giro el carro retrocedía "a ciegas" durante un tiempo fijo y nunca sabíamos exactamente dónde iba a quedar. Ahora ese retroceso está controlado por el ángulo y por el ToF trasero, así que cada tramo empieza con el carro recto y bien posicionado.
+
+<p align="center">
+  <img src="other/diagramaV2.png" alt="Diagrama de la lógica del sistema de carriles" width="640"><br>
+  <sub>Lógica del sistema de carriles.</sub>
+</p>
+
+---
+
+<a id="arquitectura-control"></a>
+### 14.6. Arquitectura de control y máquina de estados
+
+Diagrama interactivo de estados desarrollado para la competencia WRO Future Engineers. Permite simular los flujos de control, los sensores ToF, la IMU BNO055 y la lógica de navegación autónoma. Además de los estados de la tabla anterior, muestra la corrección lateral después de cada giro (`ESTADO_CORRECCION_LATERAL`) y la maniobra optimizada que se usa a partir de la línea 5 (`MANIOBRA_OPTIMIZADA`), cuando el carro ya conoce la pista.
+
+**Haz clic en la imagen para abrir el diagrama interactivo:**
+
+<p align="center">
+  <a href="https://erchivox.github.io/clasificador-de-animales-en-peligro-de-extinci-n-en-Venezuela/pagina/ModeloArquitecturaEstados.html"><img src="other/diagrama-de-estados.png" alt="Diagrama de estados del sistema" width="900"></a>
+</p>
+
+---
+
+<a id="app-v5"></a>
+## 15. 📱 Telemetría y visión artificial: aplicación Prometheus V5.0
+
+Nuestra aplicación de detección, hecha en Android Studio con OpenCV, ya va por la versión 5.0 y funciona como el centro de control de nuestro sistema durante las pruebas. Conserva lo que ya funcionaba en 2025 (comunicación USB, interfaz a pantalla completa y monitor serial integrado), pero en 2026 rehicimos buena parte del procesamiento de imagen y de la telemetría para soportar condiciones de pista más exigentes.
+
+El código de la app está en su propio repositorio: [APP-WRO-PROMETHEUS-TEAM](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) · [descarga del proyecto en .zip](https://drive.google.com/file/d/1VvdzdWbxGnchFslUwI8wQfkkwYPTyGRD/view?usp=drive_link).
+
+### Interfaz V5.0 y monitor serial integrado
+
+| <img src="other/app2026.jpeg" width="400" alt="Interfaz principal V5.0"> | <img src="other/Monitor_serial.jpeg" width="400" alt="Monitor serial integrado"> |
 | :---: | :---: |
-| *Interfaz principal con telemetría de detección dual y estabilización.* | *Monitor serial integrado operando en tiempo real.* |
+| *Interfaz principal con detección de dos objetos y estabilización.* | *Monitor serial integrado funcionando en tiempo real.* |
 
-A continuación, se detallan las innovaciones y sistemas implementados en el núcleo de la aplicación (`MainActivity.kt`, `ColorAnalyzer.kt` y el sistema de configuración):
+Estas son las mejoras que implementamos en el núcleo de la aplicación (`MainActivity.kt`, `ColorAnalyzer.kt` y el sistema de configuración):
 
-### 1. Calibración en Pista y Menú Dinámico
-Se eliminó la necesidad de depender de Android Studio para ajustar variables en el campo de competencia.
-* **Calibración Automática por Muestras:** Un nuevo menú interactivo permite calibrar el matiz (Hue) y tolerancia capturando 8 muestras directas de los pilares en distintos puntos de la pista.
-* **Ajuste Paramétrico:** Las zonas de detección de distancia, el área de referencia y los filtros se configuran directamente desde una interfaz visual sin tener que tocar código.
+### 15.1. Calibración en pista y menú dinámico
 
-### 2. Filtro Anti-Reflejos y Limpieza Geométrica
-Para lidiar con los cambios de iluminación y destellos en el tapiz de la pista, se programó un blindaje en el procesamiento de imagen (`ColorAnalyzer`):
-* **Filtro de Saturación Interna:** Los reflejos pierden saturación al mezclarse con el brillo de la pista. El sistema analiza la saturación promedio (Canal S en HSV) *dentro* del contorno y rechaza automáticamente aquellos que presenten niveles bajos, identificándolos como destellos. Estos niveles de saturación son configurables de forma independiente para el rojo y el verde desde el menú.
-* **Ecualización CLAHE:** Se aplica ecualización adaptativa de histograma al canal de brillo para normalizar la iluminación del entorno sin perder detalles críticos.
-* **Rechazo de Formas Orgánicas:** Mediante detección de picos y conteo de defectos de convexidad, el sistema ignora geometrías con ángulos muy agudos (< 45°) o formas complejas que no correspondan a la silueta regular de un pilar o delimitador.
+Ya no hace falta abrir Android Studio para ajustar variables en el lugar de la competencia.
 
-### 3. Modo Estacionamiento Dinámico (Zona Magenta)
-El color magenta activa un comportamiento estratégico mediante un umbral de área específico (8000 px), asegurando que el modo despierte únicamente al entrar a ese tramo de la pista y no desde lejos.
-* Su función no es simplemente frenar al final del circuito, sino **modificar la trayectoria de evasión**. 
-* Al reconocer la zona de estacionamiento, el `CommandManager` ajusta la ruta para que el vehículo navegue alejado de esa área (forzando un lado específico si es necesario), evitando llevarse por delante la placa delimitadora magenta durante el trayecto.
+* **Calibración por muestras:** un menú permite calibrar el matiz (*Hue*) y la tolerancia tomando 8 muestras de los pilares en distintos puntos de la pista.
+* **Ajuste de parámetros:** las zonas de distancia, el área de referencia y los filtros se configuran desde la interfaz, sin tocar el código.
 
-### 4. Filtro Temporal de Estabilización (Anti-Ruido)
-Para erradicar comandos fantasma o falsos positivos, la telemetría incluye un filtro temporal estricto.
-* **Ventana de Votación:** El sistema almacena las detecciones en una ventana deslizante de los últimos 8 fotogramas.
-* Para que un comando tome el control del vehículo, debe dominar al menos el **70% de esa ventana** y mantenerse estable durante un umbral de **2000 milisegundos**.
+### 15.2. Filtro antirreflejos y limpieza geométrica
 
-### 5. Consolidación de Telemetría Dual y Arquitectura por Casos
-Construyendo sobre la capacidad de detección dual introducida a finales de 2025, el sistema ahora engrana esta telemetría con un motor de decisiones robustecido:
-* El sistema continúa extrayendo el área, distancia y orientación de un objeto primario y secundario en simultáneo.
-* Toda la lógica de decisión se extrajo del hilo principal y se encapsuló en un `CommandManager` independiente, el cual analiza esta telemetría dual bajo una arquitectura de casos predefinidos para emitir el comando exacto de evasión combinada.
-* Para soportar la alta carga de datos con la placa ESP32, se optimizó la comunicación USB con algoritmos que interceptan y destruyen la basura binaria y los mensajes de arranque (*boot logs*) nativos del ESP32, garantizando lecturas limpias desde el primer milisegundo.
+Para lidiar con los cambios de iluminación y los brillos en el tapete, añadimos varias protecciones al procesamiento de imagen (`ColorAnalyzer`):
+
+* **Filtro de saturación interna:** los reflejos pierden saturación al mezclarse con el brillo de la pista. La app calcula la saturación promedio (canal S en HSV) *dentro* de cada contorno y descarta automáticamente los que tienen niveles bajos, porque son destellos. El umbral se configura por separado para rojo y verde desde el menú.
+* **Ecualización CLAHE:** se aplica ecualización adaptativa del histograma al canal de brillo para normalizar la iluminación sin perder detalle.
+* **Rechazo de formas irregulares:** detectando picos y contando defectos de convexidad, la app ignora formas con ángulos muy agudos (menores a 45°) o contornos complejos que no corresponden a la silueta de un pilar o de un delimitador.
+
+### 15.3. Modo estacionamiento (zona magenta)
+
+El magenta activa un comportamiento especial cuando su área supera los 8000 px, así el modo solo se activa al entrar en ese tramo y no al verlo de lejos.
+
+* Su objetivo no es solo frenar al final del recorrido, sino **cambiar la trayectoria de evasión**.
+* Al reconocer la zona de estacionamiento, el `CommandManager` ajusta la ruta para que el vehículo pase alejado de ella (forzando un lado si hace falta) y no se lleve por delante el delimitador magenta durante la vuelta.
+
+### 15.4. Filtro temporal de estabilización
+
+Para eliminar comandos fantasma o falsos positivos, la telemetría pasa por un filtro temporal:
+
+* **Ventana de votación:** la app guarda las detecciones de los últimos 8 cuadros.
+* Un comando solo se envía al vehículo si aparece en al menos el **70 % de esa ventana** y se mantiene estable durante **2000 milisegundos**.
+
+### 15.5. Detección dual y arquitectura por casos
+
+A partir de la detección de dos objetos que añadimos a finales de 2025, ahora esa información alimenta un sistema de decisiones más completo:
+
+* La app sigue obteniendo el área, la distancia y la posición de un objeto principal y uno secundario al mismo tiempo. La distancia se estima por el área aparente del pilar, calibrada una vez a una distancia conocida: $d = d_{\text{ref}} \sqrt{A_{\text{ref}} / A_{\text{medida}}}$.
+* Toda la lógica de decisión salió del hilo principal y quedó en un `CommandManager` independiente, que analiza la información de los dos objetos según una lista de casos y envía el comando de carril que corresponde (ver [14.5](#modo-obstaculos)).
+* Para manejar más datos con el ESP32 mejoramos la comunicación USB: la app descarta la basura binaria y los mensajes de arranque (*boot logs*) que manda el ESP32 al conectarse, así las lecturas son limpias desde el primer momento.
 
 > [!TIP]
-> **Ergonomía en Pruebas (Legado Mejorado)**
+> **Comodidad en las pruebas (heredado de 2025)**
 >
-> Diseñada para el estrés de la competencia, la interfaz mantiene su operabilidad a pantalla completa, despierta el teléfono automáticamente al conectar el cable USB, es capaz de emitir señales acústicas únicas para cada comando enviado de forma exitosa, permitiendo al equipo monitorear el desempeño sin despegar los ojos del vehículo.
+> La interfaz funciona a pantalla completa, despierta el teléfono al conectar el cable USB y emite un tono distinto por cada comando enviado. Así el equipo puede seguir lo que hace el carro sin quitarle la vista de encima.
 
+<p align="center">
+  <img src="other/Diagrama_de_flujo_app.png" alt="Diagrama de flujo de la aplicación" width="640"><br>
+  <sub>Diagrama de flujo de la aplicación.</sub>
+</p>
 
-## Prueba de vueltas a la pista 
+**Video del funcionamiento de la app** (clic en la imagen):
 
-Haz clic en la imagen para ver el vídeo:
-
-[![Mira el video del proyecto](other/videos.jpeg)](https://youtube.com/shorts/Ml_8qpX_Ozo)
-
-## Prueba de Evasión de obstáculos 
-
-Haz clic en la imagen para ver el vídeo:
-
-[![Mira el video del proyecto](other/videos.jpeg)](https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq)
-
-# Prometheus Team - Temporada 2025
-
-Somos un equipo venezolano que representa con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma.
+<p align="center">
+  <a href="https://youtu.be/TpLVCiggEwY"><img src="other/Funcionamiento-en-vivo.png" alt="Video del funcionamiento en vivo de la aplicación" width="520"></a>
+</p>
 
 ---
 
-##  Índice
+<a id="pruebas-pista"></a>
+## 16. Pruebas en pista
 
-* [Contenido del Repositorio](#contenido-del-repositorio)
-* [Introducción al Proyecto](#introducción-al-proyecto)
-* [Fotos de Equipo](#fotos-de-equipo)
-* [Fotos del Vehículo](#fotos-del-vehiculo)
-* [Diseño de Hardware](#diseño-de-hardware)
-   * [Componentes de Detección](#componentes-de-detección)
-   * [Componentes de Procesamiento de Información](#componentes-de-procesamiento-de-información)
-   * [Componentes de Alimentación](#componentes-de-alimentación)
-* [Desarrollo de la Aplicación para la Detección de Objetos](#Desarrollo-de-la-Aplicación-para-la-Detección-de-Objetos)
-* [Cálculo de Torque y Velocidad](#cálculo-de-torque-y-velocidad)
-* [Sistema de Alimentación](#sistema-de-alimentación)
-   * [Cálculo del Consumo Energético Total](#cálculo-del-consumo-energético-total)
-   * [Autonomía Estimada](#autonomía-estimada)
-* [Sistema de Detección de Objetos](#sistema-de-detección-de-objetos)
-* [Paso a Paso de la Construcción](#paso-a-paso-de-la-construcción)
-   * [Etapa de Diseño y Ensamblaje del Vehículo](#etapa-de-diseño-y-ensamblaje-del-vehículo)
-   * [Montaje del Vehículo](#montaje-del-vehículo)
-   * [Diseño de Base 3D](#diseño-de-base-3d)
-   * [Cambio de Base](#cambio-de-base)
-   * [Problemas Encontrados](#problemas-encontrados)
-* [Pruebas Realizadas](#pruebas-realizadas)
-   * [Prueba del Sensor de Color](#prueba-del-sensor-de-color)
-   * [Fabricación de Pista a Escala](#fabricacion-de-pista-a-escala)
-   * [Desarrollo de la Lógica de Vueltas a la Pista](#desarrollo-de-la-logica-de-vueltas-a-la-pista)
-   * [Desarrollo de la Lógica de Evasión de Objetos](#desarrollo-de-la-logica-de-evasion-de-objetos)
-   * [Desarrollo de Códigos Combinados](#desarrollo-de-códigos-combinados)
-   * [Video Resumen de las Pruebas](#video-resumen-de-las-pruebas-de-vuelta-a-la-pista-y-esquive-de-objetos)
-   * [Prueba de Vueltas a la Pista](#prueba-de-vueltas-a-la-pista)
-   * [Prueba de Evasión de Obstáculos](#prueba-de-evacion-de-obstaculos)
----
+Para las pruebas construimos una réplica de la pista de competencia de 3 × 3 metros con láminas recicladas pegadas. Tiene un error de unos 10 cm. En las esquinas pusimos las dos líneas, azul y naranja, separadas 30° y con el mismo origen en la esquina interior del cuadrado.
 
-##  Contenido del Repositorio
+<p align="center"><img src="other/pista.jpg" alt="Pista de pruebas" width="520"></p>
 
-Este repositorio contiene los siguientes directorios para organizar nuestro proyecto:
+Haz clic en las imágenes para ver los videos:
 
-* `t-photos`: Incluye 2 fotos del equipo (una oficial y una divertida con todos los miembros).
-* `v-photos`: Contiene 6 fotos del vehículo (desde todos los ángulos, superior e inferior).
-* `video`: Archivo `video.md` con el enlace a un video de demostración de conducción.
-* `schemes`: Diagramas esquemáticos (JPEG, PNG o PDF) de los componentes electromecánicos, ilustrando la conexión de elementos electrónicos y motores.
-* `src`: Código del software de control para todos los componentes programados para la competición.
-* `models`: Archivos para modelos usados por impresoras 3D, cortadoras láser y máquinas CNC para producir elementos del vehículo.
-* `other`: Archivos adicionales para entender cómo preparar el vehículo para la competición (documentación de conexión SBC/SBM, carga de archivos, especificaciones de hardware, etc.).
+<table>
+<tr>
+<td align="center" width="50%"><b>Prueba de vueltas a la pista</b><br><br><a href="https://youtube.com/shorts/Ml_8qpX_Ozo"><img src="other/videos.jpeg" alt="Video de vueltas a la pista 2026" width="360"></a></td>
+<td align="center" width="50%"><b>Prueba de evasión de obstáculos</b><br><br><a href="https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq"><img src="other/videos.jpeg" alt="Video de evasión de obstáculos 2026" width="360"></a></td>
+</tr>
+</table>
 
 ---
 
-##  Introducción al Proyecto
+<a id="estructura-repositorio"></a>
+## 17. Estructura del repositorio
 
-Para esta competición, hemos desarrollado un diseño de vehículo **cómodo, fácil de modificar y sencillo**, donde todos los elementos interactúan a la perfección. Nos enorgullece presentar nuestro primer prototipo de vehículo autónomo con reconocimiento de objetos y colores.
-
-El diseño y la construcción de nuestro vehículo son íntegramente propios. Su **estructura de dos niveles** permite que todos los componentes encajen armoniosamente. Incorpora **vigas de soporte extraíbles** para facilitar el desmontaje, un **sistema de transmisión** tipo LEGO que transfiere la potencia del motor a las ruedas traseras, y un **sistema de dirección** también con piezas LEGO, controlado por un servomotor para mayor precisión en los giros.
-
-Este proyecto ha sido el resultado del esfuerzo y la dedicación de todo nuestro equipo. Cada cable, cada sensor, y cada línea de código es un testimonio de nuestro **esfuerzo técnico y financiero**. No solo construimos un vehículo; demostramos que con pasión y ganas de aprender, se pueden superar los límites.
-
----
-##  Fotos de equipo
-| ![ Foto Oficial](t-photos/foto_equipo.jpeg)  | ![ Foto Equipo](t-photos/foto_equipo2.jpeg) | 
-| :----: | :---------- |
-
-
----
-##  Fotos del vehiculo 
-| ![Arriba del vehiculo](v-photos/arriba.JPG)  |  ![Debajo de vehiculo](v-photos/abajo.JPG)  |  ![Lateral derecho](v-photos/lateral-derecho.JPG) |
-| :----: | :------------------- | :---------- |
-| ![lateral izquierdo](v-photos/lateral-izquierdo.JPG)  |  ![frente](v-photos/frente.JPG)  |  ![detras](v-photos/detras.JPG) |
+| Carpeta | Contenido |
+| :--- | :--- |
+| [`src/`](src/) | Código del ESP32 (2026 y versiones de 2025) y enlaces al código de la app |
+| [`models/`](models/) | Archivos STL de todas las piezas impresas en 3D |
+| [`schemes/`](schemes/) | Esquemas de alimentación y de sensores, de todas las versiones |
+| [`v-photos/`](v-photos/) | Fotos del vehículo desde los seis lados (2026 y 2025) |
+| [`t-photos/`](t-photos/) | Fotos del equipo y logo |
+| [`docs/`](docs/) | Documentos técnicos detallados (cálculos de la dirección Ackermann) |
+| [`other/`](other/) | Imágenes de componentes, modelos CAD, proceso de construcción y diagramas |
 
 ---
 
-##  Diseño de Hardware
+<a id="archivo-2025"></a>
+## 18. 📁 Archivo histórico: temporada 2025
 
-![Control Principal](other/primer_nivel.jpg)
+Esta sección resume el vehículo con el que obtuvimos el **2.º lugar nacional en 2025**. La mayor parte del hardware fue reemplazada en 2026, pero la dejamos como registro porque explica de dónde salen las decisiones de este año. Los detalles están en los bloques desplegables.
 
-| Imagen | Nombre de Componente | Descripción |
-| :----: | :------------------- | :---------- |
-| ![Base del Primer Piso](other/base.jpg) | **Base del Vehículo** | Con medidas de 11.5 cm x 2.5 cm, imita un coche de Fórmula 1, optimizando la distribución de espacio y la movilidad. La parte frontal permite alojar tres sensores (1 ultrasónico central y 2 infrarrojos diagonales). Aunque el cartón inicial presentó debilidades en la dirección, el uso de acrílico o un material más rígido es la solución ideal. |
-| ![Transmisión](other/transmision.jpg) | **Sistema de Transmisión de Legos** | Distribuye la potencia del motor entre ambas ruedas traseras, permitiendo el giro continuo del motor incluso si una rueda se bloquea y evitando daños. Elegido por su facilidad de uso y tamaño adecuado, permite también la reversa. |
-| ![Motor](other/encaje_motor.jpg) | **25GA370 Motor DC con Encoder** | Motor común en estos vehículos por su potencia y velocidad. El codificador integrado mide velocidad y dirección (aún no utilizado). **Especificaciones**: Potencia nominal: 4 W, Tensión nominal: 6V, Velocidad nominal: 220 RPM, Peso: 400g, Caja reductora: 21.3:1, Torque nominal: 0.35 kg·cm. |
-| ![Dirección](other/direccion.jpg) | **Sistema de Dirección** | Construido con piezas LEGO, su tamaño es ideal y permite adaptar un servomotor de 180 grados para controlar el movimiento. El servomotor se centra a 90 grados, gira a la izquierda a 180 grados y a la derecha a 0 grados. |
-| ![Separadores](other/separadores.jpg) | **Separadores de Acrílico** | Facilitan un montaje cómodo y modular. Girar los pilares permite desatornillar y desmontar el vehículo rápidamente. |
+<a id="resumen-2025"></a>
+### 18.1. El vehículo de 2025 en resumen
 
+Un vehículo de dos pisos diseñado por nosotros, con transmisión trasera y dirección hechas con piezas Lego, un servo para la dirección y el teléfono como cámara para detectar los obstáculos.
 
+<table>
+<tr>
+<td align="center"><img src="v-photos/arriba.JPG" alt="2025 vista superior" width="230"></td>
+<td align="center"><img src="v-photos/frente.JPG" alt="2025 vista frontal" width="230"></td>
+<td align="center"><img src="v-photos/lateral-derecho.JPG" alt="2025 lateral derecho" width="230"></td>
+</tr>
+<tr>
+<td align="center"><img src="v-photos/lateral-izquierdo.JPG" alt="2025 lateral izquierdo" width="230"></td>
+<td align="center"><img src="v-photos/detras.JPG" alt="2025 vista trasera" width="230"></td>
+<td align="center"><img src="v-photos/abajo.JPG" alt="2025 vista inferior" width="230"></td>
+</tr>
+</table>
 
-### Componentes de Detección
+| Subsistema | Hardware en 2025 | Qué pasó en 2026 |
+| :--- | :--- | :--- |
+| **Procesamiento** | Arduino al inicio; luego 2 × ESP32 (maestro + esclavo para el motor) | Un solo ESP32 |
+| **Motor y driver** | 25GA-370 con L298N | Mismo motor, driver TB6612FNG |
+| **Distancia** | 4 × HC-SR04 (frente, lados y atrás) + 2 × Sharp | 4 × VL53L0X + 2 × Sharp |
+| **Orientación** | MPU6050 + magnetómetro HMC5883L/QMC5883L | BNO055 |
+| **Color** | TCS34725 | TCS34725 en un bus aparte |
+| **Regulación** | XL6009, DSN-Mini 360 y LM2596 | XL6009 + 2 × DSN-Mini 360 |
+| **Chasis** | Dos pisos (Tinkercad → Fusion 360), impreso por terceros, separadores hexagonales | Monochasis en Onshape impreso por nosotros |
+| **Dirección** | Lego paralela, encajada a presión | Ackermann impresa en PETG-CF (radio mínimo 176 mm) |
+| **Soporte del teléfono** | Trípode recortado y pegado a la base | Torres Shark Fin con mordaza ajustable |
+| **Masa en competencia** | ≈1300 g con teléfono | 1092 g con teléfono |
 
-| Imagen | Nombre de Componente | Descripción |
-| :----: | :------------------- | :---------- |
-| ![Sensor Ultrasónico](other/sensor_ultrasonico.jpg) | **Sensor Ultrasónico HC-SR04** | Mide la distancia a obstáculos mediante ondas ultrasónicas. Lo utilizamos en la parte frontral, lateral izquierda, lateral derecha y en la parte trasera del vehiculo para detectar proximidad. |
-| ![Sensor Infrarrojo](other/sensor_infrarojo.jpg) | **Sharp GP2Y0A21YK0F Sensor Infrarrojo** | Garantiza una detección de objetos rápida y precisa. Se ubican en las diagonales delanteras del vehículo. |
-| ![Sensor Color](other/sensor_color.png) | **TCS34725 Sensor de Colores** | Permite una detección precisa del color a corta distancia, ubicado en la parte inferior para identificar los colores de las franjas de la pista. Alta sensibilidad y amplio rango dinámico (3.800.000:1), funcionando incluso tras cristales oscuros. |
-| ![Giroscopio](other/sensor_giroscopio.jpg) | **MPU6050 Sensor Giroscopio y Acelerómetro** | Unidad de medición inercial (IMU) de 6 grados de libertad (DoF) que combina un acelerómetro y un giroscopio de 3 ejes. Ampliamente utilizado en navegación, radiogoniometría y estabilización. |
-| ![Magnetometro](other/GY-273-1.png) | **Magnetómetro GY-273 HMC5883L** | Funciona como una brújula digital, midiendo la intensidad y la dirección del campo magnético de la Tierra en sus tres ejes (X, Y, Z). Al detectar este campo, puede determinar su orientación con respecto al norte magnético. |
-| ![Cámara Celular](other/celular.png) | **Cámara del Teléfono Celular** | Utilizando una app desarrollada en android studio usando las librerias de OpenCV, el celular en general se usa como procesador de imagenes y la cámara del celular se usa como sensor para identificar el color y los objetos. |
+<a id="archivo-electronica-2025"></a>
+### 18.2. Evolución de la electrónica en 2025
 
-### Componentes de Procesamiento de Información
+En 2025 el sistema eléctrico pasó por tres versiones antes de llegar a la actual (versión 4, [sección 6](#esquemas-alimentacion)).
 
-| Imagen | Nombre de Componente | Descripción |
-| :----: | :------------------- | :---------- |
-| ![ESP32](other/esp32.png) | **Microcontrolador ESP32** | Actúa como el cerebro del vehículo, conectando y controlando todos los sensores y motores. |
+| Versión | Alimentación | Sensores y control |
+| :--- | :--- | :--- |
+| **V1** | LiPo 2S → XL6009 → L298N → motor. Un Mini 360 alimentaba el VIN de un Arduino, que también alimentaba el servo. | Ultrasónicos al frente y a los lados, Sharp en diagonales, giroscopio y sensor de color. |
+| **V2** | Los dos Arduino (maestro y esclavo) en un mismo regulador de 7 V y un regulador aparte para servo, ultrasónicos e infrarrojos. | Arduino esclavo dedicado al puente H y botón de inicio. |
+| **V3** | Dos ESP32 a 6 V; XL6009 a 7.5 V para el L298N (que dejaba ~6 V al motor); Mini 360 a 5 V para servo y sensores. | Dos ESP32, magnetómetro, ultrasónico trasero, LED y buzzer, y divisores de voltaje para los HC-SR04. |
 
-### Componentes de Alimentación
+<details>
+<summary>🔌 <b>Ver los esquemas de 2025 (alimentación y sensores V1 a V3)</b></summary>
+<br>
 
-| Imagen | Nombre de Componente | Descripción |
-| :----: | :------------------- | :---------- |
-| ![Batería](other/bateria_lipo.png) | **Batería LiPo 2200mAh 7.4V** | Fuente de alimentación recargable que alimenta todo el sistema, proporcionando movilidad y autonomía. Seleccionada por su capacidad para suministrar suficiente energía a los motores y componentes internos. |
-| ![Regulador](other/Modulo_regulador_alimentacion_LM2596S.jpg) | **LM2596 Regulador de Voltaje** | Reduce el voltaje de manera eficiente. Voltaje de entrada: 4.5 V a 40 V CC. Voltaje de salida: 1.23 V a 37 V CC. Corriente de salida: Máx. 3 A, se recomiendan 2.5 A. |
+| Versión | Alimentación | Sensores |
+| :---: | :---: | :---: |
+| **V1** | <img src="schemes/power_supply_diagram.jpeg" alt="Alimentación V1" width="330"> | <img src="schemes/diagrama-sensores.jpg" alt="Sensores V1" width="330"> |
+| **V2** | <img src="schemes/diagrma-alimentacion2.jpg" alt="Alimentación V2" width="330"> | <img src="schemes/diagrama-sensores2.jpg" alt="Sensores V2" width="330"> |
+| **V3** | <img src="schemes/Esquema-alimentacio-3.png" alt="Alimentación V3" width="330"> | <img src="schemes/Esquema-alimentacion-4.png" alt="Sensores V3" width="330"> |
 
----
+**Divisor de voltaje para los HC-SR04.** El pin `Echo` de los ultrasónicos da 5 V y el ESP32 acepta 3.3 V. Con R1 = 1 kΩ y R2 = 2 kΩ:
 
-# Desarrollo de la Aplicación para la Detección de Objetos
+$$V_{out} = 5\text{ V} \cdot \frac{2\text{ kΩ}}{1\text{ kΩ} + 2\text{ kΩ}} \approx 3.33\text{ V}$$
 
-Para la detección de obstáculos, hemos desarrollado una aplicación móvil usando **Android Studio** e implementando la biblioteca **OpenCV**, la app es el cerebro de nuestro vehículo autónomo en cuanto a resolución de obstáculos se refiere. Permite que nuestro vehiculo identifique y reaccione de forma inteligente a los obstáculos en su entorno. El sistema procesa imágenes en tiempo real capturadas por la cámara del teléfono y, mediante una comunicación serial confiable, envía comandos específicos a una placa **Arduino/ESP32** para controlar el comportamiento del vehiculo en el campo de competición.
-
-| ![Logo de OpenCV](other/openCV.png) | ![Logo de Android Studio](other/andriod_studio.PNG) |
-| :-------------------------------: | :---------------------------------------------: |
-
----
-A continuación, detallaremos algunas de las versiones más importantes de nuestra aplicación, mostrando la evolución del sistema de detección a lo largo del desarrollo y cómo cada etapa nos ayudó a superar los desafíos del proyecto.
-
-## Versión 1: Detección Básica de Colores
-
-Esta es la primera versión del sistema, enfocada en la detección simple de colores. Su objetivo principal era identificar objetos de color **rojo** y **verde** para enviar un comando básico (`R` para rojo, `G` para verde) a través de una conexión USB a la placa Arduino.
-
-El mayor reto en esta etapa fue lograr la comunicación efectiva entre un dispositivo móvil Android y un microcontrolador como el Arduino. Después de numerosos intentos y ajustes, se consiguió establecer una conexión estable y que el Arduino recibiera comandos, al menos de forma básica. Además, fue un desafío significativo lograr aprovechar al máximo la librería **OpenCV** en un entorno móvil, dadas las complejidades de su instalación y configuración en dispositivos Android, pero este obstáculo también fue superado con éxito.
-
-**Imágenes de la Versión 1:**
-
-| <img src="other/app_prueba.jpg" width="400"> | <img src="other/app_prueba2.jpg" width="400"> |
-| :-------------------------------: | :---------------------------------------------: |
-
----
-
----
-
----
-
-## Versión 2: Mejora en Detección y Comunicación
-
-Se introdujeron mejoras significativas para hacer el sistema más robusto y preciso. Uno de los principales retos fue **optimizar la aplicación** para que los comandos se enviaran y fueran recibidos por el Arduino lo más rápido posible, al mismo tiempo que se lograba reconocer con precisión la **distancia** y **orientación** del objeto.
-
-Con respecto a la orientación, una complicación particular surgió debido a la **posición horizontal de la cámara** en el teléfono. Al dividir la pantalla en tres sectores para determinar la ubicación del objeto, la perspectiva de la cámara causaba distorsiones, haciendo que un objeto pareciera estar más hacia un lado del vehículo de lo que realmente estaba.
-
-### Cálculo de Distancia por Área
-
-Para estimar la distancia al objeto, se implementó un método basado en la relación inversa entre la distancia y el área aparente del objeto en la imagen. El principio es simple: **cuanto más lejos está un objeto, más pequeño se ve**. Este enfoque requiere una calibración inicial para funcionar.
-
-La fórmula utilizada es la siguiente:
-
-$$ \text{Distancia} = \text{DistanciaConocida} \times \sqrt{\frac{\text{AreaConocida}}{\text{AreaMedida}}} $$
-
-Donde:
-* **DistanciaConocida**: Es una distancia fija y conocida a la que se calibra el sistema (por ejemplo, 30 cm).
-* **AreaConocida**: Es el área en píxeles que ocupa el objeto en la imagen cuando se encuentra a la `DistanciaConocida`. Este valor se guarda una vez durante la calibración.
-* **AreaMedida**: Es el área actual en píxeles que el objeto ocupa en la imagen durante la detección en tiempo real.
-
-Este método permite que, tras una única calibración, el sistema pueda estimar la distancia de forma continua simplemente midiendo el tamaño del objeto detectado.
-
-A pesar de los desafíos, se implementaron las siguientes mejoras:
-
-* **Filtrado de Formas:** La aplicación ahora filtra las imágenes para reconocer específicamente **formas rectangulares**, lo que reduce los falsos positivos y mejora la precisión.
-* **Comunicación Detallada:** Se mejoró la comunicación con Arduino para transmitir información más completa. Ahora se envían la **distancia** y la **orientación** del objeto, además de su color.
-* **Mejoras en la UI:** Se optimizó el comportamiento general de la aplicación y se realizaron cambios sutiles en la interfaz de usuario para una mejor experiencia.
-
-**Imágenes de la Versión 2:**
-
-| <img src="other/Deteccion_con_orientacion (2).jpeg" width="400"> | <img src="other/Deteccion_Magenta.jpeg" width="400"> |
-| :-------------------------------: | :---------------------------------------------: |
-
----
-
-## Versión 3: Sistema de Detección Avanzado y Profesional
-
-Esta versión representa una **reestructuración completa** y un salto cualitativo en el sistema, adaptándose a las nuevas necesidades y a un cambio en la plataforma del vehículo. Tras evaluar los resultados obtenidos en los regionales del país, se hizo evidente la necesidad de un sistema más avanzado y robusto capaz de mejorar significativamente el **esquive de obstáculos**.
-
-Para ello, se realizó un cambio en el vehículo para usar un ESP32 como microcontrolador principal, lo que requirió que la aplicación también se adaptara a esta nueva plataforma. La estrategia clave fue desarrollar un sistema capaz de reconocer dos objetos a la vez y establecer rutas de forma anticipada, en lugar de esquivar los obstáculos uno a uno en tiempo real. Esto llevó la automatización de nuestro vehículo a otro nivel.
-
-Sin embargo, la implementación de la detección dual presentó varios desafíos. El más evidente fue que requirió rehacer gran parte del código de envío de comandos. Para resolverlo, decidimos crear un archivo independiente, el CommandManager, que se encarga exclusivamente de la lógica de comandos y de gestionar la información de cada combinación de obstáculos o "caso".
-
-Además, surgió la necesidad de elevar el teléfono para que la cámara pudiera observar ambos objetos cuando uno estuviera detrás del otro. Esto nos obligó a realizar una modificación en la base del vehículo, un cambio que se detalla más a fondo en la sección correspondiente de nuestro repositorio. Finalmente, una vez resueltos estos retos, se llevaron a cabo una gran cantidad de pruebas para asegurar que el sistema fuera robusto y pudiera enfrentar de manera fiable las distintas combinaciones de obstáculos en la competición.
-Se lograron importantes avances:
-
-* **Solución al Problema de Orientación:** Se corrigió el problema anterior con la división de la pantalla y la orientación. En esta versión, no usamos una división en tres sectores; simplemente dividimos la pantalla en **izquierda y derecha** para identificar la posición lateral de los objetos.
-* **Cálculo de Distancia Avanzado:** El cálculo de distancia se encarga de identificar la posición longitudinal de los objetos (adelante, medio o atrás). Mediante algunos "trucos" y algoritmos optimizados, logramos filtrar y reconocer de manera efectiva **cada caso de colisión o esquive**.
-* **Interfaz Profesional:** La interfaz de usuario fue completamente **rediseñada** para ser más intuitiva, profesional y pulida, ofreciendo una experiencia de usuario superior.
-* **Monitor Serial Integrado:** La incorporación de un **monitor serial** para recibir información directamente del microcontrolador ha sido fundamental para el **debug** y las pruebas en tiempo real, agilizando el desarrollo.
-* **Diseño Único:** La nueva interfaz no solo es 100% más práctica, sino que también cuenta con un diseño único que representa la identidad de nuestro equipo: **Prometheus Team**.
-
-**Imágenes de la Versión 3:**
-| <img src="other/Deteccio_doble_app.jpeg" width="400"> | <img src="other/Monitor_serial.jpeg" width="400"> |
-| :-------------------------------: | :---------------------------------------------: |
-
----
-
-## 📱 Telemetría y Visión Artificial: Aplicación Prometheus V5.0
-
-La aplicación de detección desarrollada en Android Studio y OpenCV ha evolucionado a su versión 5.0, operando como el verdadero muro de pits (*pit wall*) de nuestro sistema. Conservando las bases de comunicación USB, la interfaz a pantalla completa y el monitor serial integrado de la temporada 2025, la temporada 2026 exigió una reestructuración profunda en el motor de visión y telemetría para manejar escenarios de pista mucho más agresivos y dinámicos.
-
-### Interfaz V5.0 y Monitor Serial Integrado
-| <img src="other/app2026.jpeg" width="400"> | <img src="other/Monitor_serial.jpeg" width="400"> |
+| Simulación en Tinkercad | Montaje real (vista inferior) |
 | :---: | :---: |
-| *Interfaz principal con telemetría de detección dual y estabilización.* | *Monitor serial integrado operando en tiempo real.* |
+| <img src="schemes/Divisor-de-voltaje.png" alt="Divisor de voltaje en Tinkercad" width="330"> | <img src="other/divisor-de-voltaje-abajo.jpg" alt="Divisores soldados en baquelita" width="330"> |
 
-A continuación, se detallan las innovaciones y sistemas implementados en el núcleo de la aplicación (`MainActivity.kt`, `ColorAnalyzer.kt` y el sistema de configuración):
+En 2025 el consumo nominal estimado era de ~914 mA (dos ESP32, cuatro ultrasónicos, MPU6050 y magnetómetro), con una autonomía teórica de ~2.4 h.
 
-### 1. Calibración en Pista y Menú Dinámico
-Se eliminó la necesidad de depender de Android Studio para ajustar variables en el campo de competencia.
-* **Calibración Automática por Muestras:** Un nuevo menú interactivo permite calibrar el matiz (Hue) y tolerancia capturando 8 muestras directas de los pilares en distintos puntos de la pista.
-* **Ajuste Paramétrico:** Las zonas de detección de distancia, el área de referencia y los filtros se configuran directamente desde una interfaz visual sin tener que tocar código.
+</details>
 
-### 2. Filtro Anti-Reflejos y Limpieza Geométrica
-Para lidiar con los cambios de iluminación y destellos en el tapiz de la pista, se programó un blindaje en el procesamiento de imagen (`ColorAnalyzer`):
-* **Filtro de Saturación Interna:** Los reflejos pierden saturación al mezclarse con el brillo de la pista. El sistema analiza la saturación promedio (Canal S en HSV) *dentro* del contorno y rechaza automáticamente aquellos que presenten niveles bajos, identificándolos como destellos. Estos niveles de saturación son configurables de forma independiente para el rojo y el verde desde el menú.
-* **Ecualización CLAHE:** Se aplica ecualización adaptativa de histograma al canal de brillo para normalizar la iluminación del entorno sin perder detalles críticos.
-* **Rechazo de Formas Orgánicas:** Mediante detección de picos y conteo de defectos de convexidad, el sistema ignora geometrías con ángulos muy agudos (menores a 45°) o formas complejas que no correspondan a la silueta regular de un pilar o delimitador.
+<a id="archivo-chasis-2025"></a>
+### 18.3. Construcción del chasis 2025
 
-### 3. Modo Estacionamiento Dinámico (Zona Magenta)
-El color magenta activa un comportamiento estratégico mediante un umbral de área específico (8000 px), asegurando que el modo despierte únicamente al entrar a ese tramo de la pista y no desde lejos.
-* Su función no es simplemente frenar al final del circuito, sino **modificar la trayectoria de evasión**. 
-* Al reconocer la zona de estacionamiento, el `CommandManager` ajusta la ruta para que el vehículo navegue alejado de esa área (forzando un lado específico si es necesario), evitando llevarse por delante la placa delimitadora magenta durante el trayecto.
+El diseño empezó con un modelo en Tinkercad de dos pisos: abajo la transmisión, la dirección, el motor y los sensores; arriba el microcontrolador y el teléfono. Primero lo probamos en cartón, luego lo pasamos a Fusion 360 para ajustar tolerancias y lo mandamos a imprimir. Las fallas de ese chasis (flexión, motor vertical, retoques a mano) están analizadas en el [diario de ingeniería](#diario-ingenieria).
 
-### 4. Filtro Temporal de Estabilización (Anti-Ruido)
-Para erradicar comandos fantasma o falsos positivos, la telemetría incluye un filtro temporal estricto.
-* **Ventana de Votación:** El sistema almacena las detecciones en una ventana deslizante de los últimos 8 fotogramas.
-* Para que un comando tome el control del vehículo, debe dominar al menos el **70% de esa ventana** y mantenerse estable durante un umbral de **2000 milisegundos**.
+<details>
+<summary>🛠️ <b>Ver el proceso de construcción de 2025</b></summary>
+<br>
 
-### 5. Consolidación de Telemetría Dual y Arquitectura por Casos
-Construyendo sobre la capacidad de detección dual introducida a finales de 2025, el sistema ahora engrana esta telemetría con un motor de decisiones robustecido:
-* El sistema continúa extrayendo el área, distancia y orientación de un objeto primario y secundario en simultáneo.
-* Toda la lógica de decisión se extrajo del hilo principal y se encapsuló en un `CommandManager` independiente, el cual analiza esta telemetría dual bajo una arquitectura de casos predefinidos para emitir el comando exacto de evasión combinada.
-* Para soportar la alta carga de datos con la placa ESP32, se optimizó la comunicación USB con algoritmos que interceptan y destruyen la basura binaria y los mensajes de arranque (*boot logs*) nativos del ESP32, garantizando lecturas limpias desde el primer milisegundo.
+| | |
+| :---: | :--- |
+| <img src="other/base1.jpg" alt="Base de cartón" width="230"> | **Prototipo de cartón.** Medidas iniciales en cartón doble, para poder cortar y probar sin gastar en material. |
+| <img src="other/primera_estructura.jpg" alt="Primera estructura" width="230"> | **Primera prueba.** Transmisión y dirección Lego montadas con el motor y el servo, conectadas al regulador para probar el movimiento. |
+| <img src="other/modelo3drojo5.jpeg" alt="Modelo 3D en Tinkercad" width="230"> | **Modelo 3D.** Dos pisos con espacio para separadores hexagonales, interruptor, batería, medidor de voltaje y un alerón decorativo. |
+| <img src="other/modelo3dnegro3.jpeg" alt="Modelo en Fusion 360" width="230"> | **Fusion 360.** Ajuste de tolerancias y exportación de cada pieza a STL. |
+| <img src="other/impresion3dterminada.jpeg" alt="Piezas impresas" width="230"> | **Piezas impresas** por un proveedor externo. |
+| <img src="other/proceso-3.jpg" alt="Cambio de base" width="230"> | **Cambio de base.** Paso del cartón a la base impresa, montaje de dirección y tracción y cableado. |
+| <img src="other/modificacion_base_v3.jpeg" alt="Tercer prototipo" width="230"> | **Tercer prototipo.** Sensores reubicados (el de color pasó al frente) y cableado nuevo para dos ESP32 y el magnetómetro. |
+| <img src="other/fijacion-del-soporte.jfif" alt="Trípode instalado" width="230"> | **Soporte del teléfono.** Para ver dos pilares a la vez subimos la cámara con un trípode recortado, fijado con una perforación en la base superior. Ese trípode terminó causando la flexión del chasis. |
 
-> [!TIP]
-> **Ergonomía en Pruebas (Legado Mejorado)**
->
-> Diseñada para el estrés de la competencia, la interfaz mantiene su operabilidad a pantalla completa, despierta el teléfono automáticamente al conectar el cable USB, es capaz de emitir señales acústicas únicas para cada comando enviado de forma exitosa, permitiendo al equipo monitorear el desempeño sin despegar los ojos del vehículo.
+**Videos del proceso:** [mejora del cableado (timelapse)](https://www.youtube.com/shorts/rl1eokkc18E) · [diseño de los diagramas (timelapse)](https://youtube.com/shorts/UtEvRMK07D0?si=VvvrS2JtITUjtCgx)
 
-----
+</details>
 
-### Video del Funcionamiento en Vivo de la Aplicación
+<a id="app-2025"></a>
+### 18.4. Evolución de la app en 2025 (V1 a V3)
 
-[![Mira el video del funcionamiento en vivo de la aplicación](other/Funcionamiento-en-vivo.png)](https://youtu.be/TpLVCiggEwY)
+| Versión | Qué agregó | Problema que resolvió o dejó pendiente |
+| :--- | :--- | :--- |
+| **V1** | Detección de rojo y verde; enviaba `R` o `G` por USB a un Arduino. | Lo difícil fue lograr la comunicación USB Android–Arduino e instalar OpenCV en Android. |
+| **V2** | Filtro de formas rectangulares, distancia por área (d = d_ref · √(A_ref / A_medida)) y orientación con la pantalla en tres sectores. | La perspectiva de la cámara hacía que los objetos parecieran más a un lado de lo real. |
+| **V3** | Detección de dos objetos a la vez, `CommandManager` por casos, pantalla dividida en izquierda/derecha, nueva interfaz y monitor serial integrado. | Resolvió la orientación; exigió subir el teléfono para ver dos pilares en fila. |
 
----
+<details>
+<summary>📱 <b>Ver capturas de las versiones V1 a V3</b></summary>
+<br>
 
+| V1 | V2 | V3 |
+| :---: | :---: | :---: |
+| <img src="other/app_prueba.jpg" alt="App V1" width="230"> | <img src="other/Deteccion_con_orientacion (2).jpeg" alt="App V2, orientación" width="230"> | <img src="other/Deteccio_doble_app.jpeg" alt="App V3, detección doble" width="230"> |
+| <img src="other/app_prueba2.jpg" alt="App V1, prueba 2" width="230"> | <img src="other/Deteccion_Magenta.jpeg" alt="App V2, magenta" width="230"> | <img src="other/Monitor_serial.jpeg" alt="App V3, monitor serial" width="230"> |
 
-##  Cálculo de Torque y Velocidad
+</details>
 
-### Cálculo de Torque Necesario para Mover el Vehículo:
+<a id="problemas-2025"></a>
+### 18.5. Problemas principales de 2025 y cómo los resolvimos
 
-El torque necesario ($T_{\text{necesario}}$) se calcula mediante la fórmula:
-$T_{\text{necesario}} = m \cdot g \cdot r$
+| Problema | Solución en 2025 | Solución definitiva en 2026 |
+| :--- | :--- | :--- |
+| **Interferencia del puente H:** el carro no terminaba los giros o no detectaba la línea. Aislar los cables no funcionó. | Un segundo microcontrolador (esclavo) que solo manejaba el motor y recibía órdenes del principal. | TB6612FNG y un solo ESP32. |
+| **Deriva del giroscopio.** | Fusión del MPU6050 con el magnetómetro (corrección gradual de 0.1 hacia el ángulo del magnetómetro). Se alteraba cerca de metales y motores. | BNO055 con fusión interna. |
+| **El carro se pasaba de 90° en las esquinas.** | Calibramos a mano el giro a 70°. | Giro con PID sobre el ángulo real del BNO055. |
+| **Líneas no detectadas o contadas dos veces.** | Tiempo de integración del TCS34725 a 2.4 ms y promedio de las últimas 3 lecturas. | Se mantiene, con confirmación en HSV y lectura en una tarea propia. |
+| **Esquive impreciso:** retroceso "a ciegas" después de cada giro. | Sistema de carriles con retroceso guiado por ángulo y ultrasónico trasero. | Mismo sistema con BNO055 y ToF trasero. |
 
-Donde:
-* $m$ = masa del vehículo (0.943 kg)
-* $g$ = gravedad (9.81 $m/s^2$)
-* $r$ = radio de las ruedas (0.04 m)
+<details>
+<summary>🧠 <b>Ver la lógica de navegación de 2025</b></summary>
+<br>
 
-$T_{\text{necesario}} = 0.943 \cdot 9.81 \cdot 0.04 = 0.370 \text{ N} \cdot \text{m}$
+**Vuelta libre.** Contaba las líneas de la pista (4 líneas = 1 vuelta, 12 = 3 vueltas) y usaba el giroscopio para girar en cada esquina. Centraba el carro comparando los ultrasónicos laterales con un PID. El sentido lo decidía la primera línea detectada.
 
-### Cálculo de Torque a la Salida (después de la reducción) según el motor DC 25GA370:
+**Primer esquive (estados `ESTADO_NORMAL` ↔ `SIGUIENDO_OBJETO` ↔ `ESQUIVANDO`).** La app enviaba el color (`R`/`G`) y la posición del pilar (`I`, `C`, `D`). El carro se orientaba hacia el pilar y, a 30 cm, ejecutaba una secuencia temporizada de 6 etapas: rojo por la derecha y verde por la izquierda. El retorno se podía interrumpir si aparecía otro pilar.
 
-$T_{\text{salida}} = T_{\text{motor}} \cdot \text{Reducción}$
-$T_{\text{salida}} = 0.0343 \cdot 21.3 = 0.7306 \text{ N} \cdot \text{m}$
+**Esquive 2.0 (sistema de carriles).** Con la detección de dos pilares de la app V3, cambiamos a la lógica de carriles que sigue usándose en 2026 ([sección 14.5](#modo-obstaculos)).
 
-### Cálculo de la Velocidad Lineal del Vehículo:
+| Primer esquive | Esclavo del motor |
+| :---: | :---: |
+| <img src="other/diagrama_esquive.png" alt="Diagrama del primer esquive" width="330"> | <img src="other/diagrama_esclavo.png" alt="Diagrama del microcontrolador esclavo" width="330"> |
 
-Convertimos la velocidad del motor a radianes por segundo ($\omega$):
-$\omega = \frac{220 \cdot 2\pi}{60} = 23.04 \text{ rad/s}$
+</details>
 
-Velocidad lineal del vehículo ($v$):
-$v = \omega \cdot r = 23.04 \cdot 0.04 \approx 0.92 \text{ m/s}$
+<a id="videos-2025"></a>
+### 18.6. Videos de 2025
 
-El motor empleado tiene una velocidad sin carga de 4690 RPM y un torque nominal de 0.35 kg·cm (0.0343 N·m). Mediante una caja reductora de 21.3:1, la velocidad se reduce a 220.2 RPM en el eje de salida, lo que resulta en una velocidad lineal del vehículo de aproximadamente 0.92 m/s.
+<table>
+<tr>
+<td align="center" width="33%"><b>Resumen de pruebas</b><br><br><a href="https://youtu.be/E-xsGcDSaJY?si=9i87w-iJ8TijE_ca"><img src="other/video_promocional.png" alt="Resumen de pruebas 2025" height="150"></a></td>
+<td align="center" width="33%"><b>Vueltas a la pista</b><br><br><a href="https://youtube.com/shorts/wI_OLS1nWhc?si=868zlHss_CnnXe10"><img src="other/prueba-vuelta.png" alt="Vueltas a la pista 2025" height="150"></a></td>
+<td align="center" width="33%"><b>Evasión de obstáculos</b><br><br><a href="https://www.youtube.com/watch?v=WQM6CjVKSwE"><img src="other/prueba-evacion-obstaculos.png" alt="Evasión de obstáculos 2025" height="150"></a></td>
+</tr>
+<tr>
+<td align="center"><b>Prueba del sensor de color</b><br><br><a href="https://youtu.be/7GS6mCXmGks"><img src="other/portada_pruebas.png" alt="Prueba del sensor de color 2025" height="150"></a></td>
+<td align="center"><b>Mejora del cableado</b><br><br><a href="https://www.youtube.com/shorts/rl1eokkc18E"><img src="other/TIMELAPSE.SIMPLIFICANDO-Cover.jpg" alt="Timelapse de cableado" height="150"></a></td>
+<td align="center"><b>Diseño de los diagramas</b><br><br><a href="https://youtube.com/shorts/UtEvRMK07D0?si=VvvrS2JtITUjtCgx">▶️ Ver timelapse en YouTube</a></td>
+</tr>
+</table>
 
-Gracias a esta reducción, el torque en las ruedas alcanza 0.7306 N·m, lo cual supera el torque mínimo necesario para mover el vehículo de 943 gramos (0.370 N·m). Por lo tanto, el sistema cumple adecuadamente los requerimientos de tracción y movilidad para condiciones normales.
-
----
-
-##  Sistema de Alimentación
-
-###  Versión 1:
-
-![Diagrama de Alimentación 1](schemes/power_supply_diagram.jpeg)
-
-Este diagrama representa la versión inicial del sistema de alimentación de nuestro proyecto, concebido con una configuración de componentes más simple. 
-
-En esta iteración, el circuito se alimenta por completo a través de una **batería LiPo de 2200 mAh** (7.4V), cuya energía se distribuye a los distintos módulos después de pasar por un interruptor principal de encendido. Un **regulador de voltaje XL6009** eleva el voltaje para alimentar el puente H **L298N**, asegurando que nuestro motor DC reciba la tensión de funcionamiento adecuada. 
-
-De forma paralela, un **módulo DSN-Mini 360** se encarga de reducir el voltaje de la batería para alimentar directamente el pin Vin de la placa **Arduino**, que a su vez controla el servomotor de dirección. Este diseño sienta las bases del sistema, aunque futuras versiones incorporarán más componentes para optimizar su rendimiento.
-
-###  Versión 2:
-
-![Diagrama de Alimentación 2](schemes/diagrma-alimentacion2.jpg)
-
- #### Cambios agregados a las conexiones en el sistema de alimentacion:
-  1. Alimentamos ambos microcontroladores con el mismo reductor de voltaje a 7v.
-  2. Agregamos un reductor de voltaje exclusivo para sensores ultrasonicos e infrarrojos y el servomotor de la direccion(que ahora se alimenta del reducctor y no del arduino).
-
-###  Versión 3:
-
-![Diagrama de Alimentación 3](schemes/Esquema-alimentacio-3.png)
-
-Tras la primera iteración, este diagrama detalla una revisión del sistema de alimentación del vehículo autónomo, ahora con una arquitectura que soporta más componentes y funcionalidades. 
-
-La **batería LiPo 2S de 2200mAh** (7.4V, con un máximo de 8.4V) sigue siendo la fuente principal de energía, conectada a un interruptor general. A partir de este punto, la alimentación se ramifica: una rama se dirige a un **step-up/down XL6009** ajustado a 7.5V, que a su vez alimenta el **puente H L298N**. Este entrega aproximadamente 6V al **Motor 25GA-370** tras su caída de voltaje interna. 
-
-De forma paralela, la batería alimenta dos módulos **step-down DSN-Mini 360**. El primero, configurado a 6V, proporciona energía a ambos microcontroladores **ESP32 #1** y **ESP32 #2**. El segundo módulo DSN-Mini 360, con un ajuste de 5V, se encarga de la alimentación general para el **Servomotor SG90 180°** y otros posibles sensores, ofreciendo una línea de voltaje estable y adecuada para estos componentes. Esta configuración ampliada permite una gestión de energía más distribuida y específica para las necesidades de cada subsistema del vehículo.
-
-### Cálculo del Consumo Energético Total
-
-| Componente | Cantidad | Consumo Estimado (mA) | Total (mA) |
-| :------------------------------- | :------: | :--------------------: | :--------: |
-| Motor DC | 1 | 500 mA (en carga) | 500 mA |
-| Servo 180° | 1 | 150 mA (típico) | 150 mA |
-| Sensor ultrasónico HC-SR04 | 4 | 15 mA c/u | 60 mA |
-| Sensor infrarrojo Sharp | 2 | 30 mA c/u | 60 mA |
-| ESP32 (sin WiFi/BT y sin carga) | 2 | ~70 mA c/u | 140 mA |
-| Sensor Magnetómetro GY-273 | 1 | ~0.1 mA | 0.1 mA |
-| Sensor Giroscopio/Acelerómetro MPU6050 | 1 | ~3.6 mA | 3.6 mA |
-| **TOTAL** | **—** | **—** | **~913.7 mA** |
-
----
-
-### 🔋 Corriente total aproximada: **~913.7 mA**
-
----
-
-### ⏱️ Autonomía Estimada
-
-**Fórmula:**
-`Autonomía (h) = Capacidad de la batería (mAh) / Consumo total (mA)`
-
-**Ejemplo con batería de 2200 mAh:**
-`Autonomía ≈ 2200 mAh / 913.7 mA ≈ 2.40 horas`
-
-> ⚠️ *Nota:* Este valor es teórico y asume un consumo constante. En la práctica, el consumo del motor puede aumentar significativamente si se encuentra con un obstáculo, por lo que la autonomía real podría variar.
----
-
-##  ¿Porque Seleccionamos esta Fuente de Alimentacíon?
-
-Seleccionamos una bateria LiPo (Bateria de Polimero de Litio) por su alta capacidad de almacenamiento de energía y al mismo tiem su bajo peso, en especifico nuestra bateria marca (Ovonic 2S 2200mAh 50c) donde las siglas 2S significa que la bateria es de dos celdas, cada una de ellas tiene un voltaje nominal de 3,7V, en total nuestra bateria tiene 7,4V nominales; cuando se menciona 2200mAh (Miliamperio-hora) nos referimos a la  capacidad de almacenamiento de energía de la bateria, optamos por esa cantidad de miliamperios por su rendimiento en pruebas de larga duración; y para finalizar cuando nos referimos a 50c, hablamos de la tasa de descarga de la bateria, esto nos indica la velocidad a la que la bateria puede descargarse de forma segura, en nuestro caso 50c nos permite descargar la bateria cincuenta veces su capacidad nominal.
-
-# Sistema de Detección de Objetos
-
-## Versión 1:
-
-![Diagrama de Sensores 1](schemes/diagrama-sensores.jpg)
-
-Cada uno de los sensores instalados desempeña una función crítica para la navegación del vehículo y la prevención de colisiones:
-
-* Los **sensores infrarrojos** se posicionan en las diagonales del vehículo, proporcionando una detección rápida y precisa para evitar obstáculos cercanos.
-* Los **sensores ultrasónicos** están ubicados en la parte frontal y en los laterales, midiendo distancias para mantener un margen de seguridad con respecto a las paredes y otros objetos.
-* El **sensor giroscopio** ayuda a mantener una trayectoria estable y recta, facilitando giros precisos y la orientación general del vehículo.
-* El **sensor de color** se utiliza para identificar las líneas de la pista, permitiendo que el vehículo siga la ruta designada de manera autónoma.
-
-## Versión 2: 
-
-![Diagrama de Sensores](schemes/diagrama-sensores2.jpg)
-
-#### Mejoras implementadas en el diagrama:
-
-1.  Se incorporó un segundo microprocesador Arduino para gestionar exclusivamente el módulo de puente H. Esta separación de responsabilidades minimiza las interferencias eléctricas y mejora el rendimiento general del sistema.
-2.  Se añadió un botón de inicio para controlar la ejecución del código. Esto permite que el vehículo se encienda y realice las calibraciones iniciales de los sensores, permaneciendo en un estado de espera hasta que se active el recorrido.
-
-## Versión 3: 
-
-![Diagrama de Sensores](schemes/Esquema-alimentacion-4.png)
-
-Esta versión representa una mejora significativa en la capacidad de procesamiento y la precisión del sistema de navegación y evasión. Los cambios más importantes incluyen:
-
-1.  **Migración de microcontroladores:** Ambos microcontroladores Arduino fueron reemplazados por dos **ESP32**. Este cambio se hizo necesario para obtener mayor potencia de procesamiento y memoria, lo que permite ejecutar algoritmos más complejos y eficientes para la evasión de obstáculos.
-2.  **Ajuste de compatibilidad de voltaje:** Se agregaron **cuatro divisores de voltaje** para los sensores ultrasónicos HC-SR04. Los pines de entrada de los ESP32 operan a 3.3V, por lo que era necesario reducir el voltaje de 5V que emiten estos sensores para evitar daños. Este ajuste de compatibilidad se detallará mas adelante.
-3.  **Expansión del sistema de sensores:** Se integró un **sensor magnetómetro (HMC5883L)** para mejorar la orientación del vehículo. Los datos de este sensor, combinados con los del IMU y el resto de los sensores, ofrecen una referencia más precisa y robusta para la navegación.
-4.  **Detección de obstáculos ampliada:** Se añadió un **sensor ultrasónico trasero** para mejorar la capacidad de detección y maniobrabilidad en situaciones de marcha atrás, proporcionando datos adicionales para un sistema de evasión más completo.
-5.  **Sistema de notificaciones:** Se agregaron un **LED** y un **buzzer** para proporcionar indicaciones visuales y sonoras sobre el estado operativo del vehículo, como el inicio del recorrido, la detección de obstáculos o cualquier error del sistema.
-
-Estos cambios consolidan la capacidad del vehículo para operar de manera más autónoma y segura en su entorno, basándose en un flujo de datos más rico y un procesamiento más potente.
-
----
-
-### Explicación del Divisor de Voltaje para Sensores HC-SR04
-
-Un **divisor de voltaje** es un circuito simple que permite obtener un voltaje de salida (Vout) menor a partir de un voltaje de entrada (Vin), utilizando una configuración de dos resistencias en serie. Esta solución fue esencial para adaptar la salida de 5V del pin `Echo` de los sensores HC-SR04 a la entrada de 3.3V de los pines GPIO del microcontrolador ESP32, protegiéndolo de posibles daños.
-
-La fórmula utilizada para calcular el voltaje de salida es:
-
-$$ V_{out} = V_{in} * (R2 / (R1 + R2)) $$
-
-Para nuestro circuito, utilizamos los siguientes valores de resistencias:
-
-* **R1:** 1 kΩ
-* **R2:** 2 kΩ
-
-Al aplicar la fórmula con estos valores y la entrada de 5V de los sensores, obtenemos el siguiente resultado:
-
-$$ V_{out} = 5V * (2kΩ / (1kΩ + 2kΩ)) $$
-$$ V_{out} = 5V * (2kΩ / 3kΩ) $$
-$$ V_{out} \approx 3.33 V $$
-
-Este voltaje de salida de aproximadamente 3.3V es compatible con las entradas de 3.3V del ESP32, permitiendo la comunicación segura entre el sensor y el microcontrolador.
-
-A continuación, se muestra un esquema de conexion del divisor de voltaje simulado en tinkercad:
-
-![Divisor de voltaje](schemes/Divisor-de-voltaje.png)
-
----
-
-### Implementación Física del Divisor de Voltaje
-
-**Vista Superior:**
-
-Esta imagen muestra la disposición de los componentes en la parte superior de la baquelita, incluyendo las resistencias de los divisores de voltaje conectadas a los pines del ESP32 y a los cables del sensor ultrasónico.
-
-![Divisores de Voltaje Vista Superior](other/Divisor-de-voltaje-arriba.jpg)
-
-**Vista Inferior:**
-
-Esta imagen ofrece una perspectiva de las conexiones soldadas en la parte inferior de la baquelita, mostrando cómo se unen las resistencias para formar los divisores de voltaje y cómo se conectan los cables.
-
-![Divisores de Voltaje Vista Inferior](other/divisor-de-voltaje-abajo.jpg)
-
-### Timelapse de Diseño de Circuitos
-
-Aquí puedes observar un timelapse del proceso de diseño de los diagramas de alimentación y de las conexiones de entrada/salida de nuestros microcontroladores.
-
-Haz clic en la imagen para ver el vídeo:
-
-<a href="https://youtube.com/shorts/UtEvRMK07D0?si=VvvrS2JtITUjtCgx" target="_blank">
-  <img src="https://github.com/erchivox/Prometheus-Team/blob/f2510ccf25a47e93904d0bfb8a12c54cac5ecb01/other/Dise%C3%B1ando%20Diagramas-Cover.jpg" alt="Miniatura del Video Timelapse de Diseño de Circuitos" width="480px">
-</a>
-
----
-
-##  Paso a Paso de la Construcción
-
-### Etapa de Diseño y Ensamblaje del Vehículo
-
-El diseño de nuestro vehículo comenzó con un **modelo 3D en Tinkercad** para definir las dimensiones y el tamaño de cada componente. Este modelo se concibió para un vehículo de dos plantas:
-
-* **Planta Baja:** Aloja el sistema de transmisión, sistema de dirección, motor, sistema de potencia y sensores (frontales, laterales y diagonales).
-* **Segundo Piso:** Contendrá el Arduino y la cámara (originalmente no se pensó en un teléfono celular, pero se consideró la idea en esta etapa). La imagen muestra cómo un teléfono celular interactuaría con nuestro vehículo.
-
-| Vista Frontal | Vista Base | Vista Lateral |
-| :-----------: | :--------: | :-----------: |
-| ![Modelo 3D Frontal](other/Frontal3d.png) | ![Modelo 3D Base](other/base_3d.png) | ![Modelo 3D Lateral](other/lateral3d.png) |
-
-### Montaje del Vehículo
-
-| Imagen | Descripción |
-| :----: | :---------- |
-| ![Molde Base](other/base1.jpg) | Aquí se muestran algunas medidas ya probadas para las primeras pruebas del coche. Utilizamos cartón como material de prueba para realizar cambios sin incurrir en costos adicionales. La base se cubrió con una doble capa de cartón para mayor rigidez. |
-| ![Instalación de Transmisión](other/montaje.jpg) | Colocamos la transmisión LEGO en la base y realizamos los cortes necesarios para que el motor, la dirección y la transmisión encajaran correctamente. Luego, instalamos el servomotor en el diferencial y el motor DC en la transmisión. |
-| ![Instalación de Servo](other/instalacion_servo_direccion.jpg) | Encaje del servomotor con el sistema de direccion. |
-|  ![Instalación de Motor DC](other/instalacion_motor_transmision.jpg) | Encaje de motor dc con el sistema de transmision. |
-| ![Primera Estructura](other/primera_estructura.jpg) | Con todos los elementos esenciales ensamblados, conectamos el motor a la alimentación con el regulador para una prueba de funcionamiento rápida, verificando el correcto desempeño del motor y la transmisión. |
-
-### Diseño de base 3d
-Teniendo en cuenta el modelo diseñado en carton empezamos con la modelacion en 3d de nuestro vehiculo para construirlo con un material mas resistente que no sufra los defectos de nuestra primera base de carton.
-
-| Imagen | Descripción |
-| :----: | :---------- | 
-| ![diseño de la base](other/base3d2.png) | Empezamos realizando el primer piso en base a las medidas que teniamos previamente, en el software de Tinkercad. |
-| ![diseño de la base](other/modelo3dgris.jpeg) | En nuestro primer piso realizamos la base donde encajara nuestro motor, para ello realizamos un agujero con el diametro del motor, y un pequeño espacio para la union de los ejes. |
-| ![Montaje de la Nueva Base 2](other/base3d3.png)| Luego de ya tener fijado nuestro motor empezamos a diseñar y probar el espacio en donde encajaria el soporte para nuestro servomotor. Ademas agregamos el soporte para nuestros soportes hexagonales. |
-| ![diseño de la base](other/modelointermediogris.jpeg) | Por debajo del vehiculo realizamos el espacio para nuestro sensor de color (posteriormente se cambio de posicion para optimizar el rendimiento del vehiculo).  |
-| ![Montaje de la Nueva Base 4](other/protectorUltrasonico3d.jpeg) | Empezamos a probar el segundo piso con las mismas medidas del piso de abajo y la altura que habria entre los dos pisos. |
-| ![diseño de la base](other/modelo3drojo.jpeg) | En el segundo piso realizamos los espacios para los tornilos que fijarian los separadores hexagonales al segundo piso. Ademas se hicieron espacios para el interruptor de encendido y espacio para fijar la bateria y el dispositivo movil mediante precintos de seguridad. |
-| ![diseño de la base](other/modelo3drojo2.jpeg) | A nuestro segundo piso le agregamos una pequeña base para nuestro medidor de voltaje. |
-| ![diseño de la base](other/modelointermediofull.jpeg) | Volviendo a nuestro primer piso realizamos medidas con nuestros componentes y terminamos de arreglar algunos detalles. |
-| ![diseño de la base](other/modelo3drojo3.jpeg) | Primer y segundo piso ya armados con su respectiva separación. |
-| ![diseño de la base](other/modelo3drojo4.jpeg) | Agregamos un aleron al diseño como toque estetico. |
-| ![diseño de la base](other/modelo3drojo5.jpeg) | Vista final de como quedo todo el diseño 3d. |
-| ![diseño de la base](other/modelo3dnegro2.jpeg) | Exportamos nuestro diseño a Fusion 360, para trabajar con mas precision y agregar las tolerancias para realizar la impresion 3d. |
-| ![diseño de la base](other/modelo3dnegro3.jpeg) | Terminamos de trabajar con las tolerancias respectivas y haber confirmado todas las medidas. | 
-| ![diseño de la base](other/modelo3dnegro.jpeg) | Debajo del vehiculo redondeamos el sobresaliente de la base de nuestro motor para darle un toque mas estetico y funcional. |
-| ![diseño de base](other/modelo3dazul.jpeg) | Luego de terminar todos estos ajustes procedimos a exportar cada parte del diseño de forma independiente en un formato (STL). |
-| ![Montaje de la Nueva Base 4](other/impresion3dterminada.jpeg) | Y aca podemos observar los resultados finales de la impresión 3d. |
-
-
----
-
-## Cambio de Base
-
-| Imagen | Descripción |
-| :----: | :---------- |
-| ![Montaje de la Nueva Base](other/proceso.jpg) | Inicio del proceso de cambio de base del prototipo hecho en carton a nuestra impresion 3d y pequeña modificacion en el primer piso de nuestro vehiculo. |
-| ![Montaje de la Nueva Base 2](other/proceso-2.jpg) | Aca podemos observar la colocacion del sistema de dirección y tracción trasera. |
-| ![Montaje de la Nueva Base 3](other/proceso-3.jpg) | Empezamos a realizar todo el cableado de algunos componentes. |
-| ![Montaje de la Nueva Base 4](other/proceso-4.jpg) | Se continúa con el ensamblaje de la nueva base. |
-
-### Mejoras en el orden de los cables y componentes (Segundo Prototipo - Base 3D)
-
-Tras el cambio a la base impresa en 3D, realizamos una mejora significativa en el cableado y la organización interna de nuestro segundo prototipo para optimizar su rendimiento y estética.
-
-Haz clic en la imagen para ver el vídeo:
-
-<a href="https://www.youtube.com/shorts/rl1eokkc18E" target="_blank">
-  <img src="other/TIMELAPSE.SIMPLIFICANDO-Cover.jpg" alt="Miniatura del Video de Mejora de Cableado" width="480px">
-</a>
-
-### Reubicación, mejoras y modificaciones (Tercer Prototipo)
-
-A continuación, se detallan las modificaciones y mejoras implementadas en la tercera versión del prototipo.
-
-#### 1. Reubicación de sensores y mejoras en el cableado
-
-Para esta nueva versión, se realizó un reajuste estratégico en la posición de varios sensores clave, buscando mayor comodidad y eficiencia. Esto incluyó el reposicionamiento de los sensores de ultrasonido frontales, los sensores Sharp y el sensor de color, que fue desplazado hacia la parte delantera. Adicionalmente, se optimizó el cableado superior para adaptarlo a la nueva configuración de dos microcontroladores ESP32 y la integración de un magnetómetro. Finalmente, se reforzó la base del primer piso mediante el uso de tornillos inferiores para una mayor estabilidad.
-
-![Descripción de la imagen](other/modificacion_base_v3.jpeg)
-
-#### 2. Modificaciones en la base para el nuevo soporte de teléfono
-
-Inicialmente, para validar el concepto y realizar las primeras pruebas de campo, se diseñó una adaptación provisional utilizando un material de goma espuma plástica. Este prototipo inicial nos permitió evaluar la funcionalidad del soporte de manera rápida y económica. Una vez comprobada su viabilidad, se procedió a diseñar e implementar la solución definitiva, que consistió en la integración de un trípode adaptado a la base del robot.
-
-Como se mencionó anteriormente al mejorar nuestra app y su sistema de detección de objetos ahora debíamos mejorar el soporte de nuestro teléfono, para ello se diseñó e implementó una solución para el posicionamiento elevado del teléfono encargado del análisis de imágenes en tiempo real. La base de esta solución fue un trípode de teléfono convencional, el cual fue sometido a un proceso de modificación estratégica para su integración en el chasis del vehículo.
-
-El procedimiento inicial consistió en un desmontaje selectivo, eliminando componentes innecesarios como las patas extensibles, para conservar únicamente los elementos funcionales: el soporte de sujeción del dispositivo y su vástago o columna central. El objetivo principal era posicionar el teléfono en una orientación horizontal y a una altura estratégica, garantizando así que la cámara tuviera un campo de visión amplio. Esta configuración es crucial, ya que permite al sistema capturar simultáneamente información tanto de los objetos que se encuentran delante como de aquellos que se encuentra por detrás, lo que representa una mejora significativa y un requisito indispensable para la fiabilidad de nuestro nuevo sistema de navegación.
-
-Una vez finalizada la fase de planificación, procedimos con la operación de montaje. Para adaptar e integrar el soporte al vehículo, se realizó una perforación de precisión en la base de la plataforma superior. Dicho orificio fue dimensionado específicamente para alojar el diámetro del vástago del trípode, asegurando un encaje firme. Posteriormente, se fijó sólidamente la estructura y se realizaron diversas pruebas de ajuste y resistencia para validar la solidez del montaje. Se llevaron a cabo ensayos de vibración y estabilidad para comprobar que el soporte permanecería estático durante el desplazamiento del vehículo, garantizando así una navegacion segura y un funcionamiento correcto del sistema de análisis de imagenes que implementa nuestra app.
-
-| Imagen | Descripción |
-| :----: | :---------- |
-| ![Modificación al tripode](other/desarmando-tripode.jfif) | Se modifico el tripode antes de ser instalado en la base del vehículo, de maneras que se descartaron las partes innecesarias para la adaptacion como lo son el mango de agarre y las patas de apoyo. |
-| ![Marca para la Perforación](other/marca-x.jfif) | Aquí se puede observar la marca en las medidas necesarias para la perforación de la base del vehículo, para así poder adaptar este tripode modificado. |
-| ![Perforación hecha](other/perforacion-hecha.jfif) | Se puede observar el resultado luego de que se hiciera la perforación que permitira la instalación del tripode. |
-| ![Finalizacion de la instalacion del tripode](other/fijacion-del-soporte.jfif) | Se busco una posición optima para posicionar el tripode, de manera que pudiera tener un mejor angulo de visión, lo que permitira mejorar la visibilidad de los obstaculos en pista. Luego se procedio a fijar dicho tripode a la base superior del vehículo con una combinación de quimicos que permitira una fijación optima. |
-
----
-
-## Problemas encontrados. 
-
-### interferencia con el puente H, solución: Un sistema maestro y esclavo.
-
-Al momento de realizar las pruebas de vueltas a la pista nos percatamos que el vehículo no respondía correctamente y al momento de realizar a el giro nunca terminaba de realizarlo o simplemente no detectaba la línea y por esto no lo realizaba. Entre mucha investigación encontramos que la falla era una interferencia con los pines que mandaban las señales al modulo de puente H. Por lo que buscamos aislar estos cables resultando sin éxitos. 
-La solución probada fue conectado un segundo microcontrolador Arduino esclavo, encargado exclusivamente de enviar los comandos de avanzar, retroceder, detenerse y algún cambio de velocidad al módulo puente H, mientras que el Arduino principal en este caso el maestro, llevara todos los sensores y cables conectados al esclavo para indicarle que acción debe ejecutar el puente H. 
-De esta manera logramos distanciar esta interferencia y el código fluía continuamente sin problemas
-
-#### Diagrama del codigo del microcontrolador arduino esclavo.
-
-![Diagrama del codigo del arduino esclavo](other/diagrama_esclavo.png)
-
----
-
-## Pruebas Realizadas
-
-### Prueba del Sensor de Color
-
-Haz clic en la imagen para ver el vídeo:
-
-[![Mira el video del proyecto](other/portada_pruebas.png)](https://youtu.be/7GS6mCXmGks)
-
-### Fabricacion de pista a escala
-
-Para las pruebas, creamos una imitación de la pista de competición utilizando láminas recicladas, pegadas para cumplir con los estándares de 3x3 metros. Nuestra pista tiene un ligero error de aproximadamente 10 cm. Las esquinas de la pista deben tener dos líneas, una azul y otra naranja, separadas por 30 grados cada una, tomando el mismo origen que la esquina interior del cuadrado.
-
-![Pista de Pruebas](other/pista.jpg)
-
-## Desarrollo de la Logica del codigo Maestro
-
-### Funcion actualizarGiro():
-
-  Para hacer que el vehiculo estuviera siempre guiado usamos la funcion actualizarGiro(), con ella simulamos un brujula digitar.
-
-Esta función es un sistema de fusión de sensores que combina dos fuentes de datos para obtener el ángulo final del vehículo: el MPU6050 (giroscopio) y el magnetómetro (a través de obtenerAngulo()).
-
-  El giroscopio mide la velocidad de rotación del vehículo (qué tan rápido está girando). La función toma esta velocidad y la suma a un ángulo acumulado (anguloZ) en cada ciclo de lectura. Piensa en esto como un cálculo continuo del ángulo de giro. Es muy preciso a corto plazo, pero tiene un problema: la deriva (pequeños errores que se acumulan con el tiempo).
-
- Para solucionar la deriva del giroscopio, la función llama a obtenerAngulo(), Esta función es el corazón del sistema, actúa como un compás digital usando el sensor QMC5883L (magnetómetro).
-
-### Funcion obtenerAngulo():
-
- Se conecta con el magnetómetro y lee los valores magnéticos en los ejes X, Y y Z. Estos valores representan la intensidad del campo magnético de la Tierra. Utiliza los valores X e Y para calcular el ángulo en un plano 2D, de forma similar a cómo lo haría una brújula. Este ángulo es la dirección del vehículo con respecto al Norte magnético. Se aplican correcciones (xOffset, yOffset, declinacionMagnetica) para mejorar la precisión y compensar la ubicación geográfica.
-
-  En la primera lectura válida, la función toma el ángulo absoluto actual y lo define como el punto de referencia (0°). Esto significa que la dirección en la que mira el vehículo al encenderse se considera su punto de partida.
-
- Todas las lecturas subsiguientes se comparan con ese ángulo de referencia inicial. El resultado es el ángulo relativo del vehículo con respecto a su dirección inicial, que es el valor que finalmente devuelve la función.
-
- El ángulo del magnetómetro es absoluto y no tiene deriva, pero es más susceptible a interferencias externas (como metales o campos magnéticos).
-
-### Fusión de los datos
-
-Aquí es donde ocurre la magia. La función compara el ángulo calculado por el giroscopio con el ángulo de referencia del magnetómetro. La diferencia entre ambos valores se usa para corregir suavemente el ángulo del giroscopio, ajustándolo hacia el valor más confiable del magnetómetro. El ajuste es gradual (* 0.1) para evitar saltos bruscos en la lectura.
-
-Esta combinación aprovecha lo mejor de ambos mundos: la velocidad del giroscopio para detectar movimientos instantáneos y la precisión del magnetómetro para mantener el ángulo sin errores a largo plazo.
-## Logica de vueltas a la pista
-
-Para este momento ya teníamos idea de la lógica de nuestro primer código del primer desafío que seria la vuelta libre a la pista. En esta lógica usaremos las líneas de la pista para marca el momento exacto para cruzar y el conteo de vueltas siendo 4 líneas igual a una vuelta y así cumplir las 3 vueltas que serían 12 líneas, con el sensor giroscopio(mpu6050) mediremos los grados que va girando el vehículo para calcular exactamente los 90grados del cruce de la esquina. Un planteamiento básico que nos sirvió como comienzo. A partir de aquí presentamos los siguientes problemas. 
-•	Falta de detección de líneas: Con el sistema de detección de color tuvimos problemas para detectar las líneas ya que había veces que no la detectaba por la velocidad del vehículo por lo que aumentamos la tasa de refresco a :
-Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_2_4MS, TCS34725_GAIN_1X);
-INTEGRATIONTIME _2_4MS es el tiempo de integración, que es el tiempo que la carama recoge luz para hacer una lectura y el Gain_1X es la ganancia que es un factor de amplificación que se aplica a la señal de los fotodiodos antes de la conversión analógica a digital.
-
-•	Sobre detección y detección errónea: Detectaba la línea más de una vez y en algunas zonas por la diferencia de luz podía tomar un color distinto como azul o naranja, por lo que desarrollamos una lógica que saca el promedio de las ultimas 3 mediciones para garantizarnos que si era la línea azul y que no tomara el comando mas de una vez.
-
-•	Desviación: Luego se utilizó un sistema de centrado con 2 sensores ultrasónicos laterales para corregir el problema de que el vehículo no quedaba exactamente con 90 grados al momento después de terminar el cruce. Este sistema compara ambas distancias e intenta mover el servomotor para que cruce en dirección al lado con mayor distancia. Esto luego fue robustecido con un sistema PID que hace correcciones diferentes según el nivel de desviación para una corrección leve si la desviación es poca o fuerte si es grande. 
-El ángulo de cruce que el mpu suma al ángulo actual fue modificado de 90 a 70 ya que el sensor giroscopio cuando llegaba su medición a 90 grados el vehículo cruzaba de más por lo que fuimos calibrando manualmente este valor hasta 70 grados con el que el vehículo se logró desempeñar mejor en las pruebas. Este valor puede ser distinto dependiendo de la calibración o posición de montaje del sensor por eso es mejor calibrarlo cada quien en sus montajes mediante las pruebas.
-
-Para culminar con este código realzamos la lógica necesaria para cumplir con la condición de que el vehículo girara en ambos independientemente (horario y antihorario). Por lo que pensamos en una lógica para que el vehículo dependiendo de la línea que se encontrase primero sería el sentido de la vuelta si es azul es horario y si es naranja es antihorario. Para la lógica de antihorario seria restar 70 grados al ángulo actual y girar a la izquierda en lugar de la derecha como en la lógica pasada. 
-
-### Diagrama de logica de vueltas a la pista.
- ![Diagrama del codigo de vueltas a la pista](other/Diagrama_codigo_vueltas.png)
-
-### Diagrama de logica PID del centrado y giro.
- ![Diagrama del codigo de vueltas a la pista](other/diagrama_PID_giro_y_centrado.png)
-
-## Desarrollo de la logica de evasion de objetos.
-
-### Primer esquive:
-Ya con app lista desarrollamos una lógica para el microcontrolador Arduino y de esta manera recibir los comandos de color del objeto y su distancia. Realizando una prueba controlada tuvimos unos errores con la iluminación que nos afectaba el reconocimiento de los colores por que tuvimos que ajustar los valores de los colores para mejorar la detección del objeto que termino siendo mejor pero todavía le faltan mejoras, pero cumplió con el objetivo de identificar el objeto y darnos su distancia aproximada, que a 30 cm el Arduino deberá realizar el giro a la derecha si es rojo(R) y a la izquierda si es verde(G), con un retorno al lado contrario luego de realizar el giro para reincorporarse al centro del carril de la pista. 
-
-   ### Orientacion hacia el objeto para posterior esquive.
-Problema: El vehículo cuando no está perfectamente en dirección al objeto este ejecutara el esquive pero lo derribara o simplemente perderá de vista el objeto ya que su dirección no va hacia el, por tal razón pensamos en una lógica para que dependiendo de la posición del objeto en la cámara de la del teléfono mandara comandos como C(centro), D(derecha) y I(izquierda), de esta manera ir moviendo de forma controlada la dirección según el comando recibido apenas se capte el objeto en la visión de la cámara. Con este cambio realizado el vehículo se posiciona de manera adecuada frente al objeto a esquivar y realiza su movimiento preciso para esquivar durante 1 segundo y al retornar al centro durante 1 segundos.
-
-Problema: al momento de retornar al centro puede que haya un objeto fuera de ranga de la cámara por que al momento de esquivar si se veía pero este modo no es capaz de comenzar el seguimiento así que se le agregó que si detecta otro objeto mientras este en modo de retorno cambie a modo de seguimiento nuevamente. Ademas se le aumento el modo de retorno para que haga un mapeo al area por si no llega a identificar un objeto.
-
-Aquí dejo el paso a paso de la realización de la app:
-
-### Diagrama de logica de evasion de objetos
- ![Diagrama del codigo de evasion de objetos](other/diagrama_esquive.png)
-
-# Desarrollo de Códigos Combinados
-
----
-
-## Para este momento necesitamos una lógica que nos permita:
-
-1.  **Un botón de inicio:** Un botón que energice el vehículo y programe el inicio del código al enviar una señal.
-
-2.  **Detección y conteo de líneas:** Girar en la dirección correcta al detectar una línea y llevar el conteo de las mismas para saber las vueltas.
-
-3.  **Recepción de comandos de la app:** Recibir comandos de la aplicación cuando se detecta un objeto en la pista, incluyendo su color y posición.
-    * **Orientación:** Orientarse para quedar al frente del objeto.
-    * **Esquive:** Esquivarlo dependiendo de su color (Rojo por derecha, Verde por izquierda).
-
-4.  **Centrado del vehículo:** Centrar el vehículo según las paredes exteriores cuando no esté recibiendo comandos de objetos detectados.
-
-5.  **Estacionamiento:** Estacionarse en paralelo en el área indicada al final del recorrido.
-
----
-
-## Con nuestros objetivos claros, desarrollamos una máquina de estados capaz de abarcar todo lo requerido y cambiando de estado según las condiciones impuestas:
-
-### ESTADO_NORMAL $\leftrightarrow$ SIGUIENDO_OBJETO $\leftrightarrow$ ESQUIVANDO
-
----
-
-### ESTADO_NORMAL:
-
-En este modo abarcamos todos los objetivos del código 1 de vueltas a la pista, donde detectamos las líneas que nos indican el cruce. Mientras no estemos evadiendo objetos, estamos centrando el vehículo dependiendo de la distancia con las paredes laterales. Además, añadimos la recepción de comandos de la aplicación para indicarnos que hay un objeto, lo cual nos hace cambiar al estado "SIGUIENDO_OBJETO".
-
-* **Navegación básica siguiendo líneas:**
-    * Detección de líneas de colores (azul/naranja).
-    * Centrado automático en el pasillo usando sensores ultrasónicos.
-* Recepción de comandos de la aplicación.
-
-#### Transiciones:
-
-* **A SIGUIENDO_OBJETO:** Cuando recibe el comando 'R' o 'G' por la aplicación.
-* Permanece en estado hasta nueva detección.
-
----
-
-### SIGUIENDO_OBJETO:
-
-En este estado, orientamos la dirección del vehículo con el servomotor en función de los comandos recibidos por la aplicación, ya sea a su orientación izquierda (I), derecha (D) o centro (C). Cuando se detecta que el comando de distancia del objeto es menor o igual a 30 cm, se realizará el cambio al estado "ESQUIVANDO". Si el objeto se pierde de vista por alguna razón, volveremos al estado "NORMAL".
-
-* Orienta el servo según la posición del objeto detectado.
-* Mantiene el motor activo para seguir el objetivo.
-* Procesa la orientación del objeto (Izquierda/Derecha/Centro).
-
-#### Transiciones:
-
-* **A ESQUIVANDO:** Cuando el objeto está muy cerca ($\le 30 \text{cm}$).
-* **A ESTADO_NORMAL:** Cuando pierde el objeto (comando 'N').
-
----
-
-### ESQUIVANDO:
-
-* Ejecuta la secuencia de esquive en 6 etapas:
-    * **Case 0: Orientación inicial (300ms):** Servo hacia el lado de esquive.
-    * **Case 1: Preparación (tiempo variable):** Activación del motor.
-    * **Case 2: Esquive activo (1200ms):** Avance lateral evitando el obstáculo.
-    * **Case 3: Reorientación interrumpible (300ms):** Giro hacia el lado contrario para retorno.
-    * **Case 4: Retorno interrumpible (3000ms):** Avance de vuelta al curso original.
-    * **Case 5: Finalización (100ms):** Centrado y retorno al estado normal.
-* Los "Case 3" y "Case 4" son interrumpibles si se detecta un objeto mientras se está retornando para cambiar al estado "SIGUIENDO_OBJETO".
-
-#### Transiciones:
-
-* **A SIGUIENDO_OBJETO:** Durante las etapas 3-4 si detecta un nuevo objeto.
-* **A ESTADO_NORMAL:** Al completar la secuencia de esquive.
-
-
-## Cambio de logica de esquive version 2.0 sistema de carriles.
-
-  ### Funcion realizarGiro():
-  Para este momento nos imaginamos un caso mejor donde el esquive fuera mas preciso, anteriormente esabamos implementardo un sistema para girar que consistia en que el vehiculo dependiendo de la distancia lateral giraba mas o menos para luego aplicar un retroceso post giro a ciegas. Esto era ineficiente por que a ciencia cierta nunca sabremos donde terminara el vehiculo por lo que ahora ese retroceso post giro sera controlado por el angulo llegando a un angulo recto dependiendo del conteo de lineas que lleve y el sentido del vehiculo todo gracias a la funcion actualizarGiro que nos proporciona el angulo, un ejemplo de ello con fragmento del codigo:
-
-<img width="728" height="522" alt="calculo_angulo_retroceso" src="https://github.com/user-attachments/assets/b56db8b0-9f01-4cac-bd8f-de8faac6f162" />
-
-Ahora que nos posicionamos siempre en un angulo correcto el vehiculo puede retroceder y con el sensor ultrasonico trasero determinar una distancia suficiente para proceder con los esquives.
-
-### Explicacion de la nueva logica:
-Ahora en lugar de hacer un mismo metodo de esquive para cualquier objeto que identifiquemos haremos un nuevo metodo, gracias a la mejora de la aplicacion podemos identificar 2 objetos a la vez y sus posiciones por lo que dependiendo se como sea la configuracion de los mismos podremos hacer un esquive programado indepediente y unico, de esta manera nos aseguramos de tomar cada caso por separado y con mayor eficacia. 
-
-### Máquina de Estados para Navegación por Carriles
-La lógica del vehículo se gestiona mediante una máquina de estados que transita entre diferentes modos operativos. Este sistema reemplaza el antiguo modelo de "Seguir/Esquivar" por uno más adecuado para la navegación en pista.
-
-ESTADO_NORMAL ↔ ESPERANDO_COMANDO_CARRIL → EVALUANDO_POSICION → GIRANDO_HACIA_CARRIL → MANTENIENDO_CARRIL
-
-
-#### ESTADO_NORMAL:
-Este es el estado inicial y el modo por defecto después de completar un giro en una intersección.
-
-Avanza en línea recta mientras utiliza la función centrarVehiculo() para mantenerse estable en el pasillo con una vigilancia activa, su objetivo principal es buscar la siguiente línea de color con la función detectarColor(). Al encontrar una, inicia la secuencia de giro (realizarGiro) y el ciclo de navegación se repite.
-
-##### Transición: Si no detecta una línea, puede pasar a ESPERANDO_COMANDO_CARRIL después de la maniobra post-giro.
-
-### ESPERANDO_COMANDO_CARRIL:
-En este estado, el vehículo se detiene y espera instrucciones externas.
-
-El motor se apaga y el sistema monitorea activamente el puerto serie para recibir un comando de carril.
-
-#### Transición: Al recibir un comando válido, cambia a EVALUANDO_POSICION.
-
-### EVALUANDO_POSICION:
-Estado de transición muy breve para planificar el cambio de carril.
-
-Lee los sensores ultrasónicos laterales para determinar su posición actual en relación con el carril objetivo. Decide la dirección del giro necesario para alcanzar el nuevo carril.
-
-#### Transición: Inmediatamente cambia a GIRANDO_HACIA_CARRIL.
-
-### GIRANDO_HACIA_CARRIL:
-
- Aqui aplicaremos una nueva logica donde dependiendo de las distancias laterales nos dameremos cuenta en que parte de la pista nos encontramos, dividiendo la pista en 2 carriles principales y 2 secundarios. Los principales son:
- 1. Carril 1: A la derecha del vehiculo. Usado para los objetos rojos.
- 2. Carril 2: A la izquierda del vehiculo. Usado para los objetos verdes.
- 3. Carril 1 pero a mas distancia de la pared
- 4. Carril 2 a mas distancia de la pared.
-Dependiendo de que objeto tengamos al frente tomaremos un carril. Hay doble objeto se ejecuta un cambio de carril apenas se consiga entrar en el estado donde mantiene el carril, esto se hace de la misma manera que se dirige al carril en un inicio solo que un poco mas de tiempo. este tiempo depende del comando en especifico.
-
-#### Posicionamiento en un carril:
-Dependiendo de a que carril deseemos dirigirnos usaremos diferentes sensores:
-  Carril 1: Sensores derechos Ultrasonico e infrarrojo.
-  Carril 2: Sensores izquierdos Ultrasonico e infrarrojo.
-  
-Para realizar el posicionamiento recurrimos al estado GIRANDO_HACIA_CARRIL, donde mediantes algunas funciones tendremos un giro hacia el carril correspondiendo con cierta inclinacion de la direccion y un tiempo establecido que dependen de la distancia lateral que alla con la pared externa de la pista. Al finalizar pasaremos a un giro de retorno en sentido contrario que terminara cuando el angulo sea recto. 
-
-Durante el primer giro estaremos esperando de igual manera una retroalimentacion del sensor sharp correspondiente para que nos confirme si estamos a una buena distancia de la pared lateral, si estamos muy cerca interrumpira el primer giro dara un breve retroceso y procedera con el giro de retorno. 
-
-#### Transición: Una vez que el vehículo está orientado en el nuevo carril, cambia a MANTENIENDO_CARRIL.
-
-### MANTENIENDO_CARRIL:
-Este es el estado de navegación principal entre intersecciones.
-
-Utiliza un controlador PID para mantener de forma activa y precisa la distancia con la pared lateral (izquierda o derecha, según el carril). Esto le permite seguir el contorno de la pista con gran exactitud.
-
-Control Fino: El sistema prioriza mantener el ángulo correcto; si el vehículo se desvía demasiado, corrige primero su orientación y luego ajusta la distancia a la pared.
-
-#### Transición: Permanece en este estado hasta que detectarColor() encuentra una línea, lo que interrumpe el mantenimiento del carril e inicia un giro de intersección, devolviendo el sistema al ESTADO_NORMAL.
-
-### ESTADO_DETENCION_FINAL:
-El estado final del recorrido. Se activa después de que se cuenta la última línea y se completa el último giro. El vehículo avanza en línea recta durante un tiempo predefinido (1.5 segundos) para posicionarse en la zona de estacionamiento.
-
-#### Transición: Al finalizar el avance, llama a detenerRobot() para apagar todos los motores y finalizar la operación.
- 
- ### Diagrama logica de esquive 2.0 sistema de carriles
- ![Diagrama de logica carriles](other/diagramaV2.png)
-## Video resumen de las pruebas de vuelta a la pista y esquive de objetos.
-
-Haz clic en la imagen para ver el vídeo:
-
-[![Mira el video del proyecto](other/video_promocional.png)](https://youtu.be/E-xsGcDSaJY?si=9i87w-iJ8TijE_ca)
-
-
-## Prueba de vueltas a la pista
-
-Haz clic en la imagen para ver el vídeo:
-
-[![Mira el video del proyecto](other/prueba-vuelta.png)](https://youtube.com/shorts/wI_OLS1nWhc?si=868zlHss_CnnXe10)
-
-## Prueba de evacion de obstaculos
-
-Haz clic en la imagen para ver el vídeo:
-
-[![Mira el video del proyecto](other/prueba-evacion-obstaculos.png)](https://www.youtube.com/watch?v=WQM6CjVKSwE)
-
+**Código de 2025** (en [`src/`](src/)): `Wro_Prometheus_Arduino_Maestro_v28.ino` y `Wro_Prometheus_Arduino_Esclavo.ino` (versión Arduino), `Wro_Prometeus_V1.ino` y `Wro_Prometeus_V2_.ino` (versión ESP32 con MPU6050, vuelta libre y obstáculos) y `Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino` (ESP32 esclavo del motor).
