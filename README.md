@@ -50,10 +50,11 @@ Bienvenidos al repositorio oficial de nuestro equipo para la WRO, categoría Fut
   - [9.1. Filosofía de rediseño y prototipado](#filosofia-rediseno)
   - [9.2. CAD profesional y arquitectura Monochasis](#monochasis)
   - [9.3. Validación de tolerancias y ensamble virtual](#tolerancias)
-  - [9.4. Segundo piso, separadores y sistema Shark Fin](#segundo-piso)
-  - [9.5. Ensamble maestro CAD](#ensamble-maestro)
-  - [9.6. Manufactura aditiva](#manufactura-aditiva)
-  - [9.7. Dimensiones finales y logros estructurales](#dimensiones-finales)
+  - [9.4. Dirección Ackermann](#direccion-ackermann)
+  - [9.5. Segundo piso, separadores y sistema Shark Fin](#segundo-piso)
+  - [9.6. Ensamble maestro CAD](#ensamble-maestro)
+  - [9.7. Manufactura aditiva](#manufactura-aditiva)
+  - [9.8. Dimensiones finales y logros estructurales](#dimensiones-finales)
 - [10. Análisis de masa y distribución de peso](#analisis-masa)
 - [11. Velocidad, torque y tracción](#velocidad-torque)
 - [12. Diario de ingeniería: evolución del chasis](#diario-ingenieria)
@@ -227,7 +228,7 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 | <img src="other/tb6612fng.jpg" width="110" alt="TB6612FNG"> | **Driver de motores TB6612FNG** | Puente H dual. Recibe dirección y PWM del ESP32 y entrega la potencia al motor con mucha menos pérdida que el L298N que usábamos antes. | • [Datasheet TB6612FNG](https://www.sparkfun.com/datasheets/Robotics/TB6612FNG.pdf) |
 | <img src="other/motor.png" width="110" alt="Motor 25GA-370"> | **Motor DC 25GA-370 (6 V a 8 V)** | Motorreductor metálico de 220 RPM (caja 21.3:1) para la tracción. También se vende como JGA25-370. Lo alimenta el XL6009 a través del driver. | • [Motorreductores](https://www.pololu.com/category/60/micro-metal-gearmotors) |
 | <img src="other/dsn_mini_360.jpg" width="110" alt="Mini 360"> | **2 × Step-down DSN-Mini 360** | Reguladores conmutados. El #1 está ajustado a 7 V para el pin VIN del ESP32 y el #2 a 5 V para el servo y los sensores. | • [Datasheet MP2307](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
-| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que controla el ángulo de las ruedas delanteras por PWM (pin D13). Se alimenta a 5 V desde el Mini 360 #2. | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
+| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#direccion-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 5 V desde el Mini 360 #2. El servo previsto para la versión final es un EMAX ES08MA II. | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
 
 ---
 
@@ -680,8 +681,83 @@ Con las piezas validadas, el ensamble virtual completo nos sirvió para encontra
 
 ---
 
+<a id="direccion-ackermann"></a>
+### 9.4. Sistema de dirección Ackermann
+
+📄 *Cálculos completos, verificación en CAD y mediciones: [docs/direccion-ackermann.md](docs/direccion-ackermann.md) ([.docx original](docs/Direccion_Ackermann_Calculos_y_Justificacion.docx)).*
+
+La dirección Lego que traíamos de 2025 era **paralela**: las dos ruedas giraban el mismo ángulo, tenía poco giro máximo y estaba encajada a presión en un recorte del chasis, con holgura. La reemplazamos por una **dirección Ackermann diseñada en Onshape e impresa en PETG-CF**: un servo mueve una biela plana, la biela mueve una barra de acoplamiento y la barra gira las dos manguetas, cada una sobre un pivote (*kingpin*) metálico M3.
+
+En una dirección Ackermann las prolongaciones de los ejes de las ruedas delanteras se cortan sobre la línea del eje trasero. Así la rueda interior gira más que la exterior, cada una sigue su propia circunferencia y ninguna se arrastra de lado al girar.
+
+```mermaid
+flowchart LR
+    S["Servo<br/>(brazo 14 mm)"] --> B["Biela plana<br/>14,5 mm"]
+    B --> T["Barra de acoplamiento<br/>68,6 mm"]
+    T --> MI["Mangueta izquierda<br/>brazo 22 mm a 20,56°"]
+    T --> MD["Mangueta derecha<br/>brazo 22 mm a 20,56°"]
+```
+
+#### 9.4.1. Geometría
+
+| Fórmula | Uso |
+| :--- | :--- |
+| $\cot\delta_e - \cot\delta_i = K / L$ | Condición de Ackermann |
+| $\theta = \arctan\left(\frac{K/2}{L}\right)$ | Ángulo del brazo de dirección |
+| $R = \frac{L}{\tan\delta_i} + \frac{K}{2}$ | Radio de giro (al centro del eje trasero) |
+
+Donde $\delta_i$ y $\delta_e$ son los ángulos de la rueda interior y exterior, $K$ la separación entre *kingpins* y $L$ = 112 mm la distancia entre ejes.
+
+El primer cálculo usó el ancho del chasis (115 mm) como $K$, pero $K$ es la distancia entre pivotes, no entre ruedas. Probamos 96 mm y 108 mm, que hacían que la mangueta invadiera la llanta, y adoptamos **K = 84 mm** (pivotes a ±42 mm del centro). Con eso:
+
+$$\theta = \arctan\left(\frac{42}{112}\right) = 20{,}56^\circ \qquad \text{barra} = 84 - 2 \cdot 22 \cdot \sin(20{,}56^\circ) = 68{,}55 \text{ mm}$$
+
+| Parámetro | Valor |
+| :--- | :--- |
+| Separación entre kingpins (K) | 84 mm |
+| Brazo de dirección | 22 mm a 20,56° |
+| Barra de acoplamiento | 68,6 mm entre agujeros, con un tercero a 14 mm del centro para la biela |
+| Servo | Montado invertido delante de la barra; brazo de 14 mm y biela plana de 14,5 mm |
+| Recorrido del servo | −50° a +48° (98°) |
+| Ancho entre extremos de rueda | ≈ 143 mm, igual que el eje trasero (adaptador de rueda de 25,7 mm) |
+| Holgura mínima contra el chasis | 1,00 mm en todo el recorrido (verificada en CAD) |
+
+#### 9.4.2. Resultado: real frente a ideal
+
+| δ interior | δ exterior ideal | δ exterior de nuestro mecanismo | Error | Error de una dirección paralela | Radio de giro |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 10° | 8,85° | 9,25° | +0,40° | 1,15° | 677 mm |
+| 20° | 15,96° | 17,06° | +1,10° | 4,04° | 350 mm |
+| 30° | 21,95° | 23,37° | +1,42° | 8,05° | 236 mm |
+| 40° | 27,24° | 27,96° | +0,72° | 12,76° | **176 mm** |
+
+El error nunca pasa de 1,4°, y en el giro máximo el mecanismo está al 94 % del Ackermann ideal. En el montaje real medimos con transportador **40° en la rueda interior y 25° a 30° en la exterior** (promedio 27,5°, frente a 27,2° ideal). La diferencia entre lados está dentro del error de medir sobre papel.
+
+#### 9.4.3. Comparación con la dirección Lego
+
+| Aspecto | Dirección Lego (anterior) | Dirección Ackermann (actual) |
+| :--- | :--- | :--- |
+| **Geometría** | Paralela: el mismo ángulo en las dos ruedas | Ackermann: K = 84 mm, L = 112 mm |
+| **Ángulo máximo** | Reducido (lo típico en Lego es 15° a 20°) | 40° interior y 25°–30° exterior (medido) |
+| **Radio de giro mínimo** | ≈ 308 a 418 mm | **176 mm**, un 43 % menor que con 20° |
+| **Error frente al ideal** | 4,0° con 20° y 8,1° con 30° | 1,1° con 20° y 1,4° con 30° |
+| **Neumáticos** | Se arrastran de lado al girar | Casi tangentes a sus círculos de giro |
+| **Pivotes y rigidez** | Encaje a presión en Lego, con juego | Pivote M3 y piezas en PETG-CF con holguras de 0,1 mm por lado |
+
+> [!IMPORTANT]
+> **Lo que aprendimos en el montaje real**
+>
+> El CAD predecía un recorrido de servo de 81°, pero en la práctica hicieron falta 98°: la barra necesita 22 mm de carrera y, con un brazo de 14 mm, eso exige entre 100° y 104°. Además, el servo había quedado montado al revés. Al voltearlo y ampliar el rango a −50°/+48°, la dirección llegó a los ángulos esperados. También tuvimos que abrir un canal de 2 mm en el chasis para las cabezas de los tornillos de los brazos y fijar las tuercas de los pivotes con autoblocantes, porque no conseguimos tornillos de hombro.
+
+> [!NOTE]
+> **Par del servo**
+>
+> Con 2,0 kgf·cm y un brazo de 14 mm el servo empuja con unos 14 N, más de 6 veces lo que hace falta para girar las ruedas con el carro parado (unos 0,66 kg sobre el eje delantero). El punto débil del sistema es la holgura mecánica, no la fuerza.
+
+---
+
 <a id="segundo-piso"></a>
-### 9.4. Segundo piso, separadores y sistema de visión Shark Fin
+### 9.5. Segundo piso, separadores y sistema de visión Shark Fin
 
 El segundo nivel distribuye la masa, protege la electrónica y sostiene el sistema de visión.
 
@@ -695,11 +771,11 @@ El segundo nivel distribuye la masa, protege la electrónica y sostiene el siste
   <sub>Vista inferior con el compartimento de la batería.</sub>
 </p>
 
-#### 9.4.1. Separadores e insertos roscados
+#### 9.5.1. Separadores e insertos roscados
 
 Entre el primer y el segundo piso van **separadores de 60 mm** diseñados por nosotros. Las impresoras 3D comunes no hacen roscas pequeñas que aguanten apretar y aflojar muchas veces, así que no roscamos el plástico: en cada extremo del separador colocamos con calor un **inserto roscado de latón M3**. Así los pilares quedan muy resistentes.
 
-#### 9.4.2. Sujeción del teléfono (mordaza ajustable)
+#### 9.5.2. Sujeción del teléfono (mordaza ajustable)
 
 El teléfono va sostenido por dos torres laterales en forma de **aleta de tiburón (*Shark Fin*)**. Para que no cedan con la vibración las fijamos así:
 
@@ -729,7 +805,7 @@ La sujeción en sí es una **prensa ajustable**:
 ---
 
 <a id="ensamble-maestro"></a>
-### 9.5. Integración total: ensamble maestro CAD
+### 9.6. Integración total: ensamble maestro CAD
 
 Con todos los subsistemas (tracción, soporte de cámara y chasis) modelados y revisados por separado, armamos en Onshape un ensamble maestro. En esta última revisión virtual comprobamos que se puede llegar a los puertos del microcontrolador y que se cumplen las medidas que nos propusimos.
 
@@ -741,9 +817,9 @@ Con todos los subsistemas (tracción, soporte de cámara y chasis) modelados y r
 ---
 
 <a id="manufactura-aditiva"></a>
-### 9.6. Manufactura aditiva
+### 9.7. Manufactura aditiva
 
-Imprimimos primero en una **Creality K1C** y después en una **Elegoo Centauri Carbon 2**, con filamento **PETG** y los programas Orca Slicer y Elegoo Slicer. Como el chasis recibe golpes y vibraciones todo el tiempo, usamos un perfil pensado para resistencia (*DfAM, Design for Additive Manufacturing*):
+Imprimimos primero en una **Creality K1C** y después en una **Elegoo Centauri Carbon 2**, con filamento **PETG** y los programas Orca Slicer y Elegoo Slicer. Las piezas de la dirección (manguetas, barra, biela y soporte del servo) van en **PETG-CF**, que es más rígido. Como el chasis recibe golpes y vibraciones todo el tiempo, usamos un perfil pensado para resistencia (*DfAM, Design for Additive Manufacturing*):
 
 | Parámetro | Valor | Justificación |
 | :--- | :--- | :--- |
@@ -754,7 +830,7 @@ Imprimimos primero en una **Creality K1C** y después en una **Elegoo Centauri C
 | **Ventilador de capa** | 0 % al inicio / 40 % máx. | Los voladizos quedan peor estéticamente, pero las capas no se separan por enfriarse demasiado rápido. |
 | **Cabina** | Abierta | Evita que el calor suba por la garganta del hotend (*heat creep*). |
 
-#### 9.6.1. Optimizaciones de impresión
+#### 9.7.1. Optimizaciones de impresión
 
 * **Unión con clavijas (*dowels*):** las piezas con voladizos grandes se cortaron e imprimieron planas. Se unen con clavijas guía de 2.5 mm con 0.15 mm de holgura (*slip-fit*), reforzadas con cianoacrilato.
 * **Enfriamiento de piezas pequeñas:** las imprimimos junto con las grandes. El tiempo que el cabezal pasa en las otras piezas les da a las pequeñas tiempo de enfriarse y no se deforman. Usamos además un borde (*brim*) de 5 mm para que se pegaran bien a la cama.
@@ -762,17 +838,19 @@ Imprimimos primero en una **Creality K1C** y después en una **Elegoo Centauri C
 ---
 
 <a id="dimensiones-finales"></a>
-### 9.7. Dimensiones finales y resumen de logros estructurales
+### 9.8. Dimensiones finales y resumen de logros estructurales
 
 | Parámetro | Medida | Estado |
 | :--- | :--- | :--- |
 | **Largo total** | 179 mm | Reducido |
-| **Ancho total (vía)** | 115 mm | Mantenido |
-| **Distancia entre ejes** | 112 mm | ≈ 1:1 con la vía |
+| **Ancho del chasis** | 115 mm | Mantenido |
+| **Ancho total con ruedas** | ≈ 143 mm | Igual adelante y atrás |
+| **Distancia entre ejes** | 112 mm | ≈ 1:1 con el ancho del chasis |
+| **Radio de giro mínimo** | 176 mm | Con la dirección Ackermann |
 
 **Evolución mecánica (2025 → 2026):**
 
-* **✓ Maniobrabilidad:** el chasis es más corto y el radio de giro mucho menor.
+* **✓ Maniobrabilidad:** el chasis es más corto y la dirección Ackermann baja el radio de giro mínimo a 176 mm.
 * **✓ Tracción:** transmisión de 1.67:1 que prioriza el torque, y las ruedas Lego reutilizadas con un adaptador propio.
 * **✓ Robustez:** pasamos de fijaciones improvisadas a un Monochasis paramétrico en PETG con separadores de 60 mm e insertos de latón.
 * **✓ Visión y centro de gravedad:** la batería bajó al nivel inferior y el sistema Shark Fin sujeta el teléfono sin holguras.
@@ -830,7 +908,7 @@ pie showData
 > [!IMPORTANT]
 > **Interpretación**
 >
-> El eje delantero lleva unos 9 puntos más que un reparto 50/50. Es lo esperado: el teléfono y el *Shark Fin*, que son lo más pesado montado en altura, están sobre el segundo piso hacia la zona delantera-media. La batería LiPo se movió **debajo del primer piso** (ver [9.4](#segundo-piso)) justamente para bajar el centro de gravedad, aunque no elimina por completo el sesgo hacia adelante. Este reparto ayuda a la tracción al frenar y a la respuesta de la dirección, pero deja menos peso sobre el eje motriz, algo que revisamos en el cálculo de agarre ([11.5](#friccion)).
+> El eje delantero lleva unos 9 puntos más que un reparto 50/50. Es lo esperado: el teléfono y el *Shark Fin*, que son lo más pesado montado en altura, están sobre el segundo piso hacia la zona delantera-media. La batería LiPo se movió **debajo del primer piso** (ver [9.5](#segundo-piso)) justamente para bajar el centro de gravedad, aunque no elimina por completo el sesgo hacia adelante. Este reparto ayuda a la tracción al frenar y a la respuesta de la dirección, pero deja menos peso sobre el eje motriz, algo que revisamos en el cálculo de agarre ([11.5](#friccion)).
 
 ---
 
@@ -1019,7 +1097,7 @@ En la WRO se valora mucho que un proyecto se pueda **reproducir**. Por eso docum
 
 ### Paso 1: impresión 3D
 
-Primero hay que imprimir todas las piezas estructurales del repositorio. Nuestros parámetros están en la [sección 9.6](#manufactura-aditiva), pero puedes ajustarlos según tu impresora o el material que uses.
+Primero hay que imprimir todas las piezas estructurales del repositorio. Nuestros parámetros están en la [sección 9.7](#manufactura-aditiva), pero puedes ajustarlos según tu impresora o el material que uses.
 
 > [!TIP]
 > **Consejo para la transmisión:** los engranajes necesitan la mayor resistencia posible. Si imprimes en PETG, sube la temperatura y aumenta bastante el número de perímetros; así los dientes no se parten con el torque del motor.
@@ -1056,13 +1134,18 @@ Para el eje usamos una solución de taller fácil de conseguir: el núcleo limpi
 
 ---
 
-### Paso 4: sistema de dirección Lego
+### Paso 4: dirección Ackermann
 
-Coloca el conjunto de dirección delantera, hecho con piezas Lego, en su espacio del chasis; entra con algo de presión. Para fijarlo de forma permanente aplica silicón caliente en los bordes donde se tocan el plástico impreso y las piezas Lego.
+Las piezas y medidas de la dirección están en la [sección 9.4](#direccion-ackermann) y el detalle completo en [docs/direccion-ackermann.md](docs/direccion-ackermann.md).
 
-*Nota:* además de pegar, el silicón queda algo elástico al secar y amortigua parte de la vibración de la pista.
+1. Coloca cada mangueta en su pivote con un tornillo M3 (cabeza embutida) y fija la tuerca con autoblocante o fijador de roscas. La mangueta tiene que girar libre, sin juego vertical.
+2. Une las puntas de los dos brazos de dirección con la barra de acoplamiento (agujeros a 68,6 mm).
+3. Monta el servo **invertido** (eje hacia abajo) en su soporte, delante de la barra, apoyado sobre la placa.
+4. Conecta el brazo del servo (último agujero, a 14 mm del eje) con el agujero central de la barra mediante la biela plana de 14,5 mm.
+5. Con las ruedas rectas, centra el servo y comprueba el recorrido de −50° a +48° sin que nada roce el chasis. Ajusta la convergencia (*toe-in*) con la ranura de la barra.
 
-<p align="center"><img src="other/ensamble4.jpeg" alt="Sistema de dirección" width="520"></p>
+> [!TIP]
+> Si la dirección no llega al ángulo esperado o se traba en un punto muerto, revisa que el servo no esté montado al revés: nos pasó en el primer armado.
 
 ---
 
@@ -1297,6 +1380,7 @@ Haz clic en las imágenes para ver los videos:
 | [`schemes/`](schemes/) | Esquemas de alimentación y de sensores, de todas las versiones |
 | [`v-photos/`](v-photos/) | Fotos del vehículo desde los seis lados (2026 y 2025) |
 | [`t-photos/`](t-photos/) | Fotos del equipo y logo |
+| [`docs/`](docs/) | Documentos técnicos detallados (cálculos de la dirección Ackermann) |
 | [`other/`](other/) | Imágenes de componentes, modelos CAD, proceso de construcción y diagramas |
 
 ---
@@ -1333,6 +1417,7 @@ Un vehículo de dos pisos diseñado por nosotros, con transmisión trasera y dir
 | **Color** | TCS34725 | TCS34725 en un bus aparte |
 | **Regulación** | XL6009, DSN-Mini 360 y LM2596 | XL6009 + 2 × DSN-Mini 360 |
 | **Chasis** | Dos pisos (Tinkercad → Fusion 360), impreso por terceros, separadores hexagonales | Monochasis en Onshape impreso por nosotros |
+| **Dirección** | Lego paralela, encajada a presión | Ackermann impresa en PETG-CF (radio mínimo 176 mm) |
 | **Soporte del teléfono** | Trípode recortado y pegado a la base | Torres Shark Fin con mordaza ajustable |
 | **Masa en competencia** | ≈1300 g con teléfono | 1092 g con teléfono |
 
