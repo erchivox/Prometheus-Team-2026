@@ -8,6 +8,7 @@ Videos del vehículo conduciendo de forma autónoma. Los enlaces están en [`vid
 
 | Prueba | Video |
 | :--- | :---: |
+| 🏁 **Vuelta libre** | [![Vuelta libre 2026](../other/videos.jpeg)](https://youtube.com/shorts/Ml_8qpX_Ozo) |
 | 🚧 **Evasión de obstáculos** | [![Obstáculos 2026](../other/videos.jpeg)](https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq) |
 
 ## 📁 Temporada 2025
