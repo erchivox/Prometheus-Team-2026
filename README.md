@@ -68,6 +68,7 @@ Bienvenidos al repositorio oficial de nuestro equipo para la WRO, categoría Fut
   - [14.3. Lógica común de navegación](#logica-comun)
   - [14.4. Modo vuelta libre](#vuelta-libre)
   - [14.5. Modo obstáculos: sistema de carriles](#modo-obstaculos)
+  - [14.6. Arquitectura de control y máquina de estados](#arquitectura-control)
 - [15. Aplicación de visión Prometheus V5.0](#app-v5)
 - [16. Pruebas en pista](#pruebas-pista)
 
@@ -1278,6 +1279,19 @@ En 2025, después de cada giro el carro retrocedía "a ciegas" durante un tiempo
 <p align="center">
   <img src="other/diagramaV2.png" alt="Diagrama de la lógica del sistema de carriles" width="640"><br>
   <sub>Lógica del sistema de carriles.</sub>
+</p>
+
+---
+
+<a id="arquitectura-control"></a>
+### 14.6. Arquitectura de control y máquina de estados
+
+Diagrama interactivo de estados desarrollado para la competencia WRO Future Engineers. Permite simular los flujos de control, los sensores ToF, la IMU BNO055 y la lógica de navegación autónoma. Además de los estados de la tabla anterior, muestra la corrección lateral después de cada giro (`ESTADO_CORRECCION_LATERAL`) y la maniobra optimizada que se usa a partir de la línea 5 (`MANIOBRA_OPTIMIZADA`), cuando el carro ya conoce la pista.
+
+**Haz clic en la imagen para abrir el diagrama interactivo:**
+
+<p align="center">
+  <a href="https://erchivox.github.io/clasificador-de-animales-en-peligro-de-extinci-n-en-Venezuela/pagina/ModeloArquitecturaEstados.html"><img src="other/diagrama-de-estados.png" alt="Diagrama de estados del sistema" width="900"></a>
 </p>
 
 ---
