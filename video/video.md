@@ -2,10 +2,6 @@
 
 ## 2026
 
-### Vuelta libre
-
-https://youtube.com/shorts/Ml_8qpX_Ozo
-
 ### Evasión de obstáculos
 
 https://youtu.be/qwc4M6uargw
