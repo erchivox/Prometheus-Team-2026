@@ -1019,9 +1019,17 @@ Sin embargo, la actualización tecnológica más significativa de esta temporada
 * **Consciencia Espacial Absoluta:** El vehículo calcula en tiempo real y de forma fidedigna su vector de orientación angular en todo momento.
 * **Estabilización de Carril:** Permite determinar con precisión milimétrica cuándo el chasis se encuentra perfectamente recto en relación con el carril de navegación, optimizando las correcciones del servo de dirección y evitando sobrecorrecciones.
 
+
 Para explorar a fondo la implementación matemática y el firmware, puedes acceder directamente a las secciones detalladas:
 * [Desarrollo de la Lógica de Vueltas a la Pista (Vuelta Libre)](#Desarrollo-de-la-Logica-del-codigo-Maestro)
 * [Desarrollo de la Lógica de Evasión de Objetos (Modo Combinado)](#desarrollo-de-la-logica-de-evasion-de-objetos)
+
+---
+## Arquitectura de Control y Máquina de Estados (Prometheus Team)
+
+Diagrama interactivo de estados desarrollado para la competencia WRO Future Engineers. Permite simular los flujos de control, sensores ToF, IMU BNO055 y la lógica de navegación autónoma.
+
+[![Diagrama de Estados del Sistema](other/diagrama-de-estados.png)](https://erchivox.github.io/clasificador-de-animales-en-peligro-de-extinci-n-en-Venezuela/pagina/ModeloArquitecturaEstados.html)
 
 ---
 
