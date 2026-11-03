@@ -135,16 +135,13 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
 
 **📚 Anexos**
 
-- [18. 🌐 Uso de GitHub y replicación](#18--uso-de-github-y-replicación)
-  - [18.1. 🌿 Flujo de trabajo](#181--flujo-de-trabajo)
-  - [18.2. 🔁 Cómo replicar el proyecto](#182--cómo-replicar-el-proyecto)
-- [19. 📁 Archive: 2025 Season](#19--archive-2025-season)
-  - [19.1. 🚗 2025 Vehicle Overview](#191--2025-vehicle-overview)
-  - [19.2. 🔌 Electronics Evolution](#192--electronics-evolution)
-  - [19.3. 🔧 Chassis Construction](#193--chassis-construction)
-  - [19.4. 📱 Vision App Evolution (V1–V3)](#194--vision-app-evolution-v1v3)
-  - [19.5. 🧩 Key Problems and Solutions](#195--key-problems-and-solutions)
-  - [19.6. 🎬 Videos and Source Code](#196--videos-and-source-code)
+- [18. 📁 Archive: 2025 Season](#18--archive-2025-season)
+  - [18.1. 🚗 2025 Vehicle Overview](#181--2025-vehicle-overview)
+  - [18.2. 🔌 Electronics Evolution](#182--electronics-evolution)
+  - [18.3. 🔧 Chassis Construction](#183--chassis-construction)
+  - [18.4. 📱 Vision App Evolution (V1–V3)](#184--vision-app-evolution-v1v3)
+  - [18.5. 🧩 Key Problems and Solutions](#185--key-problems-and-solutions)
+  - [18.6. 🎬 Videos and Source Code](#186--videos-and-source-code)
 
 </td></tr>
 </table>
@@ -209,7 +206,7 @@ Prometheus Team está conformado por estudiantes de Ingeniería Electrónica de 
 
 En 2025 obtuvimos el **2.º lugar en la competencia nacional de Venezuela**. Llegamos después de meses de diseño, depuración de sensores y ajustes a la lógica de navegación, y en la final tuvimos que recalibrar componentes contra reloj y resolver imprevistos en la pista frente a los mejores equipos del país.
 
-Este año volvemos con una lista clara de lo que falló: rediseñamos el chasis, cambiamos buena parte del hardware y mejoramos los algoritmos de control para que el vehículo sea más rápido y preciso. La meta es el **1.er lugar nacional** y la clasificación a la final internacional. El vehículo de 2025 está documentado en el [archivo de la temporada 2025](#19--archive-2025-season).
+Este año volvemos con una lista clara de lo que falló: rediseñamos el chasis, cambiamos buena parte del hardware y mejoramos los algoritmos de control para que el vehículo sea más rápido y preciso. La meta es el **1.er lugar nacional** y la clasificación a la final internacional. El vehículo de 2025 está documentado en el [archivo de la temporada 2025](#18--archive-2025-season).
 
 ### 1.6. 📸 Nuestro paso por la competencia nacional
 
@@ -245,7 +242,7 @@ Cada carpeta tiene su propio README con el detalle de lo que contiene.
 | **📄 [`docs/`](docs/)** | **Documentos técnicos**<br>• Cálculos y justificación de la dirección Ackermann | [🔗 Ver documentos técnicos](docs/README.md) |
 | **🚗 [`v-photos/`](v-photos/)** | **Fotos del vehículo**<br>• Seis vistas del vehículo 2026 y del 2025 | [🔗 Ver fotos del vehículo](v-photos/README.md) |
 | **👥 [`t-photos/`](t-photos/)** | **Fotos del equipo**<br>• Foto oficial, foto divertida e integrantes | [🔗 Ver fotos del equipo](t-photos/README.md) |
-| **🎥 [`video/`](video/)** | **Videos de desempeño**<br>• Vuelta libre y desafío con obstáculos | [🔗 Ver videos](video/README.md) |
+| **🎥 [`video/`](video/)** | **Videos de desempeño**<br>• Desafío con obstáculos 2026 y videos de 2025 | [🔗 Ver videos](video/README.md) |
 | **📚 [`other/`](other/)** | **Recursos adicionales**<br>• Imágenes de componentes, CAD, construcción y diagramas | [🔗 Ver recursos adicionales](other/README.md) |
 
 </div>
@@ -287,8 +284,8 @@ El reglamento de Futuros Ingenieros 2026 evalúa la documentación con cinco cri
 | **1. Movilidad y mecánica** | Chasis, tracción, dirección, cálculos y armado | [10. Diseño estructural](#10--diseño-estructural-transmisión-y-manufactura-aditiva) · [11. Masa](#11--análisis-de-masa-y-distribución-de-peso) · [12. Velocidad y torque](#12--velocidad-torque-y-tracción) · [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
 | **2. Energía y sensores** | Alimentación, sensores, cableado y consumo | [5](#5--componentes-de-control-detección-e-interfaz) · [6](#6--componentes-de-alimentación-y-actuación) · [7](#7--esquemas-de-alimentación-y-cableado) · [8](#8--esquemas-de-sensores-y-adquisición-de-datos) · [9. Gestión energética](#9--gestión-energética-y-autonomía-del-sistema) |
 | **3. Desarrollo del código** | Estrategia de navegación, evasión de obstáculos y videos | [15. Software y control](#15--software-y-control) · [16. App de visión](#16--telemetría-y-visión-artificial-aplicación-prometheus-v50) · [17. Pruebas y videos](#17--pruebas-en-pista-y-videos) |
-| **4. Sistema completo y decisiones de ingeniería** | Fotos del vehículo, arquitectura y justificación de decisiones | [4. Nuestro vehículo](#4--nuestro-vehículo) · [13. Diario de ingeniería](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2) · [19. Archivo 2025](#19--archive-2025-season) |
-| **5. Calidad de la documentación** | Orden, claridad y posibilidad de replicar | [2. Estructura](#2--estructura-del-repositorio) · [18. Uso de GitHub y replicación](#18--uso-de-github-y-replicación) |
+| **4. Sistema completo y decisiones de ingeniería** | Fotos del vehículo, arquitectura y justificación de decisiones | [4. Nuestro vehículo](#4--nuestro-vehículo) · [13. Diario de ingeniería](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2) · [18. Archivo 2025](#18--archive-2025-season) |
+| **5. Calidad de la documentación** | Orden, claridad y posibilidad de replicar | [2. Estructura](#2--estructura-del-repositorio) · [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
 
 ---
 
@@ -393,7 +390,7 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 
 ## 7. ⚡ Esquemas de alimentación y cableado
 
-*Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](#192--electronics-evolution).*
+*Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](#182--electronics-evolution).*
 
 ### 7.1. 🧾 Versión 4 (actual)
 
@@ -457,7 +454,7 @@ Desde ese punto la alimentación se divide en tres líneas reguladas e independi
 
 ## 8. 📡 Esquemas de sensores y adquisición de datos
 
-*Las versiones anteriores del sistema de detección están en el [archivo de 2025](#192--electronics-evolution).*
+*Las versiones anteriores del sistema de detección están en el [archivo de 2025](#182--electronics-evolution).*
 
 ### 8.1. 🧾 Versión 4 (actual)
 
@@ -730,7 +727,7 @@ La capacidad de 2200 mAh la decidimos por tres criterios: peso, tasa de descarga
 
 ## 10. 🧱 Diseño estructural, transmisión y manufactura aditiva
 
-*El diseño y la construcción del chasis de 2025 están en el [archivo de 2025](#193--chassis-construction).*
+*El diseño y la construcción del chasis de 2025 están en el [archivo de 2025](#183--chassis-construction).*
 
 ### 10.1. 📝 Filosofía de rediseño y prototipado conceptual
 
@@ -1625,54 +1622,23 @@ Para las pruebas construimos una réplica de la pista de competencia de 3 × 3 m
 
 <p align="center"><img src="other/pista.jpg" alt="Pista de pruebas" width="520"></p>
 
-
 Los enlaces de todos los videos también están en [`video/video.md`](video/video.md).
 
-Haz clic en las imágenes para ver los videos:
+Haz clic en la imagen para ver el video:
 
 <table>
 <tr>
-<td align="center" width="50%"><b>Prueba de vueltas a la pista</b><br><br><a href="https://youtube.com/shorts/Ml_8qpX_Ozo"><img src="other/videos.jpeg" alt="Video de vueltas a la pista 2026" width="360"></a></td>
-<td align="center" width="50%"><b>Prueba de evasión de obstáculos</b><br><br><a href="https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq"><img src="other/videos.jpeg" alt="Video de evasión de obstáculos 2026" width="360"></a></td>
+<td align="center"><b>Prueba de evasión de obstáculos</b><br><br><a href="https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq"><img src="other/videos.jpeg" alt="Video de evasión de obstáculos 2026" width="360"></a></td>
 </tr>
 </table>
 
 ---
 
-## 18. 🌐 Uso de GitHub y replicación
-
-### 18.1. 🌿 Flujo de trabajo
-
-- **`main` es la versión estable.** Los cambios grandes se hacen en una rama aparte y entran a `main` con un *pull request*, que el equipo revisa antes de unirlo.
-- **Historial completo:** cada cambio queda registrado en el [historial de commits](https://github.com/erchivox/Prometheus-Team-2026/commits/main), desde las versiones de 2025 hasta la actual.
-- **Carpetas estándar de la WRO:** `t-photos`, `v-photos`, `video`, `schemes`, `src`, `models` y `other`, más `docs` para los documentos técnicos. Cada una tiene su README.
-- **Código de 2025 conservado** en `src/` como referencia, para que se vea cómo evolucionó la lógica.
-
-### 18.2. 🔁 Cómo replicar el proyecto
-
-```mermaid
-flowchart LR
-    A["1. Clonar el repo"] --> B["2. Imprimir las piezas"] --> C["3. Armar el vehículo"] --> D["4. Cablear"]
-    D --> E["5. Cargar el firmware"] --> F["6. Instalar la app"] --> G["7. Calibrar y probar"]
-```
-
-| Paso | Qué hacer | Dónde está |
-| :---: | :--- | :--- |
-| 1 | Clonar el repositorio: `git clone https://github.com/erchivox/Prometheus-Team-2026.git` | — |
-| 2 | Imprimir las piezas en PETG (la dirección en PETG-CF) con nuestros parámetros | [`models/`](models/) · [10.7](#107--manufactura-aditiva) |
-| 3 | Armar el chasis, la tracción, la dirección y el soporte del teléfono | [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
-| 4 | Conectar la alimentación y los sensores | [`schemes/`](schemes/) · [7](#7--esquemas-de-alimentación-y-cableado) · [8](#8--esquemas-de-sensores-y-adquisición-de-datos) |
-| 5 | Instalar las librerías y cargar `v1PrometeusTeam2026.ino` (vuelta libre) o `v2PrometrusTeam2026.ino` (obstáculos) | [`src/README.md`](src/README.md) |
-| 6 | Compilar e instalar la app en el teléfono | [Repositorio de la app](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) |
-| 7 | Calibrar los colores desde el menú de la app y el rango del servo | [16.2](#162--calibración-en-pista-y-menú-dinámico) · [10.4](#104--sistema-de-dirección-ackermann) |
-
----
-
-## 19. 📁 Archive: 2025 Season
+## 18. 📁 Archive: 2025 Season
 
 This section summarizes the vehicle that earned us **2nd place at the 2025 Venezuelan National Final**. Most of its hardware was replaced in 2026, but we keep this record because it explains the design decisions behind this year's vehicle. Detailed material is collapsed under each subsection.
 
-### 19.1. 🚗 2025 Vehicle Overview
+### 18.1. 🚗 2025 Vehicle Overview
 
 A two-level chassis of our own design, with a Lego rear drivetrain, Lego front steering driven by a servo, and a smartphone camera for obstacle detection.
 
@@ -1701,7 +1667,7 @@ A two-level chassis of our own design, with a Lego rear drivetrain, Lego front s
 | **Phone mount** | Modified tripod glued to the chassis | Shark Fin towers with adjustable clamp |
 | **Race weight (with phone)** | ≈1300 g | 1092 g |
 
-### 19.2. 🔌 Electronics Evolution
+### 18.2. 🔌 Electronics Evolution
 
 The electrical system went through three versions in 2025 before reaching the current one (version 4, [section 7](#7--esquemas-de-alimentación-y-cableado)).
 
@@ -1729,7 +1695,7 @@ $$V_{out} = 5\text{ V} \cdot \frac{2\text{ kΩ}}{1\text{ kΩ} + 2\text{ kΩ}} \a
 
 </details>
 
-### 19.3. 🔧 Chassis Construction
+### 18.3. 🔧 Chassis Construction
 
 We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a cardboard prototype, refined the tolerances in Fusion 360, and had the parts printed by a third party. The failures of that chassis (bending, vertical motor, manual fixes) are analyzed in the [engineering log](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2).
 
@@ -1747,7 +1713,7 @@ We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a 
 
 </details>
 
-### 19.4. 📱 Vision App Evolution (V1–V3)
+### 18.4. 📱 Vision App Evolution (V1–V3)
 
 | Version | What it added | Limitation |
 | :---: | :--- | :--- |
@@ -1765,7 +1731,7 @@ We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a 
 
 </details>
 
-### 19.5. 🧩 Key Problems and Solutions
+### 18.5. 🧩 Key Problems and Solutions
 
 | Problem | 2025 fix | 2026 solution |
 | :--- | :--- | :--- |
@@ -1775,7 +1741,7 @@ We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a 
 | **Missed or double-counted lines.** | 2.4 ms integration time on the TCS34725 and an average of the last 3 readings. | Kept, plus HSV confirmation and reading in a dedicated task. |
 | **Imprecise avoidance:** blind reversing after each turn. | Lane system with angle-guided reversing. | Same lane system, using the BNO055 and the rear ToF sensor. |
 
-### 19.6. 🎬 Videos and Source Code
+### 18.6. 🎬 Videos and Source Code
 
 <table>
 <tr>
