@@ -242,7 +242,7 @@ Cada carpeta tiene su propio README con el detalle de lo que contiene.
 | **📄 [`docs/`](docs/)** | **Documentos técnicos**<br>• Cálculos y justificación de la dirección Ackermann | [🔗 Ver documentos técnicos](docs/README.md) |
 | **🚗 [`v-photos/`](v-photos/)** | **Fotos del vehículo**<br>• Seis vistas del vehículo 2026 y del 2025 | [🔗 Ver fotos del vehículo](v-photos/README.md) |
 | **👥 [`t-photos/`](t-photos/)** | **Fotos del equipo**<br>• Foto oficial, foto divertida e integrantes | [🔗 Ver fotos del equipo](t-photos/README.md) |
-| **🎥 [`video/`](video/)** | **Videos de desempeño**<br>• Desafío con obstáculos 2026 y videos de 2025 | [🔗 Ver videos](video/README.md) |
+| **🎥 [`video/`](video/)** | **Videos de desempeño**<br>• Vuelta libre y desafío con obstáculos | [🔗 Ver videos](video/README.md) |
 | **📚 [`other/`](other/)** | **Recursos adicionales**<br>• Imágenes de componentes, CAD, construcción y diagramas | [🔗 Ver recursos adicionales](other/README.md) |
 
 </div>
@@ -1620,15 +1620,14 @@ A partir de la detección de dos objetos que añadimos a finales de 2025, ahora 
 
 Para las pruebas construimos una réplica de la pista de competencia de 3 × 3 metros con láminas recicladas pegadas. Tiene un error de unos 10 cm. En las esquinas pusimos las dos líneas, azul y naranja, separadas 30° y con el mismo origen en la esquina interior del cuadrado.
 
-<p align="center"><img src="other/pista.jpg" alt="Pista de pruebas" width="520"></p>
-
 Los enlaces de todos los videos también están en [`video/video.md`](video/video.md).
 
-Haz clic en la imagen para ver el video:
+Haz clic en las imágenes para ver los videos:
 
 <table>
 <tr>
-<td align="center"><b>Prueba de evasión de obstáculos</b><br><br><a href="https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq"><img src="other/videos.jpeg" alt="Video de evasión de obstáculos 2026" width="360"></a></td>
+<td align="center" width="50%"><b>Prueba de vueltas a la pista</b><br><br><a href="https://youtube.com/shorts/Ml_8qpX_Ozo"><img src="other/videos.jpeg" alt="Video de vueltas a la pista 2026" width="360"></a></td>
+<td align="center" width="50%"><b>Prueba de evasión de obstáculos</b><br><br><a href="https://youtu.be/qwc4M6uargw?si=8OC0NmMWCrHWz1Wq"><img src="other/videos.jpeg" alt="Video de evasión de obstáculos 2026" width="360"></a></td>
 </tr>
 </table>
 
