@@ -890,7 +890,7 @@ El CAD era optimista: la barra necesita 22 mm de carrera en el punto de la biela
 
 #### 10.4.4. Verificación de interferencias en CAD
 
-Modelamos una «rueda fantasma» (cilindro de Ø43,2 × 22 mm) y la giramos alrededor del kingpin en pasos de 5° para buscar choques con el chasis, las manguetas, la barra y la biela.
+Modelamos una «rueda fantasma» (cilindro de Ø43,2 × 14 mm) y la giramos alrededor del kingpin en pasos de 5° para buscar choques con el chasis, las manguetas, la barra y la biela.
 
 | Problema detectado | Corrección |
 | :--- | :--- |
