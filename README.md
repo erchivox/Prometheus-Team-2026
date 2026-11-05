@@ -488,34 +488,39 @@ graph TD
     classDef adc fill:#e65100,stroke:#ff9100,stroke-width:2px,color:#fff;
     classDef gpio fill:#004d40,stroke:#00bfa5,stroke-width:2px,color:#fff;
 
-    MCU["⚡ ESP32"]:::mcu
+    MCU["⚡ ESP32<br>Microcontroller"]:::mcu
 
-    IMU["🧭 IMU BNO055"]:::i2c1
-    TOF1["🎯 ToF 1 VL53L0X (frontal)"]:::i2c1
-    TOF2["🎯 ToF 2 VL53L0X (trasero)"]:::i2c1
-    TOF3["🎯 ToF 3 VL53L0X (izquierdo)"]:::i2c1
-    TOF4["🎯 ToF 4 VL53L0X (derecho)"]:::i2c1
+    IMU["🧭 BNO055 IMU<br>I2C #1"]:::i2c1
+    TOF1["🎯 VL53L0X ToF 1<br>(Right)"]:::i2c1
+    TOF2["🎯 VL53L0X ToF 2<br>(Rear)"]:::i2c1
+    TOF3["🎯 VL53L0X ToF 3<br>(Left)"]:::i2c1
+    TOF4["🎯 VL53L0X ToF 4<br>(Front)"]:::i2c1
 
-    COLOR["🎨 Sensor de color TCS34725"]:::i2c2
+    COLOR["🎨 TCS34725<br>Color Sensor"]:::i2c2
 
-    SHARP1["📡 Sharp 1 GP2Y0A21 (GPIO 34)"]:::adc
-    SHARP2["📡 Sharp 2 GP2Y0A21 (GPIO 35)"]:::adc
+    SHARP1["📡 GP2Y0A21 Sharp 1<br>(Right · GPIO 34)"]:::adc
+    SHARP2["📡 GP2Y0A21 Sharp 2<br>(Left · GPIO 35)"]:::adc
 
-    SERVO["⚙️ Servomotor MG90 · D13"]:::gpio
-    NEO["🌈 Tira Neopixel · D14"]:::gpio
-    BUZZER["🔔 Buzzer · D4"]:::gpio
-    SW["🔘 Interruptor de inicio · D23"]:::gpio
-    DRIVER["🏎️ Driver TB6612FNG · D25, D26, D27"]:::gpio
-    XSHUT["🔀 Selectores XSHUT · D17, D16, D5, D18"]:::gpio
+    SERVO["⚙️ MG90 Servo Motor<br>Pin 13"]:::gpio
+    NEO["🔵 NeoPixel Strip<br>Pin 14"]:::gpio
+    BUZZER["🔔 Buzzer<br>Pin 4"]:::gpio
+    SW["🔘 Program Start Switch<br>Pin 23"]:::gpio
+    DRIVER["🏎️ TB6612FNG Driver<br>Pins 25, 26, 27"]:::gpio
+    XSHUT["🔀 XSHUT Selectors<br>Pins 16, 17, 5, 18"]:::gpio
 
     MCU -- "I2C #1 (21/22)" --> IMU
+    MCU -- "I2C #1 (21/22)" --> TOF1
+    MCU -- "I2C #1 (21/22)" --> TOF2
+    MCU -- "I2C #1 (21/22)" --> TOF3
+    MCU -- "I2C #1 (21/22)" --> TOF4
+
     MCU -- "I2C #2 (32/33)" --> COLOR
 
     MCU --> XSHUT
-    XSHUT --> TOF1
-    XSHUT --> TOF2
-    XSHUT --> TOF3
-    XSHUT --> TOF4
+    XSHUT -- "Pin 16" --> TOF1
+    XSHUT -- "Pin 17" --> TOF2
+    XSHUT -- "Pin 5" --> TOF3
+    XSHUT -- "Pin 18" --> TOF4
 
     SHARP1 --> MCU
     SHARP2 --> MCU
@@ -527,15 +532,22 @@ graph TD
     MCU --> DRIVER
 ```
 
-**Asignación de pines del ESP32**
+**ESP32 Pin Assignment**
 
-| Señal | Pin | Señal | Pin |
-| :--- | :---: | :--- | :---: |
-| I2C #1 SDA / SCL | 21 / 22 | XSHUT frontal / trasero | 17 / 16 |
-| I2C #2 SDA / SCL | 32 / 33 | XSHUT izquierdo / derecho | 5 / 18 |
-| Motor IN1 / IN2 / PWM | 27 / 26 / 25 | Sharp derecho / izquierdo | 34 / 35 |
-| Servo de dirección | 13 | Tira Neopixel | 14 |
-| Interruptor de inicio | 23 | Buzzer | 4 |
+| Signal | Pin |
+| :--- | :---: |
+| I2C #1 SDA / SCL (IMU & ToFs) | 21 / 22 |
+| I2C #2 SDA / SCL (Color Sensor) | 32 / 33 |
+| XSHUT Right (ToF 1) | 16 |
+| XSHUT Rear (ToF 2) | 17 |
+| XSHUT Left (ToF 3) | 5 |
+| XSHUT Front (ToF 4) | 18 |
+| Motor IN1 / IN2 / PWM | 27 / 26 / 25 |
+| Sharp Right / Left | 34 / 35 |
+| Steering Servo | 13 |
+| NeoPixel Strip | 14 |
+| Program Start Switch | 23 |
+| Buzzer | 4 |
 
 ### 8.2. 🔧 Optimización del sistema de sensores y hardware
 
