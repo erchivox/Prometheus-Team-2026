@@ -890,7 +890,7 @@ flowchart LR
 | :---: | :--- | :--- |
 | (1) | $\cot\delta_e - \cot\delta_i = K / L$ | Condición de Ackermann |
 | (2) | $\theta = \arctan\left(\frac{K/2}{L}\right)$ | Ángulo del brazo de dirección |
-| (3) | $s = K - 2\,a\,\sin\theta$ | Separación de los agujeros de la barra |
+| (3) | $s = K - 2a\sin\theta$ | Separación de los agujeros de la barra |
 | (4) | $R = \frac{L}{\tan\delta_i} + \frac{K}{2}$ | Radio de giro (al centro del eje trasero) |
 | (5) | $\frac{\delta_i - \delta_{e,\text{real}}}{\delta_i - \delta_{e,\text{ideal}}} \times 100$ | Porcentaje de Ackermann |
 | (6) | $F = \tau / r_{\text{brazo}}$ | Fuerza en el brazo del servo |
