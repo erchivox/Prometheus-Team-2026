@@ -403,31 +403,40 @@ graph TD
     classDef reg fill:#f57c00,stroke:#ffb74d,stroke-width:2px,color:#fff;
     classDef load fill:#1565c0,stroke:#64b5f6,stroke-width:2px,color:#fff;
 
-    BAT["🔋 Batería LiPo 2S<br>50C 2200 mAh (7.4 V, máx. 8.4 V)"]:::bat
-    SW["🔘 Interruptor general"]:::sw
+    BAT["🔋 2S 50C 2200mAh LiPo Battery<br>(7.4V, 8.4V Max)"]:::bat
+    SW["🔘 Main Power Switch"]:::sw
 
-    XL["🚀 Step up-down XL6009<br>Ajuste: 6 V a 8 V (motor)"]:::reg
-    SD1["📉 Step-down DSN-Mini 360 #1<br>Ajuste: 7 V (VIN del ESP32)"]:::reg
-    SD2["📉 Step-down DSN-Mini 360 #2<br>Ajuste: 5 V (servo y sensores)"]:::reg
+    XL["🚀 XL6009 Buck-Boost Converter<br>Set to 6V-8V (Motor)"]:::reg
+    SD1["📉 DSN-Mini-360 Step-Down #1<br>Set to 6V (Control)"]:::reg
+    DIODE["➡️ 1N4007 Diode<br>Voltage Drop"]:::sw
+    SD2["📉 DSN-Mini-360 Step-Down #2<br>Set to 6V (Servo)"]:::reg
+    SD3["📉 DSN-Mini-360 Step-Down #3<br>Set to 5V (General)"]:::reg
 
-    ESP32["🧠 ESP32<br>alimentado por VIN a 7 V"]:::load
-    DRIVER["🏎️ Driver TB6612FNG<br>VM 6 V a 8 V"]:::load
-    MOTOR["⚙️ Motor DC 25GA-370<br>6 V a 8 V"]:::load
-    SERVO["📐 Servomotor MG90 180°<br>5 V"]:::load
-    SENS["📡 Sensores, Neopixel y buzzer<br>5 V"]:::load
+    ESP32["🧠 ESP32 Microcontroller<br>VIN at 5.2V"]:::load
+    DRIVER["🏎️ TB6612FNG Motor Driver<br>VM 6V-8V"]:::load
+    MOTOR["⚙️ 25GA-370 DC Motor<br>6V-8V"]:::load
+    SERVO["📐 MG90 180° Servo Motor<br>6V"]:::load
+    SENS5V["💡 NeoPixel & Sharp Sensors<br>5V"]:::load
+    SENS3V["📡 IMU & TOF Sensors<br>3.3V Logic from ESP32"]:::load
 
     BAT --> SW
 
     SW --> XL
     SW --> SD1
     SW --> SD2
+    SW --> SD3
 
     XL --> DRIVER
     DRIVER --> MOTOR
 
-    SD1 --> ESP32
+    SD1 --> DIODE
+    DIODE --> ESP32
+
     SD2 --> SERVO
-    SD2 --> SENS
+    
+    SD3 --> SENS5V
+    
+    ESP32 --> SENS3V
 ```
 
 ### 7.2. 🔋 Arquitectura de energía, control y gestión de potencia
@@ -437,8 +446,14 @@ La **batería LiPo 2S de 2200 mAh** (7.4 V nominales, 8.4 V con carga completa) 
 Desde ese punto la alimentación se divide en tres líneas reguladas e independientes. Así el ruido del motor no llega a la lógica de control y evitamos caídas de tensión (*brownouts*):
 
 * **Línea de tracción:** un regulador **XL6009** ajustado entre 6 y 8 V, según la velocidad que busquemos, alimenta el **puente H TB6612FNG**, que a su vez mueve el **motor 25GA-370**.
-* **Línea de control:** un **DSN-Mini 360** ajustado a 7 V alimenta el pin VIN del **ESP32** (el único microcontrolador del sistema). Con ese voltaje su regulador interno de 3.3 V tiene margen suficiente y la placa no se reinicia cuando arranca el motor.
-* **Línea de actuadores y sensores:** un segundo **DSN-Mini 360**, ajustado a 5 V, alimenta el **servomotor MG90** y el resto de los sensores con una tensión estable.
+
+* **Línea de control:** un **DSN-Mini 360** ajustado a 6 V se conecta a un **diodo rectificador 1N4007** (para evitar retroalimentaciones al conectar el cable USB para subir código). Tras la caída de voltaje del diodo, llegan unos 5.2 V al pin VIN del **ESP32**. Con este voltaje, su regulador interno tiene margen suficiente para trabajar y evita que la placa se reinicie por caídas de tensión cuando arranca el motor.
+
+* **Línea del servomotor:** un segundo regulador **DSN-Mini 360** ajustado a 6 V alimenta de forma exclusiva al **servomotor MG90**. Aislar el servo en su propio regulador es fundamental para evitar que sus picos de consumo y el ruido eléctrico interfieran con las lecturas analógicas y digitales del resto del sistema.
+
+* **Línea general de 5 V:** un tercer **DSN-Mini 360** ajustado a 5 V se encarga de la alimentación general de los periféricos que requieren este voltaje. Por ahora, de esta línea se alimentan únicamente la **tira NeoPixel** y los dos **sensores de distancia Sharp**.
+
+* **Línea lógica de 3.3 V:** el resto de los módulos y sensores del sistema (como la IMU y los sensores TOF) se alimentan directamente desde el pin de 3.3 V del **ESP32**. Esto asegura que reciban un voltaje limpio, estable y libre del ruido de conmutación (rizado) que pueden llegar a inducir los reguladores Mini 360 debido a su naturaleza conmutada (switching).
 
 > [!IMPORTANT]
 > **Cambio clave de hardware: L298N → TB6612FNG**
@@ -448,7 +463,7 @@ Desde ese punto la alimentación se divide en tres líneas reguladas e independi
 > [!NOTE]
 > **Compromiso de diseño**
 >
-> Tres reguladores independientes ocupan más espacio dentro del chasis impreso. Aceptamos ese costo porque separar la potencia de la electrónica sensible eliminó el ruido inductivo del motor y nos dio lecturas I2C limpias durante toda la navegación.
+> 4 reguladores independientes ocupan más espacio dentro del chasis impreso. Aceptamos ese costo porque separar la potencia de la electrónica sensible eliminó el ruido inductivo del motor y nos dio lecturas I2C limpias durante toda la navegación.
 
 ---
 
