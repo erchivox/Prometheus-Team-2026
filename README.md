@@ -394,7 +394,7 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 
 ### 7.1. 🧾 Versión 4 (actual)
 
-![Diagrama de alimentación V4](schemes/diagrama-alimentacion5.jpeg)
+![Diagrama de alimentación V4](schemes/Power_Supply_Diagram_FINALS.png)
 
 ```mermaid
 graph TD
@@ -458,7 +458,7 @@ Desde ese punto la alimentación se divide en tres líneas reguladas e independi
 
 ### 8.1. 🧾 Versión 4 (actual)
 
-![Diagrama de sensores V4](schemes/diagrama-sensores3.jpeg)
+![Diagrama de sensores V4](schemes/IO_Connection_Schematic_FINALS.png)
 
 ```mermaid
 graph TD
