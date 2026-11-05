@@ -839,6 +839,11 @@ La dirección Lego que traíamos de 2025 era **paralela**: las dos ruedas giraba
 </tr>
 </table>
 
+<p align="center">
+  <img src="other/direccion_ackermann_animacion.gif" alt="Animación del recorrido de la dirección Ackermann en Onshape" width="760"><br>
+  <sub><b>Animación en Onshape.</b> El servo recorre su rango del CAD (de −46,8° a +34,3°) y se ve cómo la biela mueve la barra y cómo la rueda interior gira más que la exterior hacia cada lado.</sub>
+</p>
+
 #### 10.4.1. Datos de partida
 
 | Dato | Valor |
