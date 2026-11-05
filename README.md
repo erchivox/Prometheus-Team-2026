@@ -398,26 +398,28 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 
 ```mermaid
 graph TD
-    classDef bat fill:#d50000,stroke:#ff5252,stroke-width:2px,color:#fff;
-    classDef sw fill:#424242,stroke:#bdbdbd,stroke-width:2px,color:#fff;
-    classDef reg fill:#f57c00,stroke:#ffb74d,stroke-width:2px,color:#fff;
-    classDef load fill:#1565c0,stroke:#64b5f6,stroke-width:2px,color:#fff;
+    %% Definición de colores
+    classDef bat fill:#7b1fa2,stroke:#ab47bc,stroke-width:2px,color:#fff;
+    classDef sw fill:#616161,stroke:#9e9e9e,stroke-width:2px,color:#fff;
+    classDef reg fill:#e65100,stroke:#ff9800,stroke-width:2px,color:#fff;
+    classDef load fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
+    classDef logic fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
 
-    BAT["🔋 2S 50C 2200mAh LiPo Battery<br>(7.4V, 8.4V Max)"]:::bat
-    SW["🔘 Main Power Switch"]:::sw
+    BAT["🔋 2S 50C 2200mAh<br>LiPo Battery<br>(7.4V, 8.4V Max)"]:::bat
+    SW["🔘 Main<br>Power Switch"]:::sw
 
-    XL["🚀 XL6009 Buck-Boost Converter<br>Set to 6V-8V (Motor)"]:::reg
-    SD1["📉 DSN-Mini-360 Step-Down #1<br>Set to 6V (Control)"]:::reg
+    XL["🚀 XL6009 Buck-Boost<br>Set to 6V-8V<br>(Motor)"]:::reg
+    SD1["📉 DSN-Mini-360 #1<br>Set to 6V<br>(Control)"]:::reg
     DIODE["➡️ 1N4007 Diode<br>Voltage Drop"]:::sw
-    SD2["📉 DSN-Mini-360 Step-Down #2<br>Set to 6V (Servo)"]:::reg
-    SD3["📉 DSN-Mini-360 Step-Down #3<br>Set to 5V (General)"]:::reg
+    SD2["📉 DSN-Mini-360 #2<br>Set to 6V<br>(Servo)"]:::reg
+    SD3["📉 DSN-Mini-360 #3<br>Set to 5V<br>(General)"]:::reg
 
-    ESP32["🧠 ESP32 Microcontroller<br>VIN at 5.2V"]:::load
-    DRIVER["🏎️ TB6612FNG Motor Driver<br>VM 6V-8V"]:::load
-    MOTOR["⚙️ 25GA-370 DC Motor<br>6V-8V"]:::load
-    SERVO["📐 MG90 180° Servo Motor<br>6V"]:::load
-    SENS5V["💡 NeoPixel & Sharp Sensors<br>5V"]:::load
-    SENS3V["📡 IMU & TOF Sensors<br>3.3V Logic from ESP32"]:::load
+    ESP32["🧠 ESP32<br>Microcontroller<br>VIN at 5.2V"]:::load
+    DRIVER["🏎️ TB6612FNG<br>Motor Driver<br>VM 6V-8V"]:::load
+    MOTOR["⚙️ 25GA-370<br>DC Motor<br>6V-8V"]:::load
+    SERVO["📐 MG90 180°<br>Servo Motor<br>6V"]:::load
+    SENS5V["💡 NeoPixel &<br>Sharp Sensors<br>5V"]:::load
+    SENS3V["📡 IMU & TOF<br>Sensors<br>3.3V Logic"]:::logic
 
     BAT --> SW
 
