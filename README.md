@@ -135,13 +135,17 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
 
 **📚 Anexos**
 
-- [18. 📁 Archive: 2025 Season](#18--archive-2025-season)
-  - [18.1. 🚗 2025 Vehicle Overview](#181--2025-vehicle-overview)
-  - [18.2. 🔌 Electronics Evolution](#182--electronics-evolution)
-  - [18.3. 🔧 Chassis Construction](#183--chassis-construction)
-  - [18.4. 📱 Vision App Evolution (V1–V3)](#184--vision-app-evolution-v1v3)
-  - [18.5. 🧩 Key Problems and Solutions](#185--key-problems-and-solutions)
-  - [18.6. 🎬 Videos and Source Code](#186--videos-and-source-code)
+- [18. 🌐 Uso de GitHub, inteligencia artificial y replicación](#18--uso-de-github-inteligencia-artificial-y-replicación)
+  - [18.1. 🌿 Flujo de trabajo](#181--flujo-de-trabajo)
+  - [18.2. 🤖 Uso de inteligencia artificial](#182--uso-de-inteligencia-artificial)
+  - [18.3. 🔁 Cómo replicar el proyecto](#183--cómo-replicar-el-proyecto)
+- [19. 📁 Archive: 2025 Season](#19--archive-2025-season)
+  - [19.1. 🚗 2025 Vehicle Overview](#191--2025-vehicle-overview)
+  - [19.2. 🔌 Electronics Evolution](#192--electronics-evolution)
+  - [19.3. 🔧 Chassis Construction](#193--chassis-construction)
+  - [19.4. 📱 Vision App Evolution (V1–V3)](#194--vision-app-evolution-v1v3)
+  - [19.5. 🧩 Key Problems and Solutions](#195--key-problems-and-solutions)
+  - [19.6. 🎬 Videos and Source Code](#196--videos-and-source-code)
 
 </td></tr>
 </table>
@@ -206,7 +210,7 @@ Prometheus Team está conformado por estudiantes de Ingeniería Electrónica de 
 
 En 2025 obtuvimos el **2.º lugar en la competencia nacional de Venezuela**. Llegamos después de meses de diseño, depuración de sensores y ajustes a la lógica de navegación, y en la final tuvimos que recalibrar componentes contra reloj y resolver imprevistos en la pista frente a los mejores equipos del país.
 
-Este año volvemos con una lista clara de lo que falló: rediseñamos el chasis, cambiamos buena parte del hardware y mejoramos los algoritmos de control para que el vehículo sea más rápido y preciso. La meta es el **1.er lugar nacional** y la clasificación a la final internacional. El vehículo de 2025 está documentado en el [archivo de la temporada 2025](#18--archive-2025-season).
+Este año volvemos con una lista clara de lo que falló: rediseñamos el chasis, cambiamos buena parte del hardware y mejoramos los algoritmos de control para que el vehículo sea más rápido y preciso. La meta es el **1.er lugar nacional** y la clasificación a la final internacional. El vehículo de 2025 está documentado en el [archivo de la temporada 2025](#19--archive-2025-season).
 
 ### 1.6. 📸 Nuestro paso por la competencia nacional
 
@@ -239,7 +243,6 @@ Cada carpeta tiene su propio README con el detalle de lo que contiene.
 | **💾 [`src/`](src/)** | **Código del vehículo**<br>• Firmware del ESP32 (vuelta libre y obstáculos)<br>• Librerías y cómo cargar el código<br>• Enlace al código de la app Android | [🔗 Ver documentación del código](src/README.md) |
 | **⚙️ [`models/`](models/)** | **Piezas mecánicas**<br>• Archivos STL de todas las piezas impresas<br>• Qué es cada pieza y dónde va | [🔗 Ver documentación de los modelos](models/README.md) |
 | **🔌 [`schemes/`](schemes/)** | **Electrónica**<br>• Esquemas de alimentación y de sensores<br>• Versión actual e históricas | [🔗 Ver documentación de los esquemas](schemes/README.md) |
-| **📄 [`docs/`](docs/)** | **Documentos técnicos**<br>• Cálculos y justificación de la dirección Ackermann | [🔗 Ver documentos técnicos](docs/README.md) |
 | **🚗 [`v-photos/`](v-photos/)** | **Fotos del vehículo**<br>• Seis vistas del vehículo 2026 y del 2025 | [🔗 Ver fotos del vehículo](v-photos/README.md) |
 | **👥 [`t-photos/`](t-photos/)** | **Fotos del equipo**<br>• Foto oficial, foto divertida e integrantes | [🔗 Ver fotos del equipo](t-photos/README.md) |
 | **🎥 [`video/`](video/)** | **Videos de desempeño**<br>• Vuelta libre y desafío con obstáculos | [🔗 Ver videos](video/README.md) |
@@ -277,15 +280,15 @@ La categoría Futuros Ingenieros tiene dos rondas sobre una pista de 3 × 3 m, m
 
 ### 3.3. 📊 Criterios de evaluación de la documentación
 
-El reglamento de Futuros Ingenieros 2026 evalúa la documentación con cinco criterios. Esta tabla indica dónde se encuentra cada uno en este repositorio:
+Según el Anexo C de las [reglas generales de Future Engineers 2026](https://wro-association.org/wp-content/uploads/WRO-2026-Future-Engineers-Self-Driving-Cars-General-Rules.pdf), los jueces evalúan la documentación con cinco criterios de 0, 2, 4 o 6 puntos cada uno (máximo 30), valorando la claridad y profundidad del razonamiento de ingeniería. Esta tabla indica dónde se encuentra cada uno en este repositorio:
 
 | Criterio | Qué se evalúa | Dónde está |
 | :--- | :--- | :--- |
-| **1. Movilidad y mecánica** | Chasis, tracción, dirección, cálculos y armado | [10. Diseño estructural](#10--diseño-estructural-transmisión-y-manufactura-aditiva) · [11. Masa](#11--análisis-de-masa-y-distribución-de-peso) · [12. Velocidad y torque](#12--velocidad-torque-y-tracción) · [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
-| **2. Energía y sensores** | Alimentación, sensores, cableado y consumo | [5](#5--componentes-de-control-detección-e-interfaz) · [6](#6--componentes-de-alimentación-y-actuación) · [7](#7--esquemas-de-alimentación-y-cableado) · [8](#8--esquemas-de-sensores-y-adquisición-de-datos) · [9. Gestión energética](#9--gestión-energética-y-autonomía-del-sistema) |
-| **3. Desarrollo del código** | Estrategia de navegación, evasión de obstáculos y videos | [15. Software y control](#15--software-y-control) · [16. App de visión](#16--telemetría-y-visión-artificial-aplicación-prometheus-v50) · [17. Pruebas y videos](#17--pruebas-en-pista-y-videos) |
-| **4. Sistema completo y decisiones de ingeniería** | Fotos del vehículo, arquitectura y justificación de decisiones | [4. Nuestro vehículo](#4--nuestro-vehículo) · [13. Diario de ingeniería](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2) · [18. Archivo 2025](#18--archive-2025-season) |
-| **5. Calidad de la documentación** | Orden, claridad y posibilidad de replicar | [2. Estructura](#2--estructura-del-repositorio) · [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
+| **1. Movilidad y diseño mecánico**<br><sub>*Mobility and Mechanical Design*</sub> | Chasis, tracción, dirección, cálculos y armado | [10. Diseño estructural](#10--diseño-estructural-transmisión-y-manufactura-aditiva) · [11. Masa](#11--análisis-de-masa-y-distribución-de-peso) · [12. Velocidad y torque](#12--velocidad-torque-y-tracción) · [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
+| **2. Arquitectura de energía y sensores**<br><sub>*Power and Sensor Architecture*</sub> | Alimentación, sensores, cableado y consumo | [5](#5--componentes-de-control-detección-e-interfaz) · [6](#6--componentes-de-alimentación-y-actuación) · [7](#7--esquemas-de-alimentación-y-cableado) · [8](#8--esquemas-de-sensores-y-adquisición-de-datos) · [9. Gestión energética](#9--gestión-energética-y-autonomía-del-sistema) |
+| **3. Arquitectura de software y estrategia ante obstáculos**<br><sub>*Software Architecture and Obstacle Strategy*</sub> | Estrategia de navegación, evasión de obstáculos y videos | [15. Software y control](#15--software-y-control) · [16. App de visión](#16--telemetría-y-visión-artificial-aplicación-prometheus-v50) · [17. Pruebas y videos](#17--pruebas-en-pista-y-videos) |
+| **4. Visión de sistema y decisiones de ingeniería**<br><sub>*Systems Thinking and Engineering Decisions*</sub> | Fotos del vehículo, arquitectura y justificación de decisiones | [4. Nuestro vehículo](#4--nuestro-vehículo) · [13. Diario de ingeniería](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2) · [19. Archivo 2025](#19--archive-2025-season) |
+| **5. Reproducibilidad y calidad en GitHub**<br><sub>*Reproducibility and GitHub Quality*</sub> | Orden, claridad, uso de GitHub y posibilidad de replicar | [2. Estructura](#2--estructura-del-repositorio) · [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) · [18. GitHub, IA y replicación](#18--uso-de-github-inteligencia-artificial-y-replicación) |
 
 ---
 
@@ -390,7 +393,7 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 
 ## 7. ⚡ Esquemas de alimentación y cableado
 
-*Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](#182--electronics-evolution).*
+*Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](#192--electronics-evolution).*
 
 ### 7.1. 🧾 Versión 4 (actual)
 
@@ -454,7 +457,7 @@ Desde ese punto la alimentación se divide en tres líneas reguladas e independi
 
 ## 8. 📡 Esquemas de sensores y adquisición de datos
 
-*Las versiones anteriores del sistema de detección están en el [archivo de 2025](#182--electronics-evolution).*
+*Las versiones anteriores del sistema de detección están en el [archivo de 2025](#192--electronics-evolution).*
 
 ### 8.1. 🧾 Versión 4 (actual)
 
@@ -727,7 +730,7 @@ La capacidad de 2200 mAh la decidimos por tres criterios: peso, tasa de descarga
 
 ## 10. 🧱 Diseño estructural, transmisión y manufactura aditiva
 
-*El diseño y la construcción del chasis de 2025 están en el [archivo de 2025](#183--chassis-construction).*
+*El diseño y la construcción del chasis de 2025 están en el [archivo de 2025](#193--chassis-construction).*
 
 ### 10.1. 📝 Filosofía de rediseño y prototipado conceptual
 
@@ -819,22 +822,59 @@ Con las piezas validadas, el ensamble virtual completo nos sirvió para encontra
 
 ### 10.4. 🛞 Sistema de dirección Ackermann
 
-> [!TIP]
-> 📄 **Documento técnico completo:** [docs/direccion-ackermann.md](docs/direccion-ackermann.md) ([.docx original](docs/Direccion_Ackermann_Calculos_y_Justificacion.docx)). Incluye todos los cálculos, la disposición vertical de las piezas, la verificación en CAD paso a paso y la lista de pendientes.
-
 La dirección Lego que traíamos de 2025 era **paralela**: las dos ruedas giraban el mismo ángulo, tenía poco giro máximo y estaba encajada a presión en un recorte del chasis, con holgura. La reemplazamos por una **dirección Ackermann diseñada en Onshape e impresa en PETG-CF**: un servo mueve una biela plana, la biela mueve una barra de acoplamiento y la barra gira las dos manguetas, cada una sobre un pivote (*kingpin*) metálico M3.
 
 <div align="center">
 
-| 🛞 Giro de la rueda interior | 🔄 Radio de giro mínimo | 🎯 Error máximo frente al ideal | 📏 Holgura mínima al chasis |
-| :---: | :---: | :---: | :---: |
-| **40°** | **176 mm** | **1,4°** | **1,00 mm** |
+| 🛞 Giro de la rueda interior | 🔄 Radio de giro mínimo | 🎯 Error máximo frente al ideal | 📏 Holgura mínima al chasis | ⚙️ Recorrido del servo |
+| :---: | :---: | :---: | :---: | :---: |
+| **40°** | **176 mm** | **1,4°** | **1,00 mm** | **98°** |
 
 </div>
 
-#### 10.4.1. Principio de funcionamiento
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/direccion_ackermann_superior.jpg" alt="Dirección Ackermann vista desde arriba" width="380"><br><sub><b>Vista superior.</b> Las dos manguetas con sus pivotes, la barra de acoplamiento y el servo (en violeta) con la biela, delante del eje delantero.</sub></td>
+<td align="center" width="50%"><img src="other/direccion_ackermann_perspectiva.jpg" alt="Dirección Ackermann en perspectiva" width="380"><br><sub><b>Perspectiva desde arriba y al frente.</b> El servo va invertido sobre su soporte; la biela plana baja hasta el agujero central de la barra.</sub></td>
+</tr>
+</table>
 
-En una dirección Ackermann las prolongaciones de los ejes de las ruedas delanteras se cortan en un punto sobre la línea del eje trasero. Así la rueda interior gira más que la exterior, cada una recorre su propia circunferencia y ninguna se arrastra de lado al girar.
+#### 10.4.1. Datos de partida
+
+| Dato | Valor |
+| :--- | :--- |
+| Distancia entre ejes (L) | 112 mm |
+| Ancho del chasis | 115 mm |
+| Neumático / rin Lego | #44309 (43,2 × 22 mm) / #56145 (30,4 × 20 mm) |
+| Vía trasera | 140 mm de exterior a exterior (118 mm entre centros de neumático) |
+| Ancho delantero (montaje real) | ≈ 143 mm de extremo a extremo de rueda (≈ 121 mm entre centros), igual que el eje trasero |
+| Adaptador de rueda | 25,7 mm de largo (13,7 mm en la versión anterior) |
+| Espesor de la placa / separación entre pisos | 4 mm / 60 mm |
+| Altura del eje de rueda | 10,75 mm sobre la placa (igual que el eje trasero) |
+| Servo | **Previsto:** EMAX ES08MA II (analógico, 23 × 11,5 × 24 mm, 12 g, 4,8–6 V, 2,0 kgf·cm a 6 V).<br>**En las pruebas:** MG90 (23 × 12,2 mm) con su brazo de serie, usando el agujero a 14 mm del eje. |
+| Material | PETG-CF (manguetas, barra, biela y soporte) |
+
+#### 10.4.2. Relación 1:1: el chasis 2026 frente al de 2025
+
+La geometría de la dirección depende directamente de la distancia entre ejes (L): con el mismo ángulo de las ruedas, el radio de giro crece en proporción a L. Por eso el primer paso del rediseño fue acortar el chasis hasta que la distancia entre ejes quedara casi igual al ancho (relación 1:1). Medidas tomadas de los modelos 3D de los dos chasis:
+
+| Parámetro | Chasis 2025 | Monochasis 2026 | Cambio |
+| :--- | :---: | :---: | :---: |
+| **Largo del chasis** | 242 mm | 179 mm | 🔻 −63 mm (−26 %) |
+| **Ancho del chasis** | 116 mm | 115 mm | ≈ igual |
+| **Relación largo / ancho** | ≈ 2,1 : 1 | ≈ 1,56 : 1 | Más compacto |
+| **Distancia entre ejes / ancho** | Chasis alargado para el trípode | 112 / 115 ≈ **0,97 : 1** | ≈ 1:1 |
+
+$$R = \frac{L}{\tan\delta_i} + \frac{K}{2} \quad\Rightarrow\quad \text{a igual ángulo de giro, menos } L \text{ significa menos radio}$$
+
+- **Giro más cerrado:** con L = 112 mm la dirección llega a un radio de 176 mm. En el chasis largo de 2025, el mismo ángulo habría dado un radio mayor, porque el primer término de la fórmula crece con L.
+- **Mismo espacio para la electrónica:** el ancho no cambió; lo que se recortó fue el largo que solo existía para equilibrar el trípode.
+- **Sin flexión:** al acortar el chasis desapareció el efecto palanca que lo doblaba en el centro y ya no hacen falta los contrapesos de plomo (ver [13. Diario de ingeniería](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2)).
+- **Relación K/L más alta:** con K = 84 mm y L = 112 mm, K/L = 0,75. Es la cifra que fija cuánto más debe girar la rueda interior que la exterior (fórmula 1).
+
+#### 10.4.3. Principio de funcionamiento y fórmulas
+
+En una dirección Ackermann las prolongaciones de los ejes de las dos ruedas delanteras se cortan en un punto sobre la línea del eje trasero. Así cada rueda recorre una circunferencia distinta sin arrastrarse de lado. Para lograrlo, la rueda interior tiene que girar más que la exterior.
 
 ```mermaid
 flowchart LR
@@ -846,36 +886,50 @@ flowchart LR
     MD --> RD["🛞 Rueda derecha<br/>(kingpin M3)"]
 ```
 
-| Fórmula | Uso |
-| :--- | :--- |
-| $\cot\delta_e - \cot\delta_i = K / L$ | Condición de Ackermann |
-| $\theta = \arctan\left(\frac{K/2}{L}\right)$ | Ángulo del brazo de dirección |
-| $s = K - 2\,a\,\sin\theta$ | Separación de los agujeros de la barra |
-| $R = \frac{L}{\tan\delta_i} + \frac{K}{2}$ | Radio de giro (al centro del eje trasero) |
-| $F = \tau / r_{\text{brazo}}$ | Fuerza en el brazo del servo |
+| # | Fórmula | Uso |
+| :---: | :--- | :--- |
+| (1) | $\cot\delta_e - \cot\delta_i = K / L$ | Condición de Ackermann |
+| (2) | $\theta = \arctan\left(\frac{K/2}{L}\right)$ | Ángulo del brazo de dirección |
+| (3) | $s = K - 2\,a\,\sin\theta$ | Separación de los agujeros de la barra |
+| (4) | $R = \frac{L}{\tan\delta_i} + \frac{K}{2}$ | Radio de giro (al centro del eje trasero) |
+| (5) | $\frac{\delta_i - \delta_{e,\text{real}}}{\delta_i - \delta_{e,\text{ideal}}} \times 100$ | Porcentaje de Ackermann |
+| (6) | $F = \tau / r_{\text{brazo}}$ | Fuerza en el brazo del servo |
 
-Donde $\delta_i$ y $\delta_e$ son los ángulos de la rueda interior y exterior, $K$ la separación entre *kingpins*, $L$ = 112 mm la distancia entre ejes y $a$ la longitud del brazo de dirección.
+Donde $\delta_i$ y $\delta_e$ son los ángulos de la rueda interior y exterior, $K$ la separación entre los ejes de los *kingpins*, $L$ la distancia entre ejes y $a$ la longitud del brazo de dirección.
 
-#### 10.4.2. Elección de la separación entre pivotes (K)
+#### 10.4.4. Elección de la separación entre pivotes (K)
 
-El primer cálculo usó el ancho del chasis (115 mm) como $K$, pero era un error: $K$ es la distancia entre pivotes, no entre ruedas. Comparamos cuatro opciones con un brazo de 22 mm:
+El primer cálculo usó el ancho del chasis (115 mm) como $K$, y era un error: $K$ es la distancia entre pivotes, no entre ruedas. Comparamos cuatro opciones con L = 112 mm y un brazo de 22 mm:
 
 | K (mm) | Criterio | θ | Separación de agujeros | Decisión |
 | :---: | :--- | :---: | :---: | :--- |
 | 115 | Ancho del chasis (supuesto inicial) | 27,2° | — | ❌ No es la distancia entre pivotes |
 | 96 | Kingpin en la cara interior del neumático | 23,2° | 78,7 mm | ❌ Las orejas de Ø10 invadían unos 5 mm la llanta |
 | 108 | Kingpin a 5 mm del plano medio de la rueda | 25,7° | 88,9 mm | ❌ La mangueta tendría que entrar en la cavidad del rin |
-| **84** | **Kingpin 6 mm dentro de la cara interior (±42 mm)** | **20,56°** | **68,55 mm** | ✅ **Adoptado** |
+| **84** | **Kingpin 6 mm dentro de la cara interior (x = ±42 mm)** | **20,56°** | **68,55 mm** | ✅ **Adoptado** |
+
+#### 10.4.5. Brazo de dirección, barra y ángulos ideales
 
 Con K = 84 mm:
 
 $$\theta = \arctan\left(\frac{42}{112}\right) = 20{,}56^\circ \qquad s = 84 - 2 \cdot 22 \cdot \sin(20{,}56^\circ) = 68{,}55 \text{ mm}$$
 
-La barra se construyó con 68,6 mm entre agujeros y un tercer agujero a 14 mm del centro para la biela.
+Con un brazo de 22 mm, la punta queda 7,72 mm hacia el centro y 20,60 mm hacia atrás del kingpin. La barra se construyó con 68,6 mm entre agujeros y un tercer agujero a 14 mm del centro para la biela.
 
-#### 10.4.3. Servo y biela: lo que predijo el CAD y lo que pasó en el montaje
+Aplicando la fórmula (1) con K/L = 0,75:
 
-El servo va **invertido** (eje hacia abajo), delante de la barra y apoyado sobre la placa. Así el brazo del servo, la biela y la barra trabajan en planos casi contiguos. Un diseño anterior con una biela en forma de Z y 25 mm de desnivel se descartó porque hacía palanca sobre las articulaciones y generaba holgura. También exigimos que el ángulo entre el brazo y la biela nunca bajara de 40°, para evitar el punto muerto.
+| δ interior | δ exterior ideal | Radio de giro | Error de una dirección paralela |
+| :---: | :---: | :---: | :---: |
+| 10° | 8,85° | 677 mm | 1,15° |
+| 20° | 15,96° | 350 mm | 4,04° |
+| 30° | 21,95° | 236 mm | 8,05° |
+| 40° | 27,24° | 176 mm | 12,76° |
+
+La última columna es la diferencia entre el ideal y una rueda exterior que gira lo mismo que la interior (dirección paralela). Crece con el ángulo; por eso una dirección paralela solo es aceptable en giros pequeños.
+
+#### 10.4.6. Servo y biela: lo que predijo el CAD y lo que pasó en el montaje
+
+El servo va **invertido** (eje hacia abajo), delante de la barra y apoyado sobre la placa, con un brazo de 14 mm y una biela plana de 14,5 mm. Así el brazo del servo, la biela y la barra trabajan en planos casi contiguos. Un diseño anterior con una biela en forma de Z y 25 mm de desnivel se descartó porque hacía palanca sobre las articulaciones y generaba holgura. También exigimos que el ángulo entre el brazo y la biela nunca bajara de 40°, para evitar el punto muerto; el primer rango de servo (−19,6° a +24,8°) no lo cumplía.
 
 | Dato | CAD | Montaje real |
 | :--- | :---: | :---: |
@@ -884,30 +938,58 @@ El servo va **invertido** (eje hacia abajo), delante de la barra y apoyado sobre
 | Centro de la ventana | −6,2° | −1° |
 | Brazo del servo / biela | 14 mm / 14,5 mm | 14 mm (último agujero del brazo del MG90) / 14,5 mm |
 
-El CAD era optimista: la barra necesita 22 mm de carrera en el punto de la biela y, con un brazo de 14 mm, eso exige entre 100° y 104° de giro del servo. Además, el servo había quedado montado al revés. Al voltearlo y ampliar el rango, la dirección llegó a los ángulos esperados.
+El CAD era optimista: la barra necesita 22 mm de carrera en el punto de la biela y, con un brazo de 14 mm, eso exige entre 100° y 104° de giro del servo. La asimetría del CAD venía de la unión excéntrica de la biela con la barra (a 14 mm del centro) y del desplazamiento lateral del eje del servo. Además, el servo había quedado montado al revés; al voltearlo y ampliar el rango, la dirección llegó a los ángulos esperados y el recorrido quedó casi simétrico.
 
-**Par del servo:** con 2,0 kgf·cm y un brazo de 14 mm, el servo empuja con unos 14 N, más de 6 veces lo necesario para girar las ruedas con el carro parado (≈ 0,66 kg sobre el eje delantero). El punto débil del sistema es la holgura mecánica, no la fuerza.
+> [!NOTE]
+> Los grados del código dependen de la calibración de µs por grado (partimos de 10 µs/°). Hay que comprobar con un transportador que el brazo gira lo que se le ordena.
 
-#### 10.4.4. Verificación de interferencias en CAD
+**Par del servo:** con 2,0 kgf·cm (0,196 N·m) y un brazo de 14 mm, el servo empuja con unos **14 N**. La carga estimada para girar con el carro parado, con unos 0,66 kg sobre el eje delantero, es menor de 0,3 kgf·cm: el margen es de **más de 6 veces**. El punto débil del sistema es la holgura mecánica, no la fuerza.
 
-Modelamos una «rueda fantasma» (cilindro de Ø43,2 × 14 mm) y la giramos alrededor del kingpin en pasos de 5° para buscar choques con el chasis, las manguetas, la barra y la biela.
+#### 10.4.7. Disposición vertical
 
-| Problema detectado | Corrección |
-| :--- | :--- |
-| A 40°, la esquina trasera interior del neumático rozaba el puente y la pared del hombro | Puente inclinado y recortes en el hombro → holgura mínima de 1,00 mm en todo el rango |
-| La barra tocaba la cabeza M3 del servo, y la barra y la biela tocaban los pilares a −40° | Alivio en la barra y rebaje en los pilares → todas las holguras ≥ 1 mm |
-| Los casquillos de la biela no apretaban la pila de piezas | Casquillos de 4 mm → articulaciones firmes y biela libre (0,5 mm) |
+Las alturas se miden desde la cara inferior de la placa. La rueda baja 6,85 mm por debajo de la placa, así que ningún elemento puede quedar a menos de unos 2 mm del suelo.
 
-**Criterio:** ≥ 1 mm contra el resto de piezas y 0,5 mm solo dentro de una misma articulación.
+| Elemento | Altura z (mm) |
+| :--- | :---: |
+| Parte baja del neumático (suelo) | −6,85 |
+| Pie de la mangueta | −4,5 a −0,5 (2,35 mm sobre el suelo) |
+| Placa y puentes de los kingpins | 0 a 4 |
+| Oreja y brazo de la mangueta | 4,5 a 7,5 |
+| Barra de acoplamiento | 8 a 11 |
+| Biela | 11,5 a 14,5 |
+| Brazo del servo | 15 a 17 |
+| Eje de la rueda | 14,75 |
 
-#### 10.4.5. Resultado: dirección real frente a la ideal
+#### 10.4.8. Verificación de interferencias en CAD
 
-| δ interior | δ exterior ideal | δ exterior de nuestro mecanismo | Error | % Ackermann | Error de una dirección paralela | Radio de giro |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 10° | 8,85° | 9,25° | +0,40° | 65 % | 1,15° | 677 mm |
-| 20° | 15,96° | 17,06° | +1,10° | 73 % | 4,04° | 350 mm |
-| 30° | 21,95° | 23,37° | +1,42° | 82 % | 8,05° | 236 mm |
-| 40° | 27,24° | 27,96° | +0,72° | 94 % | 12,76° | **176 mm** |
+Modelamos una «rueda fantasma» (cilindro de Ø43,2 × 14 mm con su eje a z = 14,75 mm) y la giramos alrededor del kingpin en pasos de 5° para buscar choques con el chasis, las manguetas, la barra y la biela.
+
+| Problema detectado | Corrección | Resultado |
+| :--- | :--- | :--- |
+| A 40°, la esquina trasera interior del neumático rozaba el puente y la pared del hombro | Puente inclinado y recortes en el hombro entre x = 33,3 y 37,5 mm | Holgura mínima de 1,00 mm en todo el rango |
+| Un recorte nuevo dañó el brazo de dirección | Se limitó el alcance de los recortes al chasis | Pieza restaurada |
+| Los casquillos de la biela no apretaban la pila de piezas | Casquillos de 4 mm (z 11–15) | Articulaciones firmes y biela libre (0,5 mm) |
+| La barra tocaba la cabeza M3 del servo, y la barra y la biela tocaban los pilares a −40° | Alivio en la barra y rebaje en los pilares | Todas las holguras ≥ 1 mm |
+
+**Criterio:** ≥ 1 mm contra el resto de piezas y 0,5 mm solo dentro de una misma articulación. Las holguras de 0,5 mm entre la rueda y la mangueta son estáticas, porque ambas giran juntas.
+
+#### 10.4.9. Resultado: dirección real frente a la ideal
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/direccion_ackermann_giro_izquierda.jpg" alt="Dirección girada al máximo a la izquierda" width="380"><br><sub><b>Giro máximo a la izquierda.</b> La rueda izquierda (interior) gira más que la derecha.</sub></td>
+<td align="center" width="50%"><img src="other/direccion_ackermann_giro_derecha.jpg" alt="Dirección girada al máximo a la derecha" width="380"><br><sub><b>Giro máximo a la derecha.</b> Ahora la interior es la derecha y es la que más gira.</sub></td>
+</tr>
+</table>
+
+Pares de ángulos del modelo del mecanismo (barra rígida de 68,6 mm):
+
+| δ interior | δ exterior ideal | δ exterior de nuestro mecanismo | Error | % Ackermann |
+| :---: | :---: | :---: | :---: | :---: |
+| 10° | 8,85° | 9,25° | +0,40° | 65 % |
+| 20° | 15,96° | 17,06° | +1,10° | 73 % |
+| 30° | 21,95° | 23,37° | +1,42° | 82 % |
+| 40° | 27,24° | 27,96° | +0,72° | 94 % |
 
 ```mermaid
 xychart-beta
@@ -920,38 +1002,57 @@ xychart-beta
 
 <sub>Barras: dirección paralela (como la Lego). Línea: nuestra dirección Ackermann.</sub>
 
-El error nunca pasa de 1,4°, y el mecanismo se acerca más al ideal justo donde más importa: en el giro máximo (94 %).
+El error nunca pasa de 1,4°, y el mecanismo se acerca más al ideal justo donde más importa: en el giro máximo (94 %). En ángulos pequeños el error absoluto es menor de 0,5°.
 
-**Medición en el montaje real** (transportador sobre papel, servo en sus límites):
+**Medición en el montaje real** (transportador sobre papel, servo en sus límites de −50° y +48°):
 
-| Giro | Rueda interior | Rueda exterior | Exterior ideal | % Ackermann |
-| :--- | :---: | :---: | :---: | :---: |
-| A la derecha | 40° | 30° | 27,24° | 78 % |
-| A la izquierda | 40° | 25° | 27,24° | 118 % |
-| **Promedio** | **40°** | **27,5°** | **27,24°** | **98 %** |
+| Giro | Rueda interior | Rueda exterior | Exterior ideal | Error | % Ackermann |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| A la derecha | 40° | 30° | 27,24° | +2,8° | 78 % |
+| A la izquierda | 40° | 25° | 27,24° | −2,2° | 118 % |
+| **Promedio** | **40°** | **27,5°** | **27,24°** | **+0,3°** | **98 %** |
 
-El promedio coincide con el ideal. La diferencia de 5° entre lados no se explica por el mecanismo, que es simétrico: lo más probable es un desfase del cero de 2 a 3°, que es la incertidumbre de medir con transportador. El recorrido total de cada rueda (65° y 70°, promedio 67,5°) coincide con los ≈ 68° del modelo.
+El promedio de la rueda exterior (27,5°) coincide con el ideal (27,2°) y con el modelo (28,0°). La diferencia de 5° entre lados no se explica por el mecanismo, que es simétrico: lo más probable es un desfase del cero de 2 a 3°, que es la incertidumbre de un transportador sobre papel. El recorrido total de cada rueda (65° y 70°, promedio 67,5°) coincide con los ≈ 68° del modelo.
 
-#### 10.4.6. Comparación con la dirección Lego
+#### 10.4.10. Ajustes tras las pruebas físicas
+
+- **Servo volteado:** había quedado montado al revés. Al corregirlo y ampliar el rango a −50°/+48°, la dirección alcanza los ángulos esperados.
+- **Holguras verticales** del pie y la oreja de la mangueta, y de los casquillos: de 0,5 mm a 0,1 mm por lado. Eliminó el juego vertical; los puntos muertos que aparecieron se resolvieron con el servo corregido y el rango ampliado.
+- **Canal de unos 2 mm** en la cara superior del chasis para las cabezas de los tornillos de las puntas de los brazos, que rozaban.
+- **Pivote M3 con la cabeza embutida.** No conseguimos tornillos de hombro, así que las tuercas de los tornillos normales se fijan con autoblocante o fijador de roscas.
+- **Adaptador de rueda alargado** de 13,7 a 25,7 mm: el ancho entre extremos de rueda queda en ≈ 143 mm, igual que el eje trasero.
+- **Eje de rueda:** varilla de soldadura de Ø2,6 mm con apoyo impreso en lugar de rodamientos 604ZZ, y unión en cruz Lego alojada en un hueco de 6 mm del adaptador.
+
+**Efecto del ancho de 143 mm:** la geometría Ackermann no cambia, porque depende de K = 84 mm y L = 112 mm y no de la vía. El centro de la rueda queda unos 1,5 mm más afuera por lado, lo que sube un 9 % el esfuerzo de dirección (insignificante frente al margen de más de 6 veces) y aleja el neumático 1,5 mm de la mangueta y el chasis. Con la vía delantera igual a la trasera, las ruedas traseras siguen las huellas de las delanteras y el vehículo es más estable.
+
+#### 10.4.11. Comparación con la dirección Lego
 
 | Aspecto | Dirección Lego (anterior) | Dirección Ackermann (actual) |
 | :--- | :--- | :--- |
-| **Geometría** | Paralela: el mismo ángulo en las dos ruedas | Ackermann: K = 84 mm, L = 112 mm |
+| **Geometría** | Paralela: el mismo ángulo en las dos ruedas | Ackermann: K = 84 mm, L = 112 mm, brazos a 20,56° |
 | **Ángulo máximo** | Reducido (lo típico en Lego es 15° a 20°) | 40° interior y 25°–30° exterior (medido) |
-| **Radio de giro mínimo** | ≈ 308 a 418 mm | **176 mm**, un 43 % menor que con 20° |
+| **Radio de giro mínimo** | ≈ 308 a 418 mm con 20° a 15° ($R \approx L / \tan\delta$) | **176 mm**, un 43 % menor que con 20° |
 | **Error frente al ideal** | 4,0° con 20° y 8,1° con 30° | 1,1° con 20° y 1,4° con 30° |
 | **Neumáticos** | Se arrastran de lado al girar | Casi tangentes a sus círculos de giro |
-| **Pivotes y rigidez** | Encaje a presión en Lego, con juego | Pivote M3 y piezas en PETG-CF con holguras de 0,1 mm por lado |
+| **Pivotes** | Encaje a presión en un recorte del chasis, con holgura | Pivote M3 con ajuste definido y tuerca autoblocante |
+| **Rigidez** | Plástico Lego con juego | PETG-CF con holguras de 0,1 mm por lado |
+| **Rango del servo** | — | 98° (−50° a +48°), dentro de la capacidad del servo |
 
-#### 10.4.7. Decisiones de diseño clave
+#### 10.4.12. Decisiones de diseño
 
 | Decisión | Alternativa descartada | Por qué |
 | :--- | :--- | :--- |
-| Servo invertido delante de la barra | Servo detrás con biela en Z | Biela plana en un solo plano: más rígida y sin holgura por palanca |
+| K = 84 mm | K = 96 o 108 mm | Evita que las orejas de la mangueta invadan la llanta; casi no se pierde giro |
+| Brazo de 22 mm | — | Da el recorrido de barra necesario con un brazo de servo de 14 mm |
+| Servo invertido delante de la barra | Servo detrás con biela en Z de 25 mm | Biela plana en un solo plano: más rígida y sin holgura por palanca; libera el centro del chasis |
 | Servo apoyado sobre la placa | Servo hundido en un hueco | La rueda baja 6,85 mm y el servo mide ~28 mm: colgaría hasta el suelo |
-| Holguras de 0,1 mm por lado | Holguras de 0,5 mm | Elimina el juego vertical; la impresión no necesita tanta tolerancia |
-| Adaptador de rueda de 25,7 mm | Adaptador de 13,7 mm | Iguala el ancho delantero con el trasero (≈ 143 mm) sin cambiar la geometría |
-| Varilla de soldadura de Ø2,6 mm como eje | Rodamientos 604ZZ | Los rines Lego no tienen espacio interior y la carga es pequeña (≈ 3 N por rueda) |
+| Brazos y barra sobre la placa (z 4,5–11) | Barra por debajo | Evita el roce con el suelo |
+| Relleno de huecos hasta x = ±30 mm | Relleno completo | Apoya el soporte del servo y deja 1 mm contra la columna y la oreja al girar |
+| Kingpin metálico M3 | Rosca girando contra el plástico | Evita el desgaste del plástico; el inserto de latón solo sujeta |
+| Varilla de soldadura Ø2,6 mm con apoyo impreso | Rodamientos 604ZZ junto al rin | Los rines Lego no tienen espacio interior y la carga es pequeña (≈ 3 N por rueda) |
+| Servo volteado y rango −50°/+48° | Rango del CAD (−46,8°/+34,3°) | El montaje real necesitó unos 98°; el análisis del mecanismo lo confirma |
+| Holguras de 0,1 mm por lado | Holguras de 0,5 mm | La impresión no necesita tanta tolerancia; elimina el juego vertical |
+| Adaptador de 25,7 mm y ancho ≈ 143 mm | Adaptador de 13,7 mm | Iguala la vía delantera con la trasera sin cambiar la geometría |
 | PETG-CF | PETG simple | Más rigidez: lo que ordena el PID se traduce en giro sin retraso elástico |
 
 ---
@@ -1323,7 +1424,7 @@ Para el eje usamos una solución de taller fácil de conseguir: el núcleo limpi
 
 ### 14.4. 🔹 Paso 4: dirección Ackermann
 
-Las piezas y medidas de la dirección están en la [sección 10.4](#104--sistema-de-dirección-ackermann) y el detalle completo en [docs/direccion-ackermann.md](docs/direccion-ackermann.md).
+Las piezas y medidas de la dirección están en la [sección 10.4](#104--sistema-de-dirección-ackermann).
 
 1. Coloca cada mangueta en su pivote con un tornillo M3 (cabeza embutida) y fija la tuerca con autoblocante o fijador de roscas. La mangueta tiene que girar libre, sin juego vertical.
 2. Une las puntas de los dos brazos de dirección con la barra de acoplamiento (agujeros a 68,6 mm).
@@ -1633,11 +1734,71 @@ Haz clic en las imágenes para ver los videos:
 
 ---
 
-## 18. 📁 Archive: 2025 Season
+## 18. 🌐 Uso de GitHub, inteligencia artificial y replicación
+
+### 18.1. 🌿 Flujo de trabajo
+
+- **`main` es la versión estable.** Los cambios grandes se hacen en una rama aparte y entran a `main` con un *pull request*, que el equipo revisa antes de unirlo.
+- **Historial completo:** cada cambio queda registrado en el [historial de commits](https://github.com/erchivox/Prometheus-Team-2026/commits/main), desde las versiones de 2025 hasta la actual.
+- **Carpetas estándar de la WRO:** `t-photos`, `v-photos`, `video`, `schemes`, `src`, `models` y `other`. Cada una tiene su README.
+- **Código de 2025 conservado** en `src/` como referencia, para que se vea cómo evolucionó la lógica.
+
+### 18.2. 🤖 Uso de inteligencia artificial
+
+De cara a la **Final Internacional WRO 2026 en Puerto Rico**, declaramos de forma transparente cómo usamos inteligencia artificial en este proyecto: qué sistema, para qué y en qué medida.
+
+| | Declaración |
+| :--- | :--- |
+| **Sistema** | Claude (Anthropic), un asistente de inteligencia artificial |
+| **Para qué** | Documentación del repositorio: organizar y redactar el README a partir de nuestros textos, datos, cálculos y fotos; traducir al inglés el archivo de 2025; integrar en el README el documento de la dirección Ackermann; dibujar los diagramas de flujo en Mermaid; revisar enlaces, numeración y consistencia de cifras; y preparar los *pull requests*. |
+| **En qué medida** | Solo en la documentación. El diseño, la construcción y la programación del vehículo y de la app, las mediciones, los cálculos de diseño, las fotos, los videos y las decisiones de ingeniería son del equipo. Cada cambio propuesto lo revisamos y aprobamos antes de unirlo a `main`. |
+
+```mermaid
+flowchart LR
+    A["👥 Equipo<br/>diseño, código, pruebas<br/>y mediciones"] --> B["📂 Material del equipo<br/>textos, cálculos,<br/>fotos y datos"]
+    B --> C["🤖 Claude<br/>organiza, redacta,<br/>traduce y diagrama"]
+    C --> D["🔀 Pull request"]
+    D --> E{"👥 Revisión<br/>del equipo"}
+    E -- "Cambios pedidos" --> C
+    E -- "Aprobado" --> F["✅ main"]
+```
+
+**Respaldo en el reglamento de Future Engineers 2026** ([reglas generales, versión del 15 de enero de 2026](https://wro-association.org/wp-content/uploads/WRO-2026-Future-Engineers-Self-Driving-Cars-General-Rules.pdf)):
+
+| Regla | Qué dice | Cómo la cumplimos |
+| :--- | :--- | :--- |
+| **Reglas generales de Future Engineers 2026** | No contienen ninguna regla que prohíba o limite el uso de herramientas de inteligencia artificial. | El uso de IA en la documentación está permitido; aun así lo declaramos. |
+| **3.3** | *"Coding of the vehicle and its construction (if applicable) may be done only by the team."* La programación y la construcción del vehículo solo pueden hacerlas los integrantes del equipo. | El firmware, la app, el diseño CAD y el armado son trabajo del equipo. La IA no programó ni construyó el vehículo. |
+| **3.7** | No se permite un programa de control igual o demasiado parecido a soluciones vendidas en internet. | El código de [`src/`](src/) es propio y su evolución se puede seguir en el historial de commits. |
+| **Anexo C.1** | Los jueces evalúan *"the clarity and depth of engineering reasoning"*: la claridad y profundidad del razonamiento de ingeniería, no la apariencia ni la extensión. | El razonamiento (cálculos, decisiones y pruebas) es nuestro; la IA nos ayudó a presentarlo con claridad. |
+| **Future Innovators 2026, regla 6.5** (referencia) | En esa categoría, si un equipo usa IA, debe indicar qué sistema, para qué y en qué medida. | Future Engineers no lo exige, pero aplicamos el mismo criterio en esta declaración. |
+| **4.2 y 4.4** | Las preguntas y respuestas (Q&A) oficiales pueden aclarar o modificar las reglas, y los jueces tienen la última palabra el día de la competencia. | Revisaremos las Q&A antes de la final y responderemos cualquier pregunta de los jueces sobre este uso. |
+
+### 18.3. 🔁 Cómo replicar el proyecto
+
+```mermaid
+flowchart LR
+    A["1. Clonar el repo"] --> B["2. Imprimir las piezas"] --> C["3. Armar el vehículo"] --> D["4. Cablear"]
+    D --> E["5. Cargar el firmware"] --> F["6. Instalar la app"] --> G["7. Calibrar y probar"]
+```
+
+| Paso | Qué hacer | Dónde está |
+| :---: | :--- | :--- |
+| 1 | Clonar el repositorio: `git clone https://github.com/erchivox/Prometheus-Team-2026.git` | — |
+| 2 | Imprimir las piezas en PETG (la dirección en PETG-CF) con nuestros parámetros | [`models/`](models/) · [10.7](#107--manufactura-aditiva) |
+| 3 | Armar el chasis, la tracción, la dirección y el soporte del teléfono | [14. Guía de ensamble](#14--guía-de-ensamble-paso-a-paso) |
+| 4 | Conectar la alimentación y los sensores | [`schemes/`](schemes/) · [7](#7--esquemas-de-alimentación-y-cableado) · [8](#8--esquemas-de-sensores-y-adquisición-de-datos) |
+| 5 | Instalar las librerías y cargar `v1PrometeusTeam2026.ino` (vuelta libre) o `v2PrometrusTeam2026.ino` (obstáculos) | [`src/README.md`](src/README.md) |
+| 6 | Compilar e instalar la app en el teléfono | [Repositorio de la app](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) |
+| 7 | Calibrar los colores desde el menú de la app y el rango del servo | [16.2](#162--calibración-en-pista-y-menú-dinámico) · [10.4](#104--sistema-de-dirección-ackermann) |
+
+---
+
+## 19. 📁 Archive: 2025 Season
 
 This section summarizes the vehicle that earned us **2nd place at the 2025 Venezuelan National Final**. Most of its hardware was replaced in 2026, but we keep this record because it explains the design decisions behind this year's vehicle. Detailed material is collapsed under each subsection.
 
-### 18.1. 🚗 2025 Vehicle Overview
+### 19.1. 🚗 2025 Vehicle Overview
 
 A two-level chassis of our own design, with a Lego rear drivetrain, Lego front steering driven by a servo, and a smartphone camera for obstacle detection.
 
@@ -1666,7 +1827,7 @@ A two-level chassis of our own design, with a Lego rear drivetrain, Lego front s
 | **Phone mount** | Modified tripod glued to the chassis | Shark Fin towers with adjustable clamp |
 | **Race weight (with phone)** | ≈1300 g | 1092 g |
 
-### 18.2. 🔌 Electronics Evolution
+### 19.2. 🔌 Electronics Evolution
 
 The electrical system went through three versions in 2025 before reaching the current one (version 4, [section 7](#7--esquemas-de-alimentación-y-cableado)).
 
@@ -1694,7 +1855,7 @@ $$V_{out} = 5\text{ V} \cdot \frac{2\text{ kΩ}}{1\text{ kΩ} + 2\text{ kΩ}} \a
 
 </details>
 
-### 18.3. 🔧 Chassis Construction
+### 19.3. 🔧 Chassis Construction
 
 We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a cardboard prototype, refined the tolerances in Fusion 360, and had the parts printed by a third party. The failures of that chassis (bending, vertical motor, manual fixes) are analyzed in the [engineering log](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2).
 
@@ -1712,7 +1873,7 @@ We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a 
 
 </details>
 
-### 18.4. 📱 Vision App Evolution (V1–V3)
+### 19.4. 📱 Vision App Evolution (V1–V3)
 
 | Version | What it added | Limitation |
 | :---: | :--- | :--- |
@@ -1730,7 +1891,7 @@ We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a 
 
 </details>
 
-### 18.5. 🧩 Key Problems and Solutions
+### 19.5. 🧩 Key Problems and Solutions
 
 | Problem | 2025 fix | 2026 solution |
 | :--- | :--- | :--- |
@@ -1740,7 +1901,7 @@ We first modeled a two-level vehicle in Tinkercad, tested the dimensions with a 
 | **Missed or double-counted lines.** | 2.4 ms integration time on the TCS34725 and an average of the last 3 readings. | Kept, plus HSV confirmation and reading in a dedicated task. |
 | **Imprecise avoidance:** blind reversing after each turn. | Lane system with angle-guided reversing. | Same lane system, using the BNO055 and the rear ToF sensor. |
 
-### 18.6. 🎬 Videos and Source Code
+### 19.6. 🎬 Videos and Source Code
 
 <table>
 <tr>

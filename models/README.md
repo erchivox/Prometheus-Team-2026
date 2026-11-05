@@ -23,7 +23,7 @@ Archivos STL de las piezas impresas del vehículo. Todas se diseñaron en **Onsh
 | [`Tornillo_Mordaza_2026.stl`](Tornillo_Mordaza_2026.stl) | Tornillo M10 impreso | Rosca M10.5 de la mordaza fija; empuja la mordaza móvil |
 
 > [!NOTE]
-> Las piezas de la **dirección Ackermann** (manguetas, barra de acoplamiento, biela y soporte del servo) se agregarán a esta carpeta. Sus medidas están en [`docs/direccion-ackermann.md`](../docs/direccion-ackermann.md).
+> Las piezas de la **dirección Ackermann** (manguetas, barra de acoplamiento, biela y soporte del servo) se agregarán a esta carpeta. Sus medidas están en la sección *10.4 Sistema de dirección Ackermann* del README principal.
 
 ---
 
