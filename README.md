@@ -308,7 +308,7 @@ Según el Anexo C de las [reglas generales de Future Engineers 2026](https://wro
 | **Dirección** | Ackermann impresa en PETG-CF, movida por un servo MG90; 40° en la rueda interior y radio de giro de 176 mm |
 | **Sensores** | 4 × ToF VL53L0X, IMU BNO055, sensor de color TCS34725 y 2 × Sharp GP2Y0A21 |
 | **Visión** | App propia con OpenCV que detecta pilares rojos, verdes y la zona magenta |
-| **Energía** | LiPo 2S 2200 mAh 50C con tres líneas reguladas (motor, control, servo y sensores) |
+| **Energía** | LiPo 2S 2200 mAh 50C con cuatro líneas reguladas (motor, control, servo y 5 V general); la IMU y los ToF toman 3,3 V del ESP32 |
 | **Interfaz** | Interruptor de inicio, tira Neopixel y buzzer para indicar el estado |
 
 ### 4.2. 🧩 Arquitectura del sistema
@@ -386,8 +386,8 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 | <img src="other/XL6009.jpg" width="110" alt="XL6009"> | **Regulador XL6009 (step-up/down)** | Ajustado entre 6 y 8 V según la velocidad buscada. Mantiene estable la alimentación del driver del motor aunque baje la batería. | • [Datasheet XL6009](https://www.xlsemi.com/datasheet/XL6009%20datasheet.pdf) |
 | <img src="other/tb6612fng.jpg" width="110" alt="TB6612FNG"> | **Driver de motores TB6612FNG** | Puente H dual. Recibe dirección y PWM del ESP32 y entrega la potencia al motor con mucha menos pérdida que el L298N que usábamos antes. | • [Datasheet TB6612FNG](https://www.sparkfun.com/datasheets/Robotics/TB6612FNG.pdf) |
 | <img src="other/motor.png" width="110" alt="Motor 25GA-370"> | **Motor DC 25GA-370 (6 V a 8 V)** | Motorreductor metálico de 220 RPM (caja 21.3:1) para la tracción. También se vende como JGA25-370. Lo alimenta el XL6009 a través del driver. | • [Motorreductores](https://www.pololu.com/category/60/micro-metal-gearmotors) |
-| <img src="other/dsn_mini_360.jpg" width="110" alt="Mini 360"> | **2 × Step-down DSN-Mini 360** | Reguladores conmutados. El #1 está ajustado a 7 V para el pin VIN del ESP32 y el #2 a 5 V para el servo y los sensores. | • [Datasheet MP2307](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
-| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#104--sistema-de-dirección-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 5 V desde el Mini 360 #2. El servo previsto para la versión final es un EMAX ES08MA II. | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
+| <img src="other/dsn_mini_360.jpg" width="110" alt="Mini 360"> | **3 × Step-down DSN-Mini 360** | Reguladores conmutados. El #1 está ajustado a 6 V y, tras un diodo 1N4007, entrega unos 5,2 V al pin VIN del ESP32. El #2, a 6 V, alimenta solo el servo, y el #3, a 5 V, la tira NeoPixel y los sensores Sharp. | • [Datasheet MP2307](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
+| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#104--sistema-de-dirección-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 6 V desde el Mini 360 #2. El servo previsto para la versión final es un EMAX ES08MA II. | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
 
 ---
 
@@ -448,7 +448,7 @@ graph TD
 
 La **batería LiPo 2S de 2200 mAh** (7.4 V nominales, 8.4 V con carga completa) es la única fuente de energía. Pasa por un **interruptor general de palanca**, que elegimos porque no se desconecta solo con las vibraciones de la pista.
 
-Desde ese punto la alimentación se divide en tres líneas reguladas e independientes. Así el ruido del motor no llega a la lógica de control y evitamos caídas de tensión (*brownouts*):
+Desde ese punto la alimentación se divide en cuatro líneas reguladas e independientes, más la línea lógica de 3,3 V que sale del propio ESP32. Así el ruido del motor no llega a la lógica de control y evitamos caídas de tensión (*brownouts*):
 
 * **Línea de tracción:** un regulador **XL6009** ajustado entre 6 y 8 V, según la velocidad que busquemos, alimenta el **puente H TB6612FNG**, que a su vez mueve el **motor 25GA-370**.
 
@@ -863,8 +863,8 @@ La dirección Lego que traíamos de 2025 era **paralela**: las dos ruedas giraba
 
 <table>
 <tr>
-<td align="center" width="50%"><img src="other/direccion_ackermann_superior.jpg" alt="Dirección Ackermann vista desde arriba" width="380"><br><sub><b>Vista superior.</b> Las dos manguetas con sus pivotes, la barra de acoplamiento y el servo (en violeta) con la biela, delante del eje delantero.</sub></td>
-<td align="center" width="50%"><img src="other/direccion_ackermann_perspectiva.jpg" alt="Dirección Ackermann en perspectiva" width="380"><br><sub><b>Perspectiva desde arriba y al frente.</b> El servo va invertido sobre su soporte; la biela plana baja hasta el agujero central de la barra.</sub></td>
+<td align="center" width="50%"><img src="other/direccion_ackermann_superior.jpg" alt="Dirección Ackermann vista desde arriba" width="380"><br><sub><b>Vista superior.</b> Las dos manguetas con sus pivotes y la barra de acoplamiento. El servo va montado en su soporte (en violeta), delante de la barra.</sub></td>
+<td align="center" width="50%"><img src="other/direccion_ackermann_perspectiva.jpg" alt="Dirección Ackermann en perspectiva" width="380"><br><sub><b>Perspectiva desde arriba y al frente.</b> La biela conecta el brazo del servo con la barra de acoplamiento. Se ve asimétrica porque la barra no tiene un agujero central para la biela: la unión está a 14 mm del centro.</sub></td>
 </tr>
 </table>
 
@@ -1209,7 +1209,7 @@ Pasar del chasis heredado al **Monochasis** redujo la masa, y lo comprobamos con
 >
 > La comparación correcta no es contra los 943 g de la primera impresión de v1 (que todavía **no** tenía el trípode), sino contra su configuración de competencia de **≈1.3 kg**. El trípode y, sobre todo, los contrapesos de plomo que pusimos para compensar el efecto palanca (ver [sección 13](#13--diario-de-ingeniería-evolución-del-chasis-v0--v2)) le añadieron cerca de **360 g**, casi un tercio de su masa sin teléfono. El sobrepeso de v1 no venía del chasis en sí, sino de corregir con peso un defecto geométrico (la flexión por palanca). La v2 lo resolvió de raíz con la proporción 1:1 y no necesita contrapesos.
 >
-> Frente al chasis de 2025 recién impreso, la v2 pesa algo más (861 g frente a 763 g sin teléfono), porque ahora lleva cuatro ToF, tres reguladores, la tira de LEDs y el soporte Shark Fin.
+> Frente al chasis de 2025 recién impreso, la v2 pesa algo más (861 g frente a 763 g sin teléfono), porque ahora lleva cuatro ToF, cuatro reguladores, la tira de LEDs y el soporte Shark Fin.
 
 > [!NOTE]
 > **Compromiso de diseño: peso frente a rigidez**
@@ -1463,7 +1463,7 @@ Las piezas y medidas de la dirección están en la [sección 10.4](#104--sistema
 1. Coloca cada mangueta en su pivote con un tornillo M3 (cabeza embutida) y fija la tuerca con autoblocante o fijador de roscas. La mangueta tiene que girar libre, sin juego vertical.
 2. Une las puntas de los dos brazos de dirección con la barra de acoplamiento (agujeros a 68,6 mm).
 3. Monta el servo **invertido** (eje hacia abajo) en su soporte, delante de la barra, apoyado sobre la placa.
-4. Conecta el brazo del servo (último agujero, a 14 mm del eje) con el agujero central de la barra mediante la biela plana de 14,5 mm.
+4. Conecta el brazo del servo (último agujero, a 14 mm del eje) con la barra de acoplamiento mediante la biela plana de 14,5 mm. La biela va al tercer agujero de la barra, a 14 mm del centro, no a un agujero central.
 5. Con las ruedas rectas, centra el servo y comprueba el recorrido de −50° a +48° sin que nada roce el chasis. Ajusta la convergencia (*toe-in*) con la ranura de la barra.
 
 > [!TIP]
