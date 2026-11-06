@@ -578,16 +578,16 @@ Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica tod
 
 ```mermaid
 flowchart TD
-    A["Inicio:<br>los 4 pines XSHUT en LOW<br>(sensores apagados)"] --> B["Activar XSHUT_FRONTAL<br>(HIGH)"]
-    B --> C["Inicializar en la<br>dirección de fábrica 0x29"]
-    C --> D["Reasignar dirección<br>→ 0x30 (ADDR_FRONTAL)"]
-    D --> E["Activar XSHUT_TRASERO<br>(HIGH)"]
-    E --> F["Inicializar en 0x29<br>→ reasignar a 0x31"]
-    F --> G["Activar XSHUT_IZQ<br>(HIGH)"]
-    G --> H["Inicializar en 0x29<br>→ reasignar a 0x32"]
-    H --> I["Activar XSHUT_DER<br>(HIGH)"]
-    I --> J["Inicializar en 0x29<br>→ reasignar a 0x33"]
-    J --> K["Los 4 sensores activos,<br>cada uno con su dirección,<br>en el mismo bus I2C #1"]
+    A["Inicio:<br>los 4 pines<br>XSHUT en LOW<br>(apagados)"] --> B["Activar<br>XSHUT_FRONTAL<br>(HIGH)"]
+    B --> C["Inicializar<br>en dir.<br>fábrica 0x29"]
+    C --> D["Reasignar a<br>0x30<br>(ADDR_FRONTAL)"]
+    D --> E["Activar<br>XSHUT_TRASERO<br>(HIGH)"]
+    E --> F["Inicializar<br>en 0x29 →<br>asignar 0x31"]
+    F --> G["Activar<br>XSHUT_IZQ<br>(HIGH)"]
+    G --> H["Inicializar<br>en 0x29 →<br>asignar 0x32"]
+    H --> I["Activar<br>XSHUT_DER<br>(HIGH)"]
+    I --> J["Inicializar<br>en 0x29 →<br>asignar 0x33"]
+    J --> K["Los 4 sensores<br>activos en el<br>mismo bus I2C"]
 ```
 
 En cada paso solo **un sensor** está encendido en la dirección `0x29`; los demás siguen en reset (XSHUT en LOW). Cuando ya tiene su dirección definitiva, ese sensor queda encendido (XSHUT en HIGH) y se pasa al siguiente.
