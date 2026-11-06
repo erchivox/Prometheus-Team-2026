@@ -394,8 +394,7 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 | <img src="other/motor.png" width="110" alt="Motor 25GA-370"> | **Motor DC 25GA-370 (6 V a 8 V)** | Motorreductor metálico de 220 RPM (caja 21.3:1) para la tracción. También se vende como JGA25-370. Lo alimenta el XL6009 a través del driver. | • [Motorreductores](https://www.pololu.com/category/60/micro-metal-gearmotors) |
 | <img src="other/dsn_mini_360.jpg" width="110" alt="Mini 360"> | **3 × Step-down DSN-Mini 360** | Reguladores conmutados. El #1 está ajustado a 6 V y, tras un diodo 1N4007, entrega unos 5,2 V al pin VIN del ESP32. El #2, a 6 V, alimenta solo el servo, y el #3, a 5 V, la tira NeoPixel y los sensores Sharp. | • [Datasheet MP2307](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
 | <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#104--sistema-de-dirección-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 6 V desde el Mini 360 #2. Se reemplazará por un EMAX ES08MD digital (🔜). | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
-| 📷 | **🔜 Servomotor digital EMAX ES08MD**<br><sub>Próximo cambio</sub> | Reemplazará al MG90. Es digital y con engranajes metálicos: corrige su posición con más frecuencia, sostiene mejor el ángulo y tiene menos zona muerta. 2,0 kgf·cm a 6 V (1,6 a 4,8 V), 0,10 s/60° a 6 V, 4,8–6 V, 23 × 11,5 × 24 mm y 13 g. Ver [18. Próximas mejoras](#18--próximas-mejoras). | • [Ficha técnica](https://shop-archive.boxtec.ch/emax-es08md-digital-metal-servo-13g-p-41148.html) |
-| 📷 | **🔜 Varilla lisa de acero inoxidable de 4 mm**<br><sub>Próximo cambio</sub> | Reemplazará al núcleo de electrodo de soldadura que hoy hace de eje trasero. Su diámetro coincide con el interior de los rodamientos 604ZZ (4 mm), así que entra sin termorretráctil: el eje queda recto, más rígido y sin juego. Ver [18. Próximas mejoras](#18--próximas-mejoras). | • Rodamientos 604ZZ: 4 × 12 × 4 mm |
+| <img src="https://servodatabase.com/images/servos/emax-es08md.jpg" width="110" alt="EMAX ES08MD"> | **🔜 Servomotor digital EMAX ES08MD**<br><sub>Próximo cambio</sub> | Reemplazará al MG90. Es digital y con engranajes metálicos: corrige su posición con más frecuencia, sostiene mejor el ángulo y tiene menos zona muerta. 2,0 kgf·cm a 6 V (1,6 a 4,8 V), 0,10 s/60° a 6 V, 4,8–6 V, 23 × 11,5 × 24 mm y 13 g. Ver [18. Próximas mejoras](#18--próximas-mejoras). | • [Ficha técnica](https://shop-archive.boxtec.ch/emax-es08md-digital-metal-servo-13g-p-41148.html) |
 
 ---
 
@@ -1789,8 +1788,7 @@ Estos son los cambios de hardware que ya decidimos para la próxima versión del
 | 1 | **ToF frontal y laterales** | 3 × VL53L0X (hasta 2 m) | 3 × **VL53L1X** (hasta 4 m, campo de 27° con zona de interés programable) | Más alcance y lecturas más estables al seguir la pared y al llegar a cada esquina |
 | 2 | **ToF trasero** | 1 × VL53L0X (una sola medida) | 1 × **VL53L5CX** matricial (4×4 u 8×8 zonas, 45° × 45°, hasta 4 m) | Una "imagen" de profundidad de lo que hay detrás: retroceso guiado más preciso |
 | 3 | **Sensores diagonales** | 2 × Sharp GP2Y0A21 (analógicos, 10–80 cm) | 2 × **VL53L0X** (los que se retiran en los cambios 1 y 2) | Medidas digitales por I2C, sin ruido analógico, con el mismo tipo de sensor que el resto |
-| 4 | **Eje trasero** | Núcleo de electrodo de soldadura (~2,4 mm) con termorretráctil | Varilla lisa de **acero inoxidable de 4 mm** | Entra directo en los rodamientos 604ZZ: eje recto, más rígido y sin juego |
-| 5 | **Servo de dirección** | MG90 (analógico) | **EMAX ES08MD** (digital) | Control de posición más preciso y mejor sujeción del ángulo |
+| 4 | **Servo de dirección** | MG90 (analógico) | **EMAX ES08MD** (digital) | Control de posición más preciso y mejor sujeción del ángulo |
 
 ### 18.1. 📡 Nueva distribución de sensores
 
@@ -1817,7 +1815,6 @@ Con este cambio el vehículo queda con **seis sensores ToF en el bus I2C #1** y 
 - **VL53L1X al frente y a los lados.** Duplica el alcance del VL53L0X (de 2 m a 4 m) y permite elegir el modo de distancia y el tiempo de medición según la situación: rápido y corto cerca de la pared, largo al acercarse a una esquina. Su zona de interés programable deja apuntar el sensor a una parte del campo de visión, por ejemplo para no "ver" el suelo.
 - **VL53L5CX atrás.** En lugar de una sola distancia, entrega una matriz de hasta 8 × 8 distancias. En el retroceso que hace el carro después de cada giro (sección 15.5), eso permite saber si la pared de atrás está recta o inclinada, y no solo a qué distancia está. También ayuda a ver los bordes de la zona de estacionamiento al final del desafío con obstáculos.
 - **VL53L0X en las diagonales.** Los Sharp son analógicos: su lectura depende de la conversión del ESP32 y del ruido de la alimentación. Un ToF digital entrega la distancia directamente en milímetros. Además reutilizamos los VL53L0X que salen del frente, los lados y la parte trasera.
-- **Eje de acero inoxidable de 4 mm.** Hoy el eje trasero es el núcleo de un electrodo, más delgado que el agujero de los rodamientos, y lo engrosamos con termorretráctil. La varilla de 4 mm coincide con el diámetro interior del 604ZZ, así que elimina ese relleno elástico: el eje gira concéntrico, no se dobla y la corona no pierde alineación con el piñón.
 - **Servo digital EMAX ES08MD.** Un servo digital corrige su posición muchas más veces por segundo que uno analógico, así que sostiene mejor el ángulo cuando las ruedas empujan y tiene menos zona muerta. Entrega **2,0 kgf·cm a 6 V**: es el valor que ya usamos en el cálculo de par de la dirección (10.4.6), que deja un margen de más de 6 veces. Es el servo que teníamos previsto para la dirección Ackermann (10.4.1).
 
 ### 18.3. 🔧 Qué hay que ajustar para integrarlos
@@ -1829,7 +1826,6 @@ Con este cambio el vehículo queda con **seis sensores ToF en el bus I2C #1** y 
 | **VL53L1X** | Cambio de librería ([Pololu VL53L1X](https://github.com/pololu/vl53l1x-arduino)) y elección del modo de distancia y del tiempo de medición. |
 | **Consumo** | El VL53L5CX consume unos 100 mA al medir (hasta 150 mA en picos) y cada VL53L1X unos 20 mA, frente a los 15–20 mA de cada VL53L0X. Hay que revisar la línea de 3,3 V del ESP32 y actualizar el cálculo de consumo y autonomía (sección 9). |
 | **Firmware** | Reemplazar la lectura analógica de los Sharp por la de los ToF diagonales en la lógica de seguridad (retroceso de emergencia) y recalibrar sus umbrales. |
-| **Eje de 4 mm** | Volver a imprimir la corona de 25 dientes y los adaptadores de rueda con el agujero de 4 mm, y quitar el termorretráctil. |
 | **Servo EMAX** | Recalibrar los µs por grado y comprobar el recorrido de la dirección (hoy −50° a +48°) dejando margen respecto a los topes. |
 
 ---
