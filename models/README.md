@@ -2,7 +2,7 @@
 
 [⬅️ Volver al README principal](../README.md)
 
-Archivos STL de las piezas impresas del vehículo. Todas se diseñaron en **Onshape** y se imprimieron en **PETG**; las piezas de la dirección van en **PETG-CF**. Los parámetros de impresión están en la sección *10.7 Manufactura aditiva* del README principal.
+Archivos STL de las piezas impresas del vehículo. Todas se diseñaron en **Onshape** y se imprimieron en **PETG**; las piezas de la dirección van en **PETG-CF**. Los parámetros de impresión están en la sección *9.7 Manufactura aditiva* del README principal.
 
 ---
 
@@ -23,7 +23,7 @@ Archivos STL de las piezas impresas del vehículo. Todas se diseñaron en **Onsh
 | [`Tornillo_Mordaza_2026.stl`](Tornillo_Mordaza_2026.stl) | Tornillo M10 impreso | Rosca M10.5 de la mordaza fija; empuja la mordaza móvil |
 
 > [!NOTE]
-> Las piezas de la **dirección Ackermann** (manguetas, barra de acoplamiento, biela y soporte del servo) se agregarán a esta carpeta. Sus medidas están en la sección *10.4 Sistema de dirección Ackermann* del README principal.
+> Las piezas de la **dirección Ackermann** (manguetas, barra de acoplamiento, biela y soporte del servo) se agregarán a esta carpeta. Sus medidas están en la sección *9.4 Sistema de dirección Ackermann* del README principal.
 
 ---
 
