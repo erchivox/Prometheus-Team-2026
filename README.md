@@ -26,7 +26,7 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
 
 | 📏 Dimensiones | ⚖️ Masa | 🛞 Radio de giro | 🔋 Autonomía | ⏱️ Vuelta libre | 🚧 Vuelta con obstáculos |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 179 × 143 mm | 1092 g (con teléfono) | 176 mm | ≈ 1 h 57 min | 25 s | 80 s |
+| 179 × 143 mm | 1092 g (con teléfono) | 176 mm | ≈ 1 h 54 min | 25 s | 80 s |
 
 <sub>Tiempos promedio por vuelta medidos en nuestra pista de pruebas de 3 × 3 m.</sub>
 
@@ -393,8 +393,8 @@ Estas son las seis vistas reglamentarias del vehículo. Con ellas se puede verif
 | <img src="other/tb6612fng.jpg" width="110" alt="TB6612FNG"> | **Driver de motores TB6612FNG** | Puente H dual. Recibe dirección y PWM del ESP32 y entrega la potencia al motor con mucha menos pérdida que el L298N que usábamos antes. | • [Datasheet TB6612FNG](https://www.sparkfun.com/datasheets/Robotics/TB6612FNG.pdf) |
 | <img src="other/motor.png" width="110" alt="Motor 25GA-370"> | **Motor DC 25GA-370 (6 V a 8 V)** | Motorreductor metálico de 220 RPM (caja 21.3:1) para la tracción. También se vende como JGA25-370. Lo alimenta el XL6009 a través del driver. | • [Motorreductores](https://www.pololu.com/category/60/micro-metal-gearmotors) |
 | <img src="other/dsn_mini_360.jpg" width="110" alt="Mini 360"> | **3 × Step-down DSN-Mini 360** | Reguladores conmutados. El #1 está ajustado a 6 V y, tras un diodo 1N4007, entrega unos 5,2 V al pin VIN del ESP32. El #2, a 6 V, alimenta solo el servo, y el #3, a 5 V, la tira NeoPixel y los sensores Sharp. | • [Datasheet MP2307](https://www.monolithicpower.com/en/documentview/productdocument/index/doc_url/M/P/MP2307_r1.9.pdf) |
-| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#104--sistema-de-dirección-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 6 V desde el Mini 360 #2. Se reemplazará por un EMAX ES08MD II digital (🔜). | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
-| <img src="https://alofthobbies.com/cdn/shop/products/es08_1400x.jpg?v=1645525000" width="110" alt="EMAX ES08MD II"> | **🔜 Servomotor digital EMAX ES08MD II**<br><sub>Próximo cambio</sub> | Reemplazará al MG90. Es digital y con engranajes metálicos: corrige su posición con más frecuencia, sostiene mejor el ángulo y tiene menos zona muerta. 2,4 kgf·cm a 6 V según su ficha técnica, 4,8–6 V, 23 × 11,5 × 24 mm y 13 g. Ver [18. Próximas mejoras](#18--próximas-mejoras). | • [Ficha técnica](https://servodatabase.com/servo/emax/es08md) |
+| <img src="other/servo_180.jpg" width="110" alt="Servo MG90"> | **Servomotor MG90 180°** | Servo con engranajes metálicos que mueve la [dirección Ackermann](#104--sistema-de-dirección-ackermann) por PWM (pin D13), con un recorrido de −50° a +48°. Se alimenta a 6 V desde el Mini 360 #2. Se reemplazará por un EMAX ES08MD digital (🔜). | • [Datasheet MG90S](https://www.electronicoscaldas.com/datasheet/MG90S_Tower-Pro.pdf) |
+| 📷 | **🔜 Servomotor digital EMAX ES08MD**<br><sub>Próximo cambio</sub> | Reemplazará al MG90. Es digital y con engranajes metálicos: corrige su posición con más frecuencia, sostiene mejor el ángulo y tiene menos zona muerta. 2,0 kgf·cm a 6 V (1,6 a 4,8 V), 0,10 s/60° a 6 V, 4,8–6 V, 23 × 11,5 × 24 mm y 13 g. Ver [18. Próximas mejoras](#18--próximas-mejoras). | • [Ficha técnica](https://shop-archive.boxtec.ch/emax-es08md-digital-metal-servo-13g-p-41148.html) |
 | 📷 | **🔜 Varilla lisa de acero inoxidable de 4 mm**<br><sub>Próximo cambio</sub> | Reemplazará al núcleo de electrodo de soldadura que hoy hace de eje trasero. Su diámetro coincide con el interior de los rodamientos 604ZZ (4 mm), así que entra sin termorretráctil: el eje queda recto, más rígido y sin juego. Ver [18. Próximas mejoras](#18--próximas-mejoras). | • Rodamientos 604ZZ: 4 × 12 × 4 mm |
 
 ---
@@ -660,11 +660,11 @@ Estimamos el consumo de cada componente en tres escenarios, con valores típicos
 | **Regulador XL6009** (consumo propio) | 1 | 15 | 15 | 15 |
 | **Driver TB6612FNG** (lógica) | 1 | 1 | 2 | 6 |
 | **Motor DC 25GA-370** | 1 | 0 (detenido) | 500 | ~1800 (arranque / rotor bloqueado) |
-| **Step-down DSN-Mini 360** (consumo propio) | 2 | 5 c/u | 5 c/u | 5 c/u |
+| **Step-down DSN-Mini 360** (consumo propio) | 3 | 5 c/u | 5 c/u | 5 c/u |
 | **Servomotor MG90** | 1 | 10 (sosteniendo posición) | 200 (en movimiento) | ~700 (forzado) |
-| **TOTAL ESTIMADO** | | **~97 mA** | **~1272.3 mA** | **~3406.6 mA** |
+| **TOTAL ESTIMADO** | | **~102 mA** | **~1277.3 mA** | **~3411.6 mA** |
 
-🔋 **Corriente nominal:** ~1.27 A · **Pico teórico simultáneo:** ~3.41 A
+🔋 **Corriente nominal:** ~1.28 A · **Pico teórico simultáneo:** ~3.41 A
 
 > [!NOTE]
 > **Sobre el escenario de pico**
@@ -683,23 +683,23 @@ $$\text{Autonomía (horas)} = \frac{\text{Capacidad de la batería (mAh)}}{\text
 
 #### 9.2.2. Aplicación a nuestro vehículo
 
-$$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1272.3 \text{ mA}} \approx 1.73 \text{ horas}$$
+$$\text{Autonomía} \approx \frac{2200 \text{ mAh}}{1277.3 \text{ mA}} \approx 1.72 \text{ horas}$$
 
-* **Tiempo estimado:** aproximadamente **1 hora y 44 minutos** de operación continua en condiciones normales.
+* **Tiempo estimado:** aproximadamente **1 hora y 43 minutos** de operación continua en condiciones normales.
 * **Nota práctica:** es un modelo teórico. En la pista el consumo del motor varía todo el tiempo (sube cerca del bloqueo o *stall*) y los sensores trabajan por ráfagas, así que la autonomía real depende de lo que esté haciendo el firmware.
 
 ---
 
 ### 9.3. 🔁 Eficiencia de los conversores DC-DC y autonomía real
 
-El cálculo anterior supone que la corriente de cada componente es la misma que sale de la batería. No es así: los reguladores XL6009 y DSN-Mini 360 entregan voltajes distintos a los de la batería (7 V y 5 V frente a 7.4 V nominales) y ninguna conversión es 100 % eficiente.
+El cálculo anterior supone que la corriente de cada componente es la misma que sale de la batería. No es así: los reguladores XL6009 y DSN-Mini 360 entregan voltajes distintos a los de la batería (7 V para el motor, 6 V para el control y el servo, y 5 V para la línea general, frente a 7.4 V nominales) y ninguna conversión es 100 % eficiente.
 
 **Eficiencias de referencia (hoja de datos del fabricante):**
 
 | Conversor | Función en el sistema | Eficiencia usada | Rango del fabricante |
 | :--- | :--- | :---: | :---: |
 | **XL6009** (step-up/down) | Línea de tracción (motor + TB6612FNG) | ~88 % | Hasta 94 % en condiciones ideales; con una relación cercana a 1:1 y ~500 mA de carga el valor real es menor |
-| **DSN-Mini 360** ×2 (step-down, MP2307) | Línea de control (ESP32) y línea de servo y sensores | ~90 % | 90–96 % típico con carga moderada |
+| **DSN-Mini 360** ×3 (step-down, MP2307) | Línea de control (ESP32), línea del servo y línea general de 5 V | ~90 % | 90–96 % típico con carga moderada |
 
 **Corriente real extraída de la batería (balance de potencia por línea):**
 
@@ -708,16 +708,20 @@ $$P_{\text{entrada}} = \frac{P_{\text{salida}}}{\eta} \qquad I_{\text{batería}}
 | Línea de alimentación | V salida | I salida (nominal) | P salida | η | P entrada | I de la batería (7.4 V) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | Tracción (XL6009 → motor + TB6612FNG) | 7 V | 502 mA | 3.51 W | 88 % | 3.99 W | **≈ 540 mA** |
-| Control (Mini 360 #1 → ESP32) | 7 V | 80 mA | 0.56 W | 90 % | 0.62 W | **≈ 84 mA** |
-| Servo y sensores (Mini 360 #2 → Sharp, ToF, BNO055, TCS34725, Neopixel, buzzer y servo) | 5 V | 665.3 mA | 3.33 W | 90 % | 3.70 W | **≈ 500 mA** |
-| **TOTAL REAL EXTRAÍDO DE LA BATERÍA** | | | | | | **≈ 1124 mA** |
+| Control (Mini 360 #1 → diodo 1N4007 → ESP32, que da 3.3 V a la IMU, los 4 ToF, el sensor de color y el buzzer) | 6 V | 185.3 mA | 1.11 W | 90 % | 1.24 W | **≈ 167 mA** |
+| Servo (Mini 360 #2 → servo MG90) | 6 V | 200 mA | 1.20 W | 90 % | 1.33 W | **≈ 180 mA** |
+| General 5 V (Mini 360 #3 → tira NeoPixel y 2 Sharp) | 5 V | 360 mA | 1.80 W | 90 % | 2.00 W | **≈ 270 mA** |
+| **TOTAL REAL EXTRAÍDO DE LA BATERÍA** | | | | | | **≈ 1157 mA** |
 
-$$\text{Autonomía real} \approx \frac{2200 \text{ mAh}}{1124 \text{ mA}} \approx 1.96 \text{ horas} \; (\approx 1\text{ h }57\text{ min})$$
+$$\text{Autonomía real} \approx \frac{2200 \text{ mAh}}{1157 \text{ mA}} \approx 1.90 \text{ horas} \; (\approx 1\text{ h }54\text{ min})$$
+
+> [!NOTE]
+> **El diodo de la línea de control.** La corriente de la línea de control se calcula a la salida del Mini 360 #1 (6 V). Así ya incluye la caída del diodo 1N4007 (unos 0,8 V × 185 mA ≈ 0,15 W), que es el precio de proteger el ESP32 cuando se conecta el cable USB. Las cargas de 3.3 V pasan por el regulador interno del ESP32, que es lineal: toma de la entrada la misma corriente que entrega.
 
 > [!IMPORTANT]
 > **Por qué la autonomía real sale mayor que la estimación inicial**
 >
-> Se esperaría que las pérdidas de los reguladores *redujeran* la autonomía, y frente a un caso ideal (100 % de eficiencia) lo hacen. Pero el primer modelo (~1.73 h) tenía un error en sentido contrario: sumaba los mA de cada componente como si todos trabajaran al voltaje de la batería (7.4 V), cuando la mayoría trabaja a 5 V o 7 V. Al bajar el voltaje, la corriente equivalente del lado de la batería es menor, y ese efecto pesa más que la pérdida en los reguladores. El resultado (~1 h 57 min) coincide con lo que observamos: en una tarde y noche completas de pruebas la batería no llegó a su límite inferior de carga.
+> Se esperaría que las pérdidas de los reguladores *redujeran* la autonomía, y frente a un caso ideal (100 % de eficiencia) lo hacen. Pero el primer modelo (~1.72 h) tenía un error en sentido contrario: sumaba los mA de cada componente como si todos trabajaran al voltaje de la batería (7.4 V), cuando la mayoría trabaja a 5 V o 6 V. Al bajar el voltaje, la corriente equivalente del lado de la batería es menor, y ese efecto pesa más que la pérdida en los reguladores. El resultado (~1 h 54 min) coincide con lo que observamos: en una tarde y noche completas de pruebas la batería no llegó a su límite inferior de carga.
 
 ---
 
@@ -756,7 +760,7 @@ La capacidad de 2200 mAh la decidimos por tres criterios: peso, tasa de descarga
 
 - **Peso:** la LiPo 2S 2200 mAh 50C que usamos pesa **115 g**. Una de 2600 o 3000 mAh de la misma tecnología pesa proporcionalmente más, y ese peso afecta la relación torque/masa (ver [sección 12](#12--velocidad-torque-y-tracción)) sin darnos ninguna ventaja, porque la autonomía actual ya cubre de sobra una ronda de competencia.
 - **Tasa de descarga (50C):** con 2200 mAh y 50C la batería puede entregar hasta 110 A instantáneos, muy por encima del pico real del sistema (~3.4 A, ver [9.1](#91--cálculo-del-consumo-energético-total)). El motor arranca sin que baje el voltaje y sin afectar a la lógica de control.
-- **Autonomía comprobada:** según el recálculo con pérdidas (8.3), la autonomía real es de ~1 h 57 min. En una tarde y noche completas de pruebas no llegamos al límite de carga, así que 2200 mAh deja margen de sobra para entrenar y competir sin cargar peso muerto.
+- **Autonomía comprobada:** según el recálculo con pérdidas ([9.3](#93--eficiencia-de-los-conversores-dc-dc-y-autonomía-real)), la autonomía real es de ~1 h 54 min. En una tarde y noche completas de pruebas no llegamos al límite de carga, así que 2200 mAh deja margen de sobra para entrenar y competir sin cargar peso muerto.
 
 > [!NOTE]
 > **Compromiso de diseño**
@@ -893,7 +897,7 @@ La dirección Lego que traíamos de 2025 era **paralela**: las dos ruedas giraba
 | Adaptador de rueda | 25,7 mm de largo (13,7 mm en la versión anterior) |
 | Espesor de la placa / separación entre pisos | 4 mm / 60 mm |
 | Altura del eje de rueda | 10,75 mm sobre la placa (igual que el eje trasero) |
-| Servo | **Próximo:** EMAX ES08MD II (digital, 23 × 11,5 × 24 mm, 13 g, 4,8–6 V, 2,4 kgf·cm a 6 V según su ficha técnica; ver [18. Próximas mejoras](#18--próximas-mejoras)).<br>**En las pruebas:** MG90 (23 × 12,2 mm) con su brazo de serie, usando el agujero a 14 mm del eje. |
+| Servo | **Próximo:** EMAX ES08MD (digital, 23 × 11,5 × 24 mm, 13 g, 4,8–6 V, 2,0 kgf·cm a 6 V; ver [18. Próximas mejoras](#18--próximas-mejoras)).<br>**En las pruebas:** MG90 (23 × 12,2 mm) con su brazo de serie, usando el agujero a 14 mm del eje. |
 | Material | PETG-CF (manguetas, barra, biela y soporte) |
 
 #### 10.4.2. Relación 1:1: el chasis 2026 frente al de 2025
@@ -1786,7 +1790,7 @@ Estos son los cambios de hardware que ya decidimos para la próxima versión del
 | 2 | **ToF trasero** | 1 × VL53L0X (una sola medida) | 1 × **VL53L5CX** matricial (4×4 u 8×8 zonas, 45° × 45°, hasta 4 m) | Una "imagen" de profundidad de lo que hay detrás: retroceso guiado más preciso |
 | 3 | **Sensores diagonales** | 2 × Sharp GP2Y0A21 (analógicos, 10–80 cm) | 2 × **VL53L0X** (los que se retiran en los cambios 1 y 2) | Medidas digitales por I2C, sin ruido analógico, con el mismo tipo de sensor que el resto |
 | 4 | **Eje trasero** | Núcleo de electrodo de soldadura (~2,4 mm) con termorretráctil | Varilla lisa de **acero inoxidable de 4 mm** | Entra directo en los rodamientos 604ZZ: eje recto, más rígido y sin juego |
-| 5 | **Servo de dirección** | MG90 (analógico) | **EMAX ES08MD II** (digital) | Control de posición más preciso y algo más de torque |
+| 5 | **Servo de dirección** | MG90 (analógico) | **EMAX ES08MD** (digital) | Control de posición más preciso y mejor sujeción del ángulo |
 
 ### 18.1. 📡 Nueva distribución de sensores
 
@@ -1814,7 +1818,7 @@ Con este cambio el vehículo queda con **seis sensores ToF en el bus I2C #1** y 
 - **VL53L5CX atrás.** En lugar de una sola distancia, entrega una matriz de hasta 8 × 8 distancias. En el retroceso que hace el carro después de cada giro (sección 15.5), eso permite saber si la pared de atrás está recta o inclinada, y no solo a qué distancia está. También ayuda a ver los bordes de la zona de estacionamiento al final del desafío con obstáculos.
 - **VL53L0X en las diagonales.** Los Sharp son analógicos: su lectura depende de la conversión del ESP32 y del ruido de la alimentación. Un ToF digital entrega la distancia directamente en milímetros. Además reutilizamos los VL53L0X que salen del frente, los lados y la parte trasera.
 - **Eje de acero inoxidable de 4 mm.** Hoy el eje trasero es el núcleo de un electrodo, más delgado que el agujero de los rodamientos, y lo engrosamos con termorretráctil. La varilla de 4 mm coincide con el diámetro interior del 604ZZ, así que elimina ese relleno elástico: el eje gira concéntrico, no se dobla y la corona no pierde alineación con el piñón.
-- **Servo digital EMAX ES08MD II.** Un servo digital corrige su posición muchas más veces por segundo que uno analógico, así que sostiene mejor el ángulo cuando las ruedas empujan y tiene menos zona muerta. Según su ficha técnica entrega **2,4 kgf·cm a 6 V**, frente a 2,2 kgf·cm del MG90S. Es el servo que ya teníamos previsto para la dirección Ackermann (sección 10.4.1).
+- **Servo digital EMAX ES08MD.** Un servo digital corrige su posición muchas más veces por segundo que uno analógico, así que sostiene mejor el ángulo cuando las ruedas empujan y tiene menos zona muerta. Entrega **2,0 kgf·cm a 6 V**: es el valor que ya usamos en el cálculo de par de la dirección (10.4.6), que deja un margen de más de 6 veces. Es el servo que teníamos previsto para la dirección Ackermann (10.4.1).
 
 ### 18.3. 🔧 Qué hay que ajustar para integrarlos
 
