@@ -2,7 +2,7 @@
 
 [⬅️ Volver al README principal](../README.md)
 
-Firmware del ESP32 (IDE de Arduino) y enlaces al código de la app de visión. La lógica de navegación está explicada en la sección *15. Software y control* del README principal.
+Firmware del ESP32 (IDE de Arduino) y enlaces al código de la app de visión. La lógica de navegación está explicada en la sección *14. Software y control* del README principal.
 
 ---
 
