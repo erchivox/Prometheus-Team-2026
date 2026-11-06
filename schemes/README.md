@@ -2,7 +2,7 @@
 
 [⬅️ Volver al README principal](../README.md)
 
-Esquemas de la alimentación y de las conexiones de entrada y salida del vehículo. Esta página repite las secciones *7. Esquemas de alimentación y cableado* y *8. Esquemas de sensores y adquisición de datos* del README principal, para que la explicación sea la misma en los dos lugares.
+Esquemas de la alimentación y de las conexiones de entrada y salida del vehículo. Esta página repite las secciones *6. Esquemas de alimentación y cableado* y *7. Esquemas de sensores y adquisición de datos* del README principal, para que la explicación sea la misma en los dos lugares.
 
 | Archivo | Contenido |
 | :--- | :--- |
@@ -11,11 +11,11 @@ Esquemas de la alimentación y de las conexiones de entrada y salida del vehícu
 
 ---
 
-## 7. ⚡ Esquemas de alimentación y cableado
+## 6. ⚡ Esquemas de alimentación y cableado
 
 *Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](../README.md#192--electronics-evolution).*
 
-### 7.1. 🧾 Versión 4 (actual)
+### 6.1. 🧾 Versión 4 (actual)
 
 ![Diagrama de alimentación V4](Power_Supply_Diagram_FINALS.png)
 
@@ -64,7 +64,7 @@ graph TD
     ESP32 --> SENS3V
 ```
 
-### 7.2. 🔋 Arquitectura de energía, control y gestión de potencia
+### 6.2. 🔋 Arquitectura de energía, control y gestión de potencia
 
 La **batería LiPo 2S de 2200 mAh** (7.4 V nominales, 8.4 V con carga completa) es la única fuente de energía. Pasa por un **interruptor general de palanca**, que elegimos porque no se desconecta solo con las vibraciones de la pista.
 
@@ -92,11 +92,11 @@ Desde ese punto la alimentación se divide en cuatro líneas reguladas e indepen
 
 ---
 
-## 8. 📡 Esquemas de sensores y adquisición de datos
+## 7. 📡 Esquemas de sensores y adquisición de datos
 
 *Las versiones anteriores del sistema de detección están en el [archivo de 2025](../README.md#192--electronics-evolution).*
 
-### 8.1. 🧾 Versión 4 (actual)
+### 7.1. 🧾 Versión 4 (actual)
 
 ![Diagrama de sensores V4](IO_Connection_Schematic_FINALS.png)
 
@@ -169,24 +169,24 @@ graph TD
 | Program Start Switch | 23 |
 | Buzzer | 4 |
 
-### 8.2. 🔧 Optimización del sistema de sensores y hardware
+### 7.2. 🔧 Optimización del sistema de sensores y hardware
 
 En esta cuarta versión reorganizamos los sensores aprovechando que el ESP32 tiene dos buses I2C por hardware. El objetivo era ganar precisión, que ningún sensor retrasara a los demás y que la navegación fuera estable dentro de la pista de $3 \times 3$ metros.
 
-#### 8.2.1. Subsistema de navegación (bus I2C #1, pines D21/D22)
+#### 7.2.1. Subsistema de navegación (bus I2C #1, pines D21/D22)
 
 * **Sensores de distancia ToF:** reemplazaron a los ultrasónicos y eliminaron las zonas muertas a corta distancia. Para conectar los cuatro al mismo bus controlamos sus pines **XSHUT** desde el ESP32 y los encendemos uno por uno para darles direcciones distintas (ver 7.2.2). Además trabajan a 3.3 V, así que ya no hacen falta divisores de tensión.
 * **IMU BNO055:** comparte el bus I2C #1. Su procesador interno fusiona los datos y prácticamente **elimina la deriva (*drift*)** acumulada que teníamos con el giroscopio anterior. Al arrancar, el programa toma la orientación actual como cero y todos los giros se calculan respecto a ella.
 
-#### 8.2.2. Calibración y direccionamiento de los 4 sensores ToF (XSHUT)
+#### 7.2.2. Calibración y direccionamiento de los 4 sensores ToF (XSHUT)
 
 Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección (`0x29`). Si se encendieran a la vez habría colisión. Para resolverlo, el pin **XSHUT** de cada sensor va a un GPIO distinto del ESP32 y funciona como interruptor de encendido por software:
 
 ```cpp
-#define XSHUT_FRONTAL 17
-#define XSHUT_TRASERO 16
+#define XSHUT_FRONTAL 18
+#define XSHUT_TRASERO 17
 #define XSHUT_IZQ     5
-#define XSHUT_DER     18
+#define XSHUT_DER     16
 
 #define ADDR_FRONTAL 0x30
 #define ADDR_TRASERO 0x31
@@ -198,16 +198,16 @@ Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica tod
 
 ```mermaid
 flowchart TD
-    A["Inicio: los 4 pines XSHUT en LOW<br/>(sensores apagados)"] --> B["Activar XSHUT_FRONTAL (HIGH)"]
-    B --> C["Inicializar en la dirección<br/>de fábrica 0x29"]
-    C --> D["Reasignar dirección → 0x30<br/>(ADDR_FRONTAL)"]
-    D --> E["Activar XSHUT_TRASERO (HIGH)"]
-    E --> F["Inicializar en 0x29 → reasignar a 0x31"]
-    F --> G["Activar XSHUT_IZQ (HIGH)"]
-    G --> H["Inicializar en 0x29 → reasignar a 0x32"]
-    H --> I["Activar XSHUT_DER (HIGH)"]
-    I --> J["Inicializar en 0x29 → reasignar a 0x33"]
-    J --> K["Los 4 sensores activos,<br/>cada uno con su dirección,<br/>en el mismo bus I2C #1"]
+    A["Inicio:<br>los 4 pines<br>XSHUT en LOW<br>(apagados)"] --> B["Activar<br>XSHUT_FRONTAL<br>(HIGH)"]
+    B --> C["Inicializar<br>en dir.<br>fábrica 0x29"]
+    C --> D["Reasignar a<br>0x30<br>(ADDR_FRONTAL)"]
+    D --> E["Activar<br>XSHUT_TRASERO<br>(HIGH)"]
+    E --> F["Inicializar<br>en 0x29 →<br>asignar 0x31"]
+    F --> G["Activar<br>XSHUT_IZQ<br>(HIGH)"]
+    G --> H["Inicializar<br>en 0x29 →<br>asignar 0x32"]
+    H --> I["Activar<br>XSHUT_DER<br>(HIGH)"]
+    I --> J["Inicializar<br>en 0x29 →<br>asignar 0x33"]
+    J --> K["Los 4 sensores<br>activos en el<br>mismo bus I2C"]
 ```
 
 En cada paso solo **un sensor** está encendido en la dirección `0x29`; los demás siguen en reset (XSHUT en LOW). Cuando ya tiene su dirección definitiva, ese sensor queda encendido (XSHUT en HIGH) y se pasa al siguiente.
@@ -217,11 +217,11 @@ En cada paso solo **un sensor** está encendido en la dirección `0x29`; los dem
 >
 > No aplicamos offsets individuales. Los VL53L0X del mismo lote vienen con una calibración de fábrica consistente entre sí; lo único que hay que configurar por sensor es su dirección.
 
-#### 8.2.3. Subsistema de lectura de superficie (bus I2C #2, pines D32/D33)
+#### 7.2.3. Subsistema de lectura de superficie (bus I2C #2, pines D32/D33)
 
 * **Sensor de color TCS34725:** detecta y confirma las líneas de la pista. Lo pusimos en un **segundo bus I2C independiente** para que sus lecturas constantes del suelo no retrasen las de los ToF, que son las que usa el carro para no chocar. En el firmware se lee cada 30 ms en una tarea propia de FreeRTOS.
 
-#### 8.2.4. Subsistema de proximidad redundante e interfaz
+#### 7.2.4. Subsistema de proximidad redundante e interfaz
 
 * **Sensores Sharp GP2Y0A21 diagonales:** siguen conectados a entradas analógicas y dan una segunda medida de proximidad en los ángulos ciegos del frente.
 * **Interfaz de usuario:** la tira Neopixel y el buzzer muestran el estado del robot (errores, calibración correcta, línea detectada). El arranque se hace con un **interruptor de palanca** (pin D23); descartamos el pulsador porque los rebotes y la vibración lo activaban por accidente.
@@ -231,7 +231,7 @@ En cada paso solo **un sensor** está encendido en la dirección `0x29`; los dem
 > [!IMPORTANT]
 > **Simplificación y mantenimiento**
 >
-> Pasar de los ultrasónicos HC-SR04 a los ToF no solo mejoró la frecuencia de muestreo, también resolvió un problema físico. El HC-SR04 trabaja con 5 V y los pines del ESP32 con 3.3 V, así que en 2025 tuvimos que armar divisores de voltaje a mano con resistencias (no conseguimos convertidores de nivel comerciales). Funcionaban, pero el circuito era voluminoso y daba falsos contactos. Con sensores I2C nativos de 3.3 V esa red desapareció y el montaje quedó más limpio y fácil de reparar en los pits.
+> Pasar de los ultrasónicos HC-SR04 a los ToF no solo mejoró la frecuencia de muestreo, también resolvió un problema físico. El HC-SR04 trabaja con 5 V y los pines del ESP32 con 3.3 V, así que en 2025 tuvimos que armar divisores de voltaje a mano con resistencias (no conseguimos convertidores de nivel comerciales). Funcionaban, pero el circuito era voluminoso. Con sensores I2C nativos de 3.3 V esa red desapareció y el montaje quedó más limpio y fácil de reparar.
 
 > [!NOTE]
 > **Compromiso de diseño: tráfico en el bus I2C**
@@ -240,7 +240,7 @@ En cada paso solo **un sensor** está encendido en la dirección `0x29`; los dem
 
 ---
 
-### 8.3. 📋 Resumen de cambios y evolución del hardware
+### 7.3. 📋 Resumen de cambios y evolución del hardware
 
 | Componente anterior | Componente actual | Justificación y ventaja principal |
 | :--- | :--- | :--- |
