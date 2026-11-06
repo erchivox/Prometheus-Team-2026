@@ -571,10 +571,10 @@ En esta cuarta versión reorganizamos los sensores aprovechando que el ESP32 tie
 Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección (`0x29`). Si se encendieran a la vez habría colisión. Para resolverlo, el pin **XSHUT** de cada sensor va a un GPIO distinto del ESP32 y funciona como interruptor de encendido por software:
 
 ```cpp
-#define XSHUT_FRONTAL 17
-#define XSHUT_TRASERO 16
+#define XSHUT_FRONTAL 18
+#define XSHUT_TRASERO 17
 #define XSHUT_IZQ     5
-#define XSHUT_DER     18
+#define XSHUT_DER     16
 
 #define ADDR_FRONTAL 0x30
 #define ADDR_TRASERO 0x31
@@ -586,16 +586,16 @@ Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica tod
 
 ```mermaid
 flowchart TD
-    A["Inicio: los 4 pines XSHUT en LOW<br/>(sensores apagados)"] --> B["Activar XSHUT_FRONTAL (HIGH)"]
-    B --> C["Inicializar en la dirección<br/>de fábrica 0x29"]
-    C --> D["Reasignar dirección → 0x30<br/>(ADDR_FRONTAL)"]
-    D --> E["Activar XSHUT_TRASERO (HIGH)"]
-    E --> F["Inicializar en 0x29 → reasignar a 0x31"]
-    F --> G["Activar XSHUT_IZQ (HIGH)"]
-    G --> H["Inicializar en 0x29 → reasignar a 0x32"]
-    H --> I["Activar XSHUT_DER (HIGH)"]
-    I --> J["Inicializar en 0x29 → reasignar a 0x33"]
-    J --> K["Los 4 sensores activos,<br/>cada uno con su dirección,<br/>en el mismo bus I2C #1"]
+    A["Inicio:<br>los 4 pines<br>XSHUT en LOW<br>(apagados)"] --> B["Activar<br>XSHUT_FRONTAL<br>(HIGH)"]
+    B --> C["Inicializar<br>en dir.<br>fábrica 0x29"]
+    C --> D["Reasignar a<br>0x30<br>(ADDR_FRONTAL)"]
+    D --> E["Activar<br>XSHUT_TRASERO<br>(HIGH)"]
+    E --> F["Inicializar<br>en 0x29 →<br>asignar 0x31"]
+    F --> G["Activar<br>XSHUT_IZQ<br>(HIGH)"]
+    G --> H["Inicializar<br>en 0x29 →<br>asignar 0x32"]
+    H --> I["Activar<br>XSHUT_DER<br>(HIGH)"]
+    I --> J["Inicializar<br>en 0x29 →<br>asignar 0x33"]
+    J --> K["Los 4 sensores<br>activos en el<br>mismo bus I2C"]
 ```
 
 En cada paso solo **un sensor** está encendido en la dirección `0x29`; los demás siguen en reset (XSHUT en LOW). Cuando ya tiene su dirección definitiva, ese sensor queda encendido (XSHUT en HIGH) y se pasa al siguiente.
@@ -619,7 +619,7 @@ En cada paso solo **un sensor** está encendido en la dirección `0x29`; los dem
 > [!IMPORTANT]
 > **Simplificación y mantenimiento**
 >
-> Pasar de los ultrasónicos HC-SR04 a los ToF no solo mejoró la frecuencia de muestreo, también resolvió un problema físico. El HC-SR04 trabaja con 5 V y los pines del ESP32 con 3.3 V, así que en 2025 tuvimos que armar divisores de voltaje a mano con resistencias (no conseguimos convertidores de nivel comerciales). Funcionaban, pero el circuito era voluminoso y daba falsos contactos. Con sensores I2C nativos de 3.3 V esa red desapareció y el montaje quedó más limpio y fácil de reparar en los pits.
+> Pasar de los ultrasónicos HC-SR04 a los ToF no solo mejoró la frecuencia de muestreo, también resolvió un problema físico. El HC-SR04 trabaja con 5 V y los pines del ESP32 con 3.3 V, así que en 2025 tuvimos que armar divisores de voltaje a mano con resistencias (no conseguimos convertidores de nivel comerciales). Funcionaban, pero el circuito era voluminoso. Con sensores I2C nativos de 3.3 V esa red desapareció y el montaje quedó más limpio y fácil de reparar.
 
 > [!NOTE]
 > **Compromiso de diseño: tráfico en el bus I2C**
