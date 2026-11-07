@@ -1425,16 +1425,77 @@ Para el eje usamos una solución de taller fácil de conseguir: el núcleo limpi
 
 ### 13.4. 🔹 Paso 4: dirección Ackermann
 
-Las piezas y medidas de la dirección están en la [sección 9.4](#94--sistema-de-dirección-ackermann).
+Las piezas y medidas de la dirección están en la [sección 10.4](#104--sistema-de-dirección-ackermann).
 
-1. Coloca cada mangueta en su pivote con un tornillo M3 (cabeza embutida) y fija la tuerca con autoblocante o fijador de roscas. La mangueta tiene que girar libre, sin juego vertical.
-2. Une las puntas de los dos brazos de dirección con la barra de acoplamiento (agujeros a 68,6 mm).
-3. Monta el servo **invertido** (eje hacia abajo) en su soporte, delante de la barra, apoyado sobre la placa.
-4. Conecta el brazo del servo (último agujero, a 14 mm del eje) con la barra de acoplamiento mediante la biela plana de 14,5 mm. La biela va al tercer agujero de la barra, a 14 mm del centro, no a un agujero central.
-5. Con las ruedas rectas, centra el servo y comprueba el recorrido de −50° a +48° sin que nada roce el chasis. Ajusta la convergencia (*toe-in*) con la ranura de la barra.
+![Componentes impresos de la dirección Ackermann](other/componentes_generales_ackerman.jpg)
 
 > [!TIP]
-> Si la dirección no llega al ángulo esperado o se traba en un punto muerto, revisa que el servo no esté montado al revés: nos pasó en el primer armado.
+> **Lubricación recomendada:** Aplica **grasa de silicona** en todas las partes móviles (pivotes, casquillos, uniones de la biela y ejes de las manguetas) durante el ensamblaje. Esto reduce drásticamente la fricción entre las piezas impresas y asegura un movimiento fluido de la dirección.
+
+1. **Montaje de las manguetas:** Instala las manguetas izquierda y derecha en sus respectivos pivotes sobre el chasis. Asegúrate de que el brazo Ackermann integrado en cada mangueta apunte diagonalmente hacia el centro del eje trasero, tal como se muestra en la referencia.
+
+   ![Montaje de manguetas en el chasis](other/paso1_manguetas.jpg)
+
+2. **Preparación de la barra y biela:** Conecta la biela a la barra de acoplamiento, asegurándote de colocar los casquillos correspondientes en cada agujero para garantizar un giro suave.
+
+   | 1. Colocación de casquillos | 2. Unión de barra y biela |
+   | :---: | :---: |
+   | <img src="other/paso2_1_casquillos.jpg.jpg" width="320"> | <img src="other/paso2_2_barra_biela.jpg" width="320"> |
+
+3. **Unión a las manguetas:** Conecta ambos extremos de la barra de acoplamiento a los brazos de las manguetas. **Importante:** No olvides instalar los casquillos en cada unión; son indispensables para eliminar holguras y lograr que el mecanismo se desplace sin trabas.
+
+   | 1. Presentación con casquillos | 2. Fijación en ambas manguetas |
+   | :---: | :---: |
+   | <img src="other/paso3_1_presentacion.jpg" width="320"> | <img src="other/paso3_2_union_manguetas.jpg" width="320"> |
+
+4. **Preparación del brazo del servo (`servo horn`):** Toma los tres elementos (brazo del servo, tornillo y casquillo) y ubica el agujero situado a **14 mm** del eje central del brazo. 
+   * Primero, atraviesa el agujero únicamente con el tornillo para labrar la rosca inicial.
+   * Retira el tornillo y vuelve a enroscarlo colocando el casquillo en la parte inferior del brazo hasta que quede firme.
+
+   | 1. Brazo, tornillo y casquillo | 2. Creación de rosca a 14 mm | 3. Ensamblado con casquillo |
+   | :---: | :---: | :---: |
+   | <img src="other/paso4_1_elementos.jpg" width="220"> | <img src="other/paso4_2_rosca.jpg" width="220"> | <img src="other/paso4_3_ensamblado.jpg" width="220"> |
+    
+    > ℹ️ **Nota:** Dependiendo del grosor del tornillo, atravesar el plástico del brazo puede requerir algo de fuerza. Haz una primera pasada con cuidado para que el tornillo labre su propia rosca, verificando que no deforme ni rompa el brazo del servo.
+    
+5. **Soporte del servomotor:** Fija el soporte del servomotor en su posición correspondiente sobre el chasis.
+
+   ![Instalación del soporte del servo](other/paso5_soporte_servo.jpg)
+
+6. **Instalación del servomotor:** Monta el servomotor en el soporte asegurándote de que su eje de salida quede orientado hacia la **derecha** (visto desde la parte trasera del chasis).
+
+   ![Montaje del servomotor orientado a la derecha](other/paso6_instalacion_servo.jpg)
+
+7. **Calibración del centro y conexión de la biela:** Encaja el casquillo en el extremo libre de la biela y únelo al brazo del servo, pero **aún no atornilles el brazo al eje del servomotor**. 
+   * Enciende el sistema y posiciona el servo electrónicamente en su centro (**90°** para un servo estándar de 180°).
+   * Alinea manualmente las manguetas para que las ruedas apunten totalmente rectas hacia adelante y, manteniendo esa posición, encaja el brazo en el eje dentado del servo.
+
+   ![Calibración y conexión del brazo al servo](other/paso7_calibracion_centro.jpg)
+
+    > ℹ️ **Ajuste fino por software:** Debido al paso de los dientes (*spline*) del cabezal del servo, es normal que al encajar el brazo las ruedas no queden perfectamente rectas a nivel mecánico. Para corregirlo, realiza una prueba de rodaje para observar hacia qué lado tiende a desviarse el vehículo y ajusta el *offset* del ángulo central por código hasta lograr una trayectoria completamente recta.
+
+
+8. **Armado de los adaptadores y ruedas:** En cada adaptador impreso, inserta un eje en cruz de LEGO por un extremo y una varilla metálica lisa (**2.4 mm de diámetro x 18 mm de largo**) por el extremo opuesto. Finalmente, acopla el conjunto a la rueda LEGO.
+
+    > ℹ️ **Nota:** La varilla lisa debe entrar a presión en el adaptador. Si notas que queda con holgura, aplica una gota de pegamento instantáneo (cianoacrilato) para evitar que patine o se salga durante la marcha.
+    
+   | 1. Eje en cruz LEGO | 2. Varilla lisa (2.4 x 18 mm) | 3. Acoplamiento en rueda |
+   | :---: | :---: | :---: |
+   | <img src="other/paso8_1_eje_cruz.jpg" width="220"> | <img src="other/paso8_2_varilla.jpg" width="220"> | <img src="other/paso8_3_rueda.jpg" width="220"> |
+
+9. **Instalación de las ruedas:** Introduce la varilla lisa del conjunto adaptador-rueda a través del orificio central de la mangueta.
+
+   ![Instalación de la rueda en la mangueta](other/paso9_rueda_mangueta.jpg)
+
+10. **Fijación con el retenedor:** Coloca el retenedor circular a presión en el extremo libre de la varilla que sobresale por la cara interna de la mangueta. Asegúrate de dejar un mínimo margen para que la rueda gire libremente sin frenarse contra el plástico, pero sin juego axial excesivo.
+
+    ![Colocación del retenedor en el extremo de la varilla](other/paso10_retenedor.jpg)
+
+---
+
+**Resultado final del tren delantero y dirección Ackermann:**
+
+![Dirección Ackermann completamente armada](other/direccion_ackermann_completa.jpg)
 
 ---
 
