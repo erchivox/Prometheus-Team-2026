@@ -755,10 +755,30 @@ Con la geometría validada pasamos a **Onshape**, un entorno paramétrico. La pr
 
 La plataforma mide **179 mm de largo por 115 mm de ancho**, con una distancia entre ejes de **~112 mm**, lo que cumple la relación 1:1 que buscábamos.
 
+<table>
+<tr>
+<td align="center" width="50%"><img src="other/chasis_lego_supe_cad.png" alt="Monochasis anterior vista superior" style="width: 100%; max-width: 340px; aspect-ratio: 1/1; object-fit: contain;"><br><sub><b>Versión anterior (vista superior):</b> recorte frontal para dirección LEGO y sin topes para tubos pasacables.</sub></td>
+<td align="center" width="50%"><img src="other/chasis_ackerman_supe_cad.png" alt="Nuevo Monochasis vista superior" style="width: 100%; max-width: 340px; aspect-ratio: 1/1; object-fit: contain;"><br><sub><b>Versión actual (vista superior):</b> base maciza para Ackermann y agujeros centrales con pestaña para tubos pasacables.</sub></td>
+</tr>
+<tr>
+<td align="center" width="50%"><img src="other/chasis_lego_inf_cad.png" alt="Monochasis anterior vista inferior" style="width: 100%; max-width: 340px; aspect-ratio: 1/1; object-fit: contain;"><br><sub><b>Versión anterior (vista inferior):</b> superficie inferior plana sin guías para el cableado ni canales para LEDs.</sub></td>
+<td align="center" width="50%"><img src="other/chasis_ackerman_inf_cad.png" alt="Nuevo Monochasis vista inferior" style="width: 100%; max-width: 340px; aspect-ratio: 1/1; object-fit: contain;"><br><sub><b>Versión actual (vista inferior):</b> canales embutidos para la tira NeoPixel, ruta del sensor de color y salida a los pasacables.</sub></td>
+</tr>
+</table>
+
+> [!IMPORTANT]
+> **Evolución del Monochasis: soporte Ackermann y gestión de cableado integrada**
+>
+> Al pasar del prototipo con dirección LEGO al diseño definitivo, aprovechamos para aplicar mejoras clave tanto en la cara superior como en la inferior del primer piso:
+> * **Base frontal para dirección Ackermann:** reemplazamos el hueco original con forma de bloque LEGO por una base estructural maciza que sostiene el soporte del servomotor, integra las orejas diagonales para los pivotes (*kingpins* M3) de las manguetas e incorpora los rebajes curvos de alivio para evitar que los tornillos rocen al girar.
+> * **Canales inferiores embutidos:** en la cara inferior modelamos un canal perimetral en "U" para alojar y proteger la **tira NeoPixel**, además de un canal curvo dedicado que guía los cables desde el alojamiento frontal del **sensor de color TCS34725** sin que queden expuestos a rozar con la pista.
+> * **Agujeros con pestaña para tubos pasacables:** ambos canales inferiores desembocan en dos orificios centrales que atraviesan el chasis. En la cara superior, estos agujeros incorporan una pequeña pestaña perimetral diseñada para encajar un **tubo pasacables** en cada uno, lo que permite subir todos los cables de forma vertical, recta y ordenada hacia el segundo piso.
+
 <p align="center">
-  <img src="other/shasisOneShape2026.jpeg" alt="Vista de planta del Monochasis en Onshape" width="600"><br>
-  <sub>Vista de planta del Monochasis en Onshape.</sub>
+  <img src="other/Isometrica_Monochasis2026.png" alt="Vista isométrica del Monochasis 2026" width="700"><br>
+  <sub><b>Vista isométrica del Monochasis definitivo:</b> se aprecia la tridimensionalidad de la plataforma, las torres de soporte, la base de dirección y el compartimento de la transmisión listos para montar los componentes.</sub>
 </p>
+
 
 #### 9.2.1. Tren motriz (torque frente a velocidad)
 
@@ -766,7 +786,7 @@ La plataforma mide **179 mm de largo por 115 mm de ancho**, con una distancia en
 * **Piñón y corona:** un piñón de 15 dientes en el motor mueve una corona de 25 dientes en el eje trasero. Esta **relación de 1.67:1** sacrifica algo de velocidad máxima para aumentar el torque en las ruedas, así el carro acelera de forma controlada desde parado sin forzar el motor.
 * **Eje trasero (solución de taller):** no conseguimos varilla calibrada de 4 mm, así que usamos el núcleo de electrodos de soldadura (~2.4 mm). En las zonas de los rodamientos aumentamos el diámetro con termorretráctil hasta lograr un ajuste a presión (*press-fit*) sin holgura.
 * **Rodamientos:** el eje gira sobre rodamientos 604ZZ (4 × 12 × 4 mm) encajados en alojamientos del propio chasis.
-
+* **Piñón y corona (Relación 1:1):** pasamos de una relación reductora (15T a 25T) a una relación directa 1:1 usando un piñón de 20 dientes y una corona de 20 dientes. Como estos engranajes tienen un diámetro diferente, **se modificó el Monochasis ampliando el recorte en la zona del eje trasero** para que giraran libremente. Con este cambio sacrificamos un excedente de torque que realmente no estábamos usando, para ganar mucha más velocidad tope en las rectas.
 ---
 
 ### 9.3. 📏 Validación de tolerancias y ensamble virtual
