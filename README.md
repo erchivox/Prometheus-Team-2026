@@ -167,13 +167,13 @@ Prometheus Team está conformado por estudiantes de Ingeniería Electrónica de 
 </div>
 
 ### 1.1. 👤 Samuel Pérez
-**Diseño 3D, modelado CAD y desarrollo móvil**
+**Diseño Mecánico CAD, Electrónica y Desarrollo Móvil**
 
 * **Formación:** estudiante de Ingeniería Electrónica en la **UPTJFR**.
 * **En el equipo:**
-  * **Diseño estructural y modelado 3D:** diseño paramétrico de las piezas mecánicas del vehículo en Onshape.
-  * **Desarrollo móvil:** creó la aplicación de detección en **Android Studio** con OpenCV.
-  * **Organización:** se encarga de que los entregables técnicos estén completos y a tiempo.
+  * **Diseño, Simulación y Cálculo Mecánico:** modelado paramétrico en **Onshape**, simulación cinemática, cálculos de la dirección Ackermann, cálculo de torque del motor y relación de engranajes.
+  * **Manufactura 3D, Ensamble y Electrónica:** validación del ensamblaje completo en CAD, impresión 3D y montaje físico del vehículo, junto con el diseño, armado y conexión del circuito electrónico.
+  * **Desarrollo móvil:** creación y depuración (*debugging*) de la app en **Android Studio** con **OpenCV** para detección de obstáculos.
   * **Logros:** finalista en la fase nacional de la **WRO Venezuela 2025**.
 
 ### 1.2. 👤 Trino Carrizales
@@ -767,10 +767,11 @@ La plataforma mide **179 mm de largo por 115 mm de ancho**, con una distancia en
 </table>
 
 > [!IMPORTANT]
-> **Evolución del Monochasis: soporte Ackermann y gestión de cableado integrada**
+> **Evolución del Monochasis: Ackermann, cableado integrado y pedestales ToF**
 >
 > Al pasar del prototipo con dirección LEGO al diseño definitivo, aprovechamos para aplicar mejoras clave tanto en la cara superior como en la inferior del primer piso:
 > * **Base frontal para dirección Ackermann:** reemplazamos el hueco original con forma de bloque LEGO por una base estructural maciza que sostiene el soporte del servomotor, integra las orejas diagonales para los pivotes (*kingpins* M3) de las manguetas e incorpora los rebajes curvos de alivio para evitar que los tornillos rocen al girar.
+> * **Bases elevadas para sensores ToF:** en las primeras pruebas, los sensores de distancia inferiores iban a ras de pista, lo que generaba errores de lectura por el rebote de la luz. Para corregirlo, integramos directamente en la estructura del chasis unos pedestales huecos en forma de "U" que elevan los ToF a su altura óptima. Esta mejora mecánica fue tan exitosa que decidimos estandarizarla como un sistema modular universal para el resto del robot (usando dos pasantes M3).
 > * **Canales inferiores embutidos:** en la cara inferior modelamos un canal perimetral en "U" para alojar y proteger la **tira NeoPixel**, además de un canal curvo dedicado que guía los cables desde el alojamiento frontal del **sensor de color TCS34725** sin que queden expuestos a rozar con la pista.
 > * **Agujeros con pestaña para tubos pasacables:** ambos canales inferiores desembocan en dos orificios centrales que atraviesan el chasis. En la cara superior, estos agujeros incorporan una pequeña pestaña perimetral diseñada para encajar un **tubo pasacables** en cada uno, lo que permite subir todos los cables de forma vertical, recta y ordenada hacia el segundo piso.
 
@@ -800,25 +801,41 @@ Antes de integrar todo, en Onshape modelamos y revisamos cada pieza mecánica po
 Diseñamos engranajes propios, cada uno con un sistema de fijación según el tipo de eje:
 
 * **Piñón motriz (eje en "D"):** para acoplar el engranaje de 15 dientes al motor aprovechamos el corte plano que trae su eje. El agujero tiene perfil en "D" con tolerancias pensadas para impresión 3D, de modo que entra a presión (*press-fit*). Transmite todo el torque sin desgastarse y no se sale con la vibración.
-* **Corona (varilla lisa):** el engranaje de 25 dientes se fija a la varilla trasera con un collarín de **abrazadera tipo "C"**. Al apretar un tornillo transversal, el collarín se cierra sobre la varilla y bloquea el engranaje por fricción, sin pegamento y sin dañar el metal.
+* **Corona (varilla lisa y muesca de anclaje):** en la configuración original (25T) usábamos un collarín con abrazadera tipo "C", pero en las pruebas notamos que el engranaje patinaba sobre la varilla lisa cuando el motor aplicaba torque de golpe. Para solucionarlo definitivamente, implementamos dos mejoras conjuntas:
+  1. Pasamos a un diseño con **tornillo prisionero** en el collarín.
+  2. Modificamos mecánicamente la varilla trasera, desgastándola ligeramente (*flat spot*) en la zona donde justo queda el agujero del tornillo prisionero del engranaje corona para crear una **cara plana**. 
+  
+  Al apretar el prisionero contra esa superficie plana en lugar de contra la curva lisa, la corona queda bloqueada de forma absoluta.
 
 <table>
 <tr>
-<td align="center" width="50%"><img src="other/Engranaje_15D.png" alt="Piñón de 15 dientes con agujero en D" width="300"><br><sub>Piñón motriz (15T) con acople en "D".</sub></td>
-<td align="center" width="50%"><img src="other/Engranaje_25D.png" alt="Corona de 25 dientes con abrazadera" width="300"><br><sub>Corona (25T) con abrazadera tipo "C".</sub></td>
+<td align="center" width="50%"><img src="other/Engranaje_15D.png" alt="Piñón de 15 dientes" width="300"><br><sub><b>Config A:</b> Piñón motriz (15T) con acople en "D".</sub></td>
+<td align="center" width="50%"><img src="other/Engranaje_25D.png" alt="Corona de 25 dientes" width="300"><br><sub><b>Config A:</b> Corona (25T) antigua con abrazadera tipo "C".</sub></td>
+</tr>
+<tr>
+<td align="center" width="50%"><img src="other/Engranaje_20D_motor.png" alt="Piñón de 20 dientes" width="300"><br><sub><b>Config B:</b> Piñón motriz (20T) con acople en "D".</sub></td>
+<td align="center" width="50%"><img src="other/Engranaje_20D_prisionero_varilla.png" alt="Corona de 20 dientes con prisionero" width="300"><br><sub><b>Config B:</b> Corona (20T) rediseñada con tornillo prisionero.</sub></td>
 </tr>
 </table>
 
 #### 9.3.2. Acople de tracción: adaptador para ruedas Lego
 
-Las **ruedas Lego** del año pasado tienen muy buen agarre en la pista, así que las mantuvimos. Para montarlas en la nueva varilla lisa diseñamos un adaptador: en un extremo tiene el perfil en cruz de Lego y en el otro una base cilíndrica con la misma **abrazadera tipo "C"** de la corona. La rueda queda firme sobre la varilla y se puede cambiar rápido en los pits.
+Las **ruedas Lego** del año pasado tienen muy buen agarre en la pista, así que las mantuvimos. Para unirlas a la nueva transmisión metálica rediseñamos por completo los adaptadores impresos en 3D, resolviendo dos problemas críticos: el deslizamiento y la fragilidad estructural de las capas de impresión.
+
+1. **Acople a la varilla (Tornillo prisionero y muesca):** 
+Dejamos atrás la antigua abrazadera tipo "C". Ahora los adaptadores se fijan a la varilla mediante un **tornillo prisionero**. Para garantizar tracción total sin deslizamientos, **desgastamos ambos extremos de la varilla metálica** creando muescas planas (*flat spots*). El prisionero aprieta directamente sobre esa base plana, bloqueando la pieza al 100 %.
+
+2. **Acople a la rueda (Inserto Lego original):**
+En el adaptador anterior, el perfil en cruz de Lego se imprimía directamente en el plástico. Por la dirección de las capas de impresión (anisotropía), esta pieza era frágil y tendía a partirse ante golpes laterales o caídas. En el nuevo diseño, eliminamos esa cruz impresa y dejamos un orificio interno hueco. Allí insertamos a presión (*press-fit*) un **pin en cruz Lego original**. Entra exacto, no se suelta, y nos brinda la resistencia mecánica extrema del plástico inyectado de Lego.
 
 <table>
 <tr>
-<td align="center" width="50%"><img src="other/adaptador_lego.png" alt="Adaptador para eje Lego" width="300"><br><sub>Perfil del adaptador.</sub></td>
-<td align="center" width="50%"><img src="other/mordaza_tipoc.png" alt="Abrazadera tipo C del adaptador" width="300"><br><sub>Detalle de la abrazadera transversal.</sub></td>
+<td align="center" width="50%"><img src="other/adaptador_lego.png" alt="Adaptador para eje Lego (Antiguo)" width="300"><br><sub><b>Versión anterior:</b> Fijación por fricción (abrazadera tipo "C") y cruz Lego impresa en 3D (frágil).</sub></td>
+<td align="center" width="50%"><img src="other/adaptador_prisionero.png" alt="Adaptador con tornillo prisionero (Nuevo)" width="300"><br><sub><b>Versión actual:</b> Anclaje con prisionero a la muesca plana, e inserto de pin Lego original a presión.</sub></td>
 </tr>
 </table>
+
+
 
 #### 9.3.3. Ensamble virtual y prevención de fallas
 
@@ -1082,16 +1099,28 @@ El promedio de la rueda exterior (27,5°) coincide con el ideal (27,2°) y con e
 
 ### 9.5. 🦈 Segundo piso, separadores y sistema de visión Shark Fin
 
-El segundo nivel distribuye la masa, protege la electrónica y sostiene el sistema de visión.
+El segundo piso del vehículo es la plataforma encargada de alojar el "cerebro" del robot y su sistema de energía. Para esta versión, recibió un rediseño completo en Onshape enfocado en el **Diseño para Manufactura (DFM)** y la **modularidad**, eliminando fijaciones improvisadas (como la silicona caliente) y facilitando un mantenimiento rápido y seguro en los pits.
 
-> [!NOTE]
-> **Compromiso de diseño: centro de gravedad**
->
-> En la versión anterior la batería iba arriba, en una posición poco segura. El nuevo diseño tiene un compartimento ventilado **debajo del primer piso**. Se pierde un poco de altura libre al suelo, pero el centro de gravedad baja mucho y el carro ya no se balancea ni corre riesgo de volcar en las curvas rápidas.
+Las principales características y mejoras estructurales son:
+
+* **Compartimento de batería modular:** la caja de la batería ya no está integrada de forma monolítica al chasis. Ahora es una pieza independiente que se ancla por debajo a la plataforma mediante 4 tornillos. El diseño permite usar insertos roscados de latón o tornillos pasantes largos con tuercas M3, facilitando su reemplazo sin desarmar el robot.
+* **Estandarización de anclajes (Sistema modular para sensores):** En el primer piso diseñamos bases elevadas en forma de "U" para corregir problemas de lectura en los ToF. Esa solución mecánica fue tan exitosa que la convertimos en un estándar para todo el robot. En las diagonales frontales de este segundo piso replicamos esas bases integradas y diseñamos soportes independientes para los sensores Sharp.
+  * *Cómo funciona:* El soporte adaptador encaja en la base "U" y se fija rígidamente con **dos tornillos pasantes y tuercas M3**. Luego, el sensor Sharp se atornilla al adaptador.
+  * *Ventaja:* Si a futuro decidimos cambiar los Sharp por más sensores ToF u otro hardware, solo debemos imprimir un nuevo adaptador para esa misma base, sin alterar el chasis.
+* **Alojamientos embutidos para interruptores:** modelamos rebajes cuadrados con las medidas exactas para empotrar los controles físicos de forma limpia y accesible desde arriba. A la derecha (más adelantado) ubicamos el **interruptor de encendido general**, y a la izquierda (ligeramente retrasado) el **botón de inicio** del programa.
+* **Guías de ensamblaje para la PCB:** el soporte principal de la baquelita y su separador trasero (pilar) siguen siendo piezas separadas que se fijan con pegamento instantáneo (cianocrilato). Sin embargo, ahora el chasis tiene hendiduras con la silueta exacta de estas piezas. Esto actúa como una guía a prueba de errores (*poka-yoke*) que asegura que la placa quede perfectamente alineada al pegarla.
+* **Recepción de cableado estructurado:** el segundo piso incorpora dos orificios con pestañas inferiores que se alinean milimétricamente con los agujeros del primer piso. Estos reciben los **tubos pasacables**, asegurando que los cables de los sensores inferiores suban de forma vertical, recta y protegida hacia la placa de control, evitando enredos con la transmisión.
 
 <p align="center">
-  <img src="other/portaBateriasOneShape2026.jpeg" alt="Compartimento de la batería bajo el chasis" width="560"><br>
-  <sub>Vista inferior con el compartimento de la batería.</sub>
+  <img src="other/Base_2_arriba.png" alt="Vista superior del segundo piso en CAD" width="700"><br>
+  <sub><b>Vista superior del segundo piso:</b> se aprecian los alojamientos cuadrados para empotrar los interruptores frontales y las guías con silueta para pegar la baquelita.</sub>
+</p>
+
+<br>
+
+<p align="center">
+  <img src="other/Adaptadores_Sharp.png" alt="Vista inferior del segundo piso en CAD" width="700"><br>
+  <sub><b>Vista inferior del segundo piso:</b> destaca el nuevo compartimento modular para la batería (en morado) fijado por tornillos y los adaptadores de los Sharp ya instalados en sus pedestales.</sub>
 </p>
 
 #### 9.5.1. Separadores e insertos roscados
@@ -1129,11 +1158,20 @@ La sujeción en sí es una **prensa ajustable**:
 
 ### 9.6. 🧩 Integración total: ensamble maestro CAD
 
-Con todos los subsistemas (tracción, soporte de cámara y chasis) modelados y revisados por separado, armamos en Onshape un ensamble maestro. En esta última revisión virtual comprobamos que se puede llegar a los puertos del microcontrolador y que se cumplen las medidas que nos propusimos.
+La culminación de todas las iteraciones de Diseño para Manufactura (DFM), estandarización de componentes y mejoras en la tracción y dirección dan como resultado un vehículo robusto, modular y altamente competitivo. 
+
+En estas vistas finales del ensamble en Onshape se aprecia la sinergia de todos los sistemas: el chasis principal con su dirección Ackermann, el tren motriz modular trasero asegurando tracción sin deslizamientos, y el segundo piso gobernando la electrónica superior con soportes modulares para los sensores.
 
 <p align="center">
-  <img src="other/vista_completa_ensamble.png" alt="Vista isométrica del vehículo completo en 3D" width="600"><br>
-  <sub>El vehículo completo en el entorno de Onshape.</sub>
+  <img src="other/ensamble_diagonal_izq.png" alt="Vista inferior en perspectiva del ensamble completo" width="800"><br>
+  <sub><b>Perspectiva inferior frontal-izquierda:</b> Detalle del Monochasis inferior. Se aprecia la base estructural frontal, el anclaje de la dirección Ackermann, las manguetas y la distribución compacta de los adaptadores elevadores para los sensores ToF.</sub>
+</p>
+
+<br>
+
+<p align="center">
+  <img src="other/ensamble_diagonal_der.png" alt="Vista superior isométrica del ensamble completo" width="800"><br>
+  <sub><b>Perspectiva isométrica frontal-derecha:</b> Vista general del empaque superior del robot. Destacan las torres "shark fin" con el logo del equipo, el sistema de mordaza ajustable para el soporte del teléfono, y el bloque de transmisión trasero con su engranaje integrado.</sub>
 </p>
 
 ---
@@ -1436,8 +1474,8 @@ Para el eje usamos una solución de taller fácil de conseguir: el núcleo limpi
 1. Como la varilla es más delgada que el agujero de los rodamientos, auméntale el diámetro con termorretráctil.
 2. Pon termorretráctil solo en **un extremo**, hasta que entre con algo de presión en el primer rodamiento del chasis.
 3. Pasa la varilla por ese rodamiento, introduce la corona (**25T o 20T, según la configuración elegida**) en la zona central y coloca la segunda camisa adaptadora en el otro extremo para asentarla en el segundo rodamiento.
-4. Alinea los dientes de la corona con el piñón. Cuando engranen, pon un tornillo transversal con su tuerca en el collarín de la corona y apriétalo para cerrar la abrazadera tipo "C" sobre la varilla.
-5. Por último, coloca los adaptadores de las ruedas Lego en los dos extremos de la varilla y asegúralos con tornillo y tuerca, con el mismo sistema de abrazadera que la corona.
+4. Alinea los dientes de la corona con el piñón. Asegúrate de que el **tornillo prisionero** del collarín de la corona apunte directamente hacia la muesca plana (*flat spot*) que desgastaste en el centro de la varilla, y apriétalo para bloquearla.
+5. Por último, coloca los adaptadores de las ruedas Lego en los dos extremos de la varilla. Alinea los **tornillos prisioneros** con los desgastes planos de los extremos y apriétalos firmemente contra el metal.
 
 > [!TIP]
 > **Para que no patine:** antes de encoger el termorretráctil con calor, pon unas gotas de cianoacrilato entre el metal y el plástico. Así no gira sobre la varilla cuando el motor hace fuerza.
