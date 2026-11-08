@@ -263,7 +263,7 @@ Cada carpeta tiene su propio README con el detalle de lo que contiene.
 | :--- | :--- |
 | **Procesamiento** | Un ESP32 para control y sensores, y un teléfono Android para la visión artificial |
 | **Chasis** | Monochasis de dos pisos diseñado en Onshape e impreso en PETG (179 mm de largo, 115 mm de ancho de chasis) |
-| **Tracción** | Motor 25GA-370 de 220 RPM con engranajes impresos 15T → 25T (1.67:1) sobre el eje trasero |
+| **Tracción** | Motor 25GA-370 de 220 RPM con sistema de engranajes impresos intercambiables: Configuración A (1.67:1 con 15T→25T) y Configuración B (1:1 con 20T→20T) |
 | **Dirección** | Ackermann impresa en PETG-CF, movida por un servo MG90; 40° en la rueda interior y radio de giro de 176 mm |
 | **Sensores** | 4 × ToF VL53L0X, IMU BNO055, sensor de color TCS34725 y 2 × Sharp GP2Y0A21 |
 | **Visión** | App propia con OpenCV que detecta pilares rojos, verdes y la zona magenta |
@@ -780,13 +780,15 @@ La plataforma mide **179 mm de largo por 115 mm de ancho**, con una distancia en
 </p>
 
 
-#### 9.2.1. Tren motriz (torque frente a velocidad)
+#### 9.2.1. Tren motriz modular (torque frente a velocidad)
 
-* **Motor de tracción:** 25GA-370 (JGA25) de 220 RPM con caja reductora metálica. El Monochasis tiene una cama hundida hecha a la medida del motor, que deja su eje alineado con la transmisión.
-* **Piñón y corona:** un piñón de 15 dientes en el motor mueve una corona de 25 dientes en el eje trasero. Esta **relación de 1.67:1** sacrifica algo de velocidad máxima para aumentar el torque en las ruedas, así el carro acelera de forma controlada desde parado sin forzar el motor.
-* **Eje trasero (solución de taller):** no conseguimos varilla calibrada de 4 mm, así que usamos el núcleo de electrodos de soldadura (~2.4 mm). En las zonas de los rodamientos aumentamos el diámetro con termorretráctil hasta lograr un ajuste a presión (*press-fit*) sin holgura.
+* **Motor de tracción:** 25GA-370 (JGA25) de 220 RPM con caja reductora metálica. El Monochasis tiene una cama hundida que deja su eje perfectamente alineado con la transmisión.
+* **Engranajes intercambiables (Piñón y Corona):** Rediseñamos la zona trasera del chasis ampliando el recorte del eje. Esto nos permite montar dos configuraciones sin modificar la estructura principal, adaptándonos al tipo de pista:
+  * **Configuración A (15T → 25T):** Relación reductora de 1.67:1. Sacrifica velocidad punta para maximizar el torque.
+  * **Configuración B (20T → 20T):** Relación directa 1:1. Aprovecha el margen de fuerza del motor para obtener mayor velocidad máxima.
+* **Eje trasero y camisas adaptadoras:** al no conseguir varilla calibrada de 4 mm, usamos el núcleo liso de electrodos de soldadura (~2.4 mm). Para suplir la diferencia de diámetro frente a los rodamientos diseñamos e imprimimos **camisas adaptadoras en 3D (`Bearing_Shaft_Adapter_Sleeve.stl`)**. Estas piezas recubren la varilla y entran a presión (*press-fit*) en la rolinera, logrando un centrado limpio y rígido.
 * **Rodamientos:** el eje gira sobre rodamientos 604ZZ (4 × 12 × 4 mm) encajados en alojamientos del propio chasis.
-* **Piñón y corona (Relación 1:1):** pasamos de una relación reductora (15T a 25T) a una relación directa 1:1 usando un piñón de 20 dientes y una corona de 20 dientes. Como estos engranajes tienen un diámetro diferente, **se modificó el Monochasis ampliando el recorte en la zona del eje trasero** para que giraran libremente. Con este cambio sacrificamos un excedente de torque que realmente no estábamos usando, para ganar mucha más velocidad tope en las rectas.
+
 ---
 
 ### 9.3. 📏 Validación de tolerancias y ensamble virtual
@@ -1233,68 +1235,69 @@ Calculamos la velocidad lineal y el torque del tren motriz con la masa actual de
 
 ### 11.1. 💨 Velocidad lineal del vehículo
 
-El motor 25GA-370 gira a 220 RPM en el eje de salida de su caja reductora. Convertido a radianes por segundo:
+El motor 25GA-370 gira a 220 RPM nominales en el eje de salida de su caja reductora. Convertido a radianes por segundo:
 
 $$\omega_{\text{motor}} = \frac{220 \cdot 2\pi}{60} \approx 23.04 \text{ rad/s}$$
 
-La transmisión piñón (15T) → corona (25T) reduce otra vez la velocidad en la rueda:
+El diámetro real de nuestras ruedas LEGO (#44309) es de 43.2 mm, por lo que el radio es $r = 0.0216$ m. Analizamos las dos configuraciones de transmisión de nuestro diseño:
 
-$$\omega_{\text{rueda}} = \omega_{\text{motor}} \cdot \frac{15}{25} \approx 13.82 \text{ rad/s} \;(\approx 132 \text{ RPM})$$
+* **Configuración A (Torque - 15T a 25T):** Reduce la velocidad multiplicando la fuerza (relación 1.67:1).
+  $$\omega_{\text{rueda}} = 23.04 \cdot \frac{15}{25} \approx 13.82 \text{ rad/s}$$
+  $$v_{\text{máx}} = 13.82 \cdot 0.0216 \approx 0.30 \text{ m/s}$$
 
-Con un radio de rueda $r = 0.04$ m, la velocidad lineal máxima teórica es:
-
-$$v = \omega_{\text{rueda}} \cdot r = 13.82 \cdot 0.04 \approx 0.55 \text{ m/s}$$
+* **Configuración B (Velocidad - 20T a 20T):** Transmisión directa 1:1.
+  $$\omega_{\text{rueda}} = \omega_{\text{motor}} \approx 23.04 \text{ rad/s}$$
+  $$v_{\text{máx}} = 23.04 \cdot 0.0216 \approx 0.50 \text{ m/s}$$
 
 ### 11.2. 🔩 Torque necesario y torque disponible
 
-Como criterio exigente tomamos como torque de referencia el necesario para sostener todo el peso del vehículo en el radio de la rueda (equivale a subir una pared vertical). Es mucho más de lo que pide mover el carro en la pista, donde solo hay que vencer la resistencia a la rodadura:
+Como criterio extremo, calculamos el torque necesario para sostener todo el peso del vehículo apoyado en el radio de la rueda (el equivalente a trepar una pared vertical). En la pista plana, la fuerza requerida para vencer la rodadura es mínima:
 
 $$T_{\text{ref}} = m \cdot g \cdot r$$
+$$T_{\text{ref}} = 1.092 \text{ kg} \cdot 9.81 \text{ m/s}^2 \cdot 0.0216 \text{ m} \approx 0.231 \text{ N·m}$$
 
-Donde:
+Según el fabricante, el motor 25GA-370 entrega un torque de salida de **0.731 N·m**. El torque en las ruedas cambia según la configuración:
 
-* $m$ = masa del vehículo con teléfono (1.092 kg)
-* $g$ = gravedad (9.81 $\text{m/s}^2$)
-* $r$ = radio de las ruedas (0.04 m)
-
-$$T_{\text{ref}} = 1.092 \cdot 9.81 \cdot 0.04 \approx 0.429 \text{ N·m}$$
-
-El motor entrega 0.0343 N·m antes de su caja reductora (21.3:1), y nuestra transmisión multiplica el torque por 25/15:
-
-$$T_{\text{salida motor}} = 0.0343 \cdot 21.3 \approx 0.731 \text{ N·m} \qquad T_{\text{rueda}} = 0.731 \cdot \frac{25}{15} \approx 1.218 \text{ N·m}$$
+* **Configuración A (Torque - 1.67:1):** $T_{\text{rueda}} = 0.731 \cdot \frac{25}{15} \approx 1.218 \text{ N·m}$
+* **Configuración B (Velocidad - 1:1):** $T_{\text{rueda}} = T_{\text{salida motor}} = 0.731 \text{ N·m}$
 
 ### 11.3. 🔒 Margen de seguridad de torque
 
-$$\text{Margen de seguridad} = \frac{T_{\text{rueda}}}{T_{\text{ref}}} \times 100 = \frac{1.218}{0.429} \times 100 \approx 284\,\%$$
+$$\text{Margen de seguridad} = \frac{T_{\text{rueda}}}{T_{\text{ref}}} \times 100$$
+
+| Configuración | Torque en rueda | Margen de seguridad frente al caso extremo (pared vertical) |
+| :--- | :---: | :--- |
+| **A (15T - 25T)** | 1.218 N·m | **527 %** (Fuerza muy excedida para pista plana) |
+| **B (20T - 20T)** | 0.731 N·m | **316 %** (Equilibrio ideal tracción/velocidad) |
 
 > [!IMPORTANT]
-> **Interpretación del margen**
+> **Flexibilidad del diseño**
 >
-> Incluso con un criterio tan exigente, el tren motriz entrega casi **tres veces** el torque de referencia. Ese excedente se traduce en capacidad de aceleración, tolerancia a superficies con más fricción de la esperada y margen ante el desgaste de los engranajes impresos. El peso del teléfono no compromete la agilidad del carro.
+> La matemática demuestra que incluso con la configuración 1:1 (Configuración B), el tren motriz entrega **más del triple (316 %)** de la fuerza necesaria para el peor escenario posible. La configuración A nos daba un torque masivo (527 %) que no aprovechábamos. Tener ambas opciones diseñadas nos permite adaptar el carro: la relación 1.67:1 para una pista con demasiada fricción o irregularidades, y la 1:1 para clasificaciones de velocidad.
 
 ### 11.4. ⏳ Tiempo teórico de vuelta frente al tiempo real
 
-Con la velocidad máxima calculada ($v \approx 0.55$ m/s) podemos estimar cuánto tardaría una vuelta y compararlo con lo que medimos en las pruebas:
+Para la estimación teórica, utilizamos la línea central ideal de la pista WRO. Con un tapete de 3x3 m y un cuadro interno de 1x1 m, el centro del carril forma un recorrido de 2x2 m, lo que da una **distancia de 8.0 metros por vuelta**.
 
-$$\text{Tiempo teórico} = \frac{\text{Distancia de una vuelta}}{v} \approx \frac{9.5 \text{ m}}{0.55 \text{ m/s}} \approx 17.2 \text{ s}$$
-
-| Modo | Tiempo teórico (v máx. constante) | Tiempo real medido (promedio) | Velocidad real efectiva | % de la velocidad teórica |
-| :--- | :---: | :---: | :---: | :---: |
-| **Vuelta libre** | ≈ 17.2 s | **25 s** | ≈ 0.38 m/s | ≈ 69 % |
-| **Modo obstáculos** | ≈ 17.2 s (misma distancia base) | **1:20 min (80 s)** | ≈ 0.12 m/s | ≈ 21 % |
+| Configuración | Tiempo teórico (v máx nominal) | Vuelta libre (real medido) | Obstáculos (real medido) |
+| :--- | :---: | :---: | :---: |
+| **A (Torque - 1.67:1)** | $\frac{8.0 \text{ m}}{0.30 \text{ m/s}} \approx \mathbf{26.6 \text{ s}}$ | **25.0 s** | **80.0 s** |
+| **B (Velocidad - 1:1)** | $\frac{8.0 \text{ m}}{0.50 \text{ m/s}} \approx \mathbf{16.0 \text{ s}}$ | *[Pendiente de pruebas]* | *[Pendiente de pruebas]* |
 
 ```mermaid
 xychart-beta
-    title "Tiempo por vuelta: teórico vs. real"
-    x-axis ["Teórico (v máx.)", "Vuelta libre (real)", "Obstáculos (real)"]
-    y-axis "Tiempo (segundos)" 0 --> 90
-    bar [17.2, 25, 80]
+    title "Tiempo por vuelta: teórico vs. real (Trayectoria central de 8.0 m)"
+    x-axis ["Teórico Config A", "Real Config A (Vuelta Libre)", "Teórico Config B"]
+    y-axis "Tiempo (segundos)" 0 --> 30
+    bar [26.6, 25.0, 16.0]
 ```
 
-> [!IMPORTANT]
-> **Por qué la diferencia es esperable y qué nos dice**
->
-> El tiempo teórico supone velocidad máxima constante durante toda la vuelta, y eso no pasa. En vuelta libre el algoritmo reduce la velocidad para corregir el ángulo con el BNO055, ajustar la distancia al muro y girar en cada esquina. En modo obstáculos, además, el carro se detiene a esperar el comando de la app y hace las maniobras de cambio de carril. Llegar al ~69 % de la velocidad teórica en vuelta libre es coherente con un algoritmo que prioriza la precisión de la trayectoria. La caída al ~21 % en obstáculos confirma que el límite no es mecánico (el motor tiene torque de sobra, ver 11.3), sino el tiempo de decisión y de maniobra del modo de evasión.
+> [!NOTE]
+> **Análisis de resultados: ¿Por qué el tiempo real (25.0s) superó al teórico nominal (26.6s)?**
+> 
+> En la ingeniería práctica, el tiempo real suele ser más lento que el teórico por la fricción y las curvas. Sin embargo, nuestro carro rompió esa regla en la Configuración A. La razón es electrónica: el cálculo teórico utiliza las 220 RPM nominales del motor (que el fabricante especifica a 6V). Nuestro sistema de potencia utiliza un regulador **XL6009 configurado hasta 8V**. 
+> 
+> Al sobrealimentar el motor de manera segura, las RPM reales superan las de la hoja de datos, compensando cualquier pérdida de tiempo en las curvas. Para la nueva Configuración B (1:1), esperamos que este mismo sobrevoltaje a 8V impulse el carro a romper la barrera de los 16.0 segundos teóricos.
 
 ### 11.5. 🛞 Coeficiente de fricción y agarre
 
@@ -1432,7 +1435,7 @@ Para el eje usamos una solución de taller fácil de conseguir: el núcleo limpi
 
 1. Como la varilla es más delgada que el agujero de los rodamientos, auméntale el diámetro con termorretráctil.
 2. Pon termorretráctil solo en **un extremo**, hasta que entre con algo de presión en el primer rodamiento del chasis.
-3. Pasa la varilla por ese rodamiento, mete la corona (25T) en el centro y pon termorretráctil en el otro extremo para pasarlo por el segundo rodamiento.
+3. Pasa la varilla por ese rodamiento, introduce la corona (**25T o 20T, según la configuración elegida**) en la zona central y coloca la segunda camisa adaptadora en el otro extremo para asentarla en el segundo rodamiento.
 4. Alinea los dientes de la corona con el piñón. Cuando engranen, pon un tornillo transversal con su tuerca en el collarín de la corona y apriétalo para cerrar la abrazadera tipo "C" sobre la varilla.
 5. Por último, coloca los adaptadores de las ruedas Lego en los dos extremos de la varilla y asegúralos con tornillo y tuerca, con el mismo sistema de abrazadera que la corona.
 
