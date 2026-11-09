@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquitectura de Control Prometheus Team - WRO Future Engineers</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: JetBrains Mono & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            neon: {
+              cyan: '#00f3ff',
+              blue: '#3b82f6',
+              purple: '#8b5cf6',
+              pink: '#ec4899',
+              orange: '#f97316',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+            }
+          },
+          animation: {
+            'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'flow-line': 'dash 20s linear infinite',
+            'glow-pulse': 'glow 2s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            dash: {
+              '0%': { strokeDashoffset: '1000' },
+              '100%': { strokeDashoffset: '0' },
+            },
+            glow: {
+              '0%': { filter: 'drop-shadow(0 0 2px rgba(0, 243, 255, 0.4))' },
+              '100%': { filter: 'drop-shadow(0 0 10px rgba(0, 243, 255, 0.9))' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f3ff;
+    }
+
+    /* Grid pattern background */
+    .bg-grid-pattern {
+      background-size: 30px 30px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Glassmorphic card design */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 243, 255, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(0, 243, 255, 0.15);
+    }
+
+    /* Flow SVG animation */
+    .flow-path {
+      stroke-dasharray: 8;
+      animation: dash 1.5s linear infinite;
+    }
+
+    .active-glow {
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 243, 255, 0.1);
+    }
+  </style>
+</head>
+
+<body class="h-full flex flex-col font-sans bg-slate-950 text-slate-100 overflow-hidden bg-grid-pattern relative select-none">
+
+  <!-- TOP HEADER / NAVBAR -->
+  <header class="h-16 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-6 flex items-center justify-between z-30 shrink-0">
+    <div class="flex items-center space-x-4">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-cyan-500/20">
+        <i class="fa-solid fa-microchip text-xl"></i>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-lg font-bold tracking-wide text-white">Prometheus Team Control Architecture</h1>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800/50 font-mono">WRO Future Engineers</span>
+        </div>
+        <p class="text-xs text-slate-400">Diagrama Interactivo de Estados y Lógica de Máquina</p>
+      </div>
+    </div>
+
+    <!-- Search & Quick Navigation -->
+    <div class="flex items-center space-x-3">
+      <div class="relative w-64 hidden md:block">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+        <input type="text" id="searchInput" placeholder="Buscar estado, sensor o evento..." 
+               class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors font-mono">
+      </div>
+
+      <button id="btnOpenSimulator" class="px-3.5 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs rounded-lg transition-all shadow-lg shadow-cyan-500/20 flex items-center space-x-2">
+        <i class="fa-solid fa-play"></i>
+        <span>Simulador Interactivo</span>
+      </button>
+
+      <button id="btnResetView" title="Restablecer Vista" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition-colors text-xs">
+        <i class="fa-solid fa-rotate"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- FILTER CONTROLS BAR -->
+  <div class="bg-slate-900/60 border-b border-slate-800/80 px-6 py-2.5 flex items-center justify-between flex-wrap gap-2 z-20 shrink-0">
+    <!-- Preset Category Filters -->
+    <div class="flex items-center space-x-1.5 overflow-x-auto py-0.5 text-xs">
+      <span class="text-slate-400 font-medium mr-2 flex items-center gap-1.5 text-xs uppercase tracking-wider font-mono">
+        <i class="fa-solid fa-filter text-cyan-400"></i> Vista:
+      </span>
+      
+      <button data-filter="all" class="filter-btn active px-3 py-1 rounded-md border font-medium transition-all bg-cyan-500/10 border-cyan-500 text-cyan-300 shadow-sm shadow-cyan-500/10">
+        Todos los Estados
+      </button>
+      <button data-filter="principal" class="filter-btn px-3 py-1 rounded-md border border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600 transition-all">
+        Flujo Principal
+      </button>
+      <button data-filter="esquina" class="filter-btn px-3 py-1 rounded-md border border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600 transition-all">
+        Giro Esquina & Corrección
+      </button>
+      <button data-filter="carril" class="filter-btn px-3 py-1 rounded-md border border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600 transition-all">
+        Cambio de Carril
+      </button>
+      <button data-filter="esquive" class="filter-btn px-3 py-1 rounded-md border border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600 transition-all">
+        Esquive Optimizado
+      </button>
+    </div>
+
+    <!-- Stats / Active Counters Header Badge -->
+    <div class="flex items-center space-x-4 text-xs font-mono text-slate-400">
+      <div class="flex items-center space-x-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Línea Contador: <strong id="hudLineCount" class="text-emerald-400">0 / 12</strong></span>
+      </div>
+      <div class="flex items-center space-x-1.5 border-l border-slate-800 pl-4">
+        <span>IMU Angle: <strong id="hudIMU" class="text-cyan-400">0.0°</strong></span>
+      </div>
+      <div class="flex items-center space-x-1.5 border-l border-slate-800 pl-4">
+        <span>ToF Front: <strong id="hudToF" class="text-amber-400">120 cm</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <div class="relative flex-1 overflow-hidden flex">
+
+    <!-- CANVAS / DIAGRAM AREA -->
+    <div id="diagramCanvas" class="flex-1 relative overflow-auto p-8 h-full">
+      
+      <!-- SVG Connectors Overlay -->
+      <svg id="svgConnectors" class="absolute inset-0 w-full h-full pointer-events-none z-0" style="min-width: 1400px; min-height: 900px;">
+        <defs>
+          <!-- Arrowhead Marker Cyan -->
+          <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00f3ff" />
+          </marker>
+          <!-- Arrowhead Marker Amber -->
+          <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b" />
+          </marker>
+          <!-- Arrowhead Marker Emerald -->
+          <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+          </marker>
+          <!-- Arrowhead Marker Purple -->
+          <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b5cf6" />
+          </marker>
+        </defs>
+        <!-- Dynamic paths generated via JavaScript -->
+      </svg>
+
+      <!-- NODES LAYOUT CONTAINER -->
+      <div id="nodesContainer" class="relative z-10 grid grid-cols-12 gap-6 min-w-[1300px] pb-24">
+
+        <!-- SECTION 1: INICIO Y DETECCIÓN LÍNEAS -->
+        <div class="col-span-12 mb-2 flex items-center justify-between border-b border-slate-800/80 pb-2">
+          <h2 class="text-xs font-mono tracking-widest text-slate-400 uppercase flex items-center gap-2">
+            <i class="fa-solid fa-flag-checkered text-cyan-400"></i>
+            Fase 1: Arranque & Esquina Inicial (Líneas 1 a 4)
+          </h2>
+          <span class="text-[11px] text-slate-500 font-mono">Detección Inicial de Sensores de Color</span>
+        </div>
+
+        <!-- Node: START TRIGGER -->
+        <div class="col-span-3">
+          <div id="node-START" data-node="START" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-cyan-400 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/50">ENTRY POINT</span>
+              <i class="fa-solid fa-power-off text-cyan-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-cyan-300 transition-colors">INICIO / INTERRUPTOR</h3>
+            <p class="text-xs text-slate-400 mt-1 line-clamp-2">Validación física del interruptor o modo de arranque rápido pista/cajón.</p>
+          </div>
+        </div>
+
+        <!-- Node: ESTADO_NORMAL -->
+        <div class="col-span-4">
+          <div id="node-ESTADO_NORMAL" data-node="ESTADO_NORMAL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-blue-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800/50">ESTADO 01</span>
+              <i class="fa-solid fa-compass text-blue-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-blue-300 transition-colors">ESTADO_NORMAL</h3>
+            <p class="text-xs text-slate-400 mt-1">Avance recto inicial en búsqueda del primer marcador de color (Líneas 1-4).</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Trigger: Sensor Color</span>
+              <span class="text-blue-400 font-bold">Línea &lt; 5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node: GIRO ESQUINA + RETROCESO -->
+        <div class="col-span-5">
+          <div id="node-GIRO_ESQUINA" data-node="GIRO_ESQUINA" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-amber-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800/50">TRANSICIÓN</span>
+              <i class="fa-solid fa-rotate-left text-amber-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-amber-300 transition-colors">GIRO ESQUINA + RETROCESO</h3>
+            <p class="text-xs text-slate-400 mt-1">Pausa no bloqueante (`procesarPausaPreGiro`), freno, giro de esquina y retroceso de seguridad.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Acción: Pausa + Servo</span>
+              <span class="text-amber-400">90° Twist</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: ACOMODO LATERAL Y MÁQUINA DE CARRILES -->
+        <div class="col-span-12 mt-4 mb-2 flex items-center justify-between border-b border-slate-800/80 pb-2">
+          <h2 class="text-xs font-mono tracking-widest text-slate-400 uppercase flex items-center gap-2">
+            <i class="fa-solid fa-arrows-split-up-and-left text-purple-400"></i>
+            Fase 2: Máquina de Estados de Carril & Corrección Lateral
+          </h2>
+          <span class="text-[11px] text-slate-500 font-mono">Control por ToF + BNO055 IMU</span>
+        </div>
+
+        <!-- Node: ESTADO_CORRECCION_LATERAL -->
+        <div class="col-span-4">
+          <div id="node-ESTADO_CORRECCION_LATERAL" data-node="ESTADO_CORRECCION_LATERAL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-purple-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-800/50">ESTADO 02</span>
+              <i class="fa-solid fa-arrows-left-right text-purple-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-purple-300 transition-colors">ESTADO_CORRECCION_LATERAL</h3>
+            <p class="text-xs text-slate-400 mt-1">Acomodo lateral post-giro utilizando el ToF lateral y ajuste angular con ángulo trasero.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Módulo: ControlDistanciaLateral</span>
+              <span class="text-purple-400">ToF Sensors</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node: ESPERANDO_COMANDO_CARRIL -->
+        <div class="col-span-4">
+          <div id="node-ESPERANDO_COMANDO_CARRIL" data-node="ESPERANDO_COMANDO_CARRIL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-cyan-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/50">ESTADO 03</span>
+              <i class="fa-solid fa-satellite-dish text-cyan-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-cyan-300 transition-colors">ESPERANDO_COMANDO_CARRIL</h3>
+            <p class="text-xs text-slate-400 mt-1">Escucha activa de comandos de carril objetivo (ej: `C21`, `C07`) vía Bluetooth/Serial.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Input: Serial SPP</span>
+              <span class="text-cyan-400">Cmd RX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node: EVALUANDO_POSICION -->
+        <div class="col-span-4">
+          <div id="node-EVALUANDO_POSICION" data-node="EVALUANDO_POSICION" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-pink-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-800/50">ESTADO 04</span>
+              <i class="fa-solid fa-calculator text-pink-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-pink-300 transition-colors">EVALUANDO_POSICION</h3>
+            <p class="text-xs text-slate-400 mt-1">Compara posición actual ToF contra carril destino. Omite giro si ya está en carril.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Decisión: ¿Mismo Carril?</span>
+              <span class="text-pink-400">Delta Dist</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: MANIOBRAS DE CARRIL & CRUCERO -->
+        <div class="col-span-12 mt-4 mb-2 flex items-center justify-between border-b border-slate-800/80 pb-2">
+          <h2 class="text-xs font-mono tracking-widest text-slate-400 uppercase flex items-center gap-2">
+            <i class="fa-solid fa-route text-emerald-400"></i>
+            Fase 3: Maniobra de Cambio de Carril & Control Cruzado
+          </h2>
+          <span class="text-[11px] text-slate-500 font-mono">Control PID & IMU Heading</span>
+        </div>
+
+        <!-- Node: GIRANDO_HACIA_CARRIL -->
+        <div class="col-span-4">
+          <div id="node-GIRANDO_HACIA_CARRIL" data-node="GIRANDO_HACIA_CARRIL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-indigo-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-950/80 text-indigo-300 border border-indigo-800/50">ESTADO 05</span>
+              <i class="fa-solid fa-turn-down text-indigo-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors">GIRANDO_HACIA_CARRIL</h3>
+            <p class="text-xs text-slate-400 mt-1">Fase 1 de transición. Giro inicial por tiempo/distancia ToF vigilando ToF frontal.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Monitoreo: ToF Frontal</span>
+              <span class="text-indigo-400">Angle Step 1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node: ENDEREZANDO_CARRIL -->
+        <div class="col-span-4">
+          <div id="node-ENDEREZANDO_CARRIL" data-node="ENDEREZANDO_CARRIL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-teal-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-800/50">ESTADO 06</span>
+              <i class="fa-solid fa-align-center text-teal-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-teal-300 transition-colors">ENDEREZANDO_CARRIL</h3>
+            <p class="text-xs text-slate-400 mt-1">Contragiro y alineación angular con IMU (BNO055) hasta alcanzar rumbo objetivo.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Alineación: IMU BNO055</span>
+              <span class="text-teal-400">Target Angle</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node: MANTENIENDO_CARRIL -->
+        <div class="col-span-4">
+          <div id="node-MANTENIENDO_CARRIL" data-node="MANTENIENDO_CARRIL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-emerald-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/50">ESTADO 07 (CRUCERO)</span>
+              <i class="fa-solid fa-gauge-high text-emerald-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-emerald-300 transition-colors">MANTENIENDO_CARRIL</h3>
+            <p class="text-xs text-slate-400 mt-1">Mantenimiento continuo de carril con PID lateral, fusión IMU y monitoreo de línea.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Control: PID + IMU</span>
+              <span class="text-emerald-400">Lazo Cerrado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: MODO OPTIMIZADO & FINAL -->
+        <div class="col-span-12 mt-4 mb-2 flex items-center justify-between border-b border-slate-800/80 pb-2">
+          <h2 class="text-xs font-mono tracking-widest text-slate-400 uppercase flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-400"></i>
+            Fase 4: Esquive Optimizado (Líneas &gt;= 5) & Detención Final
+          </h2>
+          <span class="text-[11px] text-slate-500 font-mono">Memorización Completa de Pista</span>
+        </div>
+
+        <!-- Node: MANIOBRA_OPTIMIZADA -->
+        <div class="col-span-8">
+          <div id="node-MANIOBRA_OPTIMIZADA" data-node="MANIOBRA_OPTIMIZADA" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-amber-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2">
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800/50">ESTADO 08</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Líneas &gt;= 5</span>
+              </div>
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-amber-300 transition-colors">MANIOBRA_OPTIMIZADA</h3>
+            <p class="text-xs text-slate-400 mt-1">Esquive fluido sin frenado total. Ejecuta subfases: MO_ENDEREZANDO ➔ MO_RETROCESO / MO_AVANZANDO ➔ MO_CRUZANDO ➔ EMPALME.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 grid grid-cols-4 gap-2 text-[10px] font-mono">
+              <span class="bg-slate-900 p-1 rounded text-center text-slate-300">MO_ENDEREZANDO</span>
+              <span class="bg-slate-900 p-1 rounded text-center text-slate-300">MO_RETROCESO</span>
+              <span class="bg-slate-900 p-1 rounded text-center text-slate-300">MO_CRUZANDO</span>
+              <span class="bg-slate-900 p-1 rounded text-center text-emerald-400">EMPALME PID</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node: ESTADO_DETENCION_FINAL -->
+        <div class="col-span-4">
+          <div id="node-ESTADO_DETENCION_FINAL" data-node="ESTADO_DETENCION_FINAL" class="state-card glass-card rounded-xl p-4 cursor-pointer transition-all border-l-4 border-l-red-500 relative group">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-red-950/80 text-red-300 border border-red-800/50">ESTADO FINAL</span>
+              <i class="fa-solid fa-circle-stop text-red-400 text-sm"></i>
+            </div>
+            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-red-300 transition-colors">ESTADO_DETENCION_FINAL</h3>
+            <p class="text-xs text-slate-400 mt-1">Alcanzado en Línea 12. Detención permanente de motores y parada segura de tareas.</p>
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Fin de Carrera</span>
+              <span class="text-red-400 font-bold">Línea 12</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIDE INSPECTOR PANEL (DETAILS DRAWER) -->
+    <aside id="inspectorPanel" class="w-96 border-l border-slate-800 bg-slate-900/95 backdrop-blur-md p-6 flex flex-col justify-between shrink-0 transition-all duration-300 transform translate-x-0 overflow-y-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div class="flex items-center space-x-2">
+            <div id="inspectorBadge" class="w-3 h-3 rounded-full bg-cyan-400"></div>
+            <h2 id="inspectorTitle" class="font-bold text-base text-slate-100 font-mono">ESTADO_NORMAL</h2>
+          </div>
+          <span id="inspectorTag" class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">NORMAL</span>
+        </div>
+
+        <div class="mt-5 space-y-5 text-xs">
+          <!-- Description -->
+          <div>
+            <h4 class="text-slate-400 font-mono text-[11px] uppercase tracking-wider mb-1">Descripción Lógica</h4>
+            <p id="inspectorDesc" class="text-slate-300 leading-relaxed bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
+              Selecciona un bloque del diagrama para inspeccionar los parámetros de hardware, eventos de entrada y condiciones de salida.
+            </p>
+          </div>
+
+          <!-- Hardware Involved -->
+          <div>
+            <h4 class="text-slate-400 font-mono text-[11px] uppercase tracking-wider mb-2">Hardware Involucrado</h4>
+            <div id="inspectorHardware" class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-1 bg-slate-800 border border-slate-700/60 rounded text-slate-300 font-mono text-[11px]">Sensor Color TCS34725</span>
+              <span class="px-2 py-1 bg-slate-800 border border-slate-700/60 rounded text-slate-300 font-mono text-[11px]">IMU BNO055</span>
+            </div>
+          </div>
+
+          <!-- Entry Conditions -->
+          <div>
+            <h4 class="text-slate-400 font-mono text-[11px] uppercase tracking-wider mb-1">Condiciones de Entrada</h4>
+            <ul id="inspectorEntry" class="list-disc list-inside space-y-1 text-slate-300 bg-slate-950/40 p-3 rounded-lg border border-slate-800/60">
+              <li>Interruptor de encendido activo</li>
+              <li>Recepción de bandera de inicio por puerto serie</li>
+            </ul>
+          </div>
+
+          <!-- Exit Conditions / Transitions -->
+          <div>
+            <h4 class="text-slate-400 font-mono text-[11px] uppercase tracking-wider mb-1">Transiciones Salientes</h4>
+            <div id="inspectorTransitions" class="space-y-2">
+              <div class="p-2.5 rounded bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+                <div>
+                  <div class="text-slate-200 font-semibold">Detección Línea Azul/Naranja</div>
+                  <div class="text-slate-400 text-[10px]">Línea &lt; 5</div>
+                </div>
+                <i class="fa-solid fa-arrow-right text-cyan-400"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div>
+            <h4 class="text-slate-400 font-mono text-[11px] uppercase tracking-wider mb-1">Fragmento de Código Relevante</h4>
+            <pre id="inspectorCode" class="p-3 bg-slate-950 rounded-lg text-cyan-300 font-mono text-[11px] overflow-x-auto border border-slate-800/80 leading-relaxed">
+// Código de referencia
+switch(estadoActual) {
+  case ESTADO_NORMAL:
+    avanzarRecto();
+    break;
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Quick Actions -->
+      <div class="pt-4 border-t border-slate-800 mt-6 flex items-center justify-between text-xs">
+        <span class="text-slate-500 font-mono">WRO FE 2026</span>
+        <button id="btnHighlightConnections" class="text-cyan-400 hover:text-cyan-300 font-mono text-xs flex items-center gap-1">
+          <i class="fa-solid fa-diagram-project"></i> Resaltar Conexiones
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- SIMULATOR MODAL / DRAWER -->
+  <div id="simulatorModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative">
+      <button id="btnCloseSimulator" class="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-6 border-b border-slate-800 pb-4">
+        <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+          <i class="fa-solid fa-gamepad text-lg"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg text-slate-100">Simulador de Transición de Estados</h3>
+          <p class="text-xs text-slate-400">Prueba los disparadores de sensores para ver el flujo en vivo</p>
+        </div>
+      </div>
+
+      <!-- Control Panel inside Simulator -->
+      <div class="grid grid-cols-2 gap-4 text-xs mb-6">
+        <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-3">
+          <div class="font-bold text-slate-200 border-b border-slate-800 pb-1">Sensores y Entradas</div>
+          
+          <div>
+            <label class="block text-slate-400 mb-1">Contador de Líneas: <span id="simLineVal" class="text-cyan-400 font-bold">1</span></label>
+            <input type="range" id="simLineRange" min="0" max="12" value="1" class="w-full accent-cyan-400">
+          </div>
+
+          <div>
+            <label class="block text-slate-400 mb-1">ToF Frontal (cm): <span id="simTofVal" class="text-amber-400 font-bold">80</span></label>
+            <input type="range" id="simTofRange" min="5" max="150" value="80" class="w-full accent-amber-400">
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <span class="text-slate-300">¿Línea de Color Detectada?</span>
+            <input type="checkbox" id="simColorDetected" class="w-4 h-4 accent-cyan-400 rounded">
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="font-bold text-slate-200 border-b border-slate-800 pb-1 mb-3">Comandos RX (Serial)</div>
+            <div class="grid grid-cols-2 gap-2">
+              <button class="sim-cmd-btn p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 font-mono text-[11px]" data-cmd="C21">Cmd: C21 (Mismo)</button>
+              <button class="sim-cmd-btn p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 font-mono text-[11px]" data-cmd="C07">Cmd: C07 (Cambio)</button>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+            <div class="text-[10px] text-slate-500 font-mono uppercase">Estado Evaluado:</div>
+            <div id="simActiveState" class="font-mono text-sm text-cyan-400 font-bold mt-1">ESTADO_NORMAL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="flex items-center justify-end space-x-3 pt-4 border-t border-slate-800">
+        <button id="btnStepSim" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-lg text-xs transition-colors">
+          Ejecutar Paso Lógico
+        </button>
+        <button id="btnSimReset" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-lg text-xs transition-colors">
+          Reiniciar Simulación
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- STATE DATABASE WITH FULL DETAILS ---
+    const STATE_DATA = {
+      'START': {
+        title: 'INICIO / INTERRUPTOR',
+        tag: 'BOOT',
+        color: '#00f3ff',
+        desc: 'Punto de arranque del programa. Lee el estado del interruptor físico y verifica el modo de operación (Cajón o Pista Abierta) antes de iniciar el bucle principal.',
+        hardware: ['Interruptor Toggle', 'ESP32 / MCU', 'Indicador LED'],
+        entry: ['Alimentación conectada', 'Pulsación de Botón Start'],
+        transitions: [
+          { target: 'ESTADO_NORMAL', condition: 'Interruptor ON & Modo Normal' }
+        ],
+        code: `void setup() {
+  pinMode(PIN_SWITCH, INPUT_PULLUP);
+  if (digitalRead(PIN_SWITCH) == LOW) {
+    estadoActual = ESTADO_NORMAL;
+  }
+}`
+      },
+      'ESTADO_NORMAL': {
+        title: 'ESTADO_NORMAL',
+        tag: 'ESTADO 01',
+        color: '#3b82f6',
+        desc: 'El vehículo avanza en línea recta controlada buscando los primeros marcadores de color en la pista (Líneas 1 a 4).',
+        hardware: ['Sensor Color TCS34725', 'Encoders Motores', 'IMU BNO055'],
+        entry: ['Inicio de carrera', 'Reanudación tras pausa'],
+        transitions: [
+          { target: 'GIRO_ESQUINA', condition: 'Sensor Color detecta Azul/Naranja (Línea 1-4)' }
+        ],
+        code: `if (estadoActual == ESTADO_NORMAL) {
+  avanzarRecto(VELOCIDAD_BASE);
+  if (detectarLineaColor() && contadorLineas < 5) {
+    estadoActual = GIRO_ESQUINA;
+  }
+}`
+      },
+      'GIRO_ESQUINA': {
+        title: 'GIRO ESQUINA + RETROCESO',
+        tag: 'TRANSICIÓN',
+        color: '#f59e0b',
+        desc: 'Ejecuta el frenado pre-giro (`procesarPausaPreGiro`), realiza el viraje de 90° de la esquina y realiza un retroceso de seguridad ajustado para centrar el robot.',
+        hardware: ['Servo Dirección', 'Driver Motor Pololu', 'BNO055 IMU'],
+        entry: ['Detección de línea en líneas 1 a 4'],
+        transitions: [
+          { target: 'ESTADO_CORRECCION_LATERAL', condition: 'Giro y retroceso de esquina completados' }
+        ],
+        code: `procesarPausaPreGiro();
+frenarRobot();
+ejecutarGiroEsquina(90);
+retrocederSeguridad();
+estadoActual = ESTADO_CORRECCION_LATERAL;`
+      },
+      'ESTADO_CORRECCION_LATERAL': {
+        title: 'ESTADO_CORRECCION_LATERAL',
+        tag: 'ESTADO 02',
+        color: '#8b5cf6',
+        desc: 'Invocado vía `ControlDistanciaLateral`. El vehículo utiliza los sensores ToF laterales y el sensor trasero para medir la pared, corregir la inclinación angular y la distancia lateral.',
+        hardware: ['ToF VL53L0X / VL53L1X Lateral', 'Sensor ToF Trasero', 'BNO055 IMU'],
+        entry: ['Finalización del Giro de Esquina + Retroceso'],
+        transitions: [
+          { target: 'ESPERANDO_COMANDO_CARRIL', condition: 'Ajuste de distancia y ángulo completado' }
+        ],
+        code: `void ControlDistanciaLateral() {
+  float distLateral = leerToFLateral();
+  float anguloActual = leerIMU();
+  ajustarPosicionPared(distLateral, anguloActual);
+  estadoActual = ESPERANDO_COMANDO_CARRIL;
+}`
+      },
+      'ESPERANDO_COMANDO_CARRIL': {
+        title: 'ESPERANDO_COMANDO_CARRIL',
+        tag: 'ESTADO 03',
+        color: '#00f3ff',
+        desc: 'Estado de recepción. El robot espera recibir el comando de carril por el puerto serie/Bluetooth SPP.',
+        hardware: ['Módulo Bluetooth SPP', 'Puerto UART Serial'],
+        entry: ['Corrección lateral completada', 'Fin de tramo previo'],
+        transitions: [
+          { target: 'EVALUANDO_POSICION', condition: 'Comando de carril válido recibido (ej: C21)' }
+        ],
+        code: `if (SerialBT.available()) {
+  String cmd = SerialBT.readStringUntil('\\n');
+  carrilObjetivo = parsearComando(cmd);
+  estadoActual = EVALUANDO_POSICION;
+}`
+      },
+      'EVALUANDO_POSICION': {
+        title: 'EVALUANDO_POSICION',
+        tag: 'ESTADO 04',
+        color: '#ec4899',
+        desc: 'Compara la distancia actual medida por los ToF con la distancia ideal del carril objetivo. Si el robot ya está en el carril correcto, omite los giros e ingresa directamente a mantener carril.',
+        hardware: ['ToF Sensores', 'Lógica MCU'],
+        entry: ['Recepción de comando de carril'],
+        transitions: [
+          { target: 'MANTENIENDO_CARRIL', condition: 'Distancia actual == Carril Objetivo (Omitir Giro)' },
+          { target: 'GIRANDO_HACIA_CARRIL', condition: 'Distancia actual != Carril Objetivo' }
+        ],
+        code: `float distPared = leerToFLateral();
+if (abs(distPared - distanciaCarrilObjetivo) < TOLERANCIA) {
+  estadoActual = MANTENIENDO_CARRIL; // Omitir giro
+} else {
+  estadoActual = GIRANDO_HACIA_CARRIL;
+}`
+      },
+      'GIRANDO_HACIA_CARRIL': {
+        title: 'GIRANDO_HACIA_CARRIL',
+        tag: 'ESTADO 05',
+        color: '#6366f1',
+        desc: 'Inicia el giro en diagonal hacia el carril objetivo (Fase 1). Monitorea continuamente el ToF frontal por emergencias o proximidad a obstáculos.',
+        hardware: ['Servo Dirección', 'ToF Frontal VL53L1X', 'Encoder'],
+        entry: ['EVALUANDO_POSICION determinó cambio de carril'],
+        transitions: [
+          { target: 'ENDEREZANDO_CARRIL', condition: 'Tiempo/Distancia de inclinación cumplida' }
+        ],
+        code: `setAnguloDireccion(ANGULO_DIAGONAL);
+if (tiempoGiroCumplido() || distToFLateralMetas()) {
+  estadoActual = ENDEREZANDO_CARRIL;
+}`
+      },
+      'ENDEREZANDO_CARRIL': {
+        title: 'ENDEREZANDO_CARRIL',
+        tag: 'ESTADO 06',
+        color: '#14b8a6',
+        desc: 'Aplica contragiro en la dirección y sincroniza con el gyro del BNO055 para alinear el eje del vehículo paralelamente a la pared de la pista.',
+        hardware: ['IMU BNO055', 'Servo Dirección'],
+        entry: ['Proximidad alcanzada al carril objetivo'],
+        transitions: [
+          { target: 'MANTENIENDO_CARRIL', condition: 'Error angular BNO055 < 2.0°' }
+        ],
+        code: `float errorYaw = obtenerYawIMU() - yawObjetivo;
+setAnguloDireccion(-errorYaw * Kp_Giro);
+if (abs(errorYaw) < 2.0) {
+  estadoActual = MANTENIENDO_CARRIL;
+}`
+      },
+      'MANTENIENDO_CARRIL': {
+        title: 'MANTENIENDO_CARRIL',
+        tag: 'ESTADO 07 (CRUCERO)',
+        color: '#10b981',
+        desc: 'Estado principal de navegación en recta. Ejecuta el lazo de control PID para mantener la distancia al carril mientras verifica detectores de línea.',
+        hardware: ['PID Lateral', 'ToF Lateral', 'Sensor Color', 'Encoder'],
+        entry: ['Enderezado de carril completado', 'Omitir giro al evaluar posición'],
+        transitions: [
+          { target: 'EVALUANDO_POSICION', condition: 'Comando doble: Cambio de carril durante marcha' },
+          { target: 'GIRO_ESQUINA', condition: 'Línea detectada & Contador Líneas < 5' },
+          { target: 'MANIOBRA_OPTIMIZADA', condition: 'Línea detectada & Contador Líneas >= 5' },
+          { target: 'ESTADO_DETENCION_FINAL', condition: 'Línea 12 alcanzada (Último tramo)' }
+        ],
+        code: `float error = distanciaCarrilObjetivo - leerToFLateral();
+float salidaPID = calcularPID(error);
+setDireccion(salidaPID);
+
+if (detectarLineaColor()) {
+  contadorLineas++;
+  if (contadorLineas >= 12) estadoActual = ESTADO_DETENCION_FINAL;
+  else if (contadorLineas >= 5) estadoActual = MANIOBRA_OPTIMIZADA;
+  else estadoActual = GIRO_ESQUINA;
+}`
+      },
+      'MANIOBRA_OPTIMIZADA': {
+        title: 'MANIOBRA_OPTIMIZADA',
+        tag: 'ESTADO 08',
+        color: '#f59e0b',
+        desc: 'Esquive dinámico memorizado tras completar la primera vuelta (Línea >= 5). Realiza un cruce fluido mediante subfases (MO_ENDEREZANDO ➔ MO_RETROCESO / MO_AVANZANDO ➔ MO_CRUZANDO) empalmando directo al PID.',
+        hardware: ['BNO055 IMU', 'Sensores Sharp/ToF', 'Servo Ultra-Rápido'],
+        entry: ['Detección de línea cuando contadorLineas >= 5'],
+        transitions: [
+          { target: 'MANTENIENDO_CARRIL', condition: 'Subfase MO_FINALIZADA y empalme PID correcto' }
+        ],
+        code: `switch(subFaseMO) {
+  case MO_ENDEREZANDO: suaveEnderezado(); break;
+  case MO_RETROCESO: retrocesoCortoOptimizado(); break;
+  case MO_CRUZANDO: giroSuaveContinuo(); break;
+  case MO_FINALIZADA: estadoActual = MANTENIENDO_CARRIL; break;
+}`
+      },
+      'ESTADO_DETENCION_FINAL': {
+        title: 'ESTADO_DETENCION_FINAL',
+        tag: 'ESTADO FINAL',
+        color: '#ef4444',
+        desc: 'Fin de la prueba. Al detectar la línea 12, se ejecuta el tiempo de avance de cierre y se realiza el apagado total de los motores.',
+        hardware: ['Driver Motor', 'Buzzer Indicator', 'MCU System Stop'],
+        entry: ['Contador de Líneas >= 12'],
+        transitions: [],
+        code: `void detenerRobotFinal() {
+  avanzarTiempoFinal(TIEMPO_CIERRE);
+  frenarRobot();
+  desactivarDrivers();
+  while(1) { /* Parada segura */ }
+}`
+      }
+    };
+
+    // --- CONNECTIONS DEFINITION FOR SVG ARROWS ---
+    const CONNECTIONS = [
+      { from: 'START', to: 'ESTADO_NORMAL', color: '#00f3ff', label: 'Arranque' },
+      { from: 'ESTADO_NORMAL', to: 'GIRO_ESQUINA', color: '#f59e0b', label: 'Línea < 5' },
+      { from: 'GIRO_ESQUINA', to: 'ESTADO_CORRECCION_LATERAL', color: '#8b5cf6', label: 'Giro OK' },
+      { from: 'ESTADO_CORRECCION_LATERAL', to: 'ESPERANDO_COMANDO_CARRIL', color: '#00f3ff', label: 'Acomodado' },
+      { from: 'ESPERANDO_COMANDO_CARRIL', to: 'EVALUANDO_POSICION', color: '#ec4899', label: 'Cmd RX' },
+      { from: 'EVALUANDO_POSICION', to: 'MANTENIENDO_CARRIL', color: '#10b981', label: 'Mismo Carril' },
+      { from: 'EVALUANDO_POSICION', to: 'GIRANDO_HACIA_CARRIL', color: '#6366f1', label: 'Cambiar Carril' },
+      { from: 'GIRANDO_HACIA_CARRIL', to: 'ENDEREZANDO_CARRIL', color: '#14b8a6', label: 'Ángulo Alc.' },
+      { from: 'ENDEREZANDO_CARRIL', to: 'MANTENIENDO_CARRIL', color: '#10b981', label: 'Alineado' },
+      { from: 'MANTENIENDO_CARRIL', to: 'GIRO_ESQUINA', color: '#f59e0b', label: 'Línea < 5' },
+      { from: 'MANTENIENDO_CARRIL', to: 'MANIOBRA_OPTIMIZADA', color: '#f59e0b', label: 'Línea >= 5' },
+      { from: 'MANIOBRA_OPTIMIZADA', to: 'MANTENIENDO_CARRIL', color: '#10b981', label: 'Empalme' },
+      { from: 'MANTENIENDO_CARRIL', to: 'ESTADO_DETENCION_FINAL', color: '#ef4444', label: 'Línea 12' }
+    ];
+
+    // DOM Elements
+    const svgConnectors = document.getElementById('svgConnectors');
+    const nodesContainer = document.getElementById('nodesContainer');
+
+    // Drawer Elements
+    const inspectorTitle = document.getElementById('inspectorTitle');
+    const inspectorTag = document.getElementById('inspectorTag');
+    const inspectorDesc = document.getElementById('inspectorDesc');
+    const inspectorBadge = document.getElementById('inspectorBadge');
+    const inspectorHardware = document.getElementById('inspectorHardware');
+    const inspectorEntry = document.getElementById('inspectorEntry');
+    const inspectorTransitions = document.getElementById('inspectorTransitions');
+    const inspectorCode = document.getElementById('inspectorCode');
+
+    // Active Simulation State
+    let activeNodeId = 'ESTADO_NORMAL';
+    let lineCounter = 0;
+
+    // Initialize SVG Connectors
+    function drawConnections() {
+      svgConnectors.innerHTML = svgConnectors.querySelector('defs').outerHTML; // Preserve defs
+
+      const containerRect = nodesContainer.getBoundingClientRect();
+
+      CONNECTIONS.forEach(conn => {
+        const fromEl = document.getElementById(`node-${conn.from}`);
+        const toEl = document.getElementById(`node-${conn.to}`);
+
+        if (!fromEl || !toEl) return;
+
+        const r1 = fromEl.getBoundingClientRect();
+        const r2 = toEl.getBoundingClientRect();
+
+        // Calculate center anchor points relative to container
+        const x1 = (r1.left + r1.width / 2) - containerRect.left + nodesContainer.scrollLeft;
+        const y1 = (r1.top + r1.height / 2) - containerRect.top + nodesContainer.scrollTop;
+        const x2 = (r2.left + r2.width / 2) - containerRect.left + nodesContainer.scrollLeft;
+        const y2 = (r2.top + r2.height / 2) - containerRect.top + nodesContainer.scrollTop;
+
+        // Smooth Bezier curve control points
+        const deltaY = y2 - y1;
+        const cy1 = y1 + deltaY * 0.5;
+        const cy2 = y2 - deltaY * 0.5;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const pathData = `M ${x1} ${y1} C ${x1} ${cy1}, ${x2} ${cy2}, ${x2} ${y2}`;
+        
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', conn.color);
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('stroke-opacity', '0.4');
+        path.setAttribute('class', 'transition-all duration-300');
+        path.setAttribute('data-from', conn.from);
+        path.setAttribute('data-to', conn.to);
+
+        // Optional marker arrowhead mapping
+        if (conn.color === '#00f3ff') path.setAttribute('marker-end', 'url(#arrow-cyan)');
+        else if (conn.color === '#f59e0b') path.setAttribute('marker-end', 'url(#arrow-amber)');
+        else if (conn.color === '#10b981') path.setAttribute('marker-end', 'url(#arrow-emerald)');
+        else if (conn.color === '#8b5cf6') path.setAttribute('marker-end', 'url(#arrow-purple)');
+
+        svgConnectors.appendChild(path);
+      });
+    }
+
+    // Update Drawer Panel with selected Node Info
+    function selectNode(nodeId) {
+      activeNodeId = nodeId;
+      const data = STATE_DATA[nodeId];
+      if (!data) return;
+
+      // Update Node CSS active classes
+      document.querySelectorAll('.state-card').forEach(card => {
+        card.classList.remove('active-glow', 'ring-2', 'ring-cyan-400');
+      });
+
+      const activeEl = document.getElementById(`node-${nodeId}`);
+      if (activeEl) {
+        activeEl.classList.add('active-glow', 'ring-2', 'ring-cyan-400');
+      }
+
+      // Update Drawer Details
+      inspectorTitle.innerText = data.title;
+      inspectorTag.innerText = data.tag;
+      inspectorDesc.innerText = data.desc;
+      inspectorBadge.style.backgroundColor = data.color;
+
+      // Hardware Badges
+      inspectorHardware.innerHTML = data.hardware.map(hw => 
+        `<span class="px-2 py-1 bg-slate-800 border border-slate-700/60 rounded text-slate-300 font-mono text-[11px]">${hw}</span>`
+      ).join('');
+
+      // Entry List
+      inspectorEntry.innerHTML = data.entry.map(e => 
+        `<li class="text-slate-300">${e}</li>`
+      ).join('');
+
+      // Transitions List
+      inspectorTransitions.innerHTML = data.transitions.map(t => `
+        <div class="p-2.5 rounded bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+          <div>
+            <div class="text-slate-200 font-semibold">${t.condition}</div>
+            <div class="text-slate-400 text-[10px]">Hacia: ${t.target}</div>
+          </div>
+          <i class="fa-solid fa-arrow-right text-cyan-400"></i>
+        </div>
+      `).join('');
+
+      // Code Snippet
+      inspectorCode.innerText = data.code;
+
+      // Highlight Connector Lines
+      highlightConnectionsForNode(nodeId);
+    }
+
+    // Highlight paths attached to selected node
+    function highlightConnectionsForNode(nodeId) {
+      document.querySelectorAll('#svgConnectors path').forEach(path => {
+        const from = path.getAttribute('data-from');
+        const to = path.getAttribute('data-to');
+
+        if (from === nodeId || to === nodeId) {
+          path.setAttribute('stroke-opacity', '1');
+          path.setAttribute('stroke-width', '3.5');
+          path.classList.add('flow-path');
+        } else {
+          path.setAttribute('stroke-opacity', '0.15');
+          path.setAttribute('stroke-width', '1.5');
+          path.classList.remove('flow-path');
+        }
+      });
+    }
+
+    // Filter Buttons Handling
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active', 'bg-cyan-500/10', 'border-cyan-500', 'text-cyan-300');
+          b.classList.add('border-slate-700/60', 'text-slate-400');
+        });
+
+        btn.classList.add('active', 'bg-cyan-500/10', 'border-cyan-500', 'text-cyan-300');
+
+        const filter = btn.getAttribute('data-filter');
+        filterNodes(filter);
+      });
+    });
+
+    function filterNodes(filter) {
+      document.querySelectorAll('.state-card').forEach(card => {
+        const nodeId = card.getAttribute('data-node');
+        let show = true;
+
+        if (filter === 'principal') {
+          show = ['START', 'ESTADO_NORMAL', 'MANTENIENDO_CARRIL', 'ESTADO_DETENCION_FINAL'].includes(nodeId);
+        } else if (filter === 'esquina') {
+          show = ['ESTADO_NORMAL', 'GIRO_ESQUINA', 'ESTADO_CORRECCION_LATERAL', 'ESPERANDO_COMANDO_CARRIL'].includes(nodeId);
+        } else if (filter === 'carril') {
+          show = ['ESPERANDO_COMANDO_CARRIL', 'EVALUANDO_POSICION', 'GIRANDO_HACIA_CARRIL', 'ENDEREZANDO_CARRIL', 'MANTENIENDO_CARRIL'].includes(nodeId);
+        } else if (filter === 'esquive') {
+          show = ['MANTENIENDO_CARRIL', 'MANIOBRA_OPTIMIZADA'].includes(nodeId);
+        }
+
+        if (show) {
+          card.parentElement.style.opacity = '1';
+          card.parentElement.style.pointerEvents = 'auto';
+        } else {
+          card.parentElement.style.opacity = '0.2';
+          card.parentElement.style.pointerEvents = 'none';
+        }
+      });
+      setTimeout(drawConnections, 100);
+    }
+
+    // Search bar filtering
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.state-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.style.opacity = '1';
+        } else {
+          card.style.opacity = '0.25';
+        }
+      });
+    });
+
+    // Node click listeners
+    document.querySelectorAll('.state-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const nodeId = card.getAttribute('data-node');
+        selectNode(nodeId);
+      });
+    });
+
+    // SIMULATOR CONTROLS
+    const simulatorModal = document.getElementById('simulatorModal');
+    const btnOpenSimulator = document.getElementById('btnOpenSimulator');
+    const btnCloseSimulator = document.getElementById('btnCloseSimulator');
+    const simLineRange = document.getElementById('simLineRange');
+    const simLineVal = document.getElementById('simLineVal');
+    const simTofRange = document.getElementById('simTofRange');
+    const simTofVal = document.getElementById('simTofVal');
+    const simActiveState = document.getElementById('simActiveState');
+    const hudLineCount = document.getElementById('hudLineCount');
+    const hudToF = document.getElementById('hudToF');
+
+    btnOpenSimulator.addEventListener('click', () => {
+      simulatorModal.classList.remove('opacity-0', 'pointer-events-none');
+    });
+
+    btnCloseSimulator.addEventListener('click', () => {
+      simulatorModal.classList.add('opacity-0', 'pointer-events-none');
+    });
+
+    simLineRange.addEventListener('input', (e) => {
+      lineCounter = parseInt(e.target.value);
+      simLineVal.innerText = lineCounter;
+      hudLineCount.innerText = `${lineCounter} / 12`;
+    });
+
+    simTofRange.addEventListener('input', (e) => {
+      simTofVal.innerText = e.target.value;
+      hudToF.innerText = `${e.target.value} cm`;
+    });
+
+    document.getElementById('btnStepSim').addEventListener('click', () => {
+      // Simple simulation step logic
+      if (lineCounter >= 12) {
+        selectNode('ESTADO_DETENCION_FINAL');
+      } else if (lineCounter >= 5 && activeNodeId === 'MANTENIENDO_CARRIL') {
+        selectNode('MANIOBRA_OPTIMIZADA');
+      } else if (activeNodeId === 'ESTADO_NORMAL') {
+        selectNode('GIRO_ESQUINA');
+      } else if (activeNodeId === 'GIRO_ESQUINA') {
+        selectNode('ESTADO_CORRECCION_LATERAL');
+      } else if (activeNodeId === 'ESTADO_CORRECCION_LATERAL') {
+        selectNode('ESPERANDO_COMANDO_CARRIL');
+      } else if (activeNodeId === 'ESPERANDO_COMANDO_CARRIL') {
+        selectNode('EVALUANDO_POSICION');
+      } else if (activeNodeId === 'EVALUANDO_POSICION') {
+        selectNode('GIRANDO_HACIA_CARRIL');
+      } else if (activeNodeId === 'GIRANDO_HACIA_CARRIL') {
+        selectNode('ENDEREZANDO_CARRIL');
+      } else {
+        selectNode('MANTENIENDO_CARRIL');
+      }
+
+      simActiveState.innerText = activeNodeId;
+    });
+
+    document.getElementById('btnSimReset').addEventListener('click', () => {
+      lineCounter = 0;
+      simLineRange.value = 0;
+      simLineVal.innerText = 0;
+      hudLineCount.innerText = "0 / 12";
+      selectNode('ESTADO_NORMAL');
+      simActiveState.innerText = 'ESTADO_NORMAL';
+    });
+
+    document.getElementById('btnResetView').addEventListener('click', () => {
+      selectNode('ESTADO_NORMAL');
+      document.querySelector('[data-filter="all"]').click();
+      document.getElementById('searchInput').value = '';
+    });
+
+    // Window Resize & Initialization
+    window.addEventListener('resize', drawConnections);
+    window.addEventListener('load', () => {
+      drawConnections();
+      selectNode('ESTADO_NORMAL');
+    });
+  </script>
+</body>
+</html>
