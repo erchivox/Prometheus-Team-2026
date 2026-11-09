@@ -43,7 +43,7 @@ En 2025 quedamos **subcampeones nacionales**. Para 2026 rediseñamos casi todo e
 
 - [1. 👥 Equipo Prometheus](#1--equipo-prometheus)
   - [1.1. 👤 Samuel Pérez](#11--samuel-pérez)
-  - [1.2. 👤 Trino Carrizales](#12--trino-carrizales)
+  - [1.2. 👤 Trino Carrisales](#12--trino-carrizales)
   - [1.3. 👤 Leandro Padrón](#13--leandro-padrón)
   - [1.4. 🎓 Ing. Dayana Pérez](#14--ing-dayana-pérez)
   - [1.5. 🏆 De subcampeones 2025 al primer lugar en 2026](#15--de-subcampeones-2025-al-primer-lugar-en-2026)
