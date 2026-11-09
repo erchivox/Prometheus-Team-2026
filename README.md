@@ -1754,6 +1754,38 @@ Diagrama interactivo de estados desarrollado para la competencia WRO Future Engi
 
 ---
 
+---
+
+## 🚧 Casos de esquive optimizados (Estrategia de segunda vuelta)
+
+En esta nueva faceta de los esquives optimizados, nuestro objetivo principal es **eliminar el tiempo perdido al cruzar en las esquinas**, aprovechando la información recopilada en la primera vuelta sobre la posición exacta de los obstáculos. 
+
+Para lograrlo, implementamos un **patrón de movimientos guiados** que define de antemano si el vehículo debe transitar por el carril interior o exterior, optimizando la trayectoria según la combinación de los pilares detectados.
+
+<div align="center">
+  <img src="other/casos-de-esquive-optimizados.png" alt="Casos de esquive optimizados - Prometheus Team" width="750">
+  <br>
+  <sub><b>Ilustración de trayectorias:</b> Combinaciones movimientos de carril de salida a carril de llegada para la resolución de los esquives.</sub>
+</div>
+
+---
+
+### 🧠 ¿Cómo funciona la lógica de esquive?
+
+1. **Memoria de pista (Primera vuelta):** El sistema registra la disposición espacial de los obstáculos detectados por la aplicación de visión artificial en la fase inicial, estructurando un mapa de decisiones para los tramos subsiguientes.
+2. **Selección de la maniobra:** Dependiendo de si estamos en carril **interior (I)** o **exterior (E)** y dónde se localiza el siguiente tramo, el `CommandManager` selecciona el patrón de transición óptimo:
+   * **Interior ➔ Interior ($I \to I$):** Mantenimiento de radio cerrado sin cambios abruptos de carril.
+   * **Interior ➔ Exterior ($I \to E$):** Apertura controlada hacia el perímetro exterior.
+   * **Exterior ➔ Interior ($E \to I$):** Cierre de trayectoria aprovechando el espacio libre interior.
+   * **Exterior ➔ Exterior ($E \to E$):** Tránsito fluido por el carril externo con radio amplio.
+3. **Sensores y Giroscopio en bucle cerrado:** Una vez escogida la maniobra, el sistema utiliza los **sensores de distancia ToF** y la **IMU BNO055** para calcular con precisión milimétrica *cuándo* y *hasta dónde* girar.
+4. **Ejecución y comandos dobles:** 
+   * En maniobras simples, el vehículo ejecuta el cambio y retoma el mantenimiento de carril mediante PID.
+   * En el caso de **comandos dobles** (presencia de dos obstáculos consecutivos), el sistema mantiene el patrón de navegación activo **hasta detectar mediante los sensores que se ha rebasado por completo el objeto**, momento exacto en el que se gatilla el cambio de carril hacia el otro carril.
+
+> [!NOTE]
+>  Al conocer de antemano el patrón de los comandos de carril inicial y final, el vehículo no reacciona "a ciegas" ante el pilar, sino que anticipa la cinemática de la curva, reduciendo drásticamente el tiempo por vuelta en la fase de obstáculos.
+
 ## 15. 📱 Telemetría y visión artificial: aplicación Prometheus V5.0
 
 Nuestra aplicación de detección, hecha en Android Studio con OpenCV, ya va por la versión 5.0 y funciona como el centro de control de nuestro sistema durante las pruebas. Conserva lo que ya funcionaba en 2025 (comunicación USB, interfaz a pantalla completa y monitor serial integrado), pero en 2026 rehicimos buena parte del procesamiento de imagen y de la telemetría para soportar condiciones de pista más exigentes.
