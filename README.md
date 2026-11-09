@@ -1749,7 +1749,7 @@ Diagrama interactivo de estados desarrollado para la competencia WRO Future Engi
 **Haz clic en la imagen para abrir el diagrama interactivo:**
 
 <p align="center">
-  <a href="https://erchivox.github.io/clasificador-de-animales-en-peligro-de-extinci-n-en-Venezuela/pagina/ModeloArquitecturaEstados.html"><img src="other/diagrama-de-estados.png" alt="Diagrama de estados del sistema" width="900"></a>
+  <a href="https://erchivox.github.io/Prometheus-Team-2026/other/ModeloArquitecturaEstados.html"><img src="other/diagrama-de-estados.png" alt="Diagrama de estados del sistema" width="900"></a>
 </p>
 
 ---
