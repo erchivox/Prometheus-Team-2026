@@ -556,9 +556,7 @@ flowchart TD
 En cada paso solo **un sensor** está encendido en la dirección `0x29`; los demás siguen en reset (XSHUT en LOW). Cuando ya tiene su dirección definitiva, ese sensor queda encendido (XSHUT en HIGH) y se pasa al siguiente.
 
 > [!NOTE]
-> **Los 4 sensores usan la misma calibración**
->
-> No aplicamos offsets individuales. Los VL53L0X del mismo lote vienen con una calibración de fábrica consistente entre sí; lo único que hay que configurar por sensor es su dirección.
+> **Nota dependiendo de la superficie se calibra los offsets de cada sensor tof para que marquen el valor real, esto se hace individualmente por cada tof aunque las mediciones siempre marcan casi iguales para todos**
 
 #### 7.2.3. Subsistema de lectura de superficie (bus I2C #2, pines D32/D33)
 
