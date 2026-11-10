@@ -1,27 +1,27 @@
-# 🔌 Esquemas eléctricos
+# 🔌 Electrical Schematics
 
-[⬅️ Volver al README principal](../README.md)
+[⬅️ Back to the main README](../README.md)
 
-Esquemas de la alimentación y de las conexiones de entrada y salida del vehículo. Esta página repite las secciones *6. Esquemas de alimentación y cableado* y *7. Esquemas de sensores y adquisición de datos* del README principal, para que la explicación sea la misma en los dos lugares.
+Schematics for the vehicle's power supply and its input and output connections. This page repeats sections *6. Power and Wiring Schematics* and *7. Sensor and Data Acquisition Schematics* of the main README, so the explanation is the same in both places.
 
-| Archivo | Contenido |
+| File | Contents |
 | :--- | :--- |
-| [`Power_Supply_Diagram_FINALS.png`](Power_Supply_Diagram_FINALS.png) | Diagrama de alimentación (versión 4, actual) |
-| [`IO_Connection_Schematic_FINALS.png`](IO_Connection_Schematic_FINALS.png) | Esquema de conexiones de entrada y salida (versión 4, actual) |
+| [`Power_Supply_Diagram_FINALS.png`](Power_Supply_Diagram_FINALS.png) | Power supply diagram (version 4, current) |
+| [`IO_Connection_Schematic_FINALS.png`](IO_Connection_Schematic_FINALS.png) | Input and output connection schematic (version 4, current) |
 
 ---
 
-## 6. ⚡ Esquemas de alimentación y cableado
+## 6. ⚡ Power and Wiring Schematics
 
-*Las versiones anteriores del sistema de alimentación están en el [archivo de 2025](../README.md#192--electronics-evolution).*
+*Earlier versions of the power system are in the [2025 archive](../README.md#192--electronics-evolution).*
 
-### 6.1. 🧾 Versión 4 (actual)
+### 6.1. 🧾 Version 4 (current)
 
-![Diagrama de alimentación V4](Power_Supply_Diagram_FINALS.png)
+![Power diagram V4](Power_Supply_Diagram_FINALS.png)
 
 ```mermaid
 graph TD
-    %% Definición de colores
+    %% Color definitions
     classDef bat fill:#7b1fa2,stroke:#ab47bc,stroke-width:2px,color:#fff;
     classDef sw fill:#616161,stroke:#9e9e9e,stroke-width:2px,color:#fff;
     classDef reg fill:#e65100,stroke:#ff9800,stroke-width:2px,color:#fff;
@@ -64,41 +64,41 @@ graph TD
     ESP32 --> SENS3V
 ```
 
-### 6.2. 🔋 Arquitectura de energía, control y gestión de potencia
+### 6.2. 🔋 Power, Control, and Power Management Architecture
 
-La **batería LiPo 2S de 2200 mAh** (7.4 V nominales, 8.4 V con carga completa) es la única fuente de energía. Pasa por un **interruptor general de palanca**, que elegimos porque no se desconecta solo con las vibraciones de la pista.
+The **2S 2200 mAh LiPo battery** (7.4 V nominal, 8.4 V fully charged) is the only power source. It goes through a **main toggle switch**, which we chose because track vibration cannot knock it off.
 
-Desde ese punto la alimentación se divide en cuatro líneas reguladas e independientes, más la línea lógica de 3,3 V que sale del propio ESP32. Así el ruido del motor no llega a la lógica de control y evitamos caídas de tensión (*brownouts*):
+From there, power splits into four independent regulated lines, plus the 3.3 V logic line that comes from the ESP32 itself. This keeps motor noise away from the control logic and prevents voltage drops (*brownouts*):
 
-* **Línea de tracción:** un regulador **XL6009** ajustado entre 6 y 8 V, según la velocidad que busquemos, alimenta el **puente H TB6612FNG**, que a su vez mueve el **motor 25GA-370**.
+* **Drive line:** an **XL6009** regulator, set between 6 and 8 V depending on the speed we want, powers the **TB6612FNG H-bridge**, which in turn drives the **25GA-370 motor**.
 
-* **Línea de control:** un **DSN-Mini 360** ajustado a 6 V se conecta a un **diodo rectificador 1N4007** (para evitar retroalimentaciones al conectar el cable USB para subir código). Tras la caída de voltaje del diodo, llegan unos 5.2 V al pin VIN del **ESP32**. Con este voltaje, su regulador interno tiene margen suficiente para trabajar y evita que la placa se reinicie por caídas de tensión cuando arranca el motor.
+* **Control line:** a **DSN-Mini 360** set to 6 V feeds a **1N4007 rectifier diode** (to prevent backfeeding when the USB cable is plugged in to upload code). After the diode's voltage drop, about 5.2 V reaches the **ESP32**'s VIN pin. At this voltage, its internal regulator has enough headroom and the board does not reset from voltage dips when the motor starts.
 
-* **Línea del servomotor:** un segundo regulador **DSN-Mini 360** ajustado a 6 V alimenta de forma exclusiva al **servomotor MG90**. Aislar el servo en su propio regulador es fundamental para evitar que sus picos de consumo y el ruido eléctrico interfieran con las lecturas analógicas y digitales del resto del sistema.
+* **Servo line:** a second **DSN-Mini 360** set to 6 V powers only the **MG90 servo**. Isolating the servo on its own regulator is essential to keep its current peaks and electrical noise from interfering with the analog and digital readings in the rest of the system.
 
-* **Línea general de 5 V:** un tercer **DSN-Mini 360** ajustado a 5 V se encarga de la alimentación general de los periféricos que requieren este voltaje. Por ahora, de esta línea se alimentan únicamente la **tira NeoPixel** y los dos **sensores de distancia Sharp**.
+* **General 5 V line:** a third **DSN-Mini 360** set to 5 V supplies the peripherals that need this voltage. For now, this line powers only the **NeoPixel strip** and the two **Sharp distance sensors**.
 
-* **Línea lógica de 3.3 V:** el resto de los módulos y sensores del sistema (como la IMU y los sensores TOF) se alimentan directamente desde el pin de 3.3 V del **ESP32**. Esto asegura que reciban un voltaje limpio, estable y libre del ruido de conmutación (rizado) que pueden llegar a inducir los reguladores Mini 360 debido a su naturaleza conmutada (switching).
+* **3.3 V logic line:** the remaining modules and sensors (such as the IMU and the ToF sensors) are powered directly from the **ESP32**'s 3.3 V pin. This gives them a clean, stable voltage, free of the switching noise (ripple) that the Mini 360 regulators can introduce.
 
 > [!IMPORTANT]
-> **Cambio clave de hardware: L298N → TB6612FNG**
+> **Key hardware change: L298N → TB6612FNG**
 >
-> El cambio al TB6612FNG resolvió dos problemas graves del prototipo de 2025. Primero, eliminó la caída de voltaje interna del L298N, que le quitaba fuerza al motor. Segundo, el L298N generaba una interferencia que dejaba inutilizado el bus I2C del microcontrolador. Para esquivarlo tuvimos que usar dos placas ESP32, una solo para el motor. Con el TB6612FNG ese conflicto desapareció y volvimos a un único ESP32, lo que redujo el peso, el cableado, el consumo y los puntos de falla.
+> Switching to the TB6612FNG solved two serious problems from the 2025 prototype. First, it eliminated the L298N's internal voltage drop, which robbed the motor of power. Second, the L298N generated interference that knocked out the microcontroller's I2C bus. To work around it, we had to use two ESP32 boards, one just for the motor. With the TB6612FNG that conflict disappeared and we went back to a single ESP32, which reduced weight, wiring, power draw, and points of failure.
 
 > [!NOTE]
-> **Compromiso de diseño**
+> **Design trade-off**
 >
-> 4 reguladores independientes ocupan más espacio dentro del chasis impreso. Aceptamos ese costo porque separar la potencia de la electrónica sensible eliminó el ruido inductivo del motor y nos dio lecturas I2C limpias durante toda la navegación.
+> Four independent regulators take up more space inside the printed chassis. We accepted that cost because separating power from the sensitive electronics eliminated the motor's inductive noise and gave us clean I2C readings throughout the run.
 
 ---
 
-## 7. 📡 Esquemas de sensores y adquisición de datos
+## 7. 📡 Sensor and Data Acquisition Schematics
 
-*Las versiones anteriores del sistema de detección están en el [archivo de 2025](../README.md#192--electronics-evolution).*
+*Earlier versions of the sensing system are in the [2025 archive](../README.md#192--electronics-evolution).*
 
-### 7.1. 🧾 Versión 4 (actual)
+### 7.1. 🧾 Version 4 (current)
 
-![Diagrama de sensores V4](IO_Connection_Schematic_FINALS.png)
+![Sensor diagram V4](IO_Connection_Schematic_FINALS.png)
 
 ```mermaid
 graph TD
@@ -169,18 +169,18 @@ graph TD
 | Program Start Switch | 23 |
 | Buzzer | 4 |
 
-### 7.2. 🔧 Optimización del sistema de sensores y hardware
+### 7.2. 🔧 Sensor and Hardware Optimization
 
-En esta cuarta versión reorganizamos los sensores aprovechando que el ESP32 tiene dos buses I2C por hardware. El objetivo era ganar precisión, que ningún sensor retrasara a los demás y que la navegación fuera estable dentro de la pista de $3 \times 3$ metros.
+In this fourth version we reorganized the sensors to take advantage of the ESP32's two hardware I2C buses. The goal was to gain accuracy, keep any one sensor from slowing down the others, and make navigation stable inside the $3 \times 3$ meter track.
 
-#### 7.2.1. Subsistema de navegación (bus I2C #1, pines D21/D22)
+#### 7.2.1. Navigation subsystem (I2C bus #1, pins D21/D22)
 
-* **Sensores de distancia ToF:** reemplazaron a los ultrasónicos y eliminaron las zonas muertas a corta distancia. Para conectar los cuatro al mismo bus controlamos sus pines **XSHUT** desde el ESP32 y los encendemos uno por uno para darles direcciones distintas (ver 7.2.2). Además trabajan a 3.3 V, así que ya no hacen falta divisores de tensión.
-* **IMU BNO055:** comparte el bus I2C #1. Su procesador interno fusiona los datos y prácticamente **elimina la deriva (*drift*)** acumulada que teníamos con el giroscopio anterior. Al arrancar, el programa toma la orientación actual como cero y todos los giros se calculan respecto a ella.
+* **ToF distance sensors:** they replaced the ultrasonic sensors and eliminated the short-range dead zones. To connect all four to the same bus, the ESP32 controls their **XSHUT** pins and turns them on one at a time to give each a different address (see 7.2.2). They also run at 3.3 V, so voltage dividers are no longer needed.
+* **BNO055 IMU:** shares I2C bus #1. Its internal processor fuses the data and practically **eliminates the accumulated drift** we had with the previous gyroscope. At startup, the program takes the current heading as zero and calculates every turn relative to it.
 
-#### 7.2.2. Calibración y direccionamiento de los 4 sensores ToF (XSHUT)
+#### 7.2.2. Calibration and addressing of the 4 ToF sensors (XSHUT)
 
-Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica todos responden a la misma dirección (`0x29`). Si se encendieran a la vez habría colisión. Para resolverlo, el pin **XSHUT** de cada sensor va a un GPIO distinto del ESP32 y funciona como interruptor de encendido por software:
+The four VL53L0X sensors share I2C bus #1 (pins D21/D22), but out of the box they all answer at the same address (`0x29`). Turning them on at the same time would cause a collision. To solve this, each sensor's **XSHUT** pin goes to a different ESP32 GPIO and works as a software-controlled power switch:
 
 ```cpp
 #define XSHUT_FRONTAL 18
@@ -194,72 +194,70 @@ Los cuatro VL53L0X comparten el bus I2C #1 (pines D21/D22), pero de fábrica tod
 #define ADDR_DER     0x33
 ```
 
-**Secuencia de inicialización (encendido escalonado):**
+**Startup sequence (staggered power-up):**
 
 ```mermaid
 flowchart TD
-    A["Inicio:<br>los 4 pines<br>XSHUT en LOW<br>(apagados)"] --> B["Activar<br>XSHUT_FRONTAL<br>(HIGH)"]
-    B --> C["Inicializar<br>en dir.<br>fábrica 0x29"]
-    C --> D["Reasignar a<br>0x30<br>(ADDR_FRONTAL)"]
-    D --> E["Activar<br>XSHUT_TRASERO<br>(HIGH)"]
-    E --> F["Inicializar<br>en 0x29 →<br>asignar 0x31"]
-    F --> G["Activar<br>XSHUT_IZQ<br>(HIGH)"]
-    G --> H["Inicializar<br>en 0x29 →<br>asignar 0x32"]
-    H --> I["Activar<br>XSHUT_DER<br>(HIGH)"]
-    I --> J["Inicializar<br>en 0x29 →<br>asignar 0x33"]
-    J --> K["Los 4 sensores<br>activos en el<br>mismo bus I2C"]
+    A["Start:<br>all 4<br>XSHUT pins LOW<br>(off)"] --> B["Enable<br>XSHUT_FRONTAL<br>(HIGH)"]
+    B --> C["Initialize<br>at factory<br>address 0x29"]
+    C --> D["Reassign to<br>0x30<br>(ADDR_FRONTAL)"]
+    D --> E["Enable<br>XSHUT_TRASERO<br>(HIGH)"]
+    E --> F["Initialize<br>at 0x29 →<br>assign 0x31"]
+    F --> G["Enable<br>XSHUT_IZQ<br>(HIGH)"]
+    G --> H["Initialize<br>at 0x29 →<br>assign 0x32"]
+    H --> I["Enable<br>XSHUT_DER<br>(HIGH)"]
+    I --> J["Initialize<br>at 0x29 →<br>assign 0x33"]
+    J --> K["All 4 sensors<br>active on the<br>same I2C bus"]
 ```
 
-En cada paso solo **un sensor** está encendido en la dirección `0x29`; los demás siguen en reset (XSHUT en LOW). Cuando ya tiene su dirección definitiva, ese sensor queda encendido (XSHUT en HIGH) y se pasa al siguiente.
+At each step only **one sensor** is powered at address `0x29`; the rest stay in reset (XSHUT LOW). Once a sensor has its final address, it stays on (XSHUT HIGH) and the process moves to the next one.
 
 > [!NOTE]
-> **Los 4 sensores usan la misma calibración**
->
-> No aplicamos offsets individuales. Los VL53L0X del mismo lote vienen con una calibración de fábrica consistente entre sí; lo único que hay que configurar por sensor es su dirección.
+> **Offset calibration:** depending on the surface, we calibrate each ToF sensor's offset individually so it reads the true distance, even though all four sensors almost always read nearly the same.
 
-#### 7.2.3. Subsistema de lectura de superficie (bus I2C #2, pines D32/D33)
+#### 7.2.3. Surface sensing subsystem (I2C bus #2, pins D32/D33)
 
-* **Sensor de color TCS34725:** detecta y confirma las líneas de la pista. Lo pusimos en un **segundo bus I2C independiente** para que sus lecturas constantes del suelo no retrasen las de los ToF, que son las que usa el carro para no chocar. En el firmware se lee cada 30 ms en una tarea propia de FreeRTOS.
+* **TCS34725 color sensor:** detects and confirms the track lines. We put it on a **second, independent I2C bus** so its constant floor readings do not delay the ToF readings, which are what the car uses to avoid collisions. In the firmware it is read every 30 ms in its own FreeRTOS task.
 
-#### 7.2.4. Subsistema de proximidad redundante e interfaz
+#### 7.2.4. Redundant proximity and interface subsystem
 
-* **Sensores Sharp GP2Y0A21 diagonales:** siguen conectados a entradas analógicas y dan una segunda medida de proximidad en los ángulos ciegos del frente.
-* **Interfaz de usuario:** la tira Neopixel y el buzzer muestran el estado del robot (errores, calibración correcta, línea detectada). El arranque se hace con un **interruptor de palanca** (pin D23); descartamos el pulsador porque los rebotes y la vibración lo activaban por accidente.
+* **Diagonal Sharp GP2Y0A21 sensors:** still connected to analog inputs, they provide a second proximity reading in the blind spots at the front.
+* **User interface:** the NeoPixel strip and the buzzer show the robot's state (errors, successful calibration, line detected). The run starts with a **toggle switch** (pin D23); we dropped the push button because bounce and vibration triggered it by accident.
 
 ---
 
 > [!IMPORTANT]
-> **Simplificación y mantenimiento**
+> **Simpler wiring and easier maintenance**
 >
-> Pasar de los ultrasónicos HC-SR04 a los ToF no solo mejoró la frecuencia de muestreo, también resolvió un problema físico. El HC-SR04 trabaja con 5 V y los pines del ESP32 con 3.3 V, así que en 2025 tuvimos que armar divisores de voltaje a mano con resistencias (no conseguimos convertidores de nivel comerciales). Funcionaban, pero el circuito era voluminoso. Con sensores I2C nativos de 3.3 V esa red desapareció y el montaje quedó más limpio y fácil de reparar.
+> Moving from HC-SR04 ultrasonic sensors to ToF sensors did more than raise the sampling rate; it also solved a physical problem. The HC-SR04 runs on 5 V while the ESP32 pins use 3.3 V, so in 2025 we had to hand-build resistor voltage dividers (we could not find commercial level shifters). They worked, but the circuit was bulky. With native 3.3 V I2C sensors that network disappeared, and the build became cleaner and easier to repair.
 
 > [!NOTE]
-> **Compromiso de diseño: tráfico en el bus I2C**
+> **Design trade-off: I2C bus traffic**
 >
-> Tener varios sensores I2C traía el riesgo de colisiones y de retrasos en el `loop` principal. Lo resolvimos de dos formas: en software, con lecturas secuenciales (*polling*) y direcciones asignadas con XSHUT; en hardware, separando la carga en dos buses (navegación y superficie). Para ahorrar espacio no pusimos resistencias *pull-up* externas: las que traen las placas de los sensores fueron suficientes.
+> Having several I2C sensors brought the risk of collisions and delays in the main `loop`. We solved it in two ways: in software, with sequential reads (*polling*) and addresses assigned through XSHUT; in hardware, by splitting the load across two buses (navigation and surface). To save space we did not add external *pull-up* resistors: the ones on the sensor boards were enough.
 
 ---
 
-### 7.3. 📋 Resumen de cambios y evolución del hardware
+### 7.3. 📋 Summary of Hardware Changes
 
-| Componente anterior | Componente actual | Justificación y ventaja principal |
+| Previous component | Current component | Rationale and main advantage |
 | :--- | :--- | :--- |
-| Sensor ultrasónico HC-SR04 con divisores de tensión | **4 × sensores ToF (I2C #1)** | Sin zonas muertas ni redes de resistencias; todo a 3.3 V. Direcciones asignadas con XSHUT. |
-| MPU6050 + magnetómetro HMC5883L | **IMU BNO055 (I2C #1)** | Deriva prácticamente eliminada en la pista de $3 \times 3$ m. |
-| Sensor de color en el bus compartido | **TCS34725 (I2C #2 aislado)** | Bus propio, sin cuellos de botella con los sensores de distancia. |
-| Pulsador de inicio | **Interruptor de palanca (D23)** | No se activa solo con la vibración de la pista. |
-| L298N + segundo microcontrolador | **TB6612FNG + un solo ESP32** | Sin caída de voltaje ni interferencia en el I2C. |
+| HC-SR04 ultrasonic sensor with voltage dividers | **4 × ToF sensors (I2C #1)** | No dead zones or resistor networks; everything at 3.3 V. Addresses assigned through XSHUT. |
+| MPU6050 + HMC5883L magnetometer | **BNO055 IMU (I2C #1)** | Drift practically eliminated on the $3 \times 3$ m track. |
+| Color sensor on the shared bus | **TCS34725 (isolated I2C #2)** | Its own bus, with no bottlenecks against the distance sensors. |
+| Start push button | **Toggle switch (D23)** | Track vibration cannot trigger it. |
+| L298N + second microcontroller | **TB6612FNG + a single ESP32** | No voltage drop and no I2C interference. |
 
 ---
 
-## 📁 Versiones anteriores (2025)
+## 📁 Previous Versions (2025)
 
-| Archivo | Contenido |
+| File | Contents |
 | :--- | :--- |
-| [`power_supply_diagram.jpeg`](power_supply_diagram.jpeg) | Alimentación V1 (Arduino y L298N) |
-| [`diagrma-alimentacion2.jpg`](diagrma-alimentacion2.jpg) | Alimentación V2 (dos Arduino) |
-| [`Esquema-alimentacio-3.png`](Esquema-alimentacio-3.png) | Alimentación V3 (dos ESP32) |
-| [`diagrama-sensores.jpg`](diagrama-sensores.jpg) | Sensores V1 |
-| [`diagrama-sensores2.jpg`](diagrama-sensores2.jpg) | Sensores V2 (Arduino esclavo y botón de inicio) |
-| [`Esquema-alimentacion-4.png`](Esquema-alimentacion-4.png) | Sensores V3 (dos ESP32, magnetómetro y ultrasónico trasero) |
-| [`Divisor-de-voltaje.png`](Divisor-de-voltaje.png) | Divisor de voltaje para los HC-SR04 (5 V → 3,3 V) |
+| [`power_supply_diagram.jpeg`](power_supply_diagram.jpeg) | Power V1 (Arduino and L298N) |
+| [`diagrma-alimentacion2.jpg`](diagrma-alimentacion2.jpg) | Power V2 (two Arduinos) |
+| [`Esquema-alimentacio-3.png`](Esquema-alimentacio-3.png) | Power V3 (two ESP32 boards) |
+| [`diagrama-sensores.jpg`](diagrama-sensores.jpg) | Sensors V1 |
+| [`diagrama-sensores2.jpg`](diagrama-sensores2.jpg) | Sensors V2 (secondary Arduino and start button) |
+| [`Esquema-alimentacion-4.png`](Esquema-alimentacion-4.png) | Sensors V3 (two ESP32 boards, magnetometer, and rear ultrasonic sensor) |
+| [`Divisor-de-voltaje.png`](Divisor-de-voltaje.png) | Voltage divider for the HC-SR04 sensors (5 V → 3.3 V) |
