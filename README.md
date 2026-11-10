@@ -183,7 +183,7 @@ Prometheus Team is made up of Electronics Engineering students from the **Univer
   * Electronics Engineering student at **UPTJFR**.
   * Systems Engineering student at the **Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora (UNELLEZ)**.
 * **On the team:**
-  * **Firmware:** programs and optimizes the code for the **Arduino** and **ESP32** microcontrollers.
+  * **Firmware:** programs and optimizes the code for the **ESP32** microcontroller.
   * **Debugging:** finds and fixes logic errors during testing, even in the middle of a competition.
   * **Achievements:** finalist in the national round of **WRO Venezuela 2025**.
 
