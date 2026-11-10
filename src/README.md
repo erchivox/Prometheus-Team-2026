@@ -1,121 +1,121 @@
-# 💾 Código del vehículo
+# 💾 Vehicle Code
 
-[⬅️ Volver al README principal](../README.md)
+[⬅️ Back to the main README](../README.md)
 
-Firmware del ESP32 (IDE de Arduino) y enlaces al código de la app de visión. La lógica de navegación está explicada en la sección *14. Software y control* del README principal.
-
----
-
-## ✅ Firmware 2026
-
-| Archivo | Desafío | Qué hace |
-| :--- | :--- | :--- |
-| [`v1PrometeusTeam2026.ino`](v1PrometeusTeam2026.ino) | 🏁 Vuelta libre | Seguimiento de pared con ToF y BNO055, conteo de líneas y giros con PID |
-| [`v2PrometrusTeam2026.ino`](v2PrometrusTeam2026.ino) | 🚧 Obstáculos | Todo lo anterior más la salida del estacionamiento, el sistema de carriles y los comandos de la app por USB serial |
-
-### 📚 Librerías
-
-| Librería | Uso | Instalación |
-| :--- | :--- | :--- |
-| `Wire.h` | Buses I2C (#1 en 21/22 y #2 en 32/33) | Incluida con el core del ESP32 |
-| [`Adafruit_BNO055`](https://github.com/adafruit/Adafruit_BNO055) + [`Adafruit_Sensor`](https://github.com/adafruit/Adafruit_Sensor) | IMU BNO055 (orientación) | Gestor de librerías: "Adafruit BNO055" |
-| [`Adafruit_VL53L0X`](https://github.com/adafruit/Adafruit_VL53L0X) | 4 sensores ToF | Gestor de librerías: "Adafruit VL53L0X" |
-| [`Adafruit_TCS34725`](https://github.com/adafruit/Adafruit_TCS34725) | Sensor de color | Gestor de librerías: "Adafruit TCS34725" |
-| [`Adafruit_NeoPixel`](https://github.com/adafruit/Adafruit_NeoPixel) | Tira de LEDs de estado | Gestor de librerías: "Adafruit NeoPixel" |
-| [`ESP32Servo`](https://github.com/madhephaestus/ESP32Servo) | Servo de la dirección | Gestor de librerías: "ESP32Servo" |
-| [`ColorConverterLib`](https://github.com/luisllamasbinaburo/Arduino-ColorConverter) | Conversión RGB → HSV | Descargar el .zip e instalar con *Sketch → Incluir librería → Añadir .ZIP* |
-
-### ⬆️ Cargar el código
-
-1. Instale el **IDE de Arduino** y agregue el soporte para **ESP32** (*Gestor de tarjetas → esp32 by Espressif Systems*).
-2. Instale las librerías de la tabla anterior.
-3. Abra `v1PrometeusTeam2026.ino` o `v2PrometrusTeam2026.ino`.
-4. Seleccione la placa **ESP32 Dev Module** y el puerto correspondiente.
-5. Presione **Verificar** y luego **Subir**.
-6. Con el vehículo en la pista, pase el interruptor de inicio (D23) a LOW para arrancar.
+ESP32 firmware (Arduino IDE) and links to the vision app's code. The navigation logic is explained in section *14. Software and Control* of the main README.
 
 ---
 
-## 📁 Firmware 2025
+## ✅ 2026 Firmware
 
-| Archivo | Descripción |
+| File | Challenge | What it does |
+| :--- | :--- | :--- |
+| [`v1PrometeusTeam2026.ino`](v1PrometeusTeam2026.ino) | 🏁 Open lap | Wall following with ToF and the BNO055, line counting, and PID turns |
+| [`v2PrometrusTeam2026.ino`](v2PrometrusTeam2026.ino) | 🚧 Obstacles | Everything above, plus leaving the parking area, the lane system, and app commands over USB serial |
+
+### 📚 Libraries
+
+| Library | Purpose | Installation |
+| :--- | :--- | :--- |
+| `Wire.h` | I2C buses (#1 on 21/22 and #2 on 32/33) | Included with the ESP32 core |
+| [`Adafruit_BNO055`](https://github.com/adafruit/Adafruit_BNO055) + [`Adafruit_Sensor`](https://github.com/adafruit/Adafruit_Sensor) | BNO055 IMU (orientation) | Library Manager: "Adafruit BNO055" |
+| [`Adafruit_VL53L0X`](https://github.com/adafruit/Adafruit_VL53L0X) | 4 ToF sensors | Library Manager: "Adafruit VL53L0X" |
+| [`Adafruit_TCS34725`](https://github.com/adafruit/Adafruit_TCS34725) | Color sensor | Library Manager: "Adafruit TCS34725" |
+| [`Adafruit_NeoPixel`](https://github.com/adafruit/Adafruit_NeoPixel) | Status LED strip | Library Manager: "Adafruit NeoPixel" |
+| [`ESP32Servo`](https://github.com/madhephaestus/ESP32Servo) | Steering servo | Library Manager: "ESP32Servo" |
+| [`ColorConverterLib`](https://github.com/luisllamasbinaburo/Arduino-ColorConverter) | RGB → HSV conversion | Download the .zip and install it with *Sketch → Include Library → Add .ZIP Library* |
+
+### ⬆️ Uploading the Code
+
+1. Install the **Arduino IDE** and add **ESP32** support (*Boards Manager → esp32 by Espressif Systems*).
+2. Install the libraries in the table above.
+3. Open `v1PrometeusTeam2026.ino` or `v2PrometrusTeam2026.ino`.
+4. Select the **ESP32 Dev Module** board and the correct port.
+5. Click **Verify** and then **Upload**.
+6. With the vehicle on the track, switch the start switch (D23) to LOW to start.
+
+---
+
+## 📁 2025 Firmware
+
+| File | Description |
 | :--- | :--- |
-| [`Wro_Prometheus_Arduino_Maestro_v28.ino`](Wro_Prometheus_Arduino_Maestro_v28.ino) | Arduino principal (sensores y lógica) |
-| [`Wro_Prometheus_Arduino_Esclavo.ino`](Wro_Prometheus_Arduino_Esclavo.ino) | Arduino esclavo para el puente H |
-| [`Wro_Prometeus_V1.ino`](Wro_Prometeus_V1.ino) | ESP32 con MPU6050, vuelta libre |
-| [`Wro_Prometeus_V2_.ino`](Wro_Prometeus_V2_.ino) | ESP32 con MPU6050, obstáculos (primer sistema de carriles) |
-| [`Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino`](Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino) | ESP32 esclavo del motor |
+| [`Wro_Prometheus_Arduino_Maestro_v28.ino`](Wro_Prometheus_Arduino_Maestro_v28.ino) | Main Arduino (sensors and logic) |
+| [`Wro_Prometheus_Arduino_Esclavo.ino`](Wro_Prometheus_Arduino_Esclavo.ino) | Secondary Arduino for the H-bridge |
+| [`Wro_Prometeus_V1.ino`](Wro_Prometeus_V1.ino) | ESP32 with MPU6050, open lap |
+| [`Wro_Prometeus_V2_.ino`](Wro_Prometeus_V2_.ino) | ESP32 with MPU6050, obstacles (first lane system) |
+| [`Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino`](Wro_Prometeus_ESCLAVO_PULLUP_esp32.ino) | Secondary ESP32 for the motor |
 
-Estas versiones usan además la librería [`MPU6050`](https://github.com/ElectronicCats/mpu6050) (Electronic Cats).
-
----
-
-## 📱 App WRO Prometheus (Android Studio)
-
-El código de la aplicación **WRO Prometheus** está en su propio repositorio: [APP-WRO-PROMETHEUS-TEAM](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) ([descarga en .zip](https://drive.google.com/file/d/1VvdzdWbxGnchFslUwI8wQfkkwYPTyGRD/view?usp=drive_link)). La app, que sirve para procesar datos de imágenes para nuestro Vehículo Autónomo en la competencia. Aquí encontrarás toda la información relevante sobre las tecnologías utilizadas y cómo preparar el proyecto.
+These versions also use the [`MPU6050`](https://github.com/ElectronicCats/mpu6050) library (Electronic Cats).
 
 ---
 
-### 📦 Tecnologías y dependencias principales
+## 📱 WRO Prometheus App (Android Studio)
 
-Nuestra aplicación Android ha sido desarrollada utilizando **Android Studio** y se basa en las siguientes librerías y marcos de trabajo:
+The code for the **WRO Prometheus** app lives in its own repository: [APP-WRO-PROMETHEUS-TEAM](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) ([.zip download](https://drive.google.com/file/d/1VvdzdWbxGnchFslUwI8wQfkkwYPTyGRD/view?usp=drive_link)). The app processes image data for our autonomous vehicle during the competition. Here you will find all the relevant information about the technologies we used and how to set up the project.
 
-#### Librerías de AndroidX y Material Design
+---
 
-Componentes fundamentales de la plataforma Android para la interfaz de usuario y funcionalidades básicas, asegurando compatibilidad y una experiencia de usuario moderna.
+### 📦 Main Technologies and Dependencies
 
-* `androidx.core:core-ktx`: [Documentación oficial de AndroidX Core KTX](https://developer.android.com/kotlin/ktx)
-* `androidx.appcompat:appcompat`: [Notas de lanzamiento de AndroidX Appcompat](https://developer.android.com/jetpack/androidx/releases/appcompat)
-* `com.google.android.material:material`: [Guía de inicio de Material Design Components para Android](https://material.io/develop/android/docs/getting-started)
-* `androidx.constraintlayout:constraintlayout`: [Notas de lanzamiento de AndroidX ConstraintLayout](https://developer.android.com/jetpack/androidx/releases/constraintlayout)
+Our Android app was built with **Android Studio** and relies on the following libraries and frameworks:
+
+#### AndroidX and Material Design Libraries
+
+Core Android platform components for the user interface and basic functionality, ensuring compatibility and a modern user experience.
+
+* `androidx.core:core-ktx`: [AndroidX Core KTX official documentation](https://developer.android.com/kotlin/ktx)
+* `androidx.appcompat:appcompat`: [AndroidX Appcompat release notes](https://developer.android.com/jetpack/androidx/releases/appcompat)
+* `com.google.android.material:material`: [Getting started with Material Design Components for Android](https://material.io/develop/android/docs/getting-started)
+* `androidx.constraintlayout:constraintlayout`: [AndroidX ConstraintLayout release notes](https://developer.android.com/jetpack/androidx/releases/constraintlayout)
 
 #### CameraX
 
-Un *toolkit* de Android Jetpack que simplifica el uso de la cámara del dispositivo, proporcionando una API consistente y fácil de usar para diversas funcionalidades de cámara.
+An Android Jetpack *toolkit* that simplifies using the device's camera, providing a consistent, easy-to-use API for a range of camera features.
 
 * `androidx.camera:camera-core`
 * `androidx.camera:camera-camera2`
 * `androidx.camera:camera-lifecycle`
 * `androidx.camera:camera-view`
-* Puedes encontrar la documentación y ejemplos en la **[Guía general de CameraX](https://developer.android.com/media/camera/camerax)**.
+* You can find documentation and examples in the **[CameraX overview](https://developer.android.com/media/camera/camerax)**.
 
 #### USB Serial for Android
 
-Una librería esencial para la comunicación de nuestra aplicación con el microcontrolador del vehículo a través de una conexión serial USB.
+An essential library for communication between our app and the vehicle's microcontroller over a USB serial connection.
 
-* `com.github.mik3y:usb-serial-for-android`: Puedes consultar el repositorio oficial en **[GitHub - usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android)**.
+* `com.github.mik3y:usb-serial-for-android`: see the official repository at **[GitHub - usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android)**.
 
 #### OpenCV (Open Source Computer Vision Library)
 
-Una potente librería para el procesamiento de imágenes y visión por computador, utilizada para tareas de análisis visual y toma de decisiones dentro de la aplicación.
+A powerful library for image processing and computer vision, used for visual analysis and decision-making inside the app.
 
-* **Integración Local**: Es importante destacar que **OpenCV está integrado como un módulo local dentro de este proyecto de Android Studio**. Esto significa que los archivos binarios y la configuración necesaria de OpenCV ya están incluidos en este repositorio.
-* `implementation(project(":OpenCV"))`: Esta línea en el `build.gradle` indica que el módulo `:OpenCV` es una parte intrínseca de este proyecto.
-* Para documentación general sobre la librería, puedes visitar el sitio oficial de **[OpenCV](https://opencv.org/)**.
+* **Local integration:** note that **OpenCV is integrated as a local module inside this Android Studio project**. This means the OpenCV binaries and required configuration are already included in the repository.
+* `implementation(project(":OpenCV"))`: this line in `build.gradle` indicates that the `:OpenCV` module is an integral part of the project.
+* For general documentation on the library, visit the official **[OpenCV](https://opencv.org/)** website.
 
-#### Librerías de Testing
+#### Testing Libraries
 
-Componentes estándar para realizar pruebas unitarias y de instrumentación en la aplicación.
+Standard components for running unit and instrumented tests on the app.
 
-* `junit:junit`: [Sitio oficial de JUnit 4](https://junit.org/junit4/faq.html)
-* `androidx.test.ext:junit`: [Notas de lanzamiento de AndroidX Test Ext JUnit](https://developer.android.com/jetpack/androidx/releases/test)
-* `androidx.test.espresso:espresso-core`: [Notas de lanzamiento de AndroidX Test Espresso](https://developer.android.com/jetpack/androidx/releases/espresso)
+* `junit:junit`: [JUnit 4 official website](https://junit.org/junit4/faq.html)
+* `androidx.test.ext:junit`: [AndroidX Test Ext JUnit release notes](https://developer.android.com/jetpack/androidx/releases/test)
+* `androidx.test.espresso:espresso-core`: [AndroidX Test Espresso release notes](https://developer.android.com/jetpack/androidx/releases/espresso)
 
 ---
 
-### 🛠️ Preparación del proyecto Android
+### 🛠️ Setting Up the Android Project
 
-Para compilar y ejecutar esta aplicación en su entorno, siga estos pasos:
+To build and run the app in your environment, follow these steps:
 
-1.  **Requisitos Previos**:
-    * Asegúrese de tener **Android Studio** instalado y configurado, incluyendo el SDK de Android necesario y las herramientas de Gradle.
+1.  **Prerequisites**:
+    * Make sure **Android Studio** is installed and configured, including the required Android SDK and Gradle tools.
 
-2.  **Abrir el Proyecto**:
-    * Clone el repositorio de la app y ábralo en Android Studio.
+2.  **Open the project**:
+    * Clone the app repository and open it in Android Studio.
 
-3.  **Sincronización de Gradle**:
-    * Android Studio detectará automáticamente el proyecto y sus archivos `build.gradle`. Se le pedirá que sincronice el proyecto. Este paso es crucial, ya que Gradle descargará automáticamente todas las dependencias externas (AndroidX, CameraX, USB Serial, etc.) desde los repositorios de Maven configurados.
-    * **No se requiere instalación de OpenCV**: Dado que OpenCV se incluye como un módulo local, no necesita realizar ninguna instalación o configuración adicional de OpenCV en su sistema; Gradle lo gestionará directamente desde el código fuente del proyecto. Simplemente asegúrese de que la estructura de carpetas incluya el módulo `:OpenCV` y que esté referenciado en el `settings.gradle`.
+3.  **Gradle sync**:
+    * Android Studio will automatically detect the project and its `build.gradle` files and ask you to sync the project. This step is crucial, because Gradle will automatically download all external dependencies (AndroidX, CameraX, USB Serial, etc.) from the configured Maven repositories.
+    * **No OpenCV installation required**: since OpenCV is included as a local module, you do not need to install or configure OpenCV on your system; Gradle handles it directly from the project source. Just make sure the folder structure includes the `:OpenCV` module and that it is referenced in `settings.gradle`.
 
-4.  **Compilar y Ejecutar**:
-    * Una vez que la sincronización de Gradle finalice sin errores, podrá compilar el proyecto y ejecutar la aplicación en su dispositivo Android.
+4.  **Build and run**:
+    * Once the Gradle sync finishes without errors, you can build the project and run the app on your Android device.

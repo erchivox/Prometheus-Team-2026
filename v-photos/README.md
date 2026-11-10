@@ -1,27 +1,27 @@
-# 🚗 Fotos del vehículo
+# 🚗 Vehicle Photos
 
-[⬅️ Volver al README principal](../README.md)
+[⬅️ Back to the main README](../README.md)
 
-Las seis vistas reglamentarias del vehículo: frente, atrás, ambos lados, arriba y abajo.
+The six required views of the vehicle: front, rear, both sides, top, and bottom.
 
 ---
 
-## ✅ Vehículo 2026
+## ✅ 2026 Vehicle
 
-| Vista frontal | Vista trasera |
+| Front view | Rear view |
 | :---: | :---: |
-| <img src="ADELANTE2026.jpeg" alt="Vista frontal 2026" width="380"> | <img src="DETRAS2026.jpeg" alt="Vista trasera 2026" width="380"> |
-| **Lateral izquierdo** | **Lateral derecho** |
-| <img src="IZQUIERDA2026.jpeg" alt="Lateral izquierdo 2026" width="380"> | <img src="DERECHA2026.jpeg" alt="Lateral derecho 2026" width="380"> |
-| **Vista superior** | **Vista inferior** |
-| <img src="ARRIBA2026.jpeg" alt="Vista superior 2026" width="380"> | <img src="ABAJO2026.jpeg" alt="Vista inferior 2026" width="380"> |
+| <img src="ADELANTE2026.jpeg" alt="2026 front view" width="380"> | <img src="DETRAS2026.jpeg" alt="2026 rear view" width="380"> |
+| **Left side** | **Right side** |
+| <img src="IZQUIERDA2026.jpeg" alt="2026 left side" width="380"> | <img src="DERECHA2026.jpeg" alt="2026 right side" width="380"> |
+| **Top view** | **Bottom view** |
+| <img src="ARRIBA2026.jpeg" alt="2026 top view" width="380"> | <img src="ABAJO2026.jpeg" alt="2026 bottom view" width="380"> |
 
 ---
 
-## 📁 Vehículo 2025
+## 📁 2025 Vehicle
 
-| Frente | Atrás | Lateral izquierdo |
+| Front | Rear | Left side |
 | :---: | :---: | :---: |
-| <img src="frente.JPG" alt="Frente 2025" width="250"> | <img src="detras.JPG" alt="Atrás 2025" width="250"> | <img src="lateral-izquierdo.JPG" alt="Lateral izquierdo 2025" width="250"> |
-| **Lateral derecho** | **Arriba** | **Abajo** |
-| <img src="lateral-derecho.JPG" alt="Lateral derecho 2025" width="250"> | <img src="arriba.JPG" alt="Arriba 2025" width="250"> | <img src="abajo.JPG" alt="Abajo 2025" width="250"> |
+| <img src="frente.JPG" alt="2025 front" width="250"> | <img src="detras.JPG" alt="2025 rear" width="250"> | <img src="lateral-izquierdo.JPG" alt="2025 left side" width="250"> |
+| **Right side** | **Top** | **Bottom** |
+| <img src="lateral-derecho.JPG" alt="2025 right side" width="250"> | <img src="arriba.JPG" alt="2025 top" width="250"> | <img src="abajo.JPG" alt="2025 bottom" width="250"> |
