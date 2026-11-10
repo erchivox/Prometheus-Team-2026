@@ -254,7 +254,7 @@ Each folder has its own README describing what it contains.
 ## 3. 🤖 Our Vehicle
 
 <div align="center">
-  <img src="v-photos/ADELANTE2026.jpeg" alt="Prometheus 2026 vehicle" width="420">
+  <img src="v-photos/ADELANTE2026.jpg" alt="Prometheus 2026 vehicle" width="420">
 </div>
 
 ### 3.1. 📋 General Specifications
@@ -313,12 +313,12 @@ These are the six required views of the vehicle. They make it possible to check 
 
 | 📸 View | 🖼️ Photo | 🔍 What to check |
 | :--- | :---: | :--- |
-| **Front** | <img width="360" alt="Front view" src="v-photos/ADELANTE2026.jpeg" /> | • Front and diagonal sensors.<br>• Steering mechanism alignment.<br>• Front height and how centered the structure is. |
-| **Rear** | <img width="360" alt="Rear view" src="v-photos/DETRAS2026.jpeg" /> | • Motor and rear drivetrain coupling.<br>• Stiffness of the drive axle mounts.<br>• Neatness of the power wiring. |
+| **Front** | <img width="360" alt="Front view" src="v-photos/ADELANTE2026.jpg" /> | • Front and diagonal sensors.<br>• Steering mechanism alignment.<br>• Front height and how centered the structure is. |
+| **Rear** | <img width="360" alt="Rear view" src="v-photos/DETRAS2026.jpg" /> | • Motor and rear drivetrain coupling.<br>• Stiffness of the drive axle mounts.<br>• Neatness of the power wiring. |
 | **Top** | <img width="360" alt="Top view" src="v-photos/ARRIBA2026.jpeg" /> | • Side-to-side weight balance.<br>• Position of the ESP32 and the IMU.<br>• Wiring routed between levels. |
-| **Bottom** | <img width="360" alt="Bottom view" src="v-photos/ABAJO2026.jpeg" /> | • Smooth, flat base with no rubbing parts.<br>• Ground clearance.<br>• Screw and nut fastening. |
-| **Right side** | <img width="360" alt="Right side view" src="v-photos/DERECHA2026.jpeg" /> | • Access to switches and controls.<br>• Spacing between levels (drivetrain, logic, and power).<br>• Alignment of the right-side sensors and wheels. |
-| **Left side** | <img width="360" alt="Left side view" src="v-photos/IZQUIERDA2026.jpeg" /> | • Left-side sensors.<br>• Ventilation for the power modules. |
+| **Bottom** | <img width="360" alt="Bottom view" src="v-photos/ABAJO2026.jpg" /> | • Smooth, flat base with no rubbing parts.<br>• Ground clearance.<br>• Screw and nut fastening. |
+| **Right side** | <img width="360" alt="Right side view" src="v-photos/DERECHA2026.jpg" /> | • Access to switches and controls.<br>• Spacing between levels (drivetrain, logic, and power).<br>• Alignment of the right-side sensors and wheels. |
+| **Left side** | <img width="360" alt="Left side view" src="v-photos/IZQUIERDA2026.jpg" /> | • Left-side sensors.<br>• Ventilation for the power modules. |
 
 ---
 
