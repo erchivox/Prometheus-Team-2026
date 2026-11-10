@@ -10,11 +10,11 @@ The six required views of the vehicle: front, rear, both sides, top, and bottom.
 
 | Front view | Rear view |
 | :---: | :---: |
-| <img src="ADELANTE2026.jpeg" alt="2026 front view" width="380"> | <img src="DETRAS2026.jpeg" alt="2026 rear view" width="380"> |
+| <img src="ADELANTE2026.jpg" alt="2026 front view" width="380"> | <img src="DETRAS2026.jpg" alt="2026 rear view" width="380"> |
 | **Left side** | **Right side** |
-| <img src="IZQUIERDA2026.jpeg" alt="2026 left side" width="380"> | <img src="DERECHA2026.jpeg" alt="2026 right side" width="380"> |
+| <img src="IZQUIERDA2026.jpg" alt="2026 left side" width="380"> | <img src="DERECHA2026.jpg" alt="2026 right side" width="380"> |
 | **Top view** | **Bottom view** |
-| <img src="ARRIBA2026.jpeg" alt="2026 top view" width="380"> | <img src="ABAJO2026.jpeg" alt="2026 bottom view" width="380"> |
+| <img src="ARRIBA2026.jpeg" alt="2026 top view" width="380"> | <img src="ABAJO2026.jpg" alt="2026 bottom view" width="380"> |
 
 ---
 
