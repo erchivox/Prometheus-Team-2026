@@ -1391,19 +1391,19 @@ graph TD
     classDef fix fill:#e65100,stroke:#ff9800,stroke-width:2px,color:#fff;
     classDef v2 fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
 
-    A["🟤 v0: Cardboard<br>Prototype<br>(validate drivetrain<br>and LEGO steering)"]:::v0 -->|"Material flexing,<br>softened areas,<br>wear from use"| B["🖨️ v1: 3D-Printed<br>Chassis<br>(printed by a<br>third party)"]:::v1
+    A["🟤 v0: Cardboard<br>Prototype<br>Validate drive<br>& LEGO steer"]:::v0 -->|"Material flex,<br>soft areas,<br>wear from use"| B["🖨️ v1: 3D-Print<br>Chassis<br>Printed by a<br>third party"]:::v1
 
-    B -->|"Diagnosis:<br>chassis too long<br>from tripod"| C{"⚠️ Failures<br>found in<br>v1"}:::fail
+    B -->|"Diagnosis:<br>too long<br>from tripod"| C{"⚠️ Failures<br>found in<br>v1"}:::fail
 
-    C --> C1["Flexing in the<br>middle of chassis<br>(tripod leverage)"]:::fail
-    C --> C2["Vertical rear<br>motor: takes up<br>a lot of space"]:::fail
-    C --> C3["Non-modular:<br>hot glue, holes,<br>hand sanding"]:::fail
+    C --> C1["Flexing in<br>the middle<br>(tripod lever)"]:::fail
+    C --> C2["Vertical rear<br>motor: takes<br>lots of space"]:::fail
+    C --> C3["Non-modular:<br>hot glue,<br>hand sanding"]:::fail
 
-    C1 --> D["🔧 Temp fix v1:<br>lead weights<br>near rear axle"]:::fix
-    C2 --> E["📏 Geometric:<br>1:1 ratio<br>(wheelbase = track)"]:::fix
-    C3 --> F["🔩 Modular:<br>M3 Allen screws<br>across platform"]:::fix
+    C1 --> D["🔧 Temp fix v1:<br>lead weights<br>at rear axle"]:::fix
+    C2 --> E["📏 Geometric:<br>1:1 ratio<br>wheelbase=track"]:::fix
+    C3 --> F["🔩 Modular:<br>M3 screws on<br>all platform"]:::fix
 
-    D --> G["✅ v2: Monochassis<br>179 x 115 mm,<br>112 mm wheelbase,<br>horizontal motor,<br>removable parts"]:::v2
+    D --> G["✅ v2: Monochassis<br>179 x 115 mm<br>112mm wheelbase<br>flat motor &<br>modular parts"]:::v2
     E --> G
     F --> G
 ```
