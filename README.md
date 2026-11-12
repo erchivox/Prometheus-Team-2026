@@ -454,25 +454,25 @@ graph TD
     classDef adc fill:#e65100,stroke:#ff9100,stroke-width:2px,color:#fff;
     classDef gpio fill:#004d40,stroke:#00bfa5,stroke-width:2px,color:#fff;
 
-    MCU["⚡ ESP32<br>Microcontroller"]:::mcu
+    MCU["⚡ ESP32<br>Main Control<br>Board"]:::mcu
 
-    IMU["🧭 BNO055 IMU<br>I2C #1"]:::i2c1
-    TOF1["🎯 VL53L0X ToF 1<br>(Right)"]:::i2c1
-    TOF2["🎯 VL53L0X ToF 2<br>(Rear)"]:::i2c1
-    TOF3["🎯 VL53L0X ToF 3<br>(Left)"]:::i2c1
-    TOF4["🎯 VL53L0X ToF 4<br>(Front)"]:::i2c1
+    IMU["🧭 BNO055<br>9-Axis IMU<br>I2C #1"]:::i2c1
+    TOF1["🎯 VL53L0X<br>ToF 1<br>(Right)"]:::i2c1
+    TOF2["🎯 VL53L0X<br>ToF 2<br>(Rear)"]:::i2c1
+    TOF3["🎯 VL53L0X<br>ToF 3<br>(Left)"]:::i2c1
+    TOF4["🎯 VL53L0X<br>ToF 4<br>(Front)"]:::i2c1
 
-    COLOR["🎨 TCS34725<br>Color Sensor"]:::i2c2
+    COLOR["🎨 TCS34725<br>Color Sensor<br>I2C #2"]:::i2c2
 
-    SHARP1["📡 GP2Y0A21 Sharp 1<br>(Right · GPIO 34)"]:::adc
-    SHARP2["📡 GP2Y0A21 Sharp 2<br>(Left · GPIO 35)"]:::adc
+    SHARP1["📡 GP2Y0A21<br>Sharp 1 (Right)<br>GPIO 34"]:::adc
+    SHARP2["📡 GP2Y0A21<br>Sharp 2 (Left)<br>GPIO 35"]:::adc
 
-    SERVO["⚙️ MG90 Servo Motor<br>Pin 13"]:::gpio
-    NEO["🔵 NeoPixel Strip<br>Pin 14"]:::gpio
-    BUZZER["🔔 Buzzer<br>Pin 4"]:::gpio
-    SW["🔘 Program Start Switch<br>Pin 23"]:::gpio
-    DRIVER["🏎️ TB6612FNG Driver<br>Pins 25, 26, 27"]:::gpio
-    XSHUT["🔀 XSHUT Selectors<br>Pins 16, 17, 5, 18"]:::gpio
+    SERVO["⚙️ MG90<br>Servo Motor<br>Pin 13"]:::gpio
+    NEO["🔵 NeoPixel<br>LED Strip<br>Pin 14"]:::gpio
+    BUZZER["🔔 Piezo<br>Buzzer<br>Pin 4"]:::gpio
+    SW["🔘 Program<br>Start Switch<br>Pin 23"]:::gpio
+    DRIVER["🏎️ TB6612FNG<br>Motor Driver<br>25, 26, 27"]:::gpio
+    XSHUT["🔀 XSHUT<br>Selectors<br>16, 17, 5, 18"]:::gpio
 
     MCU -- "I2C #1 (21/22)" --> IMU
     MCU -- "I2C #1 (21/22)" --> TOF1
