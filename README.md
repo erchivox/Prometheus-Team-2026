@@ -1384,16 +1384,26 @@ Before settling on the 1.67:1 gear ratio, we evaluated a timing belt drive. We r
 Here we record the failures and redesigns that led to the current Monochassis, following the order diagnosis → root cause → solution.
 
 ```mermaid
-flowchart TD
-    A["🟤 v0: cardboard prototype<br/>(validate the rear drivetrain<br/>and the LEGO steering)"] -->|"Material flexing,<br/>softened areas,<br/>wear from use"| B["🖨️ v1: 3D-printed chassis<br/>(printed by a third party, so<br/>we could not iterate ourselves)"]
-    B -->|"Diagnosis: chassis too long<br/>because of the tripod system"| C{"⚠️ Failures found in v1"}
-    C --> C1["Flexing in the middle of the chassis<br/>(tripod leverage)"]
-    C --> C2["Vertical rear motor:<br/>takes up a lot of space"]
-    C --> C3["Non-modular assembly:<br/>hot glue, corrective holes,<br/>hand sanding"]
-    C1 --> D["🔧 Temporary fix on v1:<br/>lead counterweights near<br/>the rear axle"]
-    C2 --> E["📏 Geometric redesign:<br/>1:1 ratio<br/>(wheelbase = track)"]
-    C3 --> F["🔩 Modular redesign:<br/>M3 Allen screws across<br/>the whole platform"]
-    D --> G["✅ v2: current Monochassis<br/>(179 × 115 mm, 112 mm wheelbase,<br/>horizontal motor, removable parts)"]
+graph TD
+    classDef v0 fill:#5d4037,stroke:#a1887f,stroke-width:2px,color:#fff;
+    classDef v1 fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
+    classDef fail fill:#c62828,stroke:#ef5350,stroke-width:2px,color:#fff;
+    classDef fix fill:#e65100,stroke:#ff9800,stroke-width:2px,color:#fff;
+    classDef v2 fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
+
+    A["🟤 v0: Cardboard<br>Prototype<br>(validate drivetrain<br>and LEGO steering)"]:::v0 -->|"Material flexing,<br>softened areas,<br>wear from use"| B["🖨️ v1: 3D-Printed<br>Chassis<br>(printed by a<br>third party)"]:::v1
+
+    B -->|"Diagnosis:<br>chassis too long<br>from tripod"| C{"⚠️ Failures<br>found in<br>v1"}:::fail
+
+    C --> C1["Flexing in the<br>middle of chassis<br>(tripod leverage)"]:::fail
+    C --> C2["Vertical rear<br>motor: takes up<br>a lot of space"]:::fail
+    C --> C3["Non-modular:<br>hot glue, holes,<br>hand sanding"]:::fail
+
+    C1 --> D["🔧 Temp fix v1:<br>lead weights<br>near rear axle"]:::fix
+    C2 --> E["📏 Geometric:<br>1:1 ratio<br>(wheelbase = track)"]:::fix
+    C3 --> F["🔩 Modular:<br>M3 Allen screws<br>across platform"]:::fix
+
+    D --> G["✅ v2: Monochassis<br>179 x 115 mm,<br>112 mm wheelbase,<br>horizontal motor,<br>removable parts"]:::v2
     E --> G
     F --> G
 ```
