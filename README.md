@@ -2129,48 +2129,6 @@ With this change, the vehicle will have **six ToF sensors on I2C bus #1** and no
 
 ---
 
-## 18. 🌐 Use of GitHub and Artificial Intelligence
-
-### 18.1. 🌿 Workflow
-
-- **`main` is the stable version.** Major changes are made on a separate branch and merged into `main` through a *pull request*, which the team reviews before merging.
-- **Full history:** every change is recorded in the [commit history](https://github.com/erchivox/Prometheus-Team-2026/commits/main), from the 2025 versions to the current one.
-- **Standard WRO folders:** `t-photos`, `v-photos`, `video`, `schemes`, `src`, `models`, and `other`. Each one has its own README.
-- **2025 code kept** in `src/` for reference, so you can see how the logic evolved.
-
-### 18.2. 🤖 Use of Artificial Intelligence
-
-Ahead of the **WRO 2026 International Final in Puerto Rico**, we are transparently declaring how we used artificial intelligence in this project: which system, for what, and to what extent.
-
-| | Declaration |
-| :--- | :--- |
-| **System** | Claude (Anthropic), an artificial intelligence assistant |
-| **For what** | Repository documentation: organizing and writing the README from our own texts, data, calculations, and photos; translating the documentation into English; integrating the Ackermann steering document into the README; drawing the Mermaid flowcharts; checking links, numbering, and consistency of figures; and preparing the *pull requests*. |
-| **To what extent** | Documentation only. The design, construction, and programming of the vehicle and the app, the measurements, the design calculations, the photos, the videos, and the engineering decisions are the team's own work. We review and approve every proposed change before merging it into `main`. |
-
-```mermaid
-flowchart LR
-    A["👥 Team<br/>design, code, testing,<br/>and measurements"] --> B["📂 Team material<br/>texts, calculations,<br/>photos, and data"]
-    B --> C["🤖 Claude<br/>organizes, writes,<br/>translates, and diagrams"]
-    C --> D["🔀 Pull request"]
-    D --> E{"👥 Team<br/>review"}
-    E -- "Changes requested" --> C
-    E -- "Approved" --> F["✅ main"]
-```
-
-**Basis in the Future Engineers 2026 rules** ([General Rules, January 15, 2026 version](https://wro-association.org/wp-content/uploads/WRO-2026-Future-Engineers-Self-Driving-Cars-General-Rules.pdf)):
-
-| Rule | What it says | How we comply |
-| :--- | :--- | :--- |
-| **Future Engineers 2026 General Rules** | They contain no rule that prohibits or limits the use of artificial intelligence tools. | Using AI for documentation is allowed; we declare it anyway. |
-| **3.3** | *"Coding of the vehicle and its construction (if applicable) may be done only by the team."* | The firmware, the app, the CAD design, and the assembly are the team's work. AI did not program or build the vehicle. |
-| **3.7** | A control program that is identical or too similar to solutions sold online is not allowed. | The code in [`src/`](src/) is our own, and its evolution can be followed in the commit history. |
-| **Annex C.1** | Judges evaluate *"the clarity and depth of engineering reasoning"*, not appearance or length. | The reasoning (calculations, decisions, and tests) is ours; AI helped us present it clearly. |
-| **Future Innovators 2026, rule 6.5** (reference) | In that category, if a team uses AI, it must state which system, for what, and to what extent. | Future Engineers does not require it, but we apply the same standard in this declaration. |
-| **4.2 and 4.4** | The official Q&A can clarify or modify the rules, and the judges have the final say on competition day. | We will review the Q&A before the final and answer any questions from the judges about this use. |
-
----
-
 ## 19. 📁 Archive: 2025 Season
 
 This section summarizes the vehicle that earned us **2nd place at the 2025 Venezuelan National Final**. Most of its hardware was replaced in 2026, but we keep this record because it explains the design decisions behind this year's vehicle. Detailed material is collapsed under each subsection.
