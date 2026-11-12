@@ -127,6 +127,9 @@ In 2025 we finished as **national runners-up**. For 2026 we redesigned almost th
   - [15.4. 🟣 Parking Mode (Magenta Zone)](#154--parking-mode-magenta-zone)
   - [15.5. ⏳ Time-Based Stabilization Filter](#155--time-based-stabilization-filter)
   - [15.6. 👀 Dual Detection and Case-Based Architecture](#156--dual-detection-and-case-based-architecture)
+  - [15.7. 📐 Mathematical and Spatial Model](#157--mathematical-and-spatial-model)
+  - [15.8. 📋 Complete Command Matrix (CommandManager)](#158--complete-command-matrix-commandmanager)
+  - [15.9. 🔌 USB-Serial Protocol and Fault Tolerance](#159--usb-serial-protocol-and-fault-tolerance)
 - [16. 🎬 Track Tests and Videos](#16--track-tests-and-videos)
 
 **🚀 Improvements and Appendices**
@@ -1792,20 +1795,28 @@ Our detection app, built in Android Studio with OpenCV, is now on version 5.0 an
 
 The app's code lives in its own repository: [APP-WRO-PROMETHEUS-TEAM](https://github.com/SamFlips/APP-WRO-PROMETHEUS-TEAM/tree/master) · [project download as a .zip](https://drive.google.com/file/d/1VvdzdWbxGnchFslUwI8wQfkkwYPTyGRD/view?usp=drive_link).
 
-**Processing pipeline for each frame:**
+**Complete Vision and Telemetry Architecture (per frame):**
 
 ```mermaid
-flowchart LR
-    A["📷 Camera frame"] --> B["CLAHE on the brightness channel"]
-    B --> C["HSV and masks<br/>red, green, and magenta"]
-    C --> D["Contours"]
-    D --> E{"Pillar shape and<br/>enough saturation?"}
-    E -- No --> X["Discard<br/>(glare or irregular shape)"]
-    E -- Yes --> F["Area → distance<br/>left / right position"]
-    F --> G["8-frame window<br/>≥ 70 % and stable for 2 s"]
-    G --> H["CommandManager:<br/>pillar case → command"]
-    H --> I["🔌 USB serial to the ESP32"]
+graph TD
+    classDef purple fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
+    classDef cyan fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
+    classDef green fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
+    classDef dark fill:#1a237e,stroke:#448aff,stroke-width:2px,color:#fff;
+
+    A["CameraX API<br>720x1280 YUV_420_888"]:::purple --> B["ColorAnalyzer<br>80% Centered ROI"]:::cyan
+    B --> C["HSV Conversion<br>CLAHE on V Channel"]:::cyan
+    C --> D["Multi-Channel Masks<br>Red, Green, Magenta, Wall"]:::cyan
+    D --> E["Morphology<br>OPEN 7x7 & CLOSE 3x3"]:::cyan
+    E --> F["Geometric & Glare Filters<br>Solidity, Vertices, Internal Sat"]:::green
+    F --> G["Candidate Scoring<br>60% Solidity + 40% Sat"]:::green
+    G --> H["Spatial Model<br>Distance & 60% L/R Split"]:::green
+    H --> I["CommandManager<br>Single, Dual & Parking Cases"]:::purple
+    I --> J["Temporal Filter<br>8-Frame Window, 70% Votes, 2s"]:::purple
+    J --> K["USB Serial 115200 bps<br>Direct Dispatch to ESP32"]:::dark
 ```
+
+---
 
 ### 15.1. 📺 V5.0 Interface and Built-In Serial Monitor
 
@@ -1815,34 +1826,107 @@ flowchart LR
 
 These are the improvements we made to the core of the app (`MainActivity.kt`, `ColorAnalyzer.kt`, and the settings system):
 
+---
+
 ### 15.2. 🎯 On-Track Calibration and Dynamic Menu
 
-We no longer need to open Android Studio to adjust variables at the competition venue.
+We no longer need to open Android Studio to adjust variables at the competition venue. Through `SettingsDialogManager.kt`, all critical parameters can be tuned live on the track and exported/imported as JSON files:
 
-* **Sample-based calibration:** a menu lets us calibrate the *hue* and tolerance by taking 8 samples of the pillars at different points on the track.
-* **Parameter tuning:** the distance zones, the reference area, and the filters are set from the interface, without touching the code.
+* **8-Sample On-Track HSV Calibration:** Ambient lighting varies across the four sides of the $3 \times 3\text{ m}$ mat. The app includes a translucent bottom-half calibration dialog that activates `ColorAnalyzer.calibrationMode = true` (widening HSV ranges to $S, V \ge 10$ to capture even severely backlit pillars). The operator takes **8 samples** per color (4 in the standard direction, Tramos 1–4, and 4 in the reverse direction, Tramos 5–8). The app computes the mean Hue ($\bar{H}$) and tolerance from the internal pixels of the contour and updates the active masks immediately.
+* **Automatic Red Band-2 Clipping:** Because Red wraps around the HSV cylinder ($0^\circ\text{–}15^\circ$ and $160^\circ\text{–}180^\circ$), its upper band overlaps with Magenta ($145^\circ\text{–}170^\circ$). When Magenta is calibrated on-track, `ColorConfig` automatically clips the lower limit of Red Band 2 so the parking marker never leaks into the red pillar mask.
+* **Live Parameter & Hardware Tuning:** Distance zones (Front, Middle, Back), reference area/distance, internal saturation thresholds (0–255 separately for Red and Green), phone flashlight (torch) state, Black Wall detection, and Parking Mode can all be toggled in real time.
+
+---
 
 ### 15.3. ✨ Anti-Glare Filter and Shape Cleanup
 
-To deal with lighting changes and glare on the mat, we added several safeguards to the image processing (`ColorAnalyzer`):
+To deal with lighting changes, shadows, and floor reflections on the vinyl mat, `ColorAnalyzer.kt` applies a multi-stage filtering pipeline before accepting any contour:
 
-* **Internal saturation filter:** reflections lose saturation as they blend with the shine of the track. The app calculates the average saturation (the S channel in HSV) *inside* each contour and automatically discards those with low levels, because they are glare. The threshold is set separately for red and green from the menu.
-* **CLAHE equalization:** adaptive histogram equalization is applied to the brightness channel to normalize the lighting without losing detail.
-* **Irregular shape rejection:** by detecting peaks and counting convexity defects, the app ignores shapes with very sharp angles (under 45°) or complex contours that do not match the outline of a pillar or a boundary marker.
+1. **CLAHE Illumination Normalization:** The RGB frame inside the 80% centered ROI is converted to HSV, its channels are split, and **CLAHE** (*Contrast Limited Adaptive Histogram Equalization*, `clipLimit = 1.2`, `tileGridSize = 8x8`) is applied exclusively to the **V (brightness) channel** before recombining. This stabilizes exposure under spotlights without distorting Hue or Saturation.
+2. **Asymmetric Morphological Cleanup:** Each binary color mask undergoes an **OPEN** operation with a large $7 \times 7$ rectangular kernel to break thin specular reflection bridges connecting a pillar to floor glare, followed by a **CLOSE** operation with a smaller $3 \times 3$ kernel to fill internal pinholes without re-joining separated blobs.
+3. **Double-Pass Polygonal Smoothing:** Contours are smoothed via `approxPolyDP` in two passes: an aggressive pass ($\epsilon_1 = 0.008 \times \text{perimeter}$) to strip pixelation noise, and a fine pass ($\epsilon_2 = 0.004 \times \text{perimeter}$) to preserve structural corners.
+4. **Geometric Validation (Pillar vs. Magenta Profiles):** Because pillars are tall vertical prisms while the magenta parking marker is a flat horizontal plate, the app enforces two distinct sets of geometric thresholds:
+
+| Geometric Metric | Formula / Method | Red & Green Pillars | Magenta Parking Marker | Purpose |
+| :--- | :--- | :---: | :---: | :--- |
+| **Minimum Area** | `Imgproc.contourArea` | $> 280\text{ px}^2$ | $> 840\text{ px}^2$ | Rejects distant background noise |
+| **Solidity** | $\text{Area} / \text{Convex Hull Area}$ | $\ge 0.40$ | $\ge 0.55$ | Rejects fragmented or hollow blobs |
+| **Aspect Ratio** | $\text{Width} / \text{Height}$ | $0.25 \text{ to } 1.20$ | $0.15 \text{ to } 8.00$ | Pillars $> 1.20$ are reclassified as Parking |
+| **Rectangularity (Extent)** | $\text{Area} / (\text{Width} \times \text{Height})$ | $\ge 0.35$ | $\ge 0.35$ | Ensures the contour fills its bounding box |
+| **Complexity Ratio** | $\text{Perimeter}^2 / \text{Area}$ | $\le 30.0$ | $\le 45.0$ | Rejects jagged, irregular shapes |
+| **Convexity** | $\text{Area} / \text{Hull Area}$ (strict) | $\ge 0.85$ | $\ge 0.65$ | Rejects shapes with deep indentations |
+| **Convexity Defects** | `Imgproc.convexityDefects` | $\le 3$ | $\le 6$ | Counts concavities along the perimeter |
+| **Polygon Vertices** | `approxPolyDP` ($0.02 \times P$) | $4 \text{ to } 12$ | *Exempt* | Ensures prism-like geometry |
+| **Sharp Spike Filter** | Dot-product vertex angle | $\le 2$ angles $< 45^\circ$ | *Exempt* | Rejects triangular glare spikes |
+
+5. **Internal Saturation Anti-Glare Filter (`hasRealObjectSaturation`):** Floor reflections wash out color by mixing it with the white/gray mat. The app rasterizes a binary mask of the contour's interior and computes the mean of the **S (Saturation)** channel exclusively inside the object. If the average saturation falls below the configured threshold (`minInternalSaturationRed` or `minInternalSaturationGreen`), the contour is discarded as glare and logged on-screen with its rejection reason (`✗ reflejo (sat. baja)`).
+6. **Candidate Quality Score:** Valid contours within the track's maximum distance (`backDistanceMax`) are ranked by distance and a composite quality score:
+
+$$Q_{\text{score}} = 0.60 \cdot \left(\frac{\text{Area}}{\text{Width} \times \text{Height}}\right) + 0.40 \cdot \left(\frac{\bar{S}_{\text{internal}}}{255}\right)$$
+
+---
 
 ### 15.4. 🟣 Parking Mode (Magenta Zone)
 
-Magenta triggers special behavior when its area exceeds 8000 px, so the mode only activates when the car enters that section and not when it sees it from far away.
+Under WRO Future Engineers rules, the presence of the magenta parking lot forces all traffic signs in that section to shift toward the inner wall. Our app does not only use magenta to park at the end of the run; it uses it to **dynamically switch the avoidance command tables (`C...E`)** during all three laps so the car never collides with the parking barriers.
 
-* Its purpose is not just to stop at the end of the run, but to **change the avoidance path**.
-* When it recognizes the parking zone, the `CommandManager` adjusts the route so the vehicle passes away from it (forcing a side if needed) and does not knock over the magenta boundary marker during the lap.
+#### Multi-Signal Parking Detection (Redundancy)
+Lighting or oblique camera angles can make the magenta barrier look dark or shift its apparent Hue toward red. To guarantee detection, `ColorAnalyzer` activates Parking Mode through **two independent physical triggers** (plus two geometric reclassifications):
+1. **Magenta Color Channel (with Area Gate):** A valid magenta contour must exceed `minMagentaActivationArea = 8000 px²`. Seeing the marker from the previous straight produces a small area ($840\text{–}7999\text{ px}^2$) which is ignored (`🟣⚠️ Magenta LEJOS`); the mode only activates when the vehicle is actually inside the parking section.
+2. **Wide Red Reclassification (`aspectRatio > 1.2`):** Before applying the strict pillar filter, if a red contour has a width-to-height ratio $> 1.2$, it is physically too wide to be a vertical pillar (which is taller than it is wide) and is automatically reclassified as the horizontal parking barrier.
+3. **Max Plausible Area Reclassification:** Using the minimum possible front distance (`frontDistanceMin`), the app computes the maximum pixel area a real pillar can ever have (`maxPlausibleRedGreenArea`). Any red contour exceeding this physical limit is reclassified as Magenta.
+4. **Hue-Independent Black Wall Detector (`maskWall`):** Because the outer perimeter wall is black ($V \le 70$, $S \le 90$), the app searches for large dark rectangular regions ($\text{Area} \ge 5000\text{ px}^2$, $\text{Rectangularity} \ge 0.55$) that touch the bottom of the ROI (`touchesBottom`) and either the left (`touchesLeft`) or right (`touchesRight`) edge of the frame within a 5% margin.
+
+#### Chassis Rotation Immunity (Orientation by Deduction)
+When the vehicle enters a section right after a 90° corner turn, the chassis may still be slightly angled. Relying on the screen's horizontal center line to tell whether a pillar is on the Left (`L`) or Right (`R`) would fail if the camera's yaw shifts the pillar across the dividing line.
+
+To solve this, `CommandManager` implements **Orientation by Deduction**:
+* The moment Parking Mode activates, the app locks the side where the parking barrier/wall sits (`parkingSide = "L"` or `"R"`).
+* Because WRO rules mandate that pillars in the parking section are placed against the **opposite** (inner) wall, the app ignores the pillar's X coordinate on screen and forces its effective orientation to the opposite side (`parkingSide == "L" → effectiveOrientation = "R"`, and vice versa).
+
+```mermaid
+graph TD
+    classDef purple fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
+    classDef cyan fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
+    classDef green fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
+
+    A["Frame Analysis<br>in ColorAnalyzer"]:::purple --> B{"Magenta >= 8000 px2<br>OR Black Wall Valid?"}:::cyan
+    B -- "No" --> C["Standard Mode<br>Normal L / R Split"]:::green
+    B -- "Yes" --> D["Activate Parking Mode<br>Lock parkingSide L or R"]:::purple
+    D --> E{"Which side is<br>parkingSide?"}:::cyan
+    E -- "Left (L)" --> F["Force Pillars to Right (R)<br>Use Table R (C01E-C30E)"]:::green
+    E -- "Right (R)" --> G["Force Pillars to Left (L)<br>Use Table L (C07E-C38E)"]:::green
+```
+---
 
 ### 15.5. ⏳ Time-Based Stabilization Filter
 
-To eliminate ghost commands and false positives, the telemetry goes through a time-based filter:
+Sending raw frame-by-frame detections over serial would flood the ESP32 and trigger erratic steering maneuvers from single-frame motion blur. `MainActivity.kt` implements a dedicated thread (`temporalFilterExecutor`) running a **Sliding-Window Majority Voting Filter**:
 
-* **Voting window:** the app stores the detections from the last 8 frames.
-* A command is only sent to the vehicle if it appears in at least **70 % of that window** and stays stable for **2000 milliseconds**.
+* **Sliding Window (`DETECTION_WINDOW_SIZE = 8`):** Every valid frame pushes its resulting command into an 8-frame FIFO queue (`ArrayDeque`). If the time gap between two consecutive frames exceeds `MAX_FRAME_GAP_MS = 300 ms`, the window and timers reset automatically.
+* **Majority Ratio (`DETECTION_MAJORITY_RATIO = 0.70`):** The filter tallies command frequencies inside the window. A candidate command must hold at least **70% of the votes** (at least 6 out of 8 frames) to be considered dominant.
+* **Stability Hold Timer (`DETECTION_STABILITY_TIME = 2000 ms`):** Once a dominant command emerges, it must remain the uninterrupted winner for **2000 ms** before `sendCommandImmediate()` dispatches it to the ESP32 and triggers the unique confirmation audio tone (`AudioManager.playCommandSoundOnce`).
+* **Expiry & Re-dispatch (`STABLE_STATE_EXPIRY_TIME = 3000 ms`):** After a stable command is sent, further transmissions are locked for 3 seconds to prevent serial saturation, after which the state resets to allow re-confirmation if the robot is still awaiting instructions.
+* **Instant Clear on Timeout (`DETECTION_TIMEOUT = 300 ms`):** If no valid object is seen for 300 ms, `startDetectionMonitor()` bypasses the 2-second hold, clears the voting window, and immediately dispatches `"N"` (No Detection).
+
+```mermaid
+graph TD
+    classDef purple fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
+    classDef cyan fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
+    classDef green fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
+    classDef dark fill:#1a237e,stroke:#448aff,stroke-width:2px,color:#fff;
+
+    A["New Frame Command<br>from CommandManager"]:::purple --> B{"Is Command == N?"}:::cyan
+    B -- "Yes" --> C["Clear Window & Timers<br>Send N Immediately"]:::dark
+    B -- "No" --> D["Check Frame Gap<br>Reset if > 300 ms"]:::cyan
+    D --> E["Push to Sliding Window<br>Max 8 Frames FIFO"]:::cyan
+    E --> F{"Window Full (8/8)<br>& Votes >= 70%?"}:::cyan
+    F -- "No" --> G["Wait for Next Frame<br>Update UI Progress %"]:::purple
+    F -- "Yes" --> H{"Held Continuously<br>for >= 2000 ms?"}:::green
+    H -- "No" --> G
+    H -- "Yes" --> I["Mark STABLE & Send USB<br>Play Audio Tone (3s Lock)"]:::dark
+```
+---
 
 ### 15.6. 👀 Dual Detection and Case-Based Architecture
 
@@ -1868,6 +1952,92 @@ Building on the two-object detection we added at the end of 2025, that informati
   <a href="https://youtu.be/TpLVCiggEwY"><img src="other/Funcionamiento-en-vivo.png" alt="Video of the app running live" width="520"></a>
 </p>
 
+---
+
+### 15.7. 📐 Mathematical and Spatial Model
+
+To convert 2D pixel contours into 3D navigation decisions, `CommandManager.kt` and `ColorAnalyzer.kt` share a unified mathematical model:
+
+#### 1. Area-Based Distance Estimation
+According to perspective projection, the apparent area of an object is inversely proportional to the square of its distance from the camera lens. Calibrating a known reference area ($A_{\text{ref}}$, default $19000\text{ px}^2$) at a known reference distance ($d_{\text{ref}}$, default $50\text{ cm}$), the raw distance $d_{\text{raw}}$ (in cm) is computed as:
+
+$$d_{\text{raw}} = d_{\text{ref}} \cdot \sqrt{\frac{A_{\text{ref}}}{A_{\text{measured}}}}$$
+
+Contours with $d_{\text{raw}} > d_{\text{back,max}}$ are discarded so obstacles in distant corridors are ignored. For valid objects, the operational distance is clamped to the system range:
+
+$$d_{\text{final}} = \min\left(\max\left(\lfloor d_{\text{raw}} \rfloor, \, 10\text{ cm}\right), \, 200\text{ cm}\right)$$
+
+#### 2. Distance Zones
+Each detected object is classified into one of three longitudinal zones along the corridor (default calibrated ranges shown; fully adjustable in the UI):
+* **Front Zone (`Adelante`):** $50\text{ cm} \le d \le 80\text{ cm}$
+* **Middle Zone (`Medio`):** $100\text{ cm} \le d \le 130\text{ cm}$
+* **Back Zone (`Atrás`):** $140\text{ cm} \le d \le 180\text{ cm}$
+
+#### 3. Asymmetric 60% Spatial Split (Left / Right Orientation)
+Because the smartphone camera is rotated $90^\circ$ in software to match its vertical mounting and has a slight lateral offset relative to the chassis centerline, a 50/50 split would misclassify center-lane pillars during approaches. We define the normalized horizontal centroid $X_{\text{norm}}$ and apply a **60% threshold**:
+
+$$X_{\text{norm}} = \frac{X_{\text{center}}}{W_{\text{ROI}}} \quad \Longrightarrow \quad \text{Orientation} = \begin{cases} \text{L (Left)} & \text{if } X_{\text{norm}} < 0.60 \\ \text{R (Right)} & \text{if } X_{\text{norm}} \ge 0.60 \end{cases}$$
+
+*(In the live camera preview, this threshold is rendered as a horizontal yellow dividing line across the rotated frame at $60\%$ of its height).*
+
+---
+
+### 15.8. 📋 Complete Command Matrix (CommandManager)
+
+Instead of streaming raw coordinates, the app evaluates up to two simultaneous pillars—**Primary** (closest) and **Secondary** (second closest)—and dispatches a single compact case code to the ESP32 state machine:
+
+#### A. Single-Object Cases (Standard Mode vs. Parking Mode `E`)
+When only one pillar is visible in the corridor, the command depends on its color, longitudinal zone, and lateral orientation (`L` or `R`). In Parking Mode (`E`), only the side opposite to `parkingSide` is valid:
+
+| Zone | Distance Range (default) | Color | Orientation | Standard Command | Parking Command (`E`) | Description |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Front** | $50\text{–}80\text{ cm}$ | 🟢 Green | Right (`R`) | **`C01`** | **`C01E`** | Green, Front Right |
+| **Front** | $50\text{–}80\text{ cm}$ | 🔴 Red | Right (`R`) | **`C02`** | **`C02E`** | Red, Front Right |
+| **Front** | $50\text{–}80\text{ cm}$ | 🟢 Green | Left (`L`) | **`C07`** | **`C07E`** | Green, Front Left |
+| **Front** | $50\text{–}80\text{ cm}$ | 🔴 Red | Left (`L`) | **`C08`** | **`C08E`** | Red, Front Left |
+| **Middle** | $100\text{–}130\text{ cm}$ | 🟢 Green | Right (`R`) | **`C03`** | **`C03E`** | Green, Middle Right |
+| **Middle** | $100\text{–}130\text{ cm}$ | 🔴 Red | Right (`R`) | **`C04`** | **`C04E`** | Red, Middle Right |
+| **Middle** | $100\text{–}130\text{ cm}$ | 🟢 Green | Left (`L`) | **`C09`** | **`C09E`** | Green, Middle Left |
+| **Middle** | $100\text{–}130\text{ cm}$ | 🔴 Red | Left (`L`) | **`C10`** | **`C10E`** | Red, Middle Left |
+| **Back** | $140\text{–}180\text{ cm}$ | 🟢 Green | Right (`R`) | **`C05`** | **`C05E`** | Green, Back Right |
+| **Back** | $140\text{–}180\text{ cm}$ | 🔴 Red | Right (`R`) | **`C06`** | **`C06E`** | Red, Back Right |
+| **Back** | $140\text{–}180\text{ cm}$ | 🟢 Green | Left (`L`) | **`C37`** | **`C37E`** | Green, Back Left |
+| **Back** | $140\text{–}180\text{ cm}$ | 🔴 Red | Left (`L`) | **`C38`** | **`C38E`** | Red, Back Left |
+
+#### B. Dual-Object Cases (Primary in Front Zone + Secondary in Back Zone)
+For a dual case to trigger, `isValidDualConfiguration()` verifies that the **Primary** object is in the **Front Zone** and the **Secondary** object is in the **Back Zone** (otherwise, it safely falls back to the Primary object's single command). In Parking Mode (`E`), since all pillars are shifted against the inner wall, only same-side combinations (`L+L` or `R+R`) exist:
+
+| Pattern | Primary (Front Zone) | Secondary (Back Zone) | Standard Command | Parking Command (`E`) | Maneuver Summary |
+| :---: | :---: | :---: | :---: | :---: | :--- |
+| **L ➔ R** | 🟢 Green (`L`) | 🟢 Green (`R`) | **`C13`** | *Falls back to single* | Green Front Left + Green Back Right |
+| **L ➔ R** | 🟢 Green (`L`) | 🔴 Red (`R`) | **`C14`** | *Falls back to single* | Green Front Left + Red Back Right |
+| **L ➔ R** | 🔴 Red (`L`) | 🟢 Green (`R`) | **`C15`** | *Falls back to single* | Red Front Left + Green Back Right |
+| **L ➔ R** | 🔴 Red (`L`) | 🔴 Red (`R`) | **`C18`** | *Falls back to single* | Red Front Left + Red Back Right |
+| **R ➔ L** | 🟢 Green (`R`) | 🟢 Green (`L`) | **`C19`** | *Falls back to single* | Green Front Right + Green Back Left |
+| **R ➔ L** | 🟢 Green (`R`) | 🔴 Red (`L`) | **`C20`** | *Falls back to single* | Green Front Right + Red Back Left |
+| **R ➔ L** | 🔴 Red (`R`) | 🟢 Green (`L`) | **`C21`** | *Falls back to single* | Red Front Right + Green Back Left |
+| **R ➔ L** | 🔴 Red (`R`) | 🔴 Red (`L`) | **`C24`** | *Falls back to single* | Red Front Right + Red Back Left |
+| **R ➔ R** | 🟢 Green (`R`) | 🟢 Green (`R`) | **`C25`** | **`C25E`** | Green Front Right + Green Back Right |
+| **R ➔ R** | 🟢 Green (`R`) | 🔴 Red (`R`) | **`C26`** | **`C26E`** | Green Front Right + Red Back Right |
+| **R ➔ R** | 🔴 Red (`R`) | 🟢 Green (`R`) | **`C27`** | **`C27E`** | Red Front Right + Green Back Right |
+| **R ➔ R** | 🔴 Red (`R`) | 🔴 Red (`R`) | **`C30`** | **`C30E`** | Red Front Right + Red Back Right |
+| **L ➔ L** | 🟢 Green (`L`) | 🟢 Green (`L`) | **`C31`** | **`C31E`** | Green Front Left + Green Back Left |
+| **L ➔ L** | 🟢 Green (`L`) | 🔴 Red (`L`) | **`C32`** | **`C32E`** | Green Front Left + Red Back Left |
+| **L ➔ L** | 🔴 Red (`L`) | 🟢 Green (`L`) | **`C33`** | **`C33E`** | Red Front Left + Green Back Left |
+| **L ➔ L** | 🔴 Red (`L`) | 🔴 Red (`L`) | **`C36`** | **`C36E`** | Red Front Left + Red Back Left |
+
+---
+
+### 15.9. 🔌 USB-Serial Protocol and Fault Tolerance
+
+Reliable communication between Android and the ESP32 over an OTG cable subject to mechanical vibration required dedicated hardware/software safeguards in `MainActivity.kt` and `SerialMonitorActivity.kt`:
+
+* **Custom VID/PID Probing (CH9102X Fallback):** In addition to standard CP210x (`0x10C4:0xEA60`), FTDI (`0x0403:0x6001`), CH340 (`0x1A86:0x7523`), and native ESP32-S2/S3/C3 USB IDs, the app registers a custom `ProbeTable` entry for the **WCH CH9102X** chip (`0x1A86:0x55D4`) mapped to the `Ch34xSerialDriver`, ensuring plug-and-play compatibility across different ESP32 DevKit revisions.
+* **Controlled DTR/RTS Reset & Boot-Garbage Purge:** On connection (`115200 bps, 8N1`), `initializeESP32()` executes a timed DTR/RTS handshake (`DTR=false, RTS=true` $\to 100\text{ ms} \to$ `RTS=false` $\to 50\text{ ms} \to$ `DTR=true`), purges the hardware buffers 3 times, and runs `clearInitialDeviceData()`. This function actively reads and discards incoming bytes for up to $1500\text{ ms}$ (or exits early after 3 consecutive empty reads $\approx 600\text{ ms}$) to flush ESP32 ROM bootloaders (`rst:0x...`, `boot:0x...`, `ets_main.c`, `0x00`/`0xFF` bytes) so they never corrupt the telemetry parser.
+* **Multi-Threaded Priority Architecture & Watchdogs:**
+  * `CameraThread`, `USBThread`, and `CommandProcessor` run on dedicated single-thread executors with `Thread.MAX_PRIORITY`.
+  * **Camera Watchdog (`startDetectionHealthMonitor`):** Every 5 seconds, a coroutine verifies that `isDetectionActive` was set by `ColorAnalyzer`. If the camera pipeline stalls while USB is connected, it automatically re-binds CameraX.
+  * **Auto-Wake & Auto-Reconnect:** Plugging in the OTG cable triggers `ACTION_USB_DEVICE_ATTACHED`, which acquires a `FULL_WAKE_LOCK` (`ACQUIRE_CAUSES_WAKEUP`) to turn on the screen over the lockscreen and connects automatically after a 2-second stabilization delay. If a write fails after `MAX_WRITE_RETRIES = 2`, `reconnectDevice()` safely closes the port and re-initializes the link after $1200\text{ ms}$.
 ---
 
 ## 16. 🎬 Track Tests and Videos
