@@ -1771,7 +1771,7 @@ An interactive state diagram built for the WRO Future Engineers competition. It 
 **Click the image to open the interactive diagram:**
 
 <p align="center">
-  <a href="https://erchivox.github.io/Prometheus-Team-2026/other/ModeloArquitecturaEstados.html"><img src="other/diagrama-de-estados.png" alt="System state diagram" width="900"></a>
+  <a href="https://erchivox.github.io/Prometheus-Team-2026/other/ModeloArquitecturaEstados_EN.html"><img src="other/diagrama-de-estados_EN.png" alt="System state diagram" width="900"></a>
 </p>
 
 ---
