@@ -1799,23 +1799,21 @@ The app's code lives in its own repository: [APP-WRO-PROMETHEUS-TEAM](https://gi
 
 ```mermaid
 graph TD
-%%{init: {'flowchart': {'nodeSpacing': 35, 'rankSpacing': 40, 'padding': 22}}}%%
-graph TD
     classDef purple fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
     classDef cyan fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
     classDef green fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
     classDef dark fill:#1a237e,stroke:#448aff,stroke-width:2px,color:#fff;
 
-    A["&nbsp;&nbsp;CameraX API&nbsp;&nbsp;<br>&nbsp;&nbsp;720x1280 YUV&nbsp;&nbsp;<br>&nbsp;&nbsp;ImageProxy&nbsp;&nbsp;"]:::purple --> B["&nbsp;&nbsp;ColorAnalyzer&nbsp;&nbsp;<br>&nbsp;&nbsp;80% Centered&nbsp;&nbsp;<br>&nbsp;&nbsp;ROI Crop&nbsp;&nbsp;"]:::cyan
-    B --> C["&nbsp;&nbsp;HSV Conversion&nbsp;&nbsp;<br>&nbsp;&nbsp;CLAHE on V&nbsp;&nbsp;<br>&nbsp;&nbsp;Channel&nbsp;&nbsp;"]:::cyan
-    C --> D["&nbsp;&nbsp;Color Masks&nbsp;&nbsp;<br>&nbsp;&nbsp;Red, Green,&nbsp;&nbsp;<br>&nbsp;&nbsp;Magenta, Wall&nbsp;&nbsp;"]:::cyan
-    D --> E["&nbsp;&nbsp;Morphology&nbsp;&nbsp;<br>&nbsp;&nbsp;OPEN 7x7 &amp;&nbsp;&nbsp;<br>&nbsp;&nbsp;CLOSE 3x3&nbsp;&nbsp;"]:::cyan
-    E --> F["&nbsp;&nbsp;Shape &amp; Glare&nbsp;&nbsp;<br>&nbsp;&nbsp;Solidity, Hull,&nbsp;&nbsp;<br>&nbsp;&nbsp;Internal Sat&nbsp;&nbsp;"]:::green
-    F --> G["&nbsp;&nbsp;Quality Score&nbsp;&nbsp;<br>&nbsp;&nbsp;60% Solidity +&nbsp;&nbsp;<br>&nbsp;&nbsp;40% Saturation&nbsp;&nbsp;"]:::green
-    G --> H["&nbsp;&nbsp;Spatial Model&nbsp;&nbsp;<br>&nbsp;&nbsp;Distance (cm) &amp;&nbsp;&nbsp;<br>&nbsp;&nbsp;60% L/R Split&nbsp;&nbsp;"]:::green
-    H --> I["&nbsp;&nbsp;CommandManager&nbsp;&nbsp;<br>&nbsp;&nbsp;Single, Dual &amp;&nbsp;&nbsp;<br>&nbsp;&nbsp;Parking Cases&nbsp;&nbsp;"]:::purple
-    I --> J["&nbsp;&nbsp;Temporal Filter&nbsp;&nbsp;<br>&nbsp;&nbsp;8 Frames, 70%&nbsp;&nbsp;<br>&nbsp;&nbsp;Votes, 2s Hold&nbsp;&nbsp;"]:::purple
-    J --> K["&nbsp;&nbsp;USB Serial&nbsp;&nbsp;<br>&nbsp;&nbsp;115200 bps to&nbsp;&nbsp;<br>&nbsp;&nbsp;ESP32 MCU&nbsp;&nbsp;"]:::dark
+    A["CameraX API<br>720 x 1280<br>YUV Frame"]:::purple --> B["ColorAnalyzer<br>80% Centered<br>ROI Crop"]:::cyan
+    B --> C["HSV Space<br>CLAHE on V<br>Channel"]:::cyan
+    C --> D["Color Masks<br>Red, Green,<br>Magenta, Wall"]:::cyan
+    D --> E["Morphology<br>OPEN 7x7 and<br>CLOSE 3x3"]:::cyan
+    E --> F["Shape Filter<br>Solidity, Hull,<br>Internal Sat"]:::green
+    F --> G["Quality Score<br>60% Solidity<br>40% Sat"]:::green
+    G --> H["Spatial Model<br>Distance cm<br>60% L/R Split"]:::green
+    H --> I["CommandManager<br>Single, Dual,<br>Parking Cases"]:::purple
+    I --> J["Time Filter<br>8 Frames, 70%<br>Votes, 2s Hold"]:::purple
+    J --> K["USB Serial<br>115200 bps to<br>ESP32 MCU"]:::dark
 ```
 
 ---
@@ -1888,19 +1886,18 @@ To solve this, `CommandManager` implements **Orientation by Deduction**:
 
 ```mermaid
 graph TD
-%%{init: {'flowchart': {'nodeSpacing': 45, 'rankSpacing': 45, 'padding': 24}}}%%
-graph TD
     classDef purple fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
     classDef cyan fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
     classDef green fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
 
-    A["&nbsp;&nbsp;Frame Analysis&nbsp;&nbsp;<br>&nbsp;&nbsp;in ColorAnalyzer&nbsp;&nbsp;"]:::purple --> B{"&nbsp;&nbsp;Magenta &gt;= 8000&nbsp;&nbsp;<br>&nbsp;&nbsp;OR Black Wall&nbsp;&nbsp;<br>&nbsp;&nbsp;Valid?&nbsp;&nbsp;"}:::cyan
-    B -- "No" --> C["&nbsp;&nbsp;Standard Mode&nbsp;&nbsp;<br>&nbsp;&nbsp;Normal 60%&nbsp;&nbsp;<br>&nbsp;&nbsp;L / R Split&nbsp;&nbsp;"]:::green
-    B -- "Yes" --> D["&nbsp;&nbsp;Activate Parking&nbsp;&nbsp;<br>&nbsp;&nbsp;Lock parkingSide&nbsp;&nbsp;<br>&nbsp;&nbsp;(L or R)&nbsp;&nbsp;"]:::purple
-    D --> E{"&nbsp;&nbsp;Which side&nbsp;&nbsp;<br>&nbsp;&nbsp;is locked in&nbsp;&nbsp;<br>&nbsp;&nbsp;parkingSide?&nbsp;&nbsp;"}:::cyan
-    E -- "Left (L)" --> F["&nbsp;&nbsp;Force Pillars: R&nbsp;&nbsp;<br>&nbsp;&nbsp;Use Table R&nbsp;&nbsp;<br>&nbsp;&nbsp;(C01E - C30E)&nbsp;&nbsp;"]:::green
-    E -- "Right (R)" --> G["&nbsp;&nbsp;Force Pillars: L&nbsp;&nbsp;<br>&nbsp;&nbsp;Use Table L&nbsp;&nbsp;<br>&nbsp;&nbsp;(C07E - C38E)&nbsp;&nbsp;"]:::green
+    A["Frame Analysis<br>ColorAnalyzer"]:::purple --> B{"Magenta<br>8000 px or<br>Black Wall?"}:::cyan
+    B -- "No" --> C["Standard Mode<br>Normal 60%<br>L / R Split"]:::green
+    B -- "Yes" --> D["Parking Mode<br>Lock Side<br>L or R"]:::purple
+    D --> E{"Which side<br>is locked in<br>parkingSide?"}:::cyan
+    E -- "Left (L)" --> F["Force Right R<br>Use Table R<br>C01E to C30E"]:::green
+    E -- "Right (R)" --> G["Force Left L<br>Use Table L<br>C07E to C38E"]:::green
 ```
+
 ---
 
 ### 15.5. ⏳ Time-Based Stabilization Filter
@@ -1915,23 +1912,22 @@ Sending raw frame-by-frame detections over serial would flood the ESP32 and trig
 
 ```mermaid
 graph TD
-%%{init: {'flowchart': {'nodeSpacing': 45, 'rankSpacing': 45, 'padding': 24}}}%%
-graph TD
     classDef purple fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
     classDef cyan fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
     classDef green fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
     classDef dark fill:#1a237e,stroke:#448aff,stroke-width:2px,color:#fff;
 
-    A["&nbsp;&nbsp;New Command&nbsp;&nbsp;<br>&nbsp;&nbsp;from Frame&nbsp;&nbsp;"]:::purple --> B{"&nbsp;&nbsp;Is Command&nbsp;&nbsp;<br>&nbsp;&nbsp;equal to N?&nbsp;&nbsp;"}:::cyan
-    B -- "Yes" --> C["&nbsp;&nbsp;Clear Window&nbsp;&nbsp;<br>&nbsp;&nbsp;&amp; Send N Now&nbsp;&nbsp;"]:::dark
-    B -- "No" --> D["&nbsp;&nbsp;Check Frame Gap&nbsp;&nbsp;<br>&nbsp;&nbsp;Reset if &gt; 300ms&nbsp;&nbsp;"]:::cyan
-    D --> E["&nbsp;&nbsp;Push to Window&nbsp;&nbsp;<br>&nbsp;&nbsp;8 Frames FIFO&nbsp;&nbsp;"]:::cyan
-    E --> F{"&nbsp;&nbsp;Window 8/8&nbsp;&nbsp;<br>&nbsp;&nbsp;&amp; Votes &gt;= 70%?&nbsp;&nbsp;"}:::cyan
-    F -- "No" --> G["&nbsp;&nbsp;Wait Next Frame&nbsp;&nbsp;<br>&nbsp;&nbsp;Update UI %&nbsp;&nbsp;"]:::purple
-    F -- "Yes" --> H{"&nbsp;&nbsp;Held Stable&nbsp;&nbsp;<br>&nbsp;&nbsp;for &gt;= 2000ms?&nbsp;&nbsp;"}:::green
+    A["New Command<br>from Frame"]:::purple --> B{"Is Command<br>equal to<br>N?"}:::cyan
+    B -- "Yes" --> C["Clear Window<br>Send N<br>Immediately"]:::dark
+    B -- "No" --> D["Check Gap<br>Reset if<br>over 300 ms"]:::cyan
+    D --> E["Sliding Window<br>Push Frame<br>Max 8 FIFO"]:::cyan
+    E --> F{"Window 8/8<br>and Votes<br>over 70%?"}:::cyan
+    F -- "No" --> G["Wait Next<br>Frame and<br>Update UI"]:::purple
+    F -- "Yes" --> H{"Held Stable<br>for at least<br>2000 ms?"}:::green
     H -- "No" --> G
-    H -- "Yes" --> I["&nbsp;&nbsp;Mark STABLE&nbsp;&nbsp;<br>&nbsp;&nbsp;Send USB &amp; Tone&nbsp;&nbsp;"]:::dark
+    H -- "Yes" --> I["Mark STABLE<br>Send USB and<br>Audio Tone"]:::dark
 ```
+
 ---
 
 ### 15.6. 👀 Dual Detection and Case-Based Architecture
