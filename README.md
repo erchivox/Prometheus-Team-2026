@@ -1449,9 +1449,18 @@ graph TD
 WRO places a lot of value on a project being **reproducible**. That is why we documented how we built the vehicle, with workshop tips and techniques, so any other team can replicate it. The STL files for every part are in the [`models/`](models/) folder.
 
 ```mermaid
-flowchart LR
-    P1["1. Print the parts"] --> P2["2. Motor and pinion"] --> P3["3. Rear axle and wheels"] --> P4["4. Ackermann steering"]
-    P4 --> P5["5. ToF sensors"] --> P6["6. Standoffs"] --> P7["7. Shark Fin towers"] --> P8["8. Second level and electronics"]
+graph LR
+    classDef step1 fill:#6a1b9a,stroke:#ab47bc,stroke-width:2px,color:#fff;
+    classDef step2 fill:#0277bd,stroke:#29b6f6,stroke-width:2px,color:#fff;
+    classDef step3 fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
+
+    P1["1. Print<br>all the<br>3D parts"]:::step1 --> P2["2. Motor<br>and drive<br>pinion"]:::step1
+    P2 --> P3["3. Rear<br>axle and<br>wheels"]:::step1
+    P3 --> P4["4. Front<br>Ackermann<br>steering"]:::step2
+    P4 --> P5["5. Mount<br>4x ToF<br>sensors"]:::step2
+    P5 --> P6["6. Install<br>60 mm<br>standoffs"]:::step2
+    P6 --> P7["7. Shark<br>Fin side<br>towers"]:::step3
+    P7 --> P8["8. Second<br>level and<br>wiring"]:::step3
 ```
 
 ---
