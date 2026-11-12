@@ -1391,7 +1391,7 @@ graph TD
     classDef fix fill:#e65100,stroke:#ff9800,stroke-width:2px,color:#fff;
     classDef v2 fill:#00695c,stroke:#26a69a,stroke-width:2px,color:#fff;
 
-    A["🟤 v0: Cardboard<br>Prototype<br>Validate drive<br>& LEGO steer"]:::v0 -->|"Material flex,<br>soft areas,<br>wear from use"| B["🖨️ v1: 3D-Print<br>Chassis<br>Printed by a<br>third party"]:::v1
+    A["🟤 v0:Cardboard<br>Prototype<br>Validate drive<br>& LEGO steer"]:::v0 -->|"Material flex,<br>soft areas,<br>wear from use"| B["🖨️ v1: 3D-Print<br>Chassis<br>Printed by a<br>third party"]:::v1
 
     B -->|"Diagnosis:<br>too long<br>from tripod"| C{"⚠️ Failures<br>found in<br>v1"}:::fail
 
