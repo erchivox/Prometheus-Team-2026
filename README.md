@@ -138,9 +138,7 @@ In 2025 we finished as **national runners-up**. For 2026 we redesigned almost th
   - [17.1. 📡 New Sensor Layout](#171--new-sensor-layout)
   - [17.2. ✅ What We Expect to Gain from Each Change](#172--what-we-expect-to-gain-from-each-change)
   - [17.3. 🔧 What We Need to Adjust to Integrate Them](#173--what-we-need-to-adjust-to-integrate-them)
-- [18. 🌐 Use of GitHub and Artificial Intelligence](#18--use-of-github-and-artificial-intelligence)
-  - [18.1. 🌿 Workflow](#181--workflow)
-  - [18.2. 🤖 Use of Artificial Intelligence](#182--use-of-artificial-intelligence)
+- [18. 🌐 English Translation](#18--english-translation)
 - [19. 📁 Archive: 2025 Season](#19--archive-2025-season)
   - [19.1. 🚗 2025 Vehicle Overview](#191--2025-vehicle-overview)
   - [19.2. 🔌 Electronics Evolution](#192--electronics-evolution)
@@ -2126,6 +2124,12 @@ With this change, the vehicle will have **six ToF sensors on I2C bus #1** and no
 | **Power draw** | The VL53L5CX draws about 100 mA while ranging (up to 150 mA at peaks) and each VL53L1X about 20 mA, compared with 15–20 mA for each VL53L0X. We need to check the ESP32's 3.3 V line and update the power and battery life calculation (section 8). |
 | **Firmware** | Replace the analog Sharp readings with the diagonal ToF readings in the safety logic (emergency reverse) and recalibrate their thresholds. |
 | **EMAX servo** | Recalibrate the µs per degree and check the steering travel (currently −50° to +48°), leaving a margin from the end stops. |
+
+---
+
+## 18. 🌐 English Translation
+
+The team wrote this documentation in Spanish. To meet the WRO requirement of English documentation for the international final, we translated the entire repository (this README and the README in each folder) into English with the help of an artificial intelligence assistant (Claude, by Anthropic). The team reviewed the translation.
 
 ---
 
